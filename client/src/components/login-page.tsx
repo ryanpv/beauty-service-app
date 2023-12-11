@@ -16,7 +16,7 @@ export default function LoginPage() {
           </h2>
         </div>
 
-        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm text-sm font-medium'>
+        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm text-sm font-medium border-solid border-2'>
 
           <form className='space-y-6' action='#'>
             <div>

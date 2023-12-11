@@ -25,6 +25,11 @@ const Navbar: FC = () => {
                 </a>
               </div>
               <div className=''>
+                <a href='/photo-gallery'>
+                  Photo Gallery
+                </a>
+              </div>
+              <div className=''>
                 <a href='/contact'>
                   Contact
                 </a>
