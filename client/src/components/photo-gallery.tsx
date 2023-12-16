@@ -37,10 +37,11 @@ export default function PhotoGallery() {
     media_url: string
   }
 
+  // *** add overlay of design name?
   // const Photos: React.FC<IgPhotosProp> = (props) => {
   const Photos = (props: IgPhotosProp) => {
     return (
-      <div className='hover:scale-125'>
+      <div className='hover:scale-125' key={ props.id }>
         <img className='h-auto rounded-lg min-h-full ' src={ props.media_url } key={ props.id } alt=''/>
       </div>
     )
@@ -61,7 +62,7 @@ export default function PhotoGallery() {
       </div>
 
       <div className='container grid max-w-4xl'>
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 m-auto'>
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-1 m-auto'>
           { displayPhotos() }  
         </div>  
       </div>   
