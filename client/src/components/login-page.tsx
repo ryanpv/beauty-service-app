@@ -36,7 +36,7 @@ export default function LoginPage() {
                   Password
                 </label>
                 <div>
-                  <a href='#' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
+                  <a href='/request-new-password' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
                     Forgot password?
                   </a>
                 </div>

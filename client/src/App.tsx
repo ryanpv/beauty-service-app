@@ -7,6 +7,10 @@ import PhotoGallery from './components/photo-gallery';
 import ContactPage from './components/contact-page';
 import SignupPage from './components/signup-page';
 import Services from './components/services';
+import AboutPage from './components/about-page';
+import NewPasswordRequest from './components/new-password-request';
+import ResetPassword from './components/reset-password-form';
+import AddService from './components/add-service';
 
 function App() {
   return (
@@ -20,7 +24,10 @@ function App() {
         <Route path='/photo-gallery' element={ <PhotoGallery /> } />
         <Route path='/contact' element={ <ContactPage /> } />
         <Route path='/services' element={ <Services /> } />
-
+        <Route path='/about' element={ <AboutPage /> } />
+        <Route path='/request-new-password' element={ <NewPasswordRequest /> } />
+        <Route path='/reset-password' element={ <ResetPassword /> } />
+        <Route path='/add-new-service' element={ <AddService /> } />
       </Routes>
     </div>
   );
