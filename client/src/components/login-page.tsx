@@ -3,8 +3,8 @@ import React from 'react'
 export default function LoginPage() {
 
   return (
-    <div className='container flex h-screen'>
-      <div className='flex m-auto flex-1 flex-col px-6 py-12 lg:px-8 border-solid border-2 border-pink-300 rounded-md'>
+    <div className='container flex'>
+      <div className='flex flex-1 flex-col px-6 py-12 lg:px-8 border-solid border-2 border-pink-300 rounded-md'>
         <div className='text-center text-gray-900 sm:py-2 sm:mx-auto sm:w-full sm:max-w-sm'>
           <img
             className='mx-auto h-10 w-auto'
@@ -60,7 +60,7 @@ export default function LoginPage() {
 
           <p className='mt-10 text-center text-sm text-gray-500'>
             Don't have an account? {' '}
-            <a href='#' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
+            <a href='/signup' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
               Sign up here
             </a>
           </p>
