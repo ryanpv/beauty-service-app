@@ -40,15 +40,33 @@ export default function ContactPage() {
 
       <h3>Leave us a message!</h3>
 
-      <form>
-        <input placeholder='Name *' />
-        <input placeholder='Email *' />
-        <input placeholder='Phone *' />
-        <input placeholder='Subject *' />
-        <textarea placeholder='Message *' />
+      <div className='sm:mx-auto sm:w-full sm:max-w-2xl border-solid border-2'>
+        <form>
+          <div className='flex flex-col space-y-6'>
+            <div className='flex justify-between flex-col sm:flex-row sm:max-w-sm items-center'>
+              <input placeholder='Name *'               
+                className='py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+              />
+              <input placeholder='Email *' 
+                className='py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+              />
+              <input placeholder='Phone *' 
+                className='py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+              />
+            </div>
 
-        <button>Send Message</button>
-      </form>
+            <input placeholder='Subject *' 
+              className='py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 leading-6'
+            />
+            <textarea placeholder='Message *' 
+              className='py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 leading-6'
+            />
+
+            <button>Send Message</button>
+
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
