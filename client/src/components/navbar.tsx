@@ -15,7 +15,7 @@ const Navbar: FC = () => {
           <div className='flex-1'>
             <div className='flex flex-row h-16 items-center px-5 justify-end gap-5'>
               <div className='hover:text-gray-200'>
-                <a href='/home'>
+                <a href='/'>
                   Home
                 </a>
               </div>

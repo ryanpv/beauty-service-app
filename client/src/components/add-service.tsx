@@ -3,7 +3,7 @@ import React from 'react'
 export default function AddService
 () {
   return (
-    <div>
+    <div className='container'>
       <h1>Add New Service</h1>
 
       <div>

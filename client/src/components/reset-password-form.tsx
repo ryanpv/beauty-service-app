@@ -20,6 +20,7 @@ export default function ResetPassword() {
             </label>
             <input />
           </div>
+          <button type='submit'>Change Password</button>
         </form>
       </div>
     </div>

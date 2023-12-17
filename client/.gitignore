@@ -23,3 +23,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /src/images
+
+/src/components/balloon-sq1.jpg
+/src/components/balloon-sq2.jpg
+/src/components/balloon-sq3.jpg
+/src/components/balloon-sq4.jpg
+/src/components/balloon-sq5.jpg
+/src/components/balloon-sq6.jpg
