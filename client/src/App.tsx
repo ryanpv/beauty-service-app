@@ -13,6 +13,7 @@ import NewPasswordRequest from './components/new-password-request';
 import ResetPassword from './components/reset-password-form';
 import AddService from './components/add-service';
 import BookingPage from './components/booking-page';
+import AppointmentsList from './components/appointments-list';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <HomePage /> } />
         <Route path='/book-appointment' element={ <BookingPage /> } />
+        <Route path='/appointments' element={ <AppointmentsList /> } />
         <Route path='/login' element={ <LoginPage /> } />
         <Route path='/signup' element={ <SignupPage /> } />
         <Route path='/ig-auth' element={ <GetAuth /> } />

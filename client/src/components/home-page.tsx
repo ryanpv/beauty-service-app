@@ -27,8 +27,8 @@ export default function HomePage() {
         </a>
       </div>
 
-      <div className='container'>
-        <div className=''>
+      <div className='container max-w-2xl overflow-auto'>
+        <div className='grid grid-rows-1 grid-flow-col'>
           <div>
             <img src={ require("./balloon-sq1.jpg") } alt="placeholder" />
           </div>
