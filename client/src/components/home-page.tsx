@@ -11,7 +11,13 @@ export default function HomePage() {
         />
         <h1 className='text-center'>Polish By Cin</h1>
         <p>Introduction blurb???</p>
-        <a href='/book-appointment'>Book Appointment</a>
+
+        <a 
+        href='/add-new-service' 
+        className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
+        >
+        Book Appointment
+      </a>
       </header>
 
       <div className='flex border-solid border-2 justify-center'>

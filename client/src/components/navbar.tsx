@@ -3,7 +3,7 @@ import React,  { FC } from 'react'
 const Navbar: FC = () => {
   return (
     <>
-      <nav className='sticky top-0 w-screen flex bg-pink-300 text-white text-center'>
+      <nav className='sticky top-0 min-w-screen flex bg-pink-300 text-white text-center'>
         <div className='flex sm:flex-row flex-col flex-1 justify-between items-center'>
 
           <div className='grow-0 justify-start items-center px-5 text-2xl'>
