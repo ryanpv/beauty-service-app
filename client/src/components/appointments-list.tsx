@@ -3,13 +3,13 @@ import React from 'react'
 export default function AppointmentsList() {
   const admin = true
   return (
-    <div className='container flex flex-col space-y-6'>
+    <div className='container flex flex-col space-y-6 max-w-screen-lg'>
       <h1 className='mt-10 text-center text-2xl font-bold'>
       AppointmentsList
       </h1>
 {/* FILTER FORM  */}
-      <div className='mt-10 mx-auto'>
-        <form className='space-y-6'>
+      <div className='mx-auto'>
+        <form className='space-y-6 mx-3'>
           <div>
             <label>
               Search
@@ -21,7 +21,7 @@ export default function AppointmentsList() {
               />
             </div>
           </div>
-          <div className='flex flex-wrap space-x-6'>
+          <div className='flex flex-wrap sm:space-x-6 space-y-3 sm:space-y-0'>
             <div>
               <label>
                 Start Date
