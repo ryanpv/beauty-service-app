@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Services() {
   return (
-    <div className='container flex flex-col max-w-screen-sm space-y-6'>
+    <div className='container flex flex-col max-w-screen-md space-y-6'>
       <h1 className='text-center font-bold text-2xl mt-5'>Available Services</h1>
 
       <a 

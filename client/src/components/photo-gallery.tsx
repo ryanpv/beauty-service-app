@@ -42,7 +42,7 @@ export default function PhotoGallery() {
   const Photos = (props: IgPhotosProp) => {
     return (
       <div className='hover:scale-125' key={ props.id }>
-        <img className='h-auto rounded-lg min-h-full ' src={ props.media_url } key={ props.id } alt=''/>
+        <img className='h-auto rounded-sm min-h-full ' src={ props.media_url } key={ props.id } alt=''/>
       </div>
     )
   }
