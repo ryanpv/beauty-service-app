@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function SignupPage() {
   return (
-    <div className='container flex flex-col px-6 py-12 lg:px-8 border-solid border-2 border-pink-300'>
+    <div className='container flex flex-col px-6 py-12 lg:px-8'>
       <div className='text-center text-gray-900 '>
         <img
               className='mx-auto h-10 w-auto'

@@ -4,7 +4,7 @@ export default function ContactPage() {
   return (
     <div className='container flex flex-1 flex-col space-y-10'>
       <h1 className='text-center mt-10 text-2xl font-bold text-gray-900'>Contact Us</h1>
-      <div className='grid sm:grid-cols-3 sm:space-y-0 space-y-10 py-6 border-2 border-solid border-gray-300 items-start text-center'>
+      <div className='grid sm:grid-cols-3 sm:space-y-0 space-y-10 py-6 items-start text-center'>
         <div className=''>
           <img
             className='mx-auto h-10 w-auto'
@@ -57,7 +57,7 @@ export default function ContactPage() {
 
       <h3 className='text-center font-bold text-2xl'>Leave us a message!</h3>
 
-      <div className='p-5 mb-5 sm:mx-auto sm:w-full sm:max-w-2xl border-solid border-2'>
+      <div className='p-5 mb-5 sm:mx-auto sm:w-full sm:max-w-2xl'>
         <form>
           <div className='flex flex-col space-y-6'>
             <div className='flex justify-between flex-col sm:flex-row space-y-6 sm:space-y-0'>
