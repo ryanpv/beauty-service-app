@@ -9,8 +9,16 @@ export default function Services() {
         href='/add-new-service' 
         className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
         >
-        Add new service
+        + Add new service
       </a>
+      <a 
+        href='/book-appointment' 
+        className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
+      >
+        Book Appointment
+      </a>
+
+      <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Regular Polish Services</h2>

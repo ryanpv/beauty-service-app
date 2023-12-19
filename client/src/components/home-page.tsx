@@ -22,8 +22,8 @@ export default function HomePage() {
         href='/book-appointment' 
         className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
         >
-        Book Appointment
-      </a>
+          Book Appointment
+        </a>
       </header>
 
       <div className='flex justify-center'>
