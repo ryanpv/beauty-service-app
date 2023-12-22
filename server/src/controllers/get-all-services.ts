@@ -11,5 +11,5 @@ export const getAllServices = (req: Request, res: Response) => {
             throw error;
           }
           res.status(200).json(results.rows);
-        })
+        });
 };

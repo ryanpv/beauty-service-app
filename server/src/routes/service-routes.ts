@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { addService } from '../controllers/add-service.js';
 import { getAllServices } from '../controllers/get-all-services.js';
+import { getService } from '../controllers/get-service.js';
 
 export const servicesRouter = express.Router();
 
@@ -9,9 +10,7 @@ servicesRouter.route('/')
   .post(addService); // POST new servic
 
 servicesRouter.route('/:serviceId')
-  .get((req: Request, res: Response) => {
-    res.send(`GET route for ${ req.params.serviceId }`)
-  })
+  .get(getService)
   .put((req: Request, res: Response) => {
     res.send(`PUT route for services success`)
   })
