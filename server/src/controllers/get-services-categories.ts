@@ -1,0 +1,12 @@
+import express, { Request, Response } from 'express';
+import { pool } from '../queries.js';
+
+export const getServiceCategories = (req: Request, res: Response) => {
+  pool.query('SELECT * FROM service_categories ORDER BY id ASC', (error, results) => {
+    if (error) {
+      console.log("GET all services error: ", error)
+      throw error;
+    }
+    res.status(200).json(results.rows);
+  });
+};

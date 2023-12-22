@@ -1,0 +1,116 @@
+[
+    {
+        "service_name": "Spa Pedicure",
+        "price": "35",
+        "description": "Includes single regular polish colour of choice, cuticle clean up, gentle exfoliation of feet, nail shaping, hot towel service, and calf massage with cream",
+        "service_categories_id": 1
+    },
+    {
+        "service_name": "Deluxe Spa Pedicure",
+        "price": "50",
+        "description": "Everything included with a spa pedicure, with the addition of scented exfoliation scrub, foot mask, and longer calf massage. Highly recommended for a pampering time for yourself or with others!",
+        "service_categories_id": 1
+    },
+    {
+        "service_name": "Gel /Shellac Manicure",
+        "price": "40+",
+        "description": "Includes single gel colour of choice, deep cuticle clean up, nail shaping, hot towel service, and hand massage with cream and cuticle oil. Add a layer of biogel underneath the colour to reinforce and prolong retention for an additional $5",
+        "service_categories_id": 2
+    },
+    {
+        "service_name": "Deluxe Gel/Shellac Manicure",
+        "price": "55+",
+        "description": "Everything included with a gel manicure, adds scented exfoliation scrub, hand mask, and hand massage. Add a layer of biogel underneath the colour to reinforce and prolong retention for an additional $5",
+        "service_categories_id": 2
+    },
+    {
+        "service_name": "Gel/Shellac Colour Change (Hands or feet)",
+        "price": "30",
+        "description": "Includes single gel colour of choice, nail shaping and cuticle oil",
+        "service_categories_id": 2
+    },
+    {
+        "service_name": "Gel/Shellac Pedicure",
+        "price": "50",
+        "description": "Includes single gel colour of choice, deep cuticle clean up, gentle exfoliation of bottom feet, nail shaping, hot towel service, and calf and foot massage with cream and cuticle oil",
+        "service_categories_id": 2
+    },
+    {
+        "service_name": "Deluxe Gel/Shellac Pedicure",
+        "price": "65",
+        "description": "Everything included with a gel/shellac manicure, adds scented exfoliation scrub, hand mask, and extra foot massage",
+        "service_categories_id": 2
+    },
+    {
+        "service_name": "Gel/Shellac Removal",
+        "price": 10,
+        "description": "Includes removal by acetone/efile, shaping of nails, and cuticle oil",
+        "service_categories_id": 2
+    },
+    {
+        "service_name": "Bio Gel Overlay",
+        "price": "60",
+        "description": "Includes single gel colour of choice onto bare nails, biogel layer, deep cuticle clean up, nail shaping, hot towel service, hand massage with cream and cuticle oil",
+        "service_categories_id": 3
+    },
+    {
+        "service_name": "Gel New Set",
+        "price": "80+",
+        "description": "Includes polymer extensions onto bare nails, we have half tips or Après X full gel tips to choose from, single gel colour of choice, biogel layer, deep cuticle clean up, nail shaping, hot towel service, hand massage with cream and cuticle oil",
+        "service_categories_id": 3
+    },
+    {
+        "service_name": "Refill",
+        "price": "60+",
+        "description": "Removal gel colour of existing biogel from a previous appointment, single colour of choice, biogel layer, deep cuticle clean up, nail shaping, hot towel service, massage with cream and cuticle oil. Extra long lengths for additional $5. For clients who prefer a raised or curved nailbed for aesthetics, we can build up your nailbed into a beautiful shape using biogel as well. This will also result in an additional fee $15+",
+        "service_categories_id": 3
+    },
+    {
+        "service_name": "Biogel removal",
+        "price": "15",
+        "description": "Includes removal by e-file, shaping of nails, and cuticle oil",
+        "service_categories_id": 3
+    },
+    {
+        "service_name": "Acrylic removal",
+        "price": "20",
+        "description": "Includes removal by e-file, shaping of nails, and cuticle oil",
+        "service_categories_id": 3
+    },
+    {
+        "service_name": "Regular mani + regular pedi",
+        "price": "60",
+        "description": "",
+        "service_categories_id": 4
+    },
+    {
+        "service_name": "Gel/Shellac mani + regular pedi",
+        "price": "70+",
+        "description": "",
+        "service_categories_id": 4
+    },
+    {
+        "service_name": "Gel/Shellac mani + Gel/shellac pedi",
+        "price": "85+",
+        "description": "",
+        "service_categories_id": 4
+    },
+    {
+        "service_name": "Nail Design",
+        "price": "5+ per nail",
+        "description": "Pricing varies by style and complexity, please consult our team via Instagram or emails for an estimated quote before booking your appointment! Please keep in mind that adding designs will add additional time to your appointment, you must let the receptionist know when booking. To respect our technicians and other clients time, last-second design additions may be declined if you did not book for designs",
+        "service_categories_id": 5
+    },
+    {
+        "service_name": "Nail Repair With Extensions",
+        "price": "6+ per nail",
+        "description": "Application of a single extension to one finger. Includes removal of broken nail, nail shaping, single extension, and application of same colour",
+        "service_categories_id": 5
+    },
+    {
+        "service_name": "Nail Repair With Silk Fiber",
+        "price": "2+ per nail",
+        "description": "For slightly torn nails, you may choose to have a silk fiber fabric applied as a bridge over the torn section. This includes removal of colour, nail shaping, silk fiber, and application of the same colour. Silk is appropriate only for short term fixes and cannot be expected to replace a real extension! Our nail technicians will assess and recommend the best option for your nail during the appointment",
+        "service_categories_id": 5
+    }
+]

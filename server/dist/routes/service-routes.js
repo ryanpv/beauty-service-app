@@ -1,12 +1,9 @@
 import express from 'express';
+import { addService } from '../controllers/add-service.js';
 export const servicesRouter = express.Router();
 servicesRouter.route('/')
-    .get((req, res) => {
-    res.send("GET route for all services");
-})
-    .post((req, res) => {
-    res.send("POST route for all services");
-});
+    .get() // GET list of ALL service categories
+    .post(addService); // POST new servic
 servicesRouter.route('/:serviceId')
     .get((req, res) => {
     res.send(`GET route for ${req.params.serviceId}`);

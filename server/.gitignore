@@ -1,4 +1,10 @@
-/node_modules
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+
 .env
-/dist/localhost-key.pem
-/dist/localhost.pem
+dist/localhost-key.pem
+dist/localhost.pem
