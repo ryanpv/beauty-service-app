@@ -5,7 +5,7 @@ export const deleteService = (req: Request, res: Response) => {
   const { serviceId } = req.params;
 
   pool.query(
-    `SELECT * FROM service_types
+    `DELETE FROM service_types
     WHERE id = $1`
     , [serviceId], (error, results) => {
       if (error) {
