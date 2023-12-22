@@ -1,6 +1,6 @@
 [
   {
-  "service_name": "Spa Manicure",
+  "service_name": "Spa Manicures",
   "price": "30",
   "description": "Includes single regular polish colour of choice, cuticle clean up, nail shaping, hot towel service, and hand massage with cream",
   "service_categories_id": 1
@@ -10,6 +10,12 @@
   "price": "40",
   "description": "Everything included with a Spa Manicure, with the addition of scented exfoliation scrub, hand mask, and longer hand massage",
   "service_categories_id": 1
+  },
+  {
+    "service_name": "Spa Manicure",
+    "price": "30",
+    "description": "Includes single regular polish colour of choice, cuticle clean up, nail shaping, hot towel service, and hand massage with cream",
+    "service_categories_id": 1
   },
   {
   "service_name": "Spa Pedicure",
@@ -24,7 +30,7 @@
   "service_categories_id": 1
   },
   {
-  "service_name": "Gel /Shellac Manicure",
+  "service_name": "Gel/Shellac Manicure",
   "price": "40+",
   "description": "Includes single gel colour of choice, deep cuticle clean up, nail shaping, hot towel service, and hand massage with cream and cuticle oil. Add a layer of biogel underneath the colour to reinforce and prolong retention for an additional $5",
   "service_categories_id": 2
@@ -55,7 +61,7 @@
   },
   {
   "service_name": "Gel/Shellac Removal",
-  "price": 10,
+  "price": "10",
   "description": "Includes removal by acetone/efile, shaping of nails, and cuticle oil",
   "service_categories_id": 2
   },

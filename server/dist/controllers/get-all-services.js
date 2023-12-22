@@ -8,6 +8,7 @@ export const getAllServices = (req, res) => {
             console.log(`GET ALL SERVICES ERROR: ${error}`);
             throw error;
         }
+        console.log('results: ', results.rows.length);
         res.status(200).json(results.rows);
     });
 };
