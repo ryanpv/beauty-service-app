@@ -1,22 +1,19 @@
 import express from 'express';
+import { createUser } from '../controllers/create-user.js';
+import { getUser } from '../controllers/get-user.js';
+import { deleteUser } from '../controllers/delete-user.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
     .get((req, res) => {
     res.send("GET all users route");
 })
-    .post((req, res) => {
-    res.send("POST user account");
-});
+    .post(createUser);
 usersRouter.route('/:userId')
-    .get((req, res) => {
-    res.send("GET single users route:" + req.params.userId);
-})
+    .get(getUser)
     .put((req, res) => {
     res.send("PUT single users route");
 })
-    .delete((req, res) => {
-    res.send("DELETE single users route");
-});
+    .delete(deleteUser);
 usersRouter.route('/:userId/appointments')
     .get((req, res) => {
     res.send("GET users appointments route. Appointments for: " + req.params.userId);
