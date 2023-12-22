@@ -1,4 +1,4 @@
-import express, { Response, Request } from 'express';
+import { Response, Request } from 'express';
 import { pool } from '../queries.js';
 
 export const getAllServices = (req: Request, res: Response) => {

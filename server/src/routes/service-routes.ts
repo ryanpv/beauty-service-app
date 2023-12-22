@@ -3,6 +3,7 @@ import { addService } from '../controllers/add-service.js';
 import { getAllServices } from '../controllers/get-all-services.js';
 import { getService } from '../controllers/get-service.js';
 import { updateService } from '../controllers/update-service.js';
+import { deleteService } from '../controllers/delete-service.js';
 
 export const servicesRouter = express.Router();
 
@@ -13,6 +14,4 @@ servicesRouter.route('/')
 servicesRouter.route('/:serviceId')
   .get(getService)
   .put(updateService)
-  .delete((req: Request, res: Response) => {
-    res.send(`DELETE success for services`)
-  })
+  .delete(deleteService)
