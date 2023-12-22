@@ -1,12 +1,11 @@
 import express from 'express';
 import { createUser } from '../controllers/create-user.js';
+import { getAllUsers } from '../controllers/get-all-users.js';
 import { getUser } from '../controllers/get-user.js';
 import { deleteUser } from '../controllers/delete-user.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
-    .get((req, res) => {
-    res.send("GET all users route");
-})
+    .get(getAllUsers)
     .post(createUser);
 usersRouter.route('/:userId')
     .get(getUser)
