@@ -1,7 +1,7 @@
 import { pool } from '../queries.js';
 export const getAllServices = (req, res) => {
     pool.query(`
-    SELECT * FROM service_types
+    SELECT service_types.*, service_categories.service_category_name FROM service_types
       JOIN service_categories
         ON service_types.service_categories_id = service_categories.id`, (error, results) => {
         if (error) {

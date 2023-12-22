@@ -8,3 +8,4 @@ temp/
 .env
 dist/localhost-key.pem
 dist/localhost.pem
+notes.txt
