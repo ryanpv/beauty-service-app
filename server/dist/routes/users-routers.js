@@ -6,6 +6,7 @@ import { updateUser } from '../controllers/update-user.js';
 import { deleteUser } from '../controllers/delete-user.js';
 import { addAppointment } from '../controllers/add-appointment.js';
 import { getUserAppointments } from '../controllers/get-user-appointments.js';
+import { deleteAppointment } from '../controllers/delete-appointment.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
     .get(getAllUsers)
@@ -16,11 +17,10 @@ usersRouter.route('/:userId')
     .delete(deleteUser);
 usersRouter.route('/:userId/appointments')
     .get(getUserAppointments)
-    .post(addAppointment)
+    .post(addAppointment);
+usersRouter.route('/:userId/appointments/:appointmentId')
     .put((req, res) => {
     res.send("PUT users appointments route");
 })
-    .delete((req, res) => {
-    res.send("DELETE users appointments route");
-});
+    .delete(deleteAppointment);
 //# sourceMappingURL=users-routers.js.map
