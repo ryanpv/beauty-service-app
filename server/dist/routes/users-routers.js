@@ -4,6 +4,7 @@ import { getAllUsers } from '../controllers/get-all-users.js';
 import { getUser } from '../controllers/get-user.js';
 import { updateUser } from '../controllers/update-user.js';
 import { deleteUser } from '../controllers/delete-user.js';
+import { addAppointment } from '../controllers/add-appointment.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
     .get(getAllUsers)
@@ -16,9 +17,7 @@ usersRouter.route('/:userId/appointments')
     .get((req, res) => {
     res.send("GET users appointments route. Appointments for: " + req.params.userId);
 })
-    .post((req, res) => {
-    res.send("POST users appointment route");
-})
+    .post(addAppointment)
     .put((req, res) => {
     res.send("PUT users appointments route");
 })
