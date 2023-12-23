@@ -1,16 +1,16 @@
 import { pool } from "../queries.js";
 export const updateService = (req, res) => {
     const { serviceId } = req.params;
-    const serviceDetails = req.body.serviceDetails;
+    const { service_name, price, description, service_categories_id } = req.body;
     pool.query(`
-    UPDATE service_types
-    SET service_name = $1,
-        price = $2,
-        description = $3,
-        service_categories_id = $4
+    UPDATE service_types SET 
+      service_name = COALESCE($1, service_name),
+      price = COALESCE($2, price),
+      description = COALESCE($3, description),
+      service_categories_id = COALESCE($4, service_categories_id)
     WHERE id = $5
     RETURNING *
-  `, [serviceDetails.service_name, serviceDetails.price, serviceDetails.description, serviceDetails.service_categories_id, serviceId], (error, results) => {
+  `, [service_name, price, description, service_categories_id, serviceId], (error, results) => {
         if (error) {
             console.log(`update service error: ${error}`);
             throw error;

@@ -2,6 +2,7 @@ import express from 'express';
 import { createUser } from '../controllers/create-user.js';
 import { getAllUsers } from '../controllers/get-all-users.js';
 import { getUser } from '../controllers/get-user.js';
+import { updateUser } from '../controllers/update-user.js';
 import { deleteUser } from '../controllers/delete-user.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
@@ -9,9 +10,7 @@ usersRouter.route('/')
     .post(createUser);
 usersRouter.route('/:userId')
     .get(getUser)
-    .put((req, res) => {
-    res.send("PUT single users route");
-})
+    .put(updateUser)
     .delete(deleteUser);
 usersRouter.route('/:userId/appointments')
     .get((req, res) => {
