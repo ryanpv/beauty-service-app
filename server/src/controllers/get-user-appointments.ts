@@ -5,7 +5,10 @@ export const getUserAppointments = (req: Request, res: Response) => {
   const { userId } = req.params;
 
   pool.query(`
-    SELECT * FROM appointments
+    SELECT appointments.*, status_types.status 
+    FROM appointments
+    JOIN status_types
+      ON appointments.status = status_types.id
     WHERE users_id = $1
   `, [userId], (error, results) => {
     if (error) {
