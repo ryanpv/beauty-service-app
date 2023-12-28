@@ -5,16 +5,21 @@ import * as fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import cors from 'cors';
-
+import session from 'express-session';
+import connectPgSimple from 'connect-pg-simple';
 
 // ROUTER IMPORTS
 import { testRoute } from './routes/test-route.js'
 import { servicesRouter } from './routes/service-routes.js';
 import { usersRouter} from './routes/users-routers.js';
+import { sessionRouter } from './routes/session-routes.js';
+
+// CONTROLLERS
 import { getRoles } from './controllers/roles.js';
 import { getServiceCategories } from './controllers/get-services-categories.js';
 import { checkUserRole } from './middleware/check-user.js';
 import { uploadServices } from './controllers/add-service.js';
+import { pool } from './queries.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,11 +30,24 @@ const PORT = process.env.PORT
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  store: new (connectPgSimple(session))({
+    pool: pool,
+    tableName: process.env.SESSION_TABLE
+  }),
+  secret: process.env.STORE_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  unset: 'destroy',
+  cookie: { maxAge: 30000 }
+  // cookie: { maxAge: 24 * 30 * 60  * 60 * 1000 } // 30 days
+}))
 
 // ROUTERS
 app.use('/test', testRoute)
 app.use('/services', servicesRouter)
 app.use('/users', usersRouter);
+app.use('/sessions', sessionRouter)
 
 
 app.get("/", (req: Request, res: Response) => {
