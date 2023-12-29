@@ -19,6 +19,7 @@ import { checkUserRole } from './middleware/check-user.js';
 import { uploadServices } from './controllers/add-service.js';
 import { pool } from './queries.js';
 import { requestNewPassword } from './controllers/request-password-reset.js';
+import { passwordResetTokenCheck } from './controllers/token-password-reset.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
@@ -56,6 +57,7 @@ app.get('/service-categories', getServiceCategories);
 app.get('/check-user', checkUserRole);
 app.get('/upload-services', uploadServices);
 app.post('/password-resets', requestNewPassword);
+app.get('/password-resets/:token', passwordResetTokenCheck);
 /////////////////////////
 app.post("/sessions", (req, res) => {
     console.log("user session start");
