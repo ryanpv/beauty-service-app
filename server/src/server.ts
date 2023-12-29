@@ -20,6 +20,7 @@ import { getServiceCategories } from './controllers/get-services-categories.js';
 import { checkUserRole } from './middleware/check-user.js';
 import { uploadServices } from './controllers/add-service.js';
 import { pool } from './queries.js';
+import { requestNewPassword } from './controllers/password-reset.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -66,6 +67,8 @@ app.get('/service-categories', getServiceCategories)
 
 app.get('/check-user', checkUserRole)
 app.get('/upload-services', uploadServices)
+
+app.post('/password-resets', requestNewPassword)
 
 /////////////////////////
 app.post("/sessions", (req: Request, res: Response) => {
