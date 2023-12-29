@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import { pool } from "../queries.js";
 
 export const getAllUsers = (req: Request, res: Response) => {
+  if (req.cookies.userRole !== 'admin') {
+    res.status(403).json({ message: "Forbidden access." });
+  }
+  
   pool.query(`
     SELECT name, email, phone_number, role_id
     FROM users
@@ -9,6 +13,7 @@ export const getAllUsers = (req: Request, res: Response) => {
       if (error) {
         console.log(`UNSUCCESSFUL GET all users request: ${ error }`)
       }
+
       res.status(200).json(results.rows);
     });
 };

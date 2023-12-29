@@ -8,14 +8,15 @@ import { addAppointment } from '../controllers/add-appointment.js';
 import { getUserAppointments } from '../controllers/get-user-appointments.js';
 import { updateAppointment } from '../controllers/update-appointment.js';
 import { deleteAppointment } from '../controllers/delete-appointment.js';
+import { verifyUser } from '../middleware/check-user.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
     .get(getAllUsers)
     .post(createUser);
 usersRouter.route('/:userId')
-    .get(getUser)
-    .put(updateUser)
-    .delete(deleteUser);
+    .get(verifyUser, getUser)
+    .put(verifyUser, updateUser)
+    .delete(verifyUser, deleteUser);
 usersRouter.route('/:userId/appointments')
     .get(getUserAppointments)
     .post(addAppointment);
