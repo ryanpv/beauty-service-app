@@ -24,7 +24,6 @@ export const requestNewPassword = async (req, res, next) => {
             subject: `Password Reset for your PolishByCin account`,
             html: `<p>Click this link to reset your password!: </p><a href="${resetPasswordURL}/${resetToken}">Reset Password</a>`
         };
-        console.log("lowercase email: ", emailLowerCased);
         // Check if user's email exists in DB
         if (checkEmailExistence.rowCount === 0) {
             res.status(404).json({ message: "User not found." });
