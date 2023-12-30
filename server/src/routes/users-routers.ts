@@ -13,7 +13,7 @@ import { verifyUser } from '../middleware/check-user.js';
 export const usersRouter = express.Router();
 
 usersRouter.route('/')
-  .get(getAllUsers)
+  .get(getAllUsers) // Should be admin only route
   .post(createUser);
 
 usersRouter.route('/:userId')
@@ -22,9 +22,9 @@ usersRouter.route('/:userId')
   .delete(verifyUser, deleteUser);
 
 usersRouter.route('/:userId/appointments')
-  .get(getUserAppointments)
-  .post(addAppointment);
+  .get(verifyUser, getUserAppointments)
+  .post(verifyUser, addAppointment);
 
 usersRouter.route('/:userId/appointments/:appointmentId')
-  .put(updateAppointment)
-  .delete(deleteAppointment);
+  .put(verifyUser, updateAppointment)
+  .delete(verifyUser, deleteAppointment);

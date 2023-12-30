@@ -11,16 +11,16 @@ import { deleteAppointment } from '../controllers/delete-appointment.js';
 import { verifyUser } from '../middleware/check-user.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
-    .get(getAllUsers)
+    .get(getAllUsers) // Should be admin only route
     .post(createUser);
 usersRouter.route('/:userId')
     .get(verifyUser, getUser)
     .put(verifyUser, updateUser)
     .delete(verifyUser, deleteUser);
 usersRouter.route('/:userId/appointments')
-    .get(getUserAppointments)
-    .post(addAppointment);
+    .get(verifyUser, getUserAppointments)
+    .post(verifyUser, addAppointment);
 usersRouter.route('/:userId/appointments/:appointmentId')
-    .put(updateAppointment)
-    .delete(deleteAppointment);
+    .put(verifyUser, updateAppointment)
+    .delete(verifyUser, deleteAppointment);
 //# sourceMappingURL=users-routers.js.map

@@ -7,11 +7,9 @@ interface ModifiedRequest extends Request {
 
 export const passwordResetTokenCheck = async(req: Request, res:Response) => {
   const { token } = req.params;
-  // const resetTokenCache = new NodeCache();
 
   // User email stored in cache with key === token
   const resetToken = await tokenCache({ key: token, res: res });
-  console.log("resettoken: ", resetToken)
 
   if (!resetToken) {
     res.status(400).json({ message: "Invalid/expired token" });

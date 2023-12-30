@@ -13,7 +13,7 @@ interface ModifiedSession extends Session {
 export const login = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { email, password } = req.body;
-  
+  console.log("login info: ", req.body)
     const getUser = await pool.query(`
       SELECT * FROM users
       WHERE email = $1

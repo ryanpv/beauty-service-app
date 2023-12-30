@@ -7,9 +7,9 @@ import { deleteService } from '../controllers/delete-service.js';
 export const servicesRouter = express.Router();
 servicesRouter.route('/')
     .get(getAllServices) // GET list of ALL service categories
-    .post(addService); // POST new service
+    .post(addService); // POST new service - admin route
 servicesRouter.route('/:serviceId')
     .get(getService)
-    .put(updateService)
-    .delete(deleteService);
+    .put(updateService) // admin route
+    .delete(deleteService); // admin route
 //# sourceMappingURL=service-routes.js.map

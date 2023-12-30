@@ -20,11 +20,17 @@ import { uploadServices } from './controllers/add-service.js';
 import { pool } from './queries.js';
 import { requestNewPassword } from './controllers/request-password-reset.js';
 import { passwordResetTokenCheck } from './controllers/token-password-reset.js';
+import { passwordReset } from './controllers/password-reset.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT;
-app.use(cors());
+app.use(cors({
+    origin: [
+        'http://localhost:3000'
+    ],
+    credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
@@ -47,7 +53,7 @@ app.use('/sessions', sessionRouter);
 app.get("/", (req, res) => {
     res.send("Welcome to home page for PolishByCin");
 });
-//////// TEST ROUTES
+//////// TEST/ADMIN ROUTES
 app.get("/test-auth", (req, res) => {
     console.log("response from ig auth");
     res.send("response from ig auth endpoint");
@@ -58,15 +64,16 @@ app.get('/check-user', checkUserRole);
 app.get('/upload-services', uploadServices);
 app.post('/password-resets', requestNewPassword);
 app.get('/password-resets/:token', passwordResetTokenCheck);
+app.put('/password-resets/:token', passwordReset);
 /////////////////////////
-app.post("/sessions", (req, res) => {
-    console.log("user session start");
-    res.end();
-});
-app.delete("/sessions", (req, res) => {
-    console.log("user session end");
-    res.end();
-});
+// app.post("/sessions", (req: Request, res: Response) => {
+//   console.log("user session start");
+//   res.end();
+// });
+// app.delete("/sessions", (req: Request, res: Response) => {
+//   console.log("user session end");
+//   res.end();  
+// });
 const options = {
     key: fs.readFileSync(path.join(__dirname, "localhost-key.pem")),
     cert: fs.readFileSync(path.join(__dirname, "localhost.pem")),
