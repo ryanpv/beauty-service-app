@@ -10,6 +10,7 @@ const checkExistingUser = async (emailToCheck) => {
 export const createUser = async (req, res) => {
     try {
         const { name, email, phone_number, password, role_id } = req.body;
+        const emailLowerCased = email.toLowerCase();
         const existingUser = await checkExistingUser(email);
         if (existingUser) {
             console.log("exists");
@@ -21,7 +22,7 @@ export const createUser = async (req, res) => {
         INSERT INTO users (name, email, phone_number, password, role_id)
         VALUES ($1, $2, $3, $4, $5)
         RETURNING id
-      `, [name, email, phone_number, hashPassword, role_id]);
+      `, [name, emailLowerCased, phone_number, hashPassword, role_id]);
             return res.status(201).json({ message: `Successfully created user with id ${newUser.rows[0].id}` });
         }
     }

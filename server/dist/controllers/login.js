@@ -5,11 +5,12 @@ import jwt from 'jsonwebtoken';
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        const emailLowerCased = email.toLowerCase();
         console.log("login info: ", req.body);
         const getUser = await pool.query(`
       SELECT * FROM users
       WHERE email = $1
-    `, [email]);
+    `, [emailLowerCased]);
         const userEmail = getUser.rows[0].email;
         const userId = getUser.rows[0].id;
         const userRole = getUser.rows[0].role_id;

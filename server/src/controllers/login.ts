@@ -13,11 +13,12 @@ interface ModifiedSession extends Session {
 export const login = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { email, password } = req.body;
+    const emailLowerCased = email.toLowerCase();
   console.log("login info: ", req.body)
     const getUser = await pool.query(`
       SELECT * FROM users
       WHERE email = $1
-    `, [email]);
+    `, [emailLowerCased]);
   
     const userEmail = getUser.rows[0].email;
     const userId = getUser.rows[0].id;
