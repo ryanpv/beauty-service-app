@@ -10,7 +10,8 @@ import connectPgSimple from 'connect-pg-simple';
 // ROUTER IMPORTS
 import { testRoute } from './routes/test-route.js';
 import { servicesRouter } from './routes/service-routes.js';
-import { usersRouter } from './routes/users-routers.js';
+import { serviceCategoryRouter } from './routes/service-category-routes.js';
+import { usersRouter } from './routes/users-routes.js';
 import { sessionRouter } from './routes/session-routes.js';
 // CONTROLLERS
 import { getRoles } from './controllers/roles.js';
@@ -48,6 +49,7 @@ app.use(session({
 // ROUTERS
 app.use('/test', testRoute);
 app.use('/services', servicesRouter);
+app.use('/service-categories', serviceCategoryRouter);
 app.use('/users', usersRouter);
 app.use('/sessions', sessionRouter);
 app.get("/", (req, res) => {

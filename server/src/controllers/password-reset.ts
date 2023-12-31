@@ -12,10 +12,6 @@ export const passwordReset = async(req: Request, res: Response) => {
     const userEmail = tokenCache({ key: token, res: res });
     const hashPassword = await bcrypt.hash(newPassword, 10);
     
-    console.log("useremail results: ", userEmail)
-    console.log("reqbody: ", req.body)
-    console.log("token" , token)
-    
     if (userEmail) {
       await pool.query(`
         UPDATE users

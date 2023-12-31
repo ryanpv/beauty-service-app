@@ -8,7 +8,6 @@ const NewPasswordRequest:React.FC = () => {
 
     const emailInputValue = emailInputRef.current!.value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-console.log("email input: ", emailInputValue);
 
     if (emailRegex.test(emailInputValue)) {
       fetch("https://localhost:3001/password-resets",{

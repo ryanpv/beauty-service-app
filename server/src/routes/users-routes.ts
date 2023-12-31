@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { createUser } from '../controllers/create-user.js';
 import { getAllUsers } from '../controllers/get-all-users.js';
 import { getUser } from '../controllers/get-user.js';

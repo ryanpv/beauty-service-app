@@ -10,15 +10,17 @@ export const addService = (req: Request, res: Response) => {
   const serviceTypesTable = 'service_types';
   const { service_name, price, description, service_categories_id } = req.body;
 
-  pool.query(
-    `INSERT INTO $5 (service_name, price, description, service_categories_id)
-      VALUES ($1, $2, $3, $4) RETURNING *`, [service_name, price, description, service_categories_id, serviceTypesTable], (error, result) => {
-        if (error) {
-          console.log("INSERT NEW SERVICE TYPE ERROR: ", error);
-          throw error;          
-        }
-        res.status(200).json(result.rows[0].id);
-    });
+  console.log("reqbody: ", req.body)
+  res.send("received service")
+  // pool.query(
+  //   `INSERT INTO $5 (service_name, price, description, service_categories_id)
+  //     VALUES ($1, $2, $3, $4) RETURNING *`, [service_name, price, description, service_categories_id, serviceTypesTable], (error, result) => {
+  //       if (error) {
+  //         console.log("INSERT NEW SERVICE TYPE ERROR: ", error);
+  //         throw error;          
+  //       }
+  //       res.status(200).json(result.rows[0].id);
+  //   });
 };
 
 

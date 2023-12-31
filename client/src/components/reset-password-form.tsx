@@ -14,28 +14,24 @@ const ResetPassword:React.FC = () => {
 
   const submitForm = (event: React.FormEvent) => {
     event.preventDefault();
-    try {
-      const newPassValue = newPassRef.current?.value;
-      const confirmPassValue = confirmNewPassRef.current?.value;
-  
-      if (newPassValue !== undefined && newPassValue === confirmPassValue) {
-        fetch(`https://localhost:3001/password-resets/${ token }`,{
-          method: "PUT",
-          credentials: "include",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify({ newPassword: newPassValue })
-        });
-      } else {
-        console.log("Passwords do not match")
-      }
-  
-      newPassRef.current!.value = '';
-      confirmNewPassRef.current!.value = '';
-    } catch (error) {
-      console.log("Password reset error: ", error)
+    const newPassValue = newPassRef.current?.value;
+    const confirmPassValue = confirmNewPassRef.current?.value;
+
+    if (newPassValue !== undefined && newPassValue === confirmPassValue) {
+      fetch(`https://localhost:3001/password-resets/${ token }`,{
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({ newPassword: newPassValue })
+      });
+    } else {
+      console.log("Passwords do not match")
     }
+
+    newPassRef.current!.value = '';
+    confirmNewPassRef.current!.value = '';
   };
 
   return (
