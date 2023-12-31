@@ -1,3 +1,4 @@
+import { pool } from '../queries.js';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -6,17 +7,15 @@ const __dirname = dirname(__filename);
 export const addService = (req, res) => {
     const serviceTypesTable = 'service_types';
     const { service_name, price, description, service_categories_id } = req.body;
-    console.log("reqbody: ", req.body);
-    res.send("received service");
-    // pool.query(
-    //   `INSERT INTO $5 (service_name, price, description, service_categories_id)
-    //     VALUES ($1, $2, $3, $4) RETURNING *`, [service_name, price, description, service_categories_id, serviceTypesTable], (error, result) => {
-    //       if (error) {
-    //         console.log("INSERT NEW SERVICE TYPE ERROR: ", error);
-    //         throw error;          
-    //       }
-    //       res.status(200).json(result.rows[0].id);
-    //   });
+    const service_categories_idNum = Number(service_categories_id); // parse id to number;
+    pool.query(`INSERT INTO $5 (service_name, price, description, service_categories_id)
+      VALUES ($1, $2, $3, $4) RETURNING *`, [service_name, price, description, service_categories_idNum, serviceTypesTable], (error, result) => {
+        if (error) {
+            console.log("INSERT NEW SERVICE TYPE ERROR: ", error);
+            throw error;
+        }
+        res.status(200).json(result.rows[0].id);
+    });
 };
 export const uploadServices = (req, res) => {
     const serviceTypesTable = 'service_types';
