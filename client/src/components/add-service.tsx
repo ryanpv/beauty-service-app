@@ -65,8 +65,6 @@ const AddService:React.FC = () => {
       body: JSON.stringify(serviceFormData)
     });
 
-    const priceAsNum: number = Number(serviceFormData.price)
-    console.log("num: ", typeof priceAsNum === 'string')
   };
 
   return (
