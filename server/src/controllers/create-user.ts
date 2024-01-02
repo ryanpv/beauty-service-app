@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { pool } from '../queries.js';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { Session } from "express-session";
 
 const checkExistingUser = async(emailToCheck: string): Promise<boolean> => { 
   const result = await pool.query(`
@@ -11,11 +13,19 @@ const checkExistingUser = async(emailToCheck: string): Promise<boolean> => {
   return result.rowCount > 0;
 };
 
+interface ModifiedSession extends Session {
+  isAuthenticated: boolean;
+  userRole: string;
+  accessToken: string; 
+}
+
 export const createUser = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { name, email, phone_number, password, role_id } = req.body;
     const emailLowerCased = email.toLowerCase();
     const existingUser: boolean = await checkExistingUser(email);
+    const clientRole = 1;
+    const adminRole = 2;
 
     if (existingUser) {
       console.log("exists")
@@ -29,6 +39,27 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         RETURNING id
       `, [name, emailLowerCased, phone_number, hashPassword, role_id]
       );  
+
+      const userEmail = email;
+      const userId = newUser.rows[0].id;
+      const userRole = clientRole;
+
+      const jwtToken = jwt.sign(
+        {
+          email: userEmail,
+          id: newUser.rows[0].id
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "24h"
+        }
+      );
+
+      (req.session as ModifiedSession).isAuthenticated = true;
+      (req.session as ModifiedSession).userRole = "client";
+      (req.session as ModifiedSession).accessToken = jwtToken;
+
+      res.cookie("userRole", 'client', { httpOnly: false });
 
       return res.status(201).json({ message: `Successfully created user with id ${ newUser.rows[0].id }`})
     }
