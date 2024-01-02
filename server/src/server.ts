@@ -48,7 +48,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   unset: 'destroy',
-  cookie: { maxAge: 30000 }
+  cookie: { maxAge: 30000 } // ** REMOVE FOR PROD
   // cookie: { maxAge: 24 * 30 * 60  * 60 * 1000 } // 30 days
 }))
 

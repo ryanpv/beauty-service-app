@@ -1,6 +1,38 @@
 import React from 'react'
 
 export default function LoginPage() {
+  type LoginForm = {
+    email: string;
+    password: string;
+  };
+
+  const [loginFormData, setLoginFormData] = React.useState<LoginForm>({
+    email: "",
+    password: ""
+  });
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    console.log("name-value", name + ": " + value);
+    setLoginFormData((prev) => {
+      return ({
+        ...prev,
+        [name]: value
+      });
+    });
+  };
+
+  const submitLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+    fetch(`https://localhost:3001/sessions`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(loginFormData)
+    })
+  };
 
   return (
     <div className='container flex'>
@@ -18,7 +50,7 @@ export default function LoginPage() {
 
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm text-sm font-medium'>
 
-          <form className='space-y-6' action='#'>
+          <form className='space-y-6' onSubmit={ submitLogin }>
             <div>
               <label className=''>
                 Email Address
@@ -26,6 +58,10 @@ export default function LoginPage() {
               <div className='mt-2'>
                 <input 
                   className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                  required
+                  type='email'
+                  name='email'
+                  onChange={ handleInput }
                 />
               </div>
             </div>
@@ -45,6 +81,10 @@ export default function LoginPage() {
               <div className='mt-2'>
                 <input 
                   className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                  required
+                  type='password'
+                  name='password'
+                  onChange={ handleInput }
                 />
               </div>
             </div>
