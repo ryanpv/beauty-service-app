@@ -13,7 +13,7 @@ export default function LoginPage() {
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log("name-value", name + ": " + value);
+
     setLoginFormData((prev) => {
       return ({
         ...prev,
@@ -31,7 +31,7 @@ export default function LoginPage() {
         "Content-type": "application/json"
       },
       body: JSON.stringify(loginFormData)
-    })
+    });
   };
 
   return (
