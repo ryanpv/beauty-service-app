@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ErrorResponse, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignupPage() {
   const navigate = useNavigate();

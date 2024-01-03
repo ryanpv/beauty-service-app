@@ -1,6 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
+  const [error, setError] = React.useState("");
+  const navigate = useNavigate();
+
   type LoginForm = {
     email: string;
     password: string;
@@ -22,16 +26,29 @@ export default function LoginPage() {
     });
   };
 
-  const submitLogin = (event: React.FormEvent) => {
+  const submitLogin = async (event: React.FormEvent) => {
     event.preventDefault();
-    fetch(`https://localhost:3001/sessions`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(loginFormData)
-    });
+    try {
+      const login = await fetch(`https://localhost:3001/sessions`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(loginFormData)
+      });
+  
+      const loginResponse = login.status;
+  
+      if (loginResponse === 200) {
+        navigate('/')
+      } else {
+        throw Error;
+      }
+    } catch (error) {
+      console.log("Login error: ", error);
+      setError("Error with login, please check credentials.")
+    }
   };
 
   return (
