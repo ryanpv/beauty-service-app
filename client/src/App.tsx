@@ -12,6 +12,7 @@ import AboutPage from './components/about-page';
 import NewPasswordRequest from './components/new-password-request';
 import ResetPassword from './components/reset-password-form';
 import AddService from './components/add-service';
+import UpdateService from './components/update-service';
 import BookingPage from './components/booking-page';
 import AppointmentsList from './components/appointments-list';
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/photo-gallery' element={ <PhotoGallery /> } />
         <Route path='/contact' element={ <ContactPage /> } />
         <Route path='/services' element={ <Services /> } />
+        <Route path='/update-service/:serviceId' element={ <UpdateService /> } />
         <Route path='/about' element={ <AboutPage /> } />
         <Route path='/request-new-password' element={ <NewPasswordRequest /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />

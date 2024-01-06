@@ -25,7 +25,12 @@ const ServiceCategory: React.FC<Services> = ({ list, serviceId }) => {
                   <h3>{ service.price }</h3>
                 </div>
                 <p>{ service.description }</p>
-                <button className='bg-pink-300 hover:bg-pink-200 font-semibold text-white rounded-sm'>Edit service</button>
+                <a 
+                  href={ `/update-service/${ service.id }` }
+                  className='text-center bg-pink-300 hover:bg-pink-200 font-semibold text-white rounded-sm'
+                  >
+                    Edit service
+                  </a>
             </div>          
             )
           });

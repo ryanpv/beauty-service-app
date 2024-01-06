@@ -2,6 +2,10 @@ import React from 'react'
 
 export default function AppointmentsList() {
   const admin = true
+  const appointments = async() => {
+    const fetchAppointments = await fetch(`https://localhost:3001/`)
+  }
+
   return (
     <div className='container flex flex-col space-y-6 max-w-screen-lg'>
       <h1 className='mt-10 text-center text-2xl font-bold'>

@@ -79,7 +79,7 @@ const AddService:React.FC = () => {
                 Service Category
               </label>
               <select required name='service_categories_id' onChange={ inputChangeHandler }>
-                <option value="" disabled>Select a category...</option>
+                <option defaultValue="" selected disabled>Select a category...</option>
                 { listCategories() }
               </select>
             </div>
