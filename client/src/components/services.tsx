@@ -11,16 +11,7 @@ const Services:React.FC = () => {
     description: string;      
   }[];
 
-  // fetch entire cateogries with useEffect
-  // - have each category component .FILTER() through it and render the section
-  //
-  // each category as its own component
-  // - category name 
-  // - then rest of the layout for each service in the category
-  // call each category component in jsx
-
   const [allServices, setAllServices] = useState<ServiceState>([]);
-  // const [categories, setCategories] = useState([]);
   const regularShellac = 1;
   const gelShellac = 2;
   const bioGel = 3;
@@ -29,9 +20,7 @@ const Services:React.FC = () => {
 
   useEffect(() => {
     servicesList();
-    // serviceCategories();
   }, []);
-  
   
   const servicesList = async() => {
     try {
@@ -49,24 +38,6 @@ const Services:React.FC = () => {
       console.log("Fetch services ferror: ", error)
     }
   };
-
-  // const serviceCategories = async () => {
-  //   try {
-  //     const fetchCategories = await fetch(`https://localhost:3001/service-categories`, {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: {
-  //         "Content-type": "application/json"
-  //       }
-  //     });
-
-  //     const categoryList = await fetchCategories.json();
-  //     console.log(categoryList)
-  //     setCategories(categoryList);
-  //   } catch (error) {
-  //     console.log("Fetch categories error: ", error)
-  //   }
-  // };
 
   return (
     <div className='container flex flex-col max-w-screen-md space-y-6'>

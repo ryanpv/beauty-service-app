@@ -39,7 +39,7 @@ const ServiceCategory: React.FC<Services> = ({ list, serviceId }) => {
 
   return (
     <>
-        { services() }
+      { services() }
     </>
   )
 }
