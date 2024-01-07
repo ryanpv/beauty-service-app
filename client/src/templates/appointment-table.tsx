@@ -21,7 +21,8 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
     if (list.length > 0) {
       return list.map((appointment) => {
         const date = new Date(appointment.date)
-        const reformatDate = `${ date.getFullYear() }-${ date.getMonth() }-${ date.getDate() }`
+        const month = date.toLocaleDateString('default', { month: 'short' });
+        const reformatDate = `${ date.getFullYear() }-${ month }-${ date.getDate() }`
         
         return (
         <tr className='bg-pink-200'>

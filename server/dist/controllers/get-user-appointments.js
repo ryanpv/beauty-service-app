@@ -1,7 +1,7 @@
 import { pool } from "../queries.js";
 export const getUserAppointments = async (req, res) => {
     const { userId } = req.params;
-    const status = req.query.status ? req.query.status : "upcoming";
+    const status = req.query && req.query.status ? req.query.status : "upcoming";
     const admin = true;
     const client = false;
     console.log("status: ", status);
@@ -9,9 +9,9 @@ export const getUserAppointments = async (req, res) => {
     console.log("ROLE: ", req.session);
     const date = new Date();
     const year = date.getFullYear();
-    const month = date.getMonth();
+    const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
     const day = date.getDate();
-    const currentDate = `${year}-${month + 1}-${day}`;
+    const currentDate = `${year}-${month}-${day}`;
     if (admin) {
         const appointments = await pool.query(`
     SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name
@@ -25,9 +25,9 @@ export const getUserAppointments = async (req, res) => {
     JOIN users
       ON appointments.users_id = users.id
 
-    WHERE appointments.date = $1
-      AND appointments.status = $2
-    `, [currentDate, status]);
+      WHERE appointments.date = $1
+        AND status_types.status = $2
+      `, [currentDate, status]);
         const results = appointments.rows;
         res.status(200).json(results);
     }
