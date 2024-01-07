@@ -3,19 +3,20 @@ import { pool } from "../queries.js";
 
 export const getUserAppointments = async(req: Request, res: Response) => {
   const { userId } = req.params;
-  const { status, startDate, endDate } = req.query;
-  // const statusNum = Number(req.query.status);
-  const admin = true;
-  const client = false;
-
-  console.log("status: ", Number(req.query.status))
-  console.log("userid: ", userId)
-
+  const { status } = req.query;
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
   const day = date.getDate();
   const currentDate = `${ year }-${ month }-${ day }`
+  const start_date = req.query.start_date === "" ? currentDate : req.query.start_date;
+  const end_date = req.query.end_date === "" ? null : req.query.end_date;
+  const admin = true;
+  const client = false;
+
+  console.log("status: ", req.query)
+  console.log("userid: ", userId)
+
 
   if (admin) {
     const appointments = await pool.query(`
@@ -30,13 +31,10 @@ export const getUserAppointments = async(req: Request, res: Response) => {
     JOIN users
       ON appointments.users_id = users.id
     WHERE (status_types.id = $1 OR $1 IS NULL)
-      AND (appointments.date < $2 OR $2 IS NULL)
-      AND (appointments.date > $3 OR $3 IS NULL)
-      `, [status, startDate, endDate]);
+      AND (appointments.date >= $2 OR $2 IS NULL)
+      AND (appointments.date < $3 OR $3 IS NULL)
+      `, [status, start_date, end_date]);
       
-            // WHERE appointments.date = $1
-            //   AND status_types.status = $2
-
     const results = appointments.rows;
     res.status(200).json(results)
   } else if (client) {

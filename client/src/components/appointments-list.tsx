@@ -16,28 +16,38 @@ const AppointmentsList:React.FC = () => {
 
   const [appointmentList, setAppointmentList] = useState<AppointmentList>([]);
   const [appointmentStatus, setAppointmentStatus] = useState(1); // value 1 is id for "upcoming"
+  
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
+  const day = date.getDate();
+  const currentDate = `${ year }-${ month }-${ day }`
+
+  const [startDate, setStartDate] = useState(currentDate);
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
+    const appointments = async() => {
+      try {
+        const fetchAppointments = await fetch(`https://localhost:3001/users/11/appointments?status=${ appointmentStatus }&start_date=${ startDate }`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-type": "application/json"
+          }
+        });
+    
+        const result = await fetchAppointments.json();
+        setAppointmentList(result);
+        console.log("appointments: ", result)
+      } catch (error) {
+        console.log("Error fetching appointments")
+      }
+    };
+    
     appointments();
-  }, []);
+  }, [appointmentStatus, startDate, endDate]);
 
-  const appointments = async() => {
-    try {
-      const fetchAppointments = await fetch(`https://localhost:3001/users/11/appointments?status=${ appointmentStatus }`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-type": "application/json"
-        }
-      });
-  
-      const result = await fetchAppointments.json();
-      setAppointmentList(result);
-      console.log("appointments: ", result)
-    } catch (error) {
-      console.log("Error fetching appointments")
-    }
-  };
 
 
   return (
@@ -89,8 +99,8 @@ const AppointmentsList:React.FC = () => {
               className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
               name='service_categories_id'
             >
-              <option>Upcoming</option>
-              <option>Complete</option>
+              <option value={ 1 }>Upcoming</option>
+              <option value={ 2 }>Complete</option>
             </select>
           </div>
         </form>
