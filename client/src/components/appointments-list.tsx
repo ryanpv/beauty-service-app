@@ -15,8 +15,7 @@ const AppointmentsList:React.FC = () => {
   }[];
 
   const [appointmentList, setAppointmentList] = useState<AppointmentList>([]);
-  const upcoming = 1;
-  const complete = 2;
+  const [appointmentStatus, setAppointmentStatus] = useState(1); // value 1 is id for "upcoming"
 
   useEffect(() => {
     appointments();
@@ -24,7 +23,7 @@ const AppointmentsList:React.FC = () => {
 
   const appointments = async() => {
     try {
-      const fetchAppointments = await fetch(`https://localhost:3001/users/11/appointments`, {
+      const fetchAppointments = await fetch(`https://localhost:3001/users/11/appointments?status=${ appointmentStatus }`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -98,7 +97,7 @@ const AppointmentsList:React.FC = () => {
       </div>
 
 {/* APPOINTMENT LIST TABLE */}
-    <AppointmentsTable list={ appointmentList } status={ upcoming }/>
+    <AppointmentsTable list={ appointmentList } status={ appointmentStatus }/>
 
     </div>
   )
