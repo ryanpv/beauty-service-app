@@ -110,7 +110,6 @@ export default function UpdateService() {
     }
   };
 
-
   return (
     <div className='container flex flex-col space-y-10'>
       <h1 className='text-center font-bold text-2xl'>Update Service</h1>

@@ -16,7 +16,6 @@ interface AppointmentsList {
 };
 
 const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
-  console.log('status: ', status)
   const appointments = () => {
     if (list.length > 0) {
       return list.map((appointment) => {

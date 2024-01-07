@@ -3,7 +3,7 @@ import { pool } from "../queries.js";
 
 export const getUserAppointments = async(req: Request, res: Response) => {
   const { userId } = req.params;
-  const { status } = req.query;
+  const { status, search } = req.query;
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
@@ -13,11 +13,9 @@ export const getUserAppointments = async(req: Request, res: Response) => {
   const end_date = req.query.end_date === "" ? null : req.query.end_date;
   const admin = true;
   const client = false;
+  const textSearch = "first@email.com"
 
-  console.log("status: ", req.query)
-  console.log("userid: ", userId)
-
-
+  console.log("queries: ", req.query)
   if (admin) {
     const appointments = await pool.query(`
     SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name
@@ -33,7 +31,14 @@ export const getUserAppointments = async(req: Request, res: Response) => {
     WHERE (status_types.id = $1 OR $1 IS NULL)
       AND (appointments.date >= $2 OR $2 IS NULL)
       AND (appointments.date < $3 OR $3 IS NULL)
-      `, [status, start_date, end_date]);
+      AND (
+        users.email ILIKE '%' || $4 || '%' 
+        OR 
+        users.name ILIKE '%' || $4 || '%' 
+        OR 
+        $4 IS NULL)
+    ORDER BY appointments.date ASC
+      `, [status, start_date, end_date, search]);
       
     const results = appointments.rows;
     res.status(200).json(results)
