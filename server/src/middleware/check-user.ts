@@ -9,8 +9,8 @@ interface ModifiedSession extends Session {
   accessToken?: string;
 };
 
-export const checkUserRole = async (req: Request, res: Response) => {
-  const userId = 1;
+export const checkUserRole = async (req: Request, res: Response, next: NextFunction) => {
+  const { userId } = req.params; 
   const userRole = await pool.query(`
     SELECT name, role 
       FROM users 

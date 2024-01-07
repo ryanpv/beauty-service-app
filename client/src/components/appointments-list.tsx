@@ -1,10 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import AppointmentsTable from '../templates/appointment-table';
 
-export default function AppointmentsList() {
-  const admin = true
+const AppointmentsList:React.FC = () => {
+  type AppointmentList = {
+    date: string;
+    email: string;
+    name?: string;
+    id: number;
+    service_name: string;
+    status: string;
+    time: string;
+    users_id: number;
+    price?: number;
+  }[];
+
+  const [appointmentList, setAppointmentList] = useState<AppointmentList>([]);
+  const upcoming = 1;
+  const complete = 2;
+
+  useEffect(() => {
+    appointments();
+  }, []);
+
   const appointments = async() => {
-    const fetchAppointments = await fetch(`https://localhost:3001/`)
-  }
+    try {
+      const fetchAppointments = await fetch(`https://localhost:3001/users/11/appointments`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
+  
+      const result = await fetchAppointments.json();
+      setAppointmentList(result);
+      console.log("appointments: ", result)
+    } catch (error) {
+      console.log("Error fetching appointments")
+    }
+  };
+
 
   return (
     <div className='container flex flex-col space-y-6 max-w-screen-lg'>
@@ -49,54 +84,24 @@ export default function AppointmentsList() {
               </div>
             </div>
           </div>
+          <div>
+            <label className='font-bold'>Status:</label>
+            <select 
+              className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+              name='service_categories_id'
+            >
+              <option>Upcoming</option>
+              <option>Complete</option>
+            </select>
+          </div>
         </form>
       </div>
 
 {/* APPOINTMENT LIST TABLE */}
-      <div className='overflow-auto text-left p-5'>
-        <table className='table-auto overflow-scroll border-separate border-spacing-y-1'>
-          <thead className='uppercase border'>
-            <tr className='bg-pink-300'>
-              <th className='px-4 py-2 w-1/4'>Client</th>
-              <th className='px-4 py-2 w-1/4'>Contact</th>
-              <th className='px-4 py-2 w-1/2'>Service</th>
-              <th className='px-4 py-2 w-1/4'>Date</th>
-              <th className='px-4 py-2 w-1/4'>Time</th>
-              <th className='px-4 py-2 w-1/4'>Price</th>
-              <th className='px-4 py-2 w-1/4'></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className='bg-pink-200'>
-              <td className='px-4 py-2'>Example Client 1</td>
-              <td className='px-4 py-2'>1234553452</td>
-              <td className='px-4 py-2'>manicurema nicuremanic uremanicur emanic uremanic asdfdsa fsdafsaffsurem anicuremanicure</td>
-              <td className='px-4 py-2'>December 1, 2023</td>
-              <td className='px-4 py-2'>13:00</td>
-              <td className='px-4 py-2'>99.50</td>
-              { admin ? <td className='px-4 py-2'>X</td> : null }
-            </tr>
-            <tr className='bg-pink-200'>
-              <td className='px-4 py-2'>Example Client 2</td>
-              <td className='px-4 py-2'>client@email.com</td>
-              <td className='px-4 py-2'>pedicure</td>
-              <td className='px-4 py-2'>December 2, 2023</td>
-              <td className='px-4 py-2'>15:00</td>
-              <td className='px-4 py-2'>30.99</td>
-              <td className='px-4 py-2'>X</td>
-            </tr>
-            <tr className='bg-pink-200'>
-              <td className='px-4 py-2'>Example Client 3</td>
-              <td className='px-4 py-2'>33333333</td>
-              <td className='px-4 py-2'>Full set</td>
-              <td className='px-4 py-2'>December 3, 2023</td>
-              <td className='px-4 py-2'>13:00</td>
-              <td className='px-4 py-2'>123.50</td>
-              <td className='px-4 py-2'>X</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <AppointmentsTable list={ appointmentList } status={ upcoming }/>
+
     </div>
   )
 }
+
+export default AppointmentsList;

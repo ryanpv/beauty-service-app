@@ -1,7 +1,8 @@
 import { pool } from '../queries.js';
 export const addAppointment = (req, res) => {
-    const { userId, date, time, serviceId, price_paid } = req.body;
-    const status = 1;
+    const { date, time, serviceId, price_paid } = req.body;
+    const { userId } = req.params;
+    const status = 2;
     pool.query(`
     CREATE OR REPLACE FUNCTION add_appointment(
       userId INT, 
