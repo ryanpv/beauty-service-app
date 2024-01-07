@@ -15,16 +15,12 @@ const AppointmentsList:React.FC = () => {
   }[];
 
   const [appointmentList, setAppointmentList] = useState<AppointmentList>([]);
-  const [appointmentStatus, setAppointmentStatus] = useState(1); // value 1 is id for "upcoming"
   
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
   const day = date.getDate();
   const currentDate = `${ year }-${ month }-${ day }`
-
-  const [startDate, setStartDate] = useState(currentDate);
-  const [endDate, setEndDate] = useState("");
 
   type FormFilter = {
     search: string;
@@ -36,7 +32,7 @@ const AppointmentsList:React.FC = () => {
     search: "",
     startDate: currentDate,
     endDate: "",
-    status: 1
+    status: 1 // default 1 for "upcoming"
   });
 
   useEffect(() => {
@@ -45,7 +41,7 @@ const AppointmentsList:React.FC = () => {
   
   const appointments = async() => {
     try {
-      const fetchAppointments = await fetch(`https://localhost:3001/users/11/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
+      const fetchAppointments = await fetch(`https://localhost:3001/users/12/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -75,14 +71,21 @@ const AppointmentsList:React.FC = () => {
     event.preventDefault();
 
     appointments();
+  };
 
-    console.log("state", formState)
+  const resetForm = () => {
+    setFormState({
+      search: "",
+      startDate: currentDate,
+      endDate: "",
+      status: 1
+    });
   };
 
   return (
     <div className='container flex flex-col space-y-6 max-w-screen-lg'>
       <h1 className='mt-10 text-center text-2xl font-bold'>
-      AppointmentsList
+      Appointments
       </h1>
 {/* FILTER FORM  */}
       <div className='sm:mx-auto max-w-2xl'>
@@ -140,11 +143,15 @@ const AppointmentsList:React.FC = () => {
               <option value={ 2 }>Complete</option>
             </select>
           </div>
-          <div>
+          <div className='flex justify-between'>
             <button
               type='submit'
               className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
               >Filter</button>
+            <button
+              onClick={ resetForm }
+              className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
+              >Reset</button>
           </div>
         </form>
       </div>

@@ -1,6 +1,26 @@
 import React,  { FC } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: FC = () => {
+  const navigate = useNavigate();
+
+  const logout = async() => {
+    try {
+      const logoutRequest = await fetch(`https://localhost:3001/sessions`, {
+        method: "DELETE",
+        credentials: "include"
+      });
+  
+      if (logoutRequest.status !== 200) {
+        throw Error("Failed to logout.")
+      } else {
+        navigate('/')
+      }
+    } catch (error) {
+      console.log("Logout error: ", error)
+    }
+  };
+
   return (
     <>
       <nav className='sticky top-0 min-w-screen flex bg-pink-300 text-white text-center'>
@@ -48,6 +68,13 @@ const Navbar: FC = () => {
                 <a href='/login'>
                   Login
                 </a>
+              </div>
+              <div className=''>
+                <button
+                onClick={ logout }
+                >
+                  Logout
+                </button>
               </div>
               <div className=''>
                 <a href='/signup'>
