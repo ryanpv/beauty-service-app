@@ -1,4 +1,5 @@
 import express, { Request, Response} from 'express';
+import cookieParser from 'cookie-parser';
 import "dotenv/config.js";
 import https from 'https';
 import * as fs from 'fs';  
@@ -31,6 +32,7 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT
 
+app.use(cookieParser());
 app.use(cors({
   origin: [
     'http://localhost:3000'

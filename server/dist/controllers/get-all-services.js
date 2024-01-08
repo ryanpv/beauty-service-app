@@ -1,5 +1,6 @@
 import { pool } from '../queries.js';
 export const getAllServices = (req, res) => {
+    console.log("service session: ", req.session);
     pool.query(`
     SELECT service_types.*, service_categories.service_category_name FROM service_types
       JOIN service_categories

@@ -1,10 +1,11 @@
 import React from 'react'
 
 export default function HomePage() {
-  const cookies = document.cookie.split(';').find(cookie => cookie.startsWith("userRole="))
-  const userRole = cookies?.split("=")[1];
+  const cookies = document.cookie.split("; ");
+  // const userRole = cookies?.find(cookie => cookie.startsWith("userRole"));
+  const currentUser = cookies?.find(cookie => cookie.startsWith("currentUser"));
 
-  console.log("userRole: ", userRole)
+
   return (
     <div className='container flex flex-col max-w-screen-md mt-10 space-y-10'>
       <header className='flex flex-col mx-auto space-y-10'>

@@ -35,9 +35,11 @@ export const login = async (req, res) => {
                 req.session.accessToken = jwtToken;
                 if (userRole === 2) { // Provide frontend with context of users' role
                     res.cookie('userRole', 'admin', { httpOnly: false });
+                    res.cookie('currentUser', userEmail, { httpOnly: false });
                 }
                 else {
                     res.cookie('userRole', 'client', { httpOnly: false });
+                    res.cookie('currentUser', userEmail, { httpOnly: false });
                 }
                 res.status(200).json({ message: "Successfully authenticated user" });
             }
