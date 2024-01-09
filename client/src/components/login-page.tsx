@@ -1,7 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useStateContext } from '../contexts/state-contexts';
 
 export default function LoginPage() {
+  const { userId, setUserId, currentUser, setCurrentUser } = useStateContext();
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
 
@@ -41,6 +43,11 @@ export default function LoginPage() {
       const loginResponse = login.status;
   
       if (loginResponse === 200) {
+        const cookies = document.cookie.split("; "); 
+        const userCookie = cookies?.find((cookie) => cookie.startsWith("currentUser"));
+        const user = userCookie?.split("=")[1].replace("%40", "@");
+
+        setCurrentUser(user!)
         navigate('/')
       } else {
         throw Error;

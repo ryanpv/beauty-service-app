@@ -1,11 +1,14 @@
 import React from 'react'
+import { useStateContext } from '../contexts/state-contexts';
 
 export default function HomePage() {
+  const { currentUser } = useStateContext();
   const cookies = document.cookie.split("; ");
   // const userRole = cookies?.find(cookie => cookie.startsWith("userRole"));
-  const currentUser = cookies?.find(cookie => cookie.startsWith("currentUser"));
 
-  console.log("user: ", currentUser?.split("=")[1].replace("%40", "@"))
+  console.log("Homepage: ", currentUser)
+
+
 
   return (
     <div className='container flex flex-col max-w-screen-md mt-10 space-y-10'>

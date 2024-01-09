@@ -10,6 +10,8 @@ const UpdateAppointment: React.FC = () => {
   const day = date.getDate();
   const currentDate = `${ year }-${ month }-${ day }`
 
+  const userId = 1
+
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const { appointmentId } = useParams();
 
