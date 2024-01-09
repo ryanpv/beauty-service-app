@@ -41,7 +41,7 @@ const AppointmentsList:React.FC = () => {
   
   const appointments = async() => {
     try {
-      const fetchAppointments = await fetch(`https://localhost:3001/users/12/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
+      const fetchAppointments = await fetch(`https://localhost:3001/users/11/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
         method: "GET",
         credentials: "include",
         headers: {

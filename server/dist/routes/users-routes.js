@@ -18,9 +18,11 @@ usersRouter.route('/:userId')
     .put(verifyUser, updateUser)
     .delete(verifyUser, deleteUser);
 usersRouter.route('/:userId/appointments')
-    .get(verifyUser, getUserAppointments)
+    .get(getUserAppointments)
+    // .get(verifyUser, getUserAppointments)
     .post(verifyUser, addAppointment);
 usersRouter.route('/:userId/appointments/:appointmentId')
-    .put(verifyUser, updateAppointment)
+    .get()
+    .put(updateAppointment)
     .delete(verifyUser, deleteAppointment);
 //# sourceMappingURL=users-routes.js.map

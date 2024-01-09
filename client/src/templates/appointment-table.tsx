@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 interface AppointmentsList {
   list: Array<{
@@ -32,7 +33,12 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
           <td className='px-4 py-2'>{ reformatDate }</td>
           <td className='px-4 py-2'>{ appointment.time }</td>
           <td className='px-4 py-2'>{ appointment.price }</td>
-          <td className='px-4 py-2'>X</td>
+          <td className='px-4 py-2'>
+            <div className='space-x-1'>
+              <Link to={`/update-appointment`}>Edit</Link> | 
+              <button>Del</button>
+            </div>
+          </td>
         </tr>
       )})
     }

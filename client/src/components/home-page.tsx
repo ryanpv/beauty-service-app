@@ -5,6 +5,7 @@ export default function HomePage() {
   // const userRole = cookies?.find(cookie => cookie.startsWith("userRole"));
   const currentUser = cookies?.find(cookie => cookie.startsWith("currentUser"));
 
+  console.log("user: ", currentUser?.split("=")[1].replace("%40", "@"))
 
   return (
     <div className='container flex flex-col max-w-screen-md mt-10 space-y-10'>
