@@ -43,7 +43,7 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
       )})
     }
   };
-  console.log("list: ", list);
+
   return (
     <>
     <h1 className='text-center font-semibold'>{ status === 1 ? "Upcoming" : "Complete" } Appointments</h1>

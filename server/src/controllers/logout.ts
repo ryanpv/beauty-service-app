@@ -7,6 +7,7 @@ export const logout = (req: Request, res: Response) => {
     } else {
       res.clearCookie('userRole');
       res.clearCookie('currentUser');
+      res.clearCookie('user');
 
       res.status(200).json({ message: "Logout successful" });
     }

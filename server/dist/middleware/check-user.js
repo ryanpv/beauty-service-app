@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken';
 import { pool } from '../queries.js';
-;
+// interface ModifiedSession extends Session {
+//   isAuthenticated?: boolean;
+//   userRole?: string;
+//   accessToken?: string;
+// };
 export const checkUserRole = async (req, res, next) => {
     const { userId } = req.params;
     const userRole = await pool.query(`

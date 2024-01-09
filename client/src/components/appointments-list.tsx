@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AppointmentsTable from '../templates/appointment-table';
+import { useStateContext } from '../contexts/state-contexts';
 
 const AppointmentsList:React.FC = () => {
   type AppointmentList = {
@@ -14,8 +15,9 @@ const AppointmentsList:React.FC = () => {
     price?: number;
   }[];
 
+  const { currentUser } = useStateContext();
   const [appointmentList, setAppointmentList] = useState<AppointmentList>([]);
-  
+
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
@@ -41,7 +43,7 @@ const AppointmentsList:React.FC = () => {
   
   const appointments = async() => {
     try {
-      const fetchAppointments = await fetch(`https://localhost:3001/users/11/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
+      const fetchAppointments = await fetch(`https://localhost:3001/users/${ currentUser }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
         method: "GET",
         credentials: "include",
         headers: {

@@ -45,7 +45,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     unset: 'destroy',
-    cookie: { maxAge: 30000 } // ** REMOVE FOR PROD
+    cookie: { maxAge: 5 * 60 * 1000 } // ** REMOVE FOR PROD - 5 minutes
     // cookie: { maxAge: 24 * 30 * 60  * 60 * 1000 } // 30 days
 }));
 // ROUTERS

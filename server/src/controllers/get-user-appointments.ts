@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { pool } from "../queries.js";
+import { ModifiedSession } from "./login.js";
 
 export const getUserAppointments = async(req: Request, res: Response) => {
-  const { userId } = req.params;
+  const { userSessionId } = req.params;
+  const userId = userSessionId === req.sessionID && (req.session as ModifiedSession).userId;
   const { status, search } = req.query;
   const date = new Date();
   const year = date.getFullYear();
@@ -13,6 +15,9 @@ export const getUserAppointments = async(req: Request, res: Response) => {
   const end_date = req.query.end_date === "" ? null : req.query.end_date;
   const admin = false;
   const client = true;
+  const clientCookie = req.cookies.currentUser;
+  const clientSession = (req.session as ModifiedSession).userEmail;
+  const authorizedClient = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
 
   if (admin) {
     const appointments = await pool.query(`
@@ -41,7 +46,9 @@ export const getUserAppointments = async(req: Request, res: Response) => {
       
     const results = appointments.rows;
     res.status(200).json(results)
-  } else if (client) {
+  } else if (authorizedClient) {
+    console.log('called authorize', userId);
+    
     pool.query(`
       SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name
       FROM appointments
@@ -72,6 +79,8 @@ export const getUserAppointments = async(req: Request, res: Response) => {
       }
       res.status(200).json(results.rows);
     });
+  } else {
+    res.status(404).json({ message: "Unauthorized, login required" });
   }
 
 };

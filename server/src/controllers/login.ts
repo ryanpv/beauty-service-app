@@ -4,10 +4,12 @@ import { pool } from '../queries.js';
 import jwt from 'jsonwebtoken';
 import { Session } from "express-session";
 
-interface ModifiedSession extends Session {
+export interface ModifiedSession extends Session {
   isAuthenticated?: boolean;
   userRole?: string;
   accessToken?: string;
+  userEmail?: string;
+  userId?: number;
 };
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
@@ -45,6 +47,8 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         (req.session as ModifiedSession).isAuthenticated = true;
         (req.session as ModifiedSession).userRole = userRole === 2 ? "admin" : "client";
         (req.session as ModifiedSession).accessToken = jwtToken;
+        (req.session as ModifiedSession).userEmail = userEmail;
+        (req.session as ModifiedSession).userId = userId;
 
         if (userRole === 2) { // Provide frontend with context of users' role
           res.cookie('userRole', 'admin', { httpOnly: false });
@@ -52,6 +56,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         } else {
           res.cookie('userRole', 'client', { httpOnly: false });
           res.cookie('currentUser', userEmail, { httpOnly: false });
+          res.cookie('user', req.sessionID, { httpOnly: false });
         }
         
         res.status(200).json({ message: "Successfully authenticated user" });

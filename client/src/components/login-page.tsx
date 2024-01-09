@@ -44,11 +44,12 @@ export default function LoginPage() {
   
       if (loginResponse === 200) {
         const cookies = document.cookie.split("; "); 
-        const userCookie = cookies?.find((cookie) => cookie.startsWith("currentUser"));
-        const user = userCookie?.split("=")[1].replace("%40", "@");
+        const userCookie = cookies?.find((cookie) => cookie.startsWith("user="));
+        // const user = userCookie?.split("=")[1].replace("%40", "@");
+        const user = userCookie ? userCookie.split("=")[1] : null;
 
-        setCurrentUser(user!)
-        navigate('/')
+        setCurrentUser(user);
+        navigate('/');
       } else {
         throw Error;
       }

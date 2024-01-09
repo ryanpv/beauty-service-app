@@ -1,5 +1,5 @@
 import React,  { FC } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
@@ -45,9 +45,9 @@ const Navbar: FC = () => {
                 </a>
               </div>
               <div className=''>
-                <a href='/appointments'>
+                <Link to='/appointments'>
                   Appointments
-                </a>
+                </Link>
               </div>
               <div className=''>
                 <a href='/photo-gallery'>

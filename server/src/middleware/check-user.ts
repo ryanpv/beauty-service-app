@@ -2,12 +2,13 @@ import express, { NextFunction, Request, Response} from 'express';
 import jwt from 'jsonwebtoken';
 import { pool } from '../queries.js';
 import { Session } from 'express-session';
+import { ModifiedSession } from '../controllers/login.js';
 
-interface ModifiedSession extends Session {
-  isAuthenticated?: boolean;
-  userRole?: string;
-  accessToken?: string;
-};
+// interface ModifiedSession extends Session {
+//   isAuthenticated?: boolean;
+//   userRole?: string;
+//   accessToken?: string;
+// };
 
 export const checkUserRole = async (req: Request, res: Response, next: NextFunction) => {
   const { userId } = req.params; 
