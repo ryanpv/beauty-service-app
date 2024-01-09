@@ -23,7 +23,7 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
         const date = new Date(appointment.date)
         const month = date.toLocaleDateString('default', { month: 'short' });
         const reformatDate = `${ date.getFullYear() }-${ month }-${ date.getDate() }`
-        
+
         return (
         <tr className='bg-pink-200'>
           <td className='px-4 py-2'>{ appointment.name }</td>
@@ -35,7 +35,7 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
           <td className='px-4 py-2'>{ appointment.price }</td>
           <td className='px-4 py-2'>
             <div className='space-x-1'>
-              <Link to={`/update-appointment`}>Edit</Link> | 
+              <Link to={`/update-appointment/${ appointment.id }`}>Edit</Link> | 
               <button>Del</button>
             </div>
           </td>

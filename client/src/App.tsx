@@ -26,7 +26,7 @@ function App() {
         <Route path='/' element={ <HomePage /> } />
         <Route path='/book-appointment' element={ <BookingPage /> } />
         <Route path='/appointments' element={ <AppointmentsList /> } />
-        <Route path='/update-appointment' element={ <UpdateAppointment /> } />
+        <Route path='/update-appointment/:appointmentId' element={ <UpdateAppointment /> } />
         <Route path='/login' element={ <LoginPage /> } />
         <Route path='/signup' element={ <SignupPage /> } />
         <Route path='/ig-auth' element={ <GetAuth /> } />

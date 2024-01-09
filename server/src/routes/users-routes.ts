@@ -9,6 +9,7 @@ import { getUserAppointments } from '../controllers/get-user-appointments.js';
 import { updateAppointment } from '../controllers/update-appointment.js';
 import { deleteAppointment } from '../controllers/delete-appointment.js';
 import { verifyUser } from '../middleware/check-user.js';
+import { getSingleAppointment } from '../controllers/get-single-appointment.js'
 
 export const usersRouter = express.Router();
 
@@ -27,6 +28,6 @@ usersRouter.route('/:userId/appointments')
   .post(verifyUser, addAppointment);
 
 usersRouter.route('/:userId/appointments/:appointmentId')
-  .get()
+  .get(getSingleAppointment)
   .put(updateAppointment)
   .delete(verifyUser, deleteAppointment);

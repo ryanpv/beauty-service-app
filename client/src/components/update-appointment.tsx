@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.module.css'
+import { useParams } from 'react-router-dom';
+// import 'react-datepicker/dist/react-datepicker.module.css'
 
 const UpdateAppointment: React.FC = () => {
   const date = new Date();
@@ -10,8 +11,13 @@ const UpdateAppointment: React.FC = () => {
   const currentDate = `${ year }-${ month }-${ day }`
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const { appointmentId } = useParams();
 
+  const appointment = async() => {
+    const getAppointment = await fetch(`https://localhost:3001/`)
+  }
 
+  console.log("appt id: ", appointmentId)
   console.log("Date: ", new Date("2023-05-12"))
   return (
     <div className='container flex flex-col space-y-6 p-5 max-w-screen-lg'>
