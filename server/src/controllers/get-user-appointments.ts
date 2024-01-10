@@ -46,9 +46,7 @@ export const getUserAppointments = async(req: Request, res: Response) => {
       
     const results = appointments.rows;
     res.status(200).json(results)
-  } else if (authorizedClient) {
-    console.log('called authorize', userId);
-    
+  } else if (authorizedClient) {    
     pool.query(`
       SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name
       FROM appointments

@@ -27,22 +27,22 @@ const Navbar: FC = () => {
         <div className='flex sm:flex-row flex-col flex-1 justify-between items-center'>
 
           <div className='grow-0 justify-start items-center px-5 text-2xl'>
-            <a href='/'>
+            <Link to='/'>
               PolishByCin
-            </a>
+            </Link>
           </div>
 
           <div className='flex-1'>
             <div className='flex flex-row h-16 items-center px-5 justify-end gap-5'>
               <div className='hover:text-gray-200'>
-                <a href='/'>
+                <Link to='/'>
                   Home
-                </a>
+                </Link>
               </div>
               <div className=''>
-                <a href='/services'>
+                <Link to='/services'>
                   Services
-                </a>
+                </Link>
               </div>
               <div className=''>
                 <Link to='/appointments'>
@@ -50,24 +50,24 @@ const Navbar: FC = () => {
                 </Link>
               </div>
               <div className=''>
-                <a href='/photo-gallery'>
+                <Link to='/photo-gallery'>
                   Photo Gallery
-                </a>
+                </Link>
               </div>
               <div className=''>
-                <a href='/contact'>
+                <Link to='/contact'>
                   Contact
-                </a>
+                </Link>
               </div>
               <div className=''>
-                <a href='/about'>
+                <Link to='/about'>
                   About
-                </a>
+                </Link>
               </div>
               <div className=''>
-                <a href='/login'>
+                <Link to='/login'>
                   Login
-                </a>
+                </Link>
               </div>
               <div className=''>
                 <button
@@ -77,9 +77,9 @@ const Navbar: FC = () => {
                 </button>
               </div>
               <div className=''>
-                <a href='/signup'>
+                <Link to='/signup'>
                   Sign Up
-                </a>
+                </Link>
               </div>
             </div>
 

@@ -3,7 +3,7 @@ import { useStateContext } from '../contexts/state-contexts';
 
 export default function HomePage() {
   const { currentUser } = useStateContext();
-
+console.log("current cookies: ", document.cookie)
   return (
     <div className='container flex flex-col max-w-screen-md mt-10 space-y-10'>
       <header className='flex flex-col mx-auto space-y-10'>
