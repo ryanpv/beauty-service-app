@@ -81,21 +81,27 @@ const UpdateAppointment: React.FC = () => {
   const submitForm = async(event: React.FormEvent) => {
     event.preventDefault();
 
-    const putFormRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(appointment)
-    });
+    try {
+      const putFormRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(appointment)
+      });
 
-    console.log('form result', await putFormRequest);
+      const result = await putFormRequest;
+
+      if (result.status !== 201) {
+      throw new Error("Error updating appointment");
+      }
+    } catch (error) {
+      console.log("Error updating appointment")
+    }
 
   };
 
-
-console.log("appointment: ", appointment)
   return (
     <div className='container flex flex-col space-y-6 p-5 max-w-screen-lg'>
       <h1 className='text-center'>Update Appointment</h1>
