@@ -2,8 +2,9 @@
 // ADMIN should confirm change requests to avoid scheduling conflicts
 import { pool } from "../queries.js";
 export const updateAppointment = (req, res) => {
-    const { userId, appointmentId } = req.params;
+    const { userSessionId, appointmentId } = req.params;
     const { date, time, price_paid, serviceId, status } = req.body;
+    const userId = req.sessionID === userSessionId && req.session.userId;
     const admin = false; // ** FOR DEV PURPOSES 
     if (admin) {
         pool.query(`

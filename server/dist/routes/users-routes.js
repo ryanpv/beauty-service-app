@@ -22,7 +22,7 @@ usersRouter.route('/:userSessionId/appointments')
     .get(getUserAppointments)
     // .get(verifyUser, getUserAppointments)
     .post(verifyUser, addAppointment);
-usersRouter.route('/:userId/appointments/:appointmentId')
+usersRouter.route('/:userSessionId/appointments/:appointmentId')
     .get(getSingleAppointment)
     .put(updateAppointment)
     .delete(verifyUser, deleteAppointment);

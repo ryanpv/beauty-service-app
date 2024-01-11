@@ -43,17 +43,21 @@ const AppointmentsList:React.FC = () => {
   
   const appointments = async() => {
     try {
-      const fetchAppointments = await fetch(`https://localhost:3001/users/${ currentUser }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-type": "application/json"
-        }
-      });
-  
-      const result = await fetchAppointments.json();
-      setAppointmentList(result);
-      console.log("appointments: ", result)
+      if (currentUser) {
+        const fetchAppointments = await fetch(`https://localhost:3001/users/${ currentUser }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-type": "application/json"
+          }
+        });
+    
+        const result = await fetchAppointments.json();
+        setAppointmentList(result);
+        console.log("appointments: ", result)
+      } else {
+        console.log("No current user.")
+      }
     } catch (error) {
       console.log("Error fetching appointments")
     }

@@ -3,10 +3,12 @@
 
 import { Request, Response } from "express";
 import { pool } from "../queries.js";
+import { ModifiedSession } from "./login.js";
 
 export const updateAppointment = (req: Request, res: Response) => {
-  const { userId, appointmentId } = req.params;
+  const { userSessionId, appointmentId } = req.params;
   const { date, time, price_paid, serviceId, status } = req.body;
+  const userId = req.sessionID === userSessionId && (req.session as ModifiedSession).userId;
   const admin = false; // ** FOR DEV PURPOSES 
 
   if (admin) { 

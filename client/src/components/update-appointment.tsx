@@ -2,51 +2,42 @@ import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
 import { useStateContext } from '../contexts/state-contexts';
 import { useParams } from 'react-router-dom';
-// import 'react-datepicker/dist/react-datepicker.module.css'
 
 const UpdateAppointment: React.FC = () => {
   type Appointment = {
-    id: number;
-    date: string;
+    appointmentId: number;
+    date: string | null;
     email: string;
     name?: string;
     service_name: string;
     status: string;
-    time: string;
+    time: string | null;
     users_id: number;
     price_paid: string;
   };
 
   const appointmentState = {
-    id: 0,
-    date: "",
+    appointmentId: 0,
+    date: null,
     email: "",
-    name: "Test Client",
+    name: "",
     service_name: "",
     status: "",
-    time: "",
+    time: null,
     users_id: 0,
     price_paid: ""
   };
 
   const { currentUser } = useStateContext();
   const [appointment, setAppointment] = useState<Appointment>(appointmentState)
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const { appointmentId } = useParams();
-
-  const date = new Date(appointment.date);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1; // 0-indexed, must +1 to get accurate month value
-  const day = date.getDate();
-  const appointmentDate = `${ year }-${ month }-${ day }`
-
-  console.log(appointmentDate)
   
   useEffect(() => {
     fetchAppointment();
   }, []);
 
   const fetchAppointment = async() => {
+    console.log('fetch called')
     try {
       const getAppointment = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
         method: "GET",
@@ -54,6 +45,7 @@ const UpdateAppointment: React.FC = () => {
       });
   
       const result = await getAppointment.json();
+      console.log("result date: ", result)
       if (result.length > 0) {
         setAppointment(result[0]);
       } else {
@@ -64,18 +56,57 @@ const UpdateAppointment: React.FC = () => {
     }
   };
 
-  console.log("appt id: ", appointment)
+  const putFormHandler = (event: React.ChangeEvent<HTMLInputElement> | Date) => {
+    if (event instanceof Date) {
+      const date = new Date(event);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1; // 0-indexed, must +1 to get accurate month value
+      const day = date.getDate();
+      const appointmentDate = `${ year }-${ month }-${ day }`
+      console.log("appointmentdate: ", new Date(appointmentDate))
+      setAppointment((prev) => ({
+        ...prev,
+        date: appointmentDate
+      }));
+    } else {
+      const { name, value } = event.target;
+  
+      setAppointment((prev) => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+  };
 
+  const submitForm = async(event: React.FormEvent) => {
+    event.preventDefault();
+
+    const putFormRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(appointment)
+    });
+
+    console.log('form result', await putFormRequest);
+
+  };
+
+
+console.log("appointment: ", appointment)
   return (
     <div className='container flex flex-col space-y-6 p-5 max-w-screen-lg'>
       <h1 className='text-center'>Update Appointment</h1>
 
       <div className='sm:mx-auto sm:w-full sm:max-w-sm max-w-2xl font-medium'>
-        <form className='space-y-3'>
+        <form className='space-y-3' onSubmit={ submitForm }>
           <div>
             <label>Client</label>
             <div>
               <input
+                name='name'
                 value={ appointment.name }
                 className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
               />
@@ -85,6 +116,7 @@ const UpdateAppointment: React.FC = () => {
             <label>Contact Info</label>
             <div>
               <input
+                name='email'
                 value={ appointment.email }
                 className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
               />
@@ -94,6 +126,8 @@ const UpdateAppointment: React.FC = () => {
             <label>Service</label>
             <div>
               <input
+                onChange={ putFormHandler }
+                name='service_name'
                 value={ appointment.service_name }
                 className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
               />
@@ -103,6 +137,8 @@ const UpdateAppointment: React.FC = () => {
             <label>Status</label>
             <div>
               <input
+                onChange={ putFormHandler }
+                name='status'
                 value={ appointment.status }
                 className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
               />
@@ -111,14 +147,10 @@ const UpdateAppointment: React.FC = () => {
           <div>
             <label>Date</label>
             <div>
-              <input
-                value={ appointmentDate }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
-              />
               <DatePicker 
-                dateFormat="yyyy-mm-dd"
-                selected={ selectedDate }
-                onChange={ (date) => setSelectedDate(date) }
+                dateFormat="MMMM Do yyyy"
+                selected={ appointment.date ? new Date(appointment.date) : null }
+                onChange={ (date) => date && putFormHandler(date) }
               />
             </div>
           </div>
@@ -126,7 +158,9 @@ const UpdateAppointment: React.FC = () => {
             <label>Time</label>
             <div>
               <input
-                value={ appointment.time }
+                onChange={ putFormHandler }
+                name='time'
+                value={ appointment.time ? appointment.time : "" }
                 className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
               />
             </div>
@@ -135,6 +169,8 @@ const UpdateAppointment: React.FC = () => {
             <label>Price</label>
             <div>
               <input
+                onChange={ putFormHandler }
+                name='price_paid'
                 value={ appointment.price_paid }
                 className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
               />
