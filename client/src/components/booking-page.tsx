@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // default styling
+import { useStateContext } from '../contexts/state-contexts';
+import ServiceOptions from '../templates/service-options';
 
 // use context for stored list of services so that it can be loaded as a service option 
 // 
@@ -15,6 +17,31 @@ export default function BookingPage() {
     price_paid: string;
   };
 
+  useEffect(() => {
+    if (allServices.length === 0) {
+      servicesList();
+    }
+  },[]);
+
+  const servicesList = async() => {
+    try {
+      const fetchServices = await fetch(`https://localhost:3001/services`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
+  
+      const services = await fetchServices.json();
+      setAllServices(services);
+    } catch (error) {
+      console.log("Fetch services ferror: ", error)
+    }
+  };
+
+  const { allServices, setAllServices } = useStateContext();
+  console.log("booking: ", allServices)
   const newAppointmentState = {
     date: new Date(),
     time: "",
@@ -51,23 +78,7 @@ console.log("newApp: ", newAppointment)
       <form className='border-2 border-solid border-pink-300 justify-between'>
         <div className='flex flex-col space-y-10'>
           <div className='flex flex-col sm:flex-row justify-around space-y-5 sm:space-y-0'>
-            <div className=''>
-              <button
-                className='bg-pink-300 hover:bg-pink-200 w-full px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
-              >
-                Technician
-              </button>
-              <div>dropdown component</div>
-            </div>
-
-            <div>
-              <button
-                className='bg-pink-300 hover:bg-pink-200 w-full px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
-              >
-                Service
-              </button>
-              <div>dropdown component</div>
-            </div>
+            <ServiceOptions serviceList={ allServices }/>
           </div>
 
           {/* calender component import */}

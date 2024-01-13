@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import ServiceCategory from '../templates/service-category';
+import { Link } from 'react-router-dom';
+import { useStateContext } from '../contexts/state-contexts';
 
 const Services:React.FC = () => {
-  type ServiceState = {
-    id: number;
-    service_name: string;
-    service_category_name: string;
-    service_categories_id: number;
-    price: string;
-    description: string;      
-  }[];
+  // type ServiceState = {
+  //   id: number;
+  //   service_name: string;
+  //   service_category_name: string;
+  //   service_categories_id: number;
+  //   price: string;
+  //   description: string;      
+  // }[];
 
-  const [allServices, setAllServices] = useState<ServiceState>([]);
+  // const [allServices, setAllServices] = useState<ServiceState>([]);
+
+  const { allServices, setAllServices } = useStateContext();
   const regularShellac = 1;
   const gelShellac = 2;
   const bioGel = 3;
@@ -38,7 +42,7 @@ const Services:React.FC = () => {
       console.log("Fetch services ferror: ", error)
     }
   };
-
+console.log("servicepage: ", allServices)
   return (
     <div className='container flex flex-col max-w-screen-md space-y-6'>
       <h1 className='text-center font-bold text-2xl mt-5'>Available Services</h1>
@@ -48,12 +52,12 @@ const Services:React.FC = () => {
       >
         + Add new services
       </a>
-      <a
-        href='/book-appointment'
+      <Link
+        to='/book-appointment'
         className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300'
       >
         Book Appointment
-      </a>
+      </Link>
 {/* REGULAR POLISH SERVICES SECTION */}
       <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
 
