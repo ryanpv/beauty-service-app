@@ -34,7 +34,7 @@ export default function UpdateService() {
       });
   
       const result = await fetchService.json(); // Should only be single result
-console.log("servicedata: ", result)
+
       if (result.length > 1) {
         throw Error
       } else {

@@ -6,7 +6,7 @@ export const getSingleAppointment = async(req: Request, res: Response) => {
   try {
     const { appointmentId } = req.params;
     const userId = req.cookies.user === req.sessionID && (req.session as ModifiedSession).userId;
-  console.log("userid app: ", userId)
+
     const getUserAppointment = await pool.query(`
       SELECT 
         appointments.id, 
