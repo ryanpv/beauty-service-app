@@ -67,27 +67,10 @@ console.log('parssed: ', newAppointment.id !== "" && JSON.parse(newAppointment.i
   };
 
   const formatDate = () => {
-    const listOfMonths = [
-      "Jan", 
-      "Feb", 
-      "Mar", 
-      "Apr", 
-      "May", 
-      "Jun", 
-      "Jul", 
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
     const date = new Date(newAppointment.date)
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    const formattedDate = `${ listOfMonths[month]} ${ day }, ${ year }`
+    const formattedDate = date.toLocaleDateString('default', { month: 'long', day: '2-digit', year: 'numeric' })
 
-    return formattedDate
+    return formattedDate;
   };
 
   return (
