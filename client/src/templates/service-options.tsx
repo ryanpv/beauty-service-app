@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react';
 
-interface Services {
+type NewAppointment = { // type for newAppointment state variable
+  date: Date | string;
+  time: string;
+  id: string;
+  price_paid: string;
+};
+
+type CalendarDates = Date | null;
+
+interface Services { // interface for props passed to this component
   serviceList: Array<{
     id: number;
     service_name: string;
@@ -8,15 +17,18 @@ interface Services {
     service_categories_id: number;
     price: string;
     description: string;
-  }> | []
+  }> | [],
+  formHandler: (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+  newAppointment: NewAppointment,
+  setNewAppointment: Dispatch<SetStateAction<NewAppointment>>
 };
 
-const ServiceOptions: React.FC<Services> = ({ serviceList }) => {
+const ServiceOptions: React.FC<Services> = ({ serviceList, newAppointment, formHandler }) => {
   const displayOptions = () => {
     if (serviceList.length > 0) {
       return (
         serviceList.map((service) => (
-          <option key={ service.id } value={ service.id }>{ service.service_name }</option>
+          <option key={ service.id } value={ JSON.stringify({ id: service.id, service_name: service.service_name }) }>{ service.service_name }</option>
           )
         )
       );
@@ -24,10 +36,12 @@ const ServiceOptions: React.FC<Services> = ({ serviceList }) => {
     return ;
   };
 
+console.log("appointment: ", newAppointment)
   return (
     <div>
       <select
-        onChange={}
+        name='id'
+        onChange={ formHandler }
         className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
         >
         <option selected>Select a service...</option>

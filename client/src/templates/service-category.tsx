@@ -9,14 +9,14 @@ interface Services {
     price: string;
     description: string;
   }>;
-  serviceId: number;
+  serviceCategoryId: number;
 };
 
-const ServiceCategory: React.FC<Services> = ({ list, serviceId }) => {
+const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId }) => {
 
   const services = () => {
       if (list.length !== 0) {
-        return list.filter((service) => service.service_categories_id === serviceId)
+        return list.filter((service) => service.service_categories_id === serviceCategoryId)
           .map((service) => {
             return (
               <div className='flex flex-col p-5 mx-auto sm:min-w-full space-y-3' key={ service.id }>

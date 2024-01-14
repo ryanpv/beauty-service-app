@@ -37,6 +37,7 @@ const Services:React.FC = () => {
       });
   
       const services = await fetchServices.json();
+      console.log("services: ", services)
       setAllServices(services);
     } catch (error) {
       console.log("Fetch services ferror: ", error)
@@ -68,7 +69,7 @@ console.log("servicepage: ", allServices)
            open toe shoes for pedicures, and expect additional time for drying!</p>
       </div>
 
-      <ServiceCategory list={ allServices } serviceId={ regularShellac } />
+      <ServiceCategory list={ allServices } serviceCategoryId={ regularShellac } />
       
 {/* GEL/SHELLAC SERVICES SECTION */}
       <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
@@ -78,7 +79,7 @@ console.log("servicepage: ", allServices)
         <p>Beautiful pigments with a glossy finish. Or choose a matte top coat if you prefer! Gel/Shellac can be expected to last about 2-3 weeks with care. Feel confident with our 1 week guarantee!</p>
       </div>
 
-      <ServiceCategory list={ allServices } serviceId={ gelShellac } />
+      <ServiceCategory list={ allServices } serviceCategoryId={ gelShellac } />
 
 {/* BIO GEL SERVICES SECTION */}
       <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
@@ -88,7 +89,7 @@ console.log("servicepage: ", allServices)
         <p>Strong and durable nails with a glossy or matte finish. Perfect for long nails or weak/brittle nails. Can be expected to last about 3-4 weeks. Backed by our 1 week guarantee.</p>
       </div>
 
-      <ServiceCategory list={ allServices } serviceId={ bioGel } />
+      <ServiceCategory list={ allServices } serviceCategoryId={ bioGel } />
 
 {/* NAIL COMBO SERVICES SECTION */}
       <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
@@ -98,7 +99,7 @@ console.log("servicepage: ", allServices)
         <p></p>
       </div>
 
-      <ServiceCategory list={ allServices } serviceId={ nailCombo } />
+      <ServiceCategory list={ allServices } serviceCategoryId={ nailCombo } />
 
 {/* ADDITIONAL NAIL SERVICES SECTION */}
       <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
@@ -108,7 +109,7 @@ console.log("servicepage: ", allServices)
         <p>We are pleased to offer high quality, beautiful designs from our talented nail techs. We are always on trend and constantly update our skills to keep up with the latest styles. We offer everything from the classic French to ombré to marble to lots of bling! We have pearls, metal shapes, foil, stickers, dust, glitter…you name it! To top it all off, we offer Swarovski crystals for maximum sparkle and shine. Be sure to check out our Instagram for our latest creations!</p>
       </div>
 
-      <ServiceCategory list={ allServices } serviceId={ additionalNail } />
+      <ServiceCategory list={ allServices } serviceCategoryId={ additionalNail } />
 
     </div>
   )

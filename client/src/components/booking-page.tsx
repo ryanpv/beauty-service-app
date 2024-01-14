@@ -4,16 +4,23 @@ import 'react-calendar/dist/Calendar.css'; // default styling
 import { useStateContext } from '../contexts/state-contexts';
 import ServiceOptions from '../templates/service-options';
 
-// use context for stored list of services so that it can be loaded as a service option 
-// 
-
 export default function BookingPage() {
+  const { allServices, setAllServices } = useStateContext();
+  const newAppointmentState = {
+    date: new Date(),
+    time: "",
+    id: "",
+    price_paid: ""
+  };
+
+  const [newAppointment, setNewAppointment] = useState<NewAppointment>(newAppointmentState)
+  
   type CalendarDates = Date | null; // required for react-calendar as it has a prop for range
 
   type NewAppointment = {
     date: Date | string;
     time: string;
-    serviceId: number;
+    id: string;
     price_paid: string;
   };
 
@@ -40,17 +47,7 @@ export default function BookingPage() {
     }
   };
 
-  const { allServices, setAllServices } = useStateContext();
-  console.log("booking: ", allServices)
-  const newAppointmentState = {
-    date: new Date(),
-    time: "",
-    serviceId: 0,
-    price_paid: ""
-  };
-
-  const [newAppointment, setNewAppointment] = useState<NewAppointment>(newAppointmentState)
-
+console.log('parssed: ', newAppointment.id !== "" && JSON.parse(newAppointment.id))
   const formChangeHandler = (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {   
     if (event instanceof Date) {
       setNewAppointment((prev) => ({
@@ -68,7 +65,31 @@ export default function BookingPage() {
       }));
     }
   };
-console.log("newApp: ", newAppointment)
+
+  const formatDate = () => {
+    const listOfMonths = [
+      "Jan", 
+      "Feb", 
+      "Mar", 
+      "Apr", 
+      "May", 
+      "Jun", 
+      "Jul", 
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
+    const date = new Date(newAppointment.date)
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const formattedDate = `${ listOfMonths[month]} ${ day }, ${ year }`
+
+    return formattedDate
+  };
+
   return (
     <div className='container flex flex-col border-2 border-solid space-y-10 my-10'>
       <h1 className='text-center font-bold text-2xl'>Book Appointment</h1>
@@ -78,7 +99,7 @@ console.log("newApp: ", newAppointment)
       <form className='border-2 border-solid border-pink-300 justify-between'>
         <div className='flex flex-col space-y-10'>
           <div className='flex flex-col sm:flex-row justify-around space-y-5 sm:space-y-0'>
-            <ServiceOptions serviceList={ allServices }/>
+            <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
           </div>
 
           {/* calender component import */}
@@ -129,6 +150,17 @@ console.log("newApp: ", newAppointment)
                 onClick={ formChangeHandler }
                 className='w-full bg-pink-300 hover:bg-pink-200 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
               >18:00 PM</button>
+            </div>
+          </div>
+          
+          <div className='mx-auto space-y-2'>
+            <h1>Confirm your details below before submitted the booking request:</h1>
+            <div>
+              <ul>
+                <li><strong>Service:</strong> { newAppointment.id !== "" && JSON.parse(newAppointment.id).service_name }</li>
+                <li><strong>Date:</strong> { formatDate() }</li>
+                <li><strong>Time:</strong> { newAppointment.time }</li>
+              </ul>
             </div>
           </div>
 
