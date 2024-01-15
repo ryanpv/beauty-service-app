@@ -4,7 +4,7 @@ type NewAppointment = { // type for newAppointment state variable
   date: Date | string;
   time: string;
   id: string;
-  price_paid: string;
+  price_paid: number;
 };
 
 type CalendarDates = Date | null;
@@ -36,7 +36,6 @@ const ServiceOptions: React.FC<Services> = ({ serviceList, newAppointment, formH
     return ;
   };
 
-console.log("appointment: ", newAppointment)
   return (
     <div>
       <select

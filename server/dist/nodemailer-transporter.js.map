@@ -1,0 +1,1 @@
+{"version":3,"file":"nodemailer-transporter.js","sourceRoot":"","sources":["../src/nodemailer-transporter.ts"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,YAAY,CAAC;AAEpC,MAAM,CAAC,MAAM,WAAW,GAAG,UAAU,CAAC,eAAe,CAAC;IACpD,IAAI,EAAE,qBAAqB;IAC3B,IAAI,EAAE,GAAG;IACT,IAAI,EAAE;QACF,IAAI,EAAE,OAAO,CAAC,GAAG,CAAC,gBAAgB;QAClC,IAAI,EAAE,OAAO,CAAC,GAAG,CAAC,mBAAmB;KACxC;CACF,CAAC,CAAC"}

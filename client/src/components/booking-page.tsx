@@ -5,14 +5,14 @@ import { useStateContext } from '../contexts/state-contexts';
 import ServiceOptions from '../templates/service-options';
 
 export default function BookingPage() {
-  const { allServices, setAllServices } = useStateContext();
+  const { currentUser, allServices, setAllServices } = useStateContext();
   const newAppointmentState = {
     date: new Date(),
     time: "",
     id: "",
-    price_paid: ""
+    price_paid: 0
   };
-
+console.log("current user booking: ", currentUser)
   const [newAppointment, setNewAppointment] = useState<NewAppointment>(newAppointmentState)
   
   type CalendarDates = Date | null; // required for react-calendar as it has a prop for range
@@ -21,7 +21,7 @@ export default function BookingPage() {
     date: Date | string;
     time: string;
     id: string;
-    price_paid: string;
+    price_paid: number;
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function BookingPage() {
 
   const servicesList = async() => {
     try {
-      const fetchServices = await fetch(`https://localhost:3001/services`, {
+      const fetchServices = await fetch(`https://localhost:3001/services/`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -43,11 +43,10 @@ export default function BookingPage() {
       const services = await fetchServices.json();
       setAllServices(services);
     } catch (error) {
-      console.log("Fetch services ferror: ", error)
+      console.log("Fetch services error: ", error);
     }
   };
 
-console.log('parssed: ', newAppointment.id !== "" && JSON.parse(newAppointment.id))
   const formChangeHandler = (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {   
     if (event instanceof Date) {
       setNewAppointment((prev) => ({
@@ -66,9 +65,27 @@ console.log('parssed: ', newAppointment.id !== "" && JSON.parse(newAppointment.i
     }
   };
 
+  const appointmentFormSubmit = async(event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      const appointmentRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newAppointment)
+      });
+
+      console.log("appointment req: ", appointmentRequest);
+    } catch (error) {
+      console.log("Appointment booking error: ", error);
+    }
+  };
+
   const formatDate = () => {
     const date = new Date(newAppointment.date)
-    const formattedDate = date.toLocaleDateString('default', { month: 'long', day: '2-digit', year: 'numeric' })
+    const formattedDate = date.toLocaleDateString('default', { month: 'long', day: '2-digit', year: 'numeric' });
 
     return formattedDate;
   };
@@ -79,8 +96,13 @@ console.log('parssed: ', newAppointment.id !== "" && JSON.parse(newAppointment.i
       <i className='text-center'>If you wish to have a specific technician, select one using the options below</i>
 
     <div className='border-2 border-solid sm:mx-auto sm:w-full sm:max-w-screen-xl'>
-      <form className='border-2 border-solid border-pink-300 justify-between'>
+      <form 
+        onSubmit={ appointmentFormSubmit }
+        className='border-2 border-solid border-pink-300 justify-between'
+        >
         <div className='flex flex-col space-y-10'>
+
+          {/* List of services for dropdown  */}
           <div className='flex flex-col sm:flex-row justify-around space-y-5 sm:space-y-0'>
             <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
           </div>
@@ -150,7 +172,7 @@ console.log('parssed: ', newAppointment.id !== "" && JSON.parse(newAppointment.i
           <button
             className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
           >
-            Add to cart
+            Submit Request
           </button>
         </div>
       </form>

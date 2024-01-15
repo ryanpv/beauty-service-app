@@ -7,6 +7,7 @@ export const getService = (req, res) => {
       JOIN service_categories
         ON service_types.service_categories_id = service_categories.id
       WHERE service_types.id = $1
+      ORDER BY service_types.id
     `, [serviceId], (error, results) => {
         if (error) {
             console.log(`GET SERVICE ERROR: ${error}`);

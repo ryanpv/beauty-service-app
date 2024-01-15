@@ -1,17 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { pool } from '../queries.js';
 import crypto from 'crypto';
-import nodemailer from 'nodemailer';
 import { tokenCache } from '../middleware/token-cache.js';
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email', // replace with gmail for prod***
-  port: 587,
-  auth: {
-      user: process.env.NODEMAILER_EMAIL,
-      pass: process.env.NODEMAILER_PASSWORD
-  }
-});
+import { transporter } from '../nodemailer-transporter.js';
 
 export const requestNewPassword = async(req: Request, res: Response, next: NextFunction) => {
   try {

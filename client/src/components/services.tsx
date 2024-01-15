@@ -37,13 +37,12 @@ const Services:React.FC = () => {
       });
   
       const services = await fetchServices.json();
-      console.log("services: ", services)
       setAllServices(services);
     } catch (error) {
       console.log("Fetch services ferror: ", error)
     }
   };
-console.log("servicepage: ", allServices)
+
   return (
     <div className='container flex flex-col max-w-screen-md space-y-6'>
       <h1 className='text-center font-bold text-2xl mt-5'>Available Services</h1>
