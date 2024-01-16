@@ -3,8 +3,10 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // default styling
 import { useStateContext } from '../contexts/state-contexts';
 import ServiceOptions from '../templates/service-options';
+import dayjs from 'dayjs';
+import TimeSlots  from '../templates/timeslots';
 
-export default function BookingPage() {
+const BookingPage: React.FC = () => {
   const { currentUser, allServices, setAllServices } = useStateContext();
   const newAppointmentState = {
     date: new Date(),
@@ -90,6 +92,7 @@ console.log("current user booking: ", currentUser)
     return formattedDate;
   };
 
+
   return (
     <div className='container flex flex-col border-2 border-solid space-y-10 my-10'>
       <h1 className='text-center font-bold text-2xl'>Book Appointment</h1>
@@ -115,48 +118,9 @@ console.log("current user booking: ", currentUser)
             />
           </div>
 
-          <div className='m-auto px-5 border-2 border-solid border-black- 300 grid grid-cols-4 gap-2'>
-            <div>
-              <button
-                name='time'
-                value="12:00"
-                onClick={ formChangeHandler }
-                className='w-full bg-pink-300 hover:bg-pink-200 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
-              >12:00 PM</button>
-            </div>
-            <div>
-              <button
-                name='time'
-                value="15:00"
-                onClick={ formChangeHandler }
-                className='w-full bg-pink-300 hover:bg-pink-200 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
-              >15:00 PM</button>
-            </div>
-            <div>
-              <button
-                name='time'
-                value="16:00"
-                onClick={ formChangeHandler }
-                className='w-full bg-pink-300 hover:bg-pink-200 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
-              >16:00 PM</button>
-            </div>
-            <div>
-              <button
-                name='time'
-                value="17:00"
-                onClick={ formChangeHandler }
-                className='w-full bg-pink-300 hover:bg-pink-200 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
-              >17:00 PM</button>
-            </div>
-            <div>
-              <button
-                name='time'
-                value="18:00"
-                onClick={ formChangeHandler }
-                className='w-full bg-pink-300 hover:bg-pink-200 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
-              >18:00 PM</button>
-            </div>
-          </div>
+          <TimeSlots formChangeHandler={ formChangeHandler } />
+
+
           
           <div className='mx-auto space-y-2'>
             <h1>Confirm your details below before submitted the booking request:</h1>
@@ -181,3 +145,5 @@ console.log("current user booking: ", currentUser)
     </div>
   )
 }
+
+export default BookingPage;

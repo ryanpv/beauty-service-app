@@ -34,7 +34,7 @@ const AppointmentsList:React.FC = () => {
     search: "",
     startDate: currentDate,
     endDate: "",
-    status: 1 // default 1 for "upcoming"
+    status: 2 // default 1 for "upcoming"
   });
 
   useEffect(() => {

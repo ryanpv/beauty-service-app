@@ -41,7 +41,7 @@ export const getUserAppointments = async(req: Request, res: Response) => {
         OR 
         $4 IS NULL
         )
-    ORDER BY appointments.date ASC
+    ORDER BY appointments.date, appointments.time ASC
       `, [status, start_date, end_date, search]);
       
     const results = appointments.rows;
@@ -69,7 +69,7 @@ export const getUserAppointments = async(req: Request, res: Response) => {
           OR 
           $5 IS NULL
         )
-      ORDER BY appointments.date ASC
+      ORDER BY appointments.date, appointments.time ASC
     `, [userId, status, start_date, end_date, search], (error, results) => {
       if (error) {
         console.log(`ERROR getting user's appointments: ${ error }`);
