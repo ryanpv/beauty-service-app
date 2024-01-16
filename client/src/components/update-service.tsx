@@ -14,6 +14,7 @@ export default function UpdateService() {
     description: "",
     service_categories_id: 0,
     service_category_name: "",
+    duration: 0,
   });
   const [categories, setCategories] = useState<CategoryListState>([]);
   const { serviceId } = useParams();
@@ -134,6 +135,16 @@ export default function UpdateService() {
                   className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
                   value={ updateForm.price }
                   name='price'
+                  onChange={ formValuesHandler }
+                />
+              </div>
+
+              <div>
+                <label className='font-bold'>Duration:</label>
+                <input
+                  className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                  value={ updateForm.duration }
+                  name='duration'
                   onChange={ formValuesHandler }
                 />
               </div>
