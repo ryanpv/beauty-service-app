@@ -1,4 +1,7 @@
 import React from 'react'
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 type CalendarDates = Date | null;
 
@@ -56,10 +59,10 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler }) => {
     const hours12 = parseHour % 12 || 12;
 
     return `${ hours12 }:${ minutes } ${ period }`
-  }
+  };
 
   const times = () => {
-    return timeSlots.map((times) => 
+    return filteredTimeSlots.map((times: { startTime: string; endTime: string; duration: number; }) => 
       (
         <div>
           <button
@@ -71,6 +74,26 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler }) => {
       </div>
       ));    
   };
+
+
+  const booked = {
+    startTime: '19:30',
+    duration: 60
+  };
+  
+  const filteredTimeSlots = timeSlots.filter((slot) => {
+    const slotStartTime = dayjs(slot.startTime, 'HH:mm');
+    const bookedStartTime = dayjs(booked.startTime, 'HH:mm');
+    const startTimeBuffer = bookedStartTime.subtract(15, 'minutes'); // 'subtract() method with 15 because there needs to be a MINIMUM of 30 minutes prior to allow appointments before
+    const bookedEndTime = bookedStartTime.add(booked.duration - 15, 'minutes'); // '- 15' to remove 15 minute time buffer since appointments can be back to back with no break
+
+    return (
+      slotStartTime.isBefore(startTimeBuffer) ||
+      slotStartTime.isAfter(bookedEndTime)
+    );
+  });
+
+
 
   return (
     <div className='m-auto px-5 border-2 border-solid border-blue-300 grid grid-cols-3 sm:grid-cols-4 gap-2'>

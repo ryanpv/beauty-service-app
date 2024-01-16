@@ -146,7 +146,10 @@ const AppointmentsList:React.FC = () => {
               name='status'
             >
               <option value={ 1 }>Upcoming</option>
-              <option value={ 2 }>Complete</option>
+              <option value={ 2 }>Requested</option>
+              <option value={ 3 }>Cancelled</option>
+              <option value={ 4 }>Completed</option>
+              <option value={ 5 }>Misc</option>
             </select>
           </div>
           <div className='flex justify-between'>
