@@ -147,29 +147,3 @@ console.log("current user booking: ", currentUser)
 }
 
 export default BookingPage;
-
-
-
-// 30min
-// 45min
-// 30min
-// 45min
-
-// 1hr
-// 1hr15
-// 45min
-// 1hr
-// 1hr15
-// 15min
-
-// 1hr 30
-// 1hr45
-// 1hr30
-// 30min
-// 30min
-
-// nail combo just add
-
-// 30easy - 45 med - 100hard
-// 30 min
-// 30 min
