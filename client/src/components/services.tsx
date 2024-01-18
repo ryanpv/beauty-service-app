@@ -33,7 +33,8 @@ const Services:React.FC = () => {
       setAllServices(services);
       setLoading(false);
     } catch (error) {
-      console.log("Fetch services ferror: ", error)
+      console.log("Fetch services ferror: ", error);
+      setLoading(false);
     }
   };
 

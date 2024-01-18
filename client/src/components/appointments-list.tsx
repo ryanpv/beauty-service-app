@@ -2,6 +2,7 @@ import React from 'react';
 import AppointmentsTable from '../templates/appointment-table';
 import { useStateContext } from '../contexts/state-contexts';
 import DatePicker from 'react-datepicker';
+import { BarLoader } from 'react-spinners';
 
 const AppointmentsList:React.FC = () => {
   type AppointmentList = {
@@ -18,6 +19,7 @@ const AppointmentsList:React.FC = () => {
 
   const { currentUser } = useStateContext();
   const [appointmentList, setAppointmentList] = React.useState<AppointmentList>([]);
+  const [loading, setLoading] = React.useState(false);
 
   const date = new Date();
   const year = date.getFullYear();
@@ -45,6 +47,7 @@ const AppointmentsList:React.FC = () => {
   // Fetch all appointments - query params as filter
   const appointments = async() => {
     try {
+      setLoading(true);
       if (currentUser) {
         const fetchAppointments = await fetch(`https://localhost:3001/users/${ currentUser }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
           method: "GET",
@@ -58,10 +61,12 @@ const AppointmentsList:React.FC = () => {
         setAppointmentList(result);
         console.log("appointments: ", result)
       } else {
-        console.log("No current user.")
+        console.log("No current user.");
       }
+      setLoading(false);
     } catch (error) {
-      console.log("Error fetching appointments")
+      console.log("Error fetching appointments");
+      setLoading(false);
     }
   };
 
@@ -190,7 +195,13 @@ const AppointmentsList:React.FC = () => {
       </div>
 
 {/* APPOINTMENT LIST TABLE */}
+
+      { loading ? 
+      <div className='mx-auto'>
+        <BarLoader color='#fbb6ce' /> 
+      </div> :
       <AppointmentsTable list={ appointmentList } status={ formState.status }/>
+      }
     </div>
   )
 };
