@@ -25,7 +25,7 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
         const reformatDate = `${ date.getFullYear() }-${ month }-${ date.getDate() }`
 
         return (
-        <tr className='bg-pink-200'>
+        <tr className='bg-pink-200' key={ appointment.id }>
           <td className='px-4 py-2'>{ appointment.name }</td>
           <td className='px-4 py-2'>{ appointment.email }</td>
           <td className='px-4 py-2'>{ appointment.service_name }</td>

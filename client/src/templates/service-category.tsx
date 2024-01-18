@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { SyncLoader } from 'react-spinners';
 
 interface Services {
   list: Array<{
@@ -10,9 +11,10 @@ interface Services {
     description: string;
   }>;
   serviceCategoryId: number;
+  loading: boolean;
 };
 
-const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId }) => {
+const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading }) => {
 
   const services = () => {
       if (list.length !== 0) {
