@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BarLoader } from 'react-spinners';
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -7,13 +8,17 @@ export default function SignupPage() {
     email: string;
     phone_number: string;
     password: string;
+    confirm_password: string;
   };
 
   const [signupFormData, setSignupFormData] = useState<SignupForm>({
     email: "",
     phone_number: "",
-    password: ""
+    password: "",
+    confirm_password: ""
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleFormInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -26,26 +31,45 @@ export default function SignupPage() {
   const submitSignup = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const signUp = await fetch(`https://localhost:3001/users`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify(signupFormData)
-      });
+      setLoading(true);
+      if (signupFormData.password.length < 8) {
+        setError("Minimum password length is 8 characters");
+        setLoading(false);
+        return ;
+      } else if (
+        signupFormData.password === signupFormData.confirm_password
+        && signupFormData.password !== ""
+        && signupFormData.confirm_password !== ""
+        ) {
+          const signUp = await fetch(`https://localhost:3001/users`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-type": "application/json"
+            },
+            body: JSON.stringify(signupFormData)
+          });
+    
+          const responseStatus = await signUp.status;
+    
+          if (responseStatus === 201) {
+            navigate("/")
+          } else if (responseStatus === 409) {
+            console.log("User already exists.");
+            setError("User already exists.");
+          } else { 
+            throw Error;
+          }
+        } else {
+          console.log("passwords do not match")
+          setError("Passwords do not match.");
+        }
 
-      const responseStatus = await signUp.status;
-
-      if (responseStatus === 201) {
-        navigate("/")
-      } else if (responseStatus === 409) {
-        console.log("User already exists.");
-      } else { 
-        throw Error;
-      }
+      setLoading(false);
     } catch (error) {
-      console.log(error); 
+      console.log("Error with signup: ", error); 
+      setError("Error signing up");
+      setLoading(false);
   }
 };
 
@@ -106,12 +130,16 @@ export default function SignupPage() {
             />
           </div>
 
+          { error !== "" && <div className='flex justify-center text-red-700 font-semibold'><i>***{ error }***</i></div> }
+
+          { loading ? <div className='flex justify-center'><BarLoader color='#fbb6ce' /></div> :
           <div>
             <button
               type='submit'
               className='flex w-full bg-pink-300 justify-center rounded-md px-3 py-1.5 text-white hover:bg-pink-200 font-semibold'            
             >Continue</button>
           </div>
+          }
         </form>
       </div>
 

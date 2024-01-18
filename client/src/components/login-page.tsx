@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../contexts/state-contexts';
+import { BarLoader } from 'react-spinners';
 
 export default function LoginPage() {
   const { userId, setUserId, currentUser, setCurrentUser } = useStateContext();
@@ -12,6 +13,7 @@ export default function LoginPage() {
     password: string;
   };
 
+  const [loading, setLoading] = React.useState(false);
   const [loginFormData, setLoginFormData] = React.useState<LoginForm>({
     email: "",
     password: ""
@@ -31,6 +33,7 @@ export default function LoginPage() {
   const submitLogin = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const login = await fetch(`https://localhost:3001/sessions`, {
         method: "POST",
         credentials: "include",
@@ -53,9 +56,11 @@ export default function LoginPage() {
       } else {
         throw Error;
       }
+      setLoading(false);
     } catch (error) {
       console.log("Login error: ", error);
-      setError("Error with login, please check credentials.")
+      setLoading(false);
+      setError("Error with login, please check credentials.");
     }
   };
 
@@ -114,13 +119,15 @@ export default function LoginPage() {
               </div>
             </div>
 
+            { loading ? <div className='flex justify-center'><BarLoader color='#fbb6ce' /></div> :
             <div>
               <button
                 type='submit'
                 className='flex w-full bg-pink-300 justify-center rounded-md px-3 py-1.5 text-white hover:bg-pink-200 font-semibold'>
                   Sign In
                 </button>
-            </div>
+            </div> }
+              
           </form>
 
           <p className='mt-10 text-center text-sm text-gray-500'>
