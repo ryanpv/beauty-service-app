@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react';
 import AppointmentsTable from '../templates/appointment-table';
 import { useStateContext } from '../contexts/state-contexts';
 import DatePicker from 'react-datepicker';
@@ -17,7 +17,7 @@ const AppointmentsList:React.FC = () => {
   }[];
 
   const { currentUser } = useStateContext();
-  const [appointmentList, setAppointmentList] = useState<AppointmentList>([]);
+  const [appointmentList, setAppointmentList] = React.useState<AppointmentList>([]);
 
   const date = new Date();
   const year = date.getFullYear();
@@ -31,17 +31,18 @@ const AppointmentsList:React.FC = () => {
     endDate: string | Date;
     status: number;
   };
-  const [formState, setFormState] = useState<FormFilter>({
+  const [formState, setFormState] = React.useState<FormFilter>({
     search: "",
     startDate: currentDate,
     endDate: "",
     status: 2 // default 2 for "requested"
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     appointments();
   }, []);
   
+  // Fetch all appointments - query params as filter
   const appointments = async() => {
     try {
       if (currentUser) {
@@ -64,7 +65,7 @@ const AppointmentsList:React.FC = () => {
     }
   };
 
-console.log("form state: ", formState)
+  // Function to update state from filter inputs
   const filterHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       event.preventDefault();
   
@@ -75,12 +76,14 @@ console.log("form state: ", formState)
       }));
   };
 
+  // Function to submit filter queries and re-call fetch appointment function
   const submitFilter = (event: React.FormEvent) => {
     event.preventDefault();
 
     appointments();
   };
 
+  // Function to reset filter form to original state and re-call appointment function
   const resetForm = () => {
     setFormState({
       search: "",
@@ -92,6 +95,7 @@ console.log("form state: ", formState)
     appointments();
   };
 
+  // Function to format dates to match DB formatting and set date variable state
   const dateFormatter = (dateInput: Date, range: string) => {
     const date = new Date(dateInput);
     const year = date.getFullYear();
@@ -186,10 +190,9 @@ console.log("form state: ", formState)
       </div>
 
 {/* APPOINTMENT LIST TABLE */}
-    <AppointmentsTable list={ appointmentList } status={ formState.status }/>
-
+      <AppointmentsTable list={ appointmentList } status={ formState.status }/>
     </div>
   )
-}
+};
 
 export default AppointmentsList;
