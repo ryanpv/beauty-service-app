@@ -115,7 +115,7 @@ console.log("current user booking: ", currentUser)
   return (
     <div className='container flex flex-col border-2 border-solid space-y-10 my-10'>
       <h1 className='text-center font-bold text-2xl'>Book Appointment</h1>
-      <i className='text-center'>If you wish to have a specific technician, select one using the options below</i>
+      <i className='text-center'>Please confirm your appointment request details before submitting. You will receive an email for when it has been accepted</i>
 
     <div className='border-2 border-solid sm:mx-auto sm:w-full sm:max-w-screen-xl'>
       <form 

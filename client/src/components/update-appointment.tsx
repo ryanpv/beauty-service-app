@@ -157,12 +157,12 @@ const UpdateAppointment: React.FC = () => {
               <option value={ 5 }>Misc</option>
             </select>
           </div>
-          <div>
+          <div className=''>
             <label>Date</label>
             <div>
               <DatePicker 
-                className='block py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
-                dateFormat="MMMM Do yyyy"
+                className='block sm:w-96 py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                dateFormat="MMMM d yyyy"
                 selected={ appointment.date ? new Date(appointment.date) : null }
                 onChange={ (date) => date && putFormHandler(date) }
               />
