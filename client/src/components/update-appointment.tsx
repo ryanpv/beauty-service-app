@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
 import { useStateContext } from '../contexts/state-contexts';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const UpdateAppointment: React.FC = () => {
   type Appointment = {
@@ -31,6 +31,7 @@ const UpdateAppointment: React.FC = () => {
   const { currentUser } = useStateContext();
   const [appointment, setAppointment] = useState<Appointment>(appointmentState)
   const { appointmentId } = useParams();
+  const navigate = useNavigate();
   
   useEffect(() => {
     fetchAppointment();
@@ -56,14 +57,14 @@ const UpdateAppointment: React.FC = () => {
     }
   };
 
-  const putFormHandler = (event: React.ChangeEvent<HTMLInputElement> | Date) => {
+  const putFormHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | Date) => {
     if (event instanceof Date) {
       const date = new Date(event);
       const year = date.getFullYear();
       const month = date.getMonth() + 1; // 0-indexed, must +1 to get accurate month value
       const day = date.getDate();
       const appointmentDate = `${ year }-${ month }-${ day }`
-      console.log("appointmentdate: ", new Date(appointmentDate))
+
       setAppointment((prev) => ({
         ...prev,
         date: appointmentDate
@@ -95,6 +96,9 @@ const UpdateAppointment: React.FC = () => {
 
       if (result.status !== 201) {
       throw new Error("Error updating appointment");
+      } else {
+        alert("Appointment successfully updated");
+        navigate("/appointments");
       }
     } catch (error) {
       console.log("Error updating appointment")
@@ -140,20 +144,24 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label>Status</label>
-            <div>
-              <input
-                onChange={ putFormHandler }
-                name='status'
-                value={ appointment.status }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
-              />
-            </div>
+            <label className='font-bold'>Status:</label>
+            <select 
+              onChange={ putFormHandler }
+              className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+              name='status'
+            >
+              <option value={ 1 }>Upcoming</option>
+              <option selected value={ 2 }>Requested</option>
+              <option value={ 3 }>Cancelled</option>
+              <option value={ 4 }>Completed</option>
+              <option value={ 5 }>Misc</option>
+            </select>
           </div>
           <div>
             <label>Date</label>
             <div>
               <DatePicker 
+                className='block py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
                 dateFormat="MMMM Do yyyy"
                 selected={ appointment.date ? new Date(appointment.date) : null }
                 onChange={ (date) => date && putFormHandler(date) }
