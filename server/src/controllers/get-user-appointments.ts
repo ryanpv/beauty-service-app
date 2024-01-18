@@ -6,6 +6,7 @@ export const getUserAppointments = async(req: Request, res: Response) => {
   const { userSessionId } = req.params;
   const userId = userSessionId === req.sessionID && (req.session as ModifiedSession).userId;
   const { status, search } = req.query;
+
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
@@ -18,7 +19,7 @@ export const getUserAppointments = async(req: Request, res: Response) => {
   const clientCookie = req.cookies.currentUser;
   const clientSession = (req.session as ModifiedSession).userEmail;
   const authorizedClient = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
-
+console.log("query: ", req.query)
   if (admin) {
     const appointments = await pool.query(`
     SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name

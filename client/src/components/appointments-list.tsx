@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import AppointmentsTable from '../templates/appointment-table';
 import { useStateContext } from '../contexts/state-contexts';
+import DatePicker from 'react-datepicker';
 
 const AppointmentsList:React.FC = () => {
   type AppointmentList = {
@@ -26,8 +27,8 @@ const AppointmentsList:React.FC = () => {
 
   type FormFilter = {
     search: string;
-    startDate: string;
-    endDate: string;
+    startDate: string | Date;
+    endDate: string | Date;
     status: number;
   };
   const [formState, setFormState] = useState<FormFilter>({
@@ -63,14 +64,15 @@ const AppointmentsList:React.FC = () => {
     }
   };
 
+console.log("form state: ", formState)
   const filterHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    event.preventDefault();
-
-    const { name, value } = event.target;
-    setFormState((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+      event.preventDefault();
+  
+      const { name, value } = event.target;
+      setFormState((prev) => ({
+        ...prev,
+        [name]: value
+      }));
   };
 
   const submitFilter = (event: React.FormEvent) => {
@@ -84,8 +86,23 @@ const AppointmentsList:React.FC = () => {
       search: "",
       startDate: currentDate,
       endDate: "",
-      status: 1
+      status: 2
     });
+
+    appointments();
+  };
+
+  const dateFormatter = (dateInput: Date, range: string) => {
+    const date = new Date(dateInput);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
+    const day = date.getDate();
+    const currentDate = `${ year }-${ month }-${ day }`;
+
+    setFormState((prev) => ({
+      ...prev,
+      [range]: currentDate
+    }));
   };
 
   return (
@@ -97,7 +114,7 @@ const AppointmentsList:React.FC = () => {
       <div className='sm:mx-auto max-w-2xl'>
         <form onSubmit={ submitFilter } className='space-y-3 mx-3'>
           <div>
-            <label>
+            <label className='font-semibold'>
               Search
             </label>
             <div className='mt-2'>
@@ -111,30 +128,33 @@ const AppointmentsList:React.FC = () => {
           </div>
           <div className='flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0'>
             <div>
-              <label>
+              <label className='font-semibold'>
                 Start Date
               </label>
               <div>
-                <input 
-                  onChange={ filterHandler }
-                  defaultValue={ formState.startDate }
-                  name='startDate'
-                  placeholder='MM/DD/YYYY'
-                  className='block py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'  
-                />
+              <DatePicker 
+                className='block py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'  
+                selected={ new Date(formState.startDate) }
+                selectsStart
+                startDate={ new Date(formState.startDate) }
+                endDate={ new Date(formState.endDate) }
+                onChange={ (date) => date && dateFormatter(date, "startDate") }
+              />
               </div>
             </div>
             <div>
-              <label>
+              <label className='font-semibold'>
                 End Date
               </label>
               <div>
-                <input
-                  onChange={ filterHandler }
-                  name='endDate'
-                  placeholder='MM/DD/YYYY'
-                  className='block py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'              
-                />
+              <DatePicker 
+                className='block py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'  
+                selectsEnd
+                startDate={ new Date(formState.startDate) }
+                endDate={ formState.endDate !== "" ? new Date(formState.endDate) : null }
+                selected={ formState.endDate !== "" ? new Date(formState.endDate) : null }
+                onChange={ (date) => date && dateFormatter(date, "endDate") }
+              />
               </div>
             </div>
           </div>
