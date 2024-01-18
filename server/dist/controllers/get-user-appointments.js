@@ -29,7 +29,7 @@ export const getUserAppointments = async (req, res) => {
       ON appointments.users_id = users.id
     WHERE status_types.id = $1
       AND (appointments.date >= $2 OR $2 IS NULL)
-      AND (appointments.date < $3 OR $3 IS NULL)
+      AND (appointments.date <= $3 OR $3 IS NULL)
       AND (
         users.email ILIKE '%' || $4 || '%' 
         OR 

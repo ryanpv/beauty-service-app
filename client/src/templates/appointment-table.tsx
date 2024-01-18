@@ -46,7 +46,7 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
 
   return (
     <>
-    <h1 className='text-center font-semibold'>{ status === 1 ? "Upcoming" : "Complete" } Appointments</h1>
+    <h1 className='text-center font-semibold'>{ status === 1 ? "Upcoming" : "Requested" } Appointments</h1>
 
     <div className='overflow-auto text-left p-5'>
         <table className='table-auto overflow-scroll border-separate border-spacing-y-1'>
