@@ -3,7 +3,6 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // default styling
 import { useStateContext } from '../contexts/state-contexts';
 import ServiceOptions from '../templates/service-options';
-import dayjs from 'dayjs';
 import TimeSlots  from '../templates/timeslots';
 
 const BookingPage: React.FC = () => {
@@ -31,6 +30,17 @@ console.log("current user booking: ", currentUser)
       servicesList();
     }
   },[]);
+  
+  type TimeList = {
+    time: string;
+    duration: number;
+  }[]
+
+  const [listOfTimes, setListOfTimes] = useState<TimeList>([]);
+
+  useEffect(() => {
+    appointmentTimes();
+  }, [newAppointment.date])
 
   const servicesList = async() => {
     try {
@@ -43,14 +53,24 @@ console.log("current user booking: ", currentUser)
       });
   
       const services = await fetchServices.json();
+      console.log("services: ", services)
       setAllServices(services);
     } catch (error) {
       console.log("Fetch services error: ", error);
     }
   };
 
+  const appointmentTimes = async() => {
+    const getAppointmentTimes = await fetch(`https://localhost:3001/appointment-times?date=${ newAppointment.date }`)
+    const result = await getAppointmentTimes.json();
+
+    setListOfTimes(result);
+    console.log("times: ", result)
+  };
+
   const formChangeHandler = (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {   
     if (event instanceof Date) {
+      console.log("event date: ", event)
       setNewAppointment((prev) => ({
         ...prev,
         date: event
@@ -92,7 +112,6 @@ console.log("current user booking: ", currentUser)
     return formattedDate;
   };
 
-
   return (
     <div className='container flex flex-col border-2 border-solid space-y-10 my-10'>
       <h1 className='text-center font-bold text-2xl'>Book Appointment</h1>
@@ -118,7 +137,7 @@ console.log("current user booking: ", currentUser)
             />
           </div>
 
-          <TimeSlots formChangeHandler={ formChangeHandler } />
+          <TimeSlots formChangeHandler={ formChangeHandler } timeList={ listOfTimes }/>
 
 
           

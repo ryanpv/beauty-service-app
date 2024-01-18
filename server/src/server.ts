@@ -25,12 +25,13 @@ import { pool } from './queries.js';
 import { requestNewPassword } from './controllers/request-password-reset.js';
 import { passwordResetTokenCheck } from './controllers/token-password-reset.js';
 import { passwordReset } from './controllers/password-reset.js';
+import { appointmentTimes } from './controllers/appointment-times.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 
 app.use(cookieParser());
 app.use(cors({
@@ -38,7 +39,7 @@ app.use(cors({
     'http://localhost:3000'
   ],
   credentials: true,
-}))
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
@@ -84,6 +85,7 @@ app.get('/password-resets/:token', passwordResetTokenCheck)
 app.put('/password-resets/:token', passwordReset)
 
 /////////////////////////
+app.get('/appointment-times', appointmentTimes)
 // app.post("/sessions", (req: Request, res: Response) => {
 //   console.log("user session start");
 //   res.end();

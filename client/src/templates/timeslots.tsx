@@ -8,11 +8,17 @@ dayjs.extend(customParseFormat);
 
 type CalendarDates = Date | null;
 
+type TimeList = {
+  time: string;
+  duration: number;
+}[]
+
 interface TimeslotProps {
-  formChangeHandler: (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
+  timeList: TimeList;
+  formChangeHandler: (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
-const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler }) => {
+const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, timeList }) => {
   const timeSlots = [
     { startTime: '10:00', duration: 15 },
     { startTime: '10:15', duration: 15 },
@@ -77,17 +83,10 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler }) => {
       </div>
       ));    
   };
-
-
-  const booked = [
-    { startTime: '10:15', duration: 30 },
-    { startTime: '12:00', duration: 30 },
-    { startTime: '14:30', duration: 60 },
-  ];
   
   const checkBooked = (timeSlot: { startTime: string; duration: number }) => {
-    return booked.some((booking) => {
-      const bookedStart = dayjs(booking.startTime, 'HH:mm');
+    return timeList.some((booking) => {
+      const bookedStart = dayjs(booking.time, 'HH:mm');
       const bookedEnd = bookedStart.add(booking.duration, 'minutes');
 
       const slotStart = dayjs(timeSlot.startTime, 'HH:mm');
@@ -103,7 +102,6 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler }) => {
   }
 
   const filteredTimeSlots = timeSlots.filter((slot) => !checkBooked(slot)) // the "!" operator is used because checkBooked() looks for timeslots that MATCH the appointment times
-
 
   return (
     <div className='m-auto px-5 border-2 border-solid border-blue-300 grid grid-cols-3 sm:grid-cols-4 gap-2'>
