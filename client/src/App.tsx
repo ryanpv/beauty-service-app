@@ -16,6 +16,7 @@ import UpdateService from './components/update-service';
 import BookingPage from './components/booking-page';
 import AppointmentsList from './components/appointments-list';
 import UpdateAppointment from './components/update-appointment';
+import SignupSuccess from './templates/signup-success';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/update-appointment/:appointmentId' element={ <UpdateAppointment /> } />
         <Route path='/login' element={ <LoginPage /> } />
         <Route path='/signup' element={ <SignupPage /> } />
+        <Route path='/successful-signup' element={ <SignupSuccess /> } />
         <Route path='/ig-auth' element={ <GetAuth /> } />
         <Route path='/photo-gallery' element={ <PhotoGallery /> } />
         <Route path='/contact' element={ <ContactPage /> } />

@@ -8,17 +8,17 @@ dayjs.extend(customParseFormat);
 
 type CalendarDates = Date | null;
 
-type TimeList = {
+type BookedTimeList = {
   time: string;
   duration: number;
 }[]
 
 interface TimeslotProps {
-  timeList: TimeList;
+  bookedTimes: BookedTimeList;
   formChangeHandler: (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
-const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, timeList }) => {
+const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, bookedTimes }) => {
   const timeSlots = [
     { startTime: '10:00', duration: 15 },
     { startTime: '10:15', duration: 15 },
@@ -85,7 +85,7 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, timeList }) => 
   };
   
   const checkBooked = (timeSlot: { startTime: string; duration: number }) => {
-    return timeList.some((booking) => {
+    return bookedTimes.some((booking) => {
       const bookedStart = dayjs(booking.time, 'HH:mm');
       const bookedEnd = bookedStart.add(booking.duration, 'minutes');
 

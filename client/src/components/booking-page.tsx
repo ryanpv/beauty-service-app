@@ -31,16 +31,16 @@ console.log("current user booking: ", currentUser)
     }
   },[]);
   
-  type TimeList = {
+  type BookedTimeList = {
     time: string;
     duration: number;
   }[]
 
-  const [listOfTimes, setListOfTimes] = useState<TimeList>([]);
+  const [bookedTimes, setBookedTimes] = useState<BookedTimeList>([]);
 
   useEffect(() => {
     appointmentTimes();
-  }, [newAppointment.date])
+  }, [newAppointment.date]);
 
   const servicesList = async() => {
     try {
@@ -64,7 +64,7 @@ console.log("current user booking: ", currentUser)
     const getAppointmentTimes = await fetch(`https://localhost:3001/appointment-times?date=${ newAppointment.date }`)
     const result = await getAppointmentTimes.json();
 
-    setListOfTimes(result);
+    setBookedTimes(result);
     console.log("times: ", result)
   };
 
@@ -137,7 +137,7 @@ console.log("current user booking: ", currentUser)
             />
           </div>
 
-          <TimeSlots formChangeHandler={ formChangeHandler } timeList={ listOfTimes }/>
+          <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes }/>
 
 
           
