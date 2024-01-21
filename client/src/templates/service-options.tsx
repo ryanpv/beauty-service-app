@@ -17,6 +17,7 @@ interface Services { // interface for props passed to this component
     service_categories_id: number;
     price: string;
     description: string;
+    duration: number;
   }> | [],
   formHandler: (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
   newAppointment: NewAppointment,
@@ -28,7 +29,7 @@ const ServiceOptions: React.FC<Services> = ({ serviceList, newAppointment, formH
     if (serviceList.length > 0) {
       return (
         serviceList.map((service) => (
-          <option key={ service.id } value={ JSON.stringify({ id: service.id, service_name: service.service_name }) }>{ service.service_name }</option>
+          <option key={ service.id } value={ JSON.stringify({ id: service.id, service_name: service.service_name, duration: service.duration }) }>{ service.service_name }</option>
           )
         )
       );
@@ -43,7 +44,7 @@ const ServiceOptions: React.FC<Services> = ({ serviceList, newAppointment, formH
         onChange={ formHandler }
         className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
         >
-        <option selected>Select a service...</option>
+        <option selected value="" >Select a service...</option>
         { displayOptions() }
       </select>
     </div>

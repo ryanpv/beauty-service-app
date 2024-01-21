@@ -15,7 +15,8 @@ type ServiceState = {
   service_category_name: string;
   service_categories_id: number;
   price: string;
-  description: string;      
+  description: string; 
+  duration: number;     
 }[];
 
 const StateContext = createContext<StateValues | null>(null);

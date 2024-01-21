@@ -13,7 +13,7 @@ const BookingPage: React.FC = () => {
     id: "",
     price_paid: 0
   };
-console.log("current user booking: ", currentUser)
+
   const [newAppointment, setNewAppointment] = useState<NewAppointment>(newAppointmentState)
   
   type CalendarDates = Date | null; // required for react-calendar as it has a prop for range
@@ -34,7 +34,7 @@ console.log("current user booking: ", currentUser)
   type BookedTimeList = {
     time: string;
     duration: number;
-  }[]
+  }[];
 
   const [bookedTimes, setBookedTimes] = useState<BookedTimeList>([]);
 
@@ -53,7 +53,7 @@ console.log("current user booking: ", currentUser)
       });
   
       const services = await fetchServices.json();
-      console.log("services: ", services)
+
       setAllServices(services);
     } catch (error) {
       console.log("Fetch services error: ", error);
@@ -137,7 +137,7 @@ console.log("current user booking: ", currentUser)
             />
           </div>
 
-          <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes }/>
+          <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes } newAppointment={ newAppointment } />
 
 
           
