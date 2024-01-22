@@ -3,7 +3,7 @@
 
 import { Request, Response } from "express";
 import { pool } from "../queries.js";
-import { ModifiedSession } from "./login.js";
+import { ModifiedSession } from "./login.js"; 
 
 export const updateAppointment = (req: Request, res: Response) => {
   const { userSessionId, appointmentId } = req.params;

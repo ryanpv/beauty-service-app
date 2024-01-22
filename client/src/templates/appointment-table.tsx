@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../contexts/state-contexts';
 
+type AppointmentList = {
+  date: string;
+  email: string;
+  name?: string;
+  id: number;
+  service_name: string;
+  status: string;
+  time: string;
+  users_id: number;
+  price?: number;
+}[];
+
 interface AppointmentsList {
-  list: Array<{
+  appointmentList: Array<{
     date: string;
     email: string;
     name?: string;
@@ -14,10 +26,11 @@ interface AppointmentsList {
     users_id: number;
     price?: number;
   }>;
+  setAppointmentList: Dispatch<SetStateAction<AppointmentList>>;
   status: number;
 };
 
-const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
+const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setAppointmentList, status }) => {
   const { currentUser } = useStateContext();
 
   const deleteAppointment = async(appointmentId: number) => {
@@ -27,8 +40,14 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
         credentials: "include",
       });
 
+      const results = await deleteRequest.json();
+
       if (deleteRequest.status !== 201) {
         throw new Error("Failed to cancel appointment.")
+      } else {
+        const removeCancelled = appointmentList.filter((appointments) => appointments.id !== results.id)
+
+        setAppointmentList(removeCancelled)
       };
 
     } catch (error) {
@@ -37,8 +56,8 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
   };
 
   const appointments = () => {
-    if (list.length > 0) {
-      return list.map((appointment) => {
+    if (appointmentList.length > 0) {
+      return appointmentList.map((appointment) => {
         const date = new Date(appointment.date)
         const month = date.toLocaleDateString('default', { month: 'short' });
         const reformatDate = `${ date.getFullYear() }-${ month }-${ date.getDate() }`

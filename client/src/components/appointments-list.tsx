@@ -200,7 +200,7 @@ const AppointmentsList:React.FC = () => {
       <div className='mx-auto'>
         <BarLoader color='#fbb6ce' /> 
       </div> :
-      <AppointmentsTable list={ appointmentList } status={ formState.status }/>
+      <AppointmentsTable appointmentList={ appointmentList } setAppointmentList={ setAppointmentList } status={ formState.status }/>
       }
     </div>
   )

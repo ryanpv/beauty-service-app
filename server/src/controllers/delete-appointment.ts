@@ -17,7 +17,7 @@ console.log("userid: ", userId);
       console.log(`ERROR deleting appointment: ${ error }`);
       throw error;
     }
-    res.status(201).send(`Successfully deleted appointment with id: ${ results.rows[0].id }`);
+    res.status(201).json({ message: `Successfully deleted appointment with id: ${ results.rows[0].id }`, id: results.rows[0].id });
   });
 };
 
