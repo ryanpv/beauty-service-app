@@ -1,10 +1,14 @@
 import { pool } from "../queries.js";
 export const deleteAppointment = (req, res) => {
-    const { userId, appointmentId } = req.params;
+    const { userSessionId, appointmentId } = req.params;
+    const userId = req.sessionID === userSessionId && req.session.userId;
+    console.log("params: ", req.params);
+    console.log("userid: ", userId);
     pool.query(`
     DELETE FROM appointments
     WHERE users_id = $1
       AND id = $2
+    RETURNING id
   `, [userId, appointmentId], (error, results) => {
         if (error) {
             console.log(`ERROR deleting appointment: ${error}`);

@@ -7,6 +7,7 @@ import TimeSlots  from '../templates/timeslots';
 
 const BookingPage: React.FC = () => {
   const { currentUser, allServices, setAllServices } = useStateContext();
+  const [error, setError] = useState("");
   const newAppointmentState = {
     date: new Date(),
     time: "",
@@ -69,6 +70,7 @@ const BookingPage: React.FC = () => {
   };
 
   const formChangeHandler = (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {   
+    console.log("changed service")
     if (event instanceof Date) {
       console.log("event date: ", event)
       setNewAppointment((prev) => ({
@@ -80,6 +82,7 @@ const BookingPage: React.FC = () => {
     } else {
       (event as React.MouseEvent<HTMLButtonElement>).preventDefault();
       const { name, value } = (event as React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | React.MouseEvent<HTMLButtonElement>).target as HTMLInputElement | HTMLSelectElement | HTMLButtonElement;
+      setNewAppointment((prev) => ({ ...prev, time: "" }))
       setNewAppointment((prev) => ({
         ...prev,
         [name]: value
@@ -90,16 +93,22 @@ const BookingPage: React.FC = () => {
   const appointmentFormSubmit = async(event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const appointmentRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(newAppointment)
-      });
+      if (newAppointment.date === "" || newAppointment.time === "") {
+        setError("Missing date/time.");
+      } else {
+        const appointmentRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments`, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(newAppointment)
+        });
+        
+        setError("")
+        console.log("appointment req: ", appointmentRequest);
+      }
 
-      console.log("appointment req: ", appointmentRequest);
     } catch (error) {
       console.log("Appointment booking error: ", error);
     }
@@ -138,11 +147,10 @@ const BookingPage: React.FC = () => {
           </div>
 
           <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes } newAppointment={ newAppointment } />
-
-
           
           <div className='mx-auto space-y-2'>
             <h1>Confirm your details below before submitted the booking request:</h1>
+            { error !== "" && <div className='flex justify-center text-red-700 font-semibold'><i>***{ error }***</i></div> }
             <div>
               <ul>
                 <li><strong>Service:</strong> { newAppointment.id !== "" && JSON.parse(newAppointment.id).service_name }</li>

@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useStateContext } from '../contexts/state-contexts';
 
 interface AppointmentsList {
   list: Array<{
@@ -17,6 +18,24 @@ interface AppointmentsList {
 };
 
 const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
+  const { currentUser } = useStateContext();
+
+  const deleteAppointment = async(appointmentId: number) => {
+    try {
+      const deleteRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (deleteRequest.status !== 201) {
+        throw new Error("Failed to cancel appointment.")
+      };
+
+    } catch (error) {
+      console.log("Failed to delete appointment", error);
+    }
+  };
+
   const appointments = () => {
     if (list.length > 0) {
       return list.map((appointment) => {
@@ -35,8 +54,8 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ list, status }) => {
           <td className='px-4 py-2'>{ appointment.price }</td>
           <td className='px-4 py-2'>
             <div className='space-x-1'>
-              <Link to={`/update-appointment/${ appointment.id }`}>Edit</Link> | 
-              <button>Del</button>
+              <Link to={ `/update-appointment/${ appointment.id }` }>Edit</Link> | 
+              <button onClick={ () => deleteAppointment(appointment.id) }>Del</button>
             </div>
           </td>
         </tr>
