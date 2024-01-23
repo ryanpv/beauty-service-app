@@ -33,22 +33,25 @@ interface AppointmentsList {
 const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setAppointmentList, status }) => {
   const { currentUser } = useStateContext();
 
-  const deleteAppointment = async(appointmentId: number) => {
+  const deleteAppointment = async(appointmentId: number, service_name: string, date: string, time: string) => {
     try {
-      const deleteRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-
-      const results = await deleteRequest.json();
-
-      if (deleteRequest.status !== 201) {
-        throw new Error("Failed to cancel appointment.")
-      } else {
-        const removeCancelled = appointmentList.filter((appointments) => appointments.id !== results.id)
-
-        setAppointmentList(removeCancelled)
-      };
+      const confirmDelete = window.confirm(`Do you wish to cancel your appointment for ${ service_name } on ${ date } at ${ time }`)
+      if (confirmDelete) {
+        const deleteRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
+          method: "DELETE",
+          credentials: "include",
+        });
+  
+        const results = await deleteRequest.json();
+  
+        if (deleteRequest.status !== 201) {
+          throw new Error("Failed to cancel appointment.")
+        } else {
+          const removeCancelled = appointmentList.filter((appointments) => appointments.id !== results.id)
+  
+          setAppointmentList(removeCancelled)
+        };
+      }
 
     } catch (error) {
       console.log("Failed to delete appointment", error);
@@ -74,7 +77,7 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
           <td className='px-4 py-2'>
             <div className='space-x-1'>
               <Link to={ `/update-appointment/${ appointment.id }` }>Edit</Link> | 
-              <button onClick={ () => deleteAppointment(appointment.id) }>Del</button>
+              <button onClick={ () => deleteAppointment(appointment.id, appointment.service_name, appointment.date, appointment.time) }>Del</button>
             </div>
           </td>
         </tr>

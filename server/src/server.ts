@@ -51,9 +51,13 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   unset: 'destroy',
-  cookie: { maxAge: 5 * 60 * 1000 } // ** REMOVE FOR PROD - 5 minutes
+  rolling: true,
+  cookie: { 
+    maxAge: 5 * 60 * 1000,
+    secure: true
+   } // ** REMOVE FOR PROD - 5 minutes
   // cookie: { maxAge: 24 * 30 * 60  * 60 * 1000 } // 30 days
-}))
+}));
 
 // ROUTERS
 app.use('/test', testRoute);
@@ -95,8 +99,6 @@ app.get('/appointment-times', appointmentTimes)
 //   console.log("user session end");
 //   res.end();  
 // });
-
-
 
 const options = {
   key: fs.readFileSync(path.join(__dirname, "localhost-key.pem")),
