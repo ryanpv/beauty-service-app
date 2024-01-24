@@ -51,7 +51,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   unset: 'destroy',
-  rolling: true,
+  // rolling: true,
   cookie: { 
     maxAge: 5 * 60 * 1000,
     secure: true

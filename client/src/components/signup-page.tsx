@@ -88,9 +88,20 @@ export default function SignupPage() {
       <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
         <form className='space-y-6' onSubmit={ submitSignup }>
           <div>
-            <label>Email Address</label>
+            <label>Display Name</label>
             <input 
-              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
+              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
+              required
+              name='name'
+              type='text'
+              onChange={ handleFormInputs }
+            />
+          </div>
+
+          <div>
+            <label>Email</label>
+            <input 
+              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
               required
               name='email'
               type='email'
@@ -101,7 +112,7 @@ export default function SignupPage() {
           <div>
             <label>Phone Number</label>
             <input 
-              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
+              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
               name='phone_number'
               type='text'
               onChange={ handleFormInputs }
@@ -111,7 +122,7 @@ export default function SignupPage() {
           <div>
             <label>Password</label>
             <input 
-              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
+              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
               required
               name='password'
               type='password'
@@ -122,7 +133,7 @@ export default function SignupPage() {
           <div>
             <label>Confirm Password</label>
             <input 
-              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
+              className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
               required
               name='confirm_password'
               type='password'

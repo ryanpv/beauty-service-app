@@ -79,7 +79,7 @@ console.log("query: ", req.query)
       res.status(200).json(results.rows);
     });
   } else {
-    res.status(404).json({ message: "Unauthorized, login required" });
+    res.status(401).json({ message: "Unauthorized, login required" });
   }
 
 };

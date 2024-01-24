@@ -76,7 +76,7 @@ export const getUserAppointments = async (req, res) => {
         });
     }
     else {
-        res.status(404).json({ message: "Unauthorized, login required" });
+        res.status(401).json({ message: "Unauthorized, login required" });
     }
 };
 //# sourceMappingURL=get-user-appointments.js.map

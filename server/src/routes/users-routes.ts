@@ -23,8 +23,8 @@ usersRouter.route('/:userId')
   .delete(verifyUser, deleteUser);
 
 usersRouter.route('/:userSessionId/appointments')
-  .get(getUserAppointments)
-  // .get(verifyUser, getUserAppointments)
+  // .get(getUserAppointments)
+  .get(verifyUser, getUserAppointments)
   .post(verifyUser, addAppointment);
 
 usersRouter.route('/:userSessionId/appointments/:appointmentId')

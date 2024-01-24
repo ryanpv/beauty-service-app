@@ -29,16 +29,21 @@ export const createUser = async (req, res) => {
             const userEmail = email;
             const userId = newUser.rows[0].id;
             const userRole = clientRole;
-            const jwtToken = jwt.sign({
-                email: userEmail,
-                id: newUser.rows[0].id
-            }, process.env.JWT_SECRET, {
+            const userDisplayName = newUser.rows[0].name;
+            const payload = {
+                id: userId,
+                role: userRole,
+                displayName: userDisplayName,
+                iat: Math.floor(Date.now() / 1000)
+            };
+            const jwtToken = jwt.sign(payload, process.env.JWT_SECRET, {
                 expiresIn: "24h"
             });
             req.session.isAuthenticated = true;
             req.session.userRole = "client";
             req.session.accessToken = jwtToken;
-            res.cookie("userRole", 'client', { httpOnly: false });
+            res.cookie("user", jwtToken, { httpOnly: false });
+            res.cookie('id', req.sessionID, { httpOnly: true, secure: true });
             return res.status(201).json({ message: `Successfully created user with id ${newUser.rows[0].id}` });
         }
     }

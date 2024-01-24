@@ -18,16 +18,20 @@ export const login = async (req, res) => {
             const userEmail = getUser.rows[0].email;
             const userId = getUser.rows[0].id;
             const userRole = getUser.rows[0].role_id;
+            const userDisplayName = getUser.rows[0].name;
             const hashedPassword = getUser.rows[0].password;
             const checkPassword = await bcrypt.compare(password, hashedPassword);
             if (!checkPassword) {
                 return res.status(401).json({ message: "Failed to authenticate." });
             }
             else {
-                const jwtToken = jwt.sign({
-                    email: userEmail,
-                    id: userId
-                }, process.env.JWT_SECRET, {
+                const payload = {
+                    id: userId,
+                    role: userRole,
+                    displayName: userDisplayName,
+                    iat: Math.floor(Date.now() / 1000)
+                };
+                const jwtToken = jwt.sign(payload, process.env.JWT_SECRET, {
                     expiresIn: "24h"
                 });
                 req.session.isAuthenticated = true;
@@ -35,15 +39,8 @@ export const login = async (req, res) => {
                 req.session.accessToken = jwtToken;
                 req.session.userEmail = userEmail;
                 req.session.userId = userId;
-                if (userRole === 2) { // Provide frontend with context of users' role
-                    res.cookie('userRole', 'admin', { httpOnly: false });
-                    res.cookie('currentUser', userEmail, { httpOnly: false });
-                }
-                else {
-                    res.cookie('userRole', 'client', { httpOnly: false });
-                    res.cookie('currentUser', userEmail, { httpOnly: false });
-                    res.cookie('user', req.sessionID, { httpOnly: false });
-                }
+                res.cookie('user', jwtToken, { httpOnly: false, secure: true });
+                res.cookie('id', req.sessionID, { httpOnly: true, secure: true });
                 res.status(200).json({ message: "Successfully authenticated user" });
             }
         }

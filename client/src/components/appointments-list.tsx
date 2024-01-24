@@ -3,6 +3,7 @@ import AppointmentsTable from '../templates/appointment-table';
 import { useStateContext } from '../contexts/state-contexts';
 import DatePicker from 'react-datepicker';
 import { BarLoader } from 'react-spinners';
+import { Link } from 'react-router-dom';
 
 const AppointmentsList:React.FC = () => {
   type AppointmentList = {
@@ -17,7 +18,7 @@ const AppointmentsList:React.FC = () => {
     price?: number;
   }[];
 
-  const { currentUser } = useStateContext();
+  const { currentUser, setCurrentUser } = useStateContext();
   const [appointmentList, setAppointmentList] = React.useState<AppointmentList>([]);
   const [loading, setLoading] = React.useState(false);
 
@@ -43,7 +44,7 @@ const AppointmentsList:React.FC = () => {
   React.useEffect(() => {
     appointments();
   }, []);
-  
+console.log("current user: ", currentUser)
   // Fetch all appointments - query params as filter
   const appointments = async() => {
     try {
@@ -56,10 +57,16 @@ const AppointmentsList:React.FC = () => {
             "Content-type": "application/json"
           }
         });
+
+        if (fetchAppointments.status === 401) {
+          setCurrentUser("");
+          
+        } else {
+          const result = await fetchAppointments.json();
+          setAppointmentList(result);
+          console.log("appointments: ", result)
+        }
     
-        const result = await fetchAppointments.json();
-        setAppointmentList(result);
-        console.log("appointments: ", result)
       } else {
         console.log("No current user.");
       }
@@ -87,6 +94,7 @@ const AppointmentsList:React.FC = () => {
 
     appointments();
   };
+
 
   // Function to reset filter form to original state and re-call appointment function
   const resetForm = () => {
@@ -119,6 +127,14 @@ const AppointmentsList:React.FC = () => {
       <h1 className='mt-10 text-center text-2xl font-bold'>
       Appointments
       </h1>
+
+      { !currentUser && 
+      <h1 className='text-center font-semibold text-red-700'>
+         Unauthorized. Please
+        <Link className='text-blue-700 text-center font-semibold underline'to='/login'> login</Link>
+      </h1> 
+      }
+
 {/* FILTER FORM  */}
       <div className='sm:mx-auto max-w-2xl'>
         <form onSubmit={ submitFilter } className='space-y-3 mx-3'>
@@ -199,8 +215,11 @@ const AppointmentsList:React.FC = () => {
       { loading ? 
       <div className='mx-auto'>
         <BarLoader color='#fbb6ce' /> 
-      </div> :
-      <AppointmentsTable appointmentList={ appointmentList } setAppointmentList={ setAppointmentList } status={ formState.status }/>
+      </div> 
+      :
+        currentUser ?
+        <AppointmentsTable appointmentList={ appointmentList } setAppointmentList={ setAppointmentList } status={ formState.status }/>
+        : null
       }
     </div>
   )

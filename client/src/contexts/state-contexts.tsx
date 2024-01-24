@@ -19,6 +19,12 @@ type ServiceState = {
   duration: number;     
 }[];
 
+type user = {
+  id: number;
+  role: number;
+  displayName: string;
+};
+
 const StateContext = createContext<StateValues | null>(null);
 
 

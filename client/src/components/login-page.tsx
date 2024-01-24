@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../contexts/state-contexts';
 import { BarLoader } from 'react-spinners';
+import { jwtDecode } from 'jwt-decode';
 
 export default function LoginPage() {
   const { userId, setUserId, currentUser, setCurrentUser } = useStateContext();
@@ -46,15 +47,20 @@ export default function LoginPage() {
       const loginResponse = login.status;
   
       if (loginResponse === 200) {
-        const cookies = document.cookie.split("; "); 
-        const userCookie = cookies?.find((cookie) => cookie.startsWith("user="));
-        // const user = userCookie?.split("=")[1].replace("%40", "@");
-        const user = userCookie ? userCookie.split("=")[1] : null;
+        const cookies = document.cookie.split("; ");
+        const userCookie = cookies.find((cookie) => cookie.startsWith("user="));
+        const user = userCookie ? userCookie.split("=")[1] : "";
 
-        setCurrentUser(user);
-        navigate('/');
+        if (user !== null || user !== "") {
+          const decoded = jwtDecode<string>(user);
+          setCurrentUser(decoded);
+          navigate('/');
+        } else {
+          throw new Error()
+        }
+
       } else {
-        throw Error;
+        throw new Error();
       }
       setLoading(false);
     } catch (error) {
