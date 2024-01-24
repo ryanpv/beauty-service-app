@@ -110,7 +110,10 @@ const UpdateAppointment: React.FC = () => {
     <div className='container flex flex-col space-y-6 p-5 max-w-screen-lg'>
       <h1 className='text-center'>Update Appointment</h1>
 
+
       <div className='sm:mx-auto sm:w-full sm:max-w-sm max-w-2xl font-medium'>
+
+      { (typeof currentUser !== 'string' && currentUser.role === 2) ?
         <form className='space-y-3' onSubmit={ submitForm }>
           <div>
             <label>Client</label>
@@ -194,11 +197,54 @@ const UpdateAppointment: React.FC = () => {
           <div>
             <button
               className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
-            >Submit</button>
+              >Submit</button>
+          </div>
+        </form>
+        :
+        <form className='space-y-3' onSubmit={ submitForm }>
+          <div>
+            <label>Service</label>
+            <div>
+              <input
+                onChange={ putFormHandler }
+                name='service_name'
+                value={ appointment.service_name }
+                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+              />
+            </div>
           </div>
 
+          <div className=''>
+            <label>Date</label>
+            <div>
+              <DatePicker 
+                className='block sm:w-96 py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                dateFormat="MMMM d yyyy"
+                selected={ appointment.date ? new Date(appointment.date) : null }
+                onChange={ (date) => date && putFormHandler(date) }
+              />
+            </div>
+          </div>
+
+          <div>
+            <label>Time</label>
+            <div>
+              <input
+                onChange={ putFormHandler }
+                name='time'
+                value={ appointment.time ? appointment.time : "" }
+                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
+              >Submit</button>
+          </div>
         </form>
-      </div>
+      }
+      </div> 
     </div>
   )
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useStateContext } from '../contexts/state-contexts';
 
 export default function UpdateService() {
   type CategoryListState = {
@@ -18,6 +19,7 @@ export default function UpdateService() {
   });
   const [categories, setCategories] = useState<CategoryListState>([]);
   const { serviceId } = useParams();
+  const { currentUser } = useStateContext();
 
   // Fetch service to be updated
   useEffect(() => {
