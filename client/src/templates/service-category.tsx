@@ -1,5 +1,6 @@
 import React from 'react';
 import { SyncLoader } from 'react-spinners';
+import { useStateContext } from '../contexts/state-contexts'; 
 
 interface Services {
   list: Array<{
@@ -15,6 +16,7 @@ interface Services {
 };
 
 const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading }) => {
+  const { currentUser } = useStateContext();
 
   const services = () => {
       if (list.length !== 0) {
@@ -27,12 +29,15 @@ const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading 
                   <h3>{ service.price }</h3>
                 </div>
                 <p>{ service.description }</p>
+                { (typeof currentUser !== "string" && currentUser.role === 2) ?
                 <a 
                   href={ `/update-service/${ service.id }` }
                   className='text-center bg-pink-300 hover:bg-pink-200 font-semibold text-white rounded-sm'
                   >
                     Edit service
                   </a>
+                  : null
+                }
             </div>          
             )
           });
