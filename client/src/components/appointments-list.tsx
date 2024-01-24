@@ -49,9 +49,9 @@ const AppointmentsList:React.FC = () => {
   const appointments = async() => {
     try {
       setLoading(true);
-      const userLogged = typeof currentUser !== 'string' && currentUser.id
-      if (userLogged) {
-        const fetchAppointments = await fetch(`https://localhost:3001/users/${ userLogged }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
+      const userId = typeof currentUser !== 'string' && currentUser.id
+      if (userId) {
+        const fetchAppointments = await fetch(`https://localhost:3001/users/${ userId }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
           method: "GET",
           credentials: "include",
           headers: {

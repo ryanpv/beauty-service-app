@@ -96,7 +96,8 @@ const BookingPage: React.FC = () => {
       if (newAppointment.date === "" || newAppointment.time === "") {
         setError("Missing date/time.");
       } else {
-        const appointmentRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments`, {
+        const userId = typeof currentUser !== "string" && currentUser.id
+        const appointmentRequest = await fetch(`https://localhost:3001/users/${ userId }/appointments`, {
           method: "POST",
           credentials: "include",
           headers: {

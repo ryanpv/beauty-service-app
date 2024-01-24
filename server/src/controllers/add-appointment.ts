@@ -6,7 +6,7 @@ import { transporter } from '../nodemailer-transporter.js';
 export const addAppointment = async(req: Request, res: Response) => {
   try {
     const { date, time, price_paid } = req.body;
-    const { userSessionId } = req.params;
+    const userSessionId = req.cookies.id;
     const userId = req.sessionID === userSessionId && (req.session as ModifiedSession).userId;
     const serviceId = JSON.parse(req.body.id).id;
     const status = 2; // default status for "requested" - admin to UPDATE to 1 ("upcoming") upon approval;

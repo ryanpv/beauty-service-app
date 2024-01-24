@@ -6,7 +6,8 @@ import { pool } from "../queries.js";
 import { ModifiedSession } from "./login.js"; 
 
 export const updateAppointment = (req: Request, res: Response) => {
-  const { userSessionId, appointmentId } = req.params;
+  const { appointmentId } = req.params;
+  const userSessionId = req.cookies.id;
   const { date, time, price_paid, serviceId, status } = req.body;
   const userId = req.sessionID === userSessionId && (req.session as ModifiedSession).userId;
   const admin = false; // ** FOR DEV PURPOSES 
