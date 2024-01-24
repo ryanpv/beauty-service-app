@@ -2,8 +2,9 @@ import { pool } from "../queries.js";
 export const getSingleAppointment = async (req, res) => {
     try {
         const { appointmentId } = req.params;
-        const userId = req.cookies.user === req.sessionID && req.session.userId;
+        const userId = req.cookies.id === req.sessionID && req.session.userId;
         const admin = true;
+        console.log("req.session", req.cookies);
         if (admin) {
             const getUserAppointment = await pool.query(`
       SELECT 

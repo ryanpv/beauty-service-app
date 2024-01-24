@@ -5,9 +5,9 @@ import { ModifiedSession } from "./login.js";
 export const getSingleAppointment = async(req: Request, res: Response) => {
   try {
     const { appointmentId } = req.params;
-    const userId = req.cookies.user === req.sessionID && (req.session as ModifiedSession).userId;
+    const userId = req.cookies.id === req.sessionID && (req.session as ModifiedSession).userId;
     const admin = true;
-
+console.log("req.session", req.cookies)
     if (admin) {
       const getUserAppointment = await pool.query(`
       SELECT 

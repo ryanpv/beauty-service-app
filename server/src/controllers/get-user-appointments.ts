@@ -3,8 +3,8 @@ import { pool } from "../queries.js";
 import { ModifiedSession } from "./login.js";
 
 export const getUserAppointments = async(req: Request, res: Response) => {
-  const { userSessionId } = req.params;
-  const userId = userSessionId === req.sessionID && (req.session as ModifiedSession).userId;
+  const clientSession = req.sessionID;
+  const userId = clientSession === req.sessionID && (req.session as ModifiedSession).userId;
   const { status, search } = req.query;
 
   const date = new Date();
@@ -14,10 +14,10 @@ export const getUserAppointments = async(req: Request, res: Response) => {
   const currentDate = `${ year }-${ month }-${ day }`
   const start_date = req.query.start_date === "" ? currentDate : req.query.start_date;
   const end_date = req.query.end_date === "" ? null : req.query.end_date;
-  const admin = true;
-  const client = false;
-  const clientCookie = req.cookies.currentUser;
-  const clientSession = (req.session as ModifiedSession).userEmail;
+  
+  const admin = false;
+  const client = true;
+  const clientCookie = req.cookies.id;
   const authorizedClient = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
 console.log("query: ", req.query)
   if (admin) {

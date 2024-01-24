@@ -1,7 +1,7 @@
 import { pool } from "../queries.js";
 export const getUserAppointments = async (req, res) => {
-    const { userSessionId } = req.params;
-    const userId = userSessionId === req.sessionID && req.session.userId;
+    const clientSession = req.sessionID;
+    const userId = clientSession === req.sessionID && req.session.userId;
     const { status, search } = req.query;
     const date = new Date();
     const year = date.getFullYear();
@@ -10,10 +10,9 @@ export const getUserAppointments = async (req, res) => {
     const currentDate = `${year}-${month}-${day}`;
     const start_date = req.query.start_date === "" ? currentDate : req.query.start_date;
     const end_date = req.query.end_date === "" ? null : req.query.end_date;
-    const admin = true;
-    const client = false;
-    const clientCookie = req.cookies.currentUser;
-    const clientSession = req.session.userEmail;
+    const admin = false;
+    const client = true;
+    const clientCookie = req.cookies.id;
     const authorizedClient = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
     console.log("query: ", req.query);
     if (admin) {

@@ -5,6 +5,7 @@ interface StateValues {
   setUserId: Dispatch<SetStateAction<number>>;
   currentUser: string | User;
   setCurrentUser: Dispatch<SetStateAction<string | User>>;
+  currentUserState: User;
   allServices: ServiceState | [];
   setAllServices: Dispatch<SetStateAction<ServiceState | []>>;
 };
@@ -40,9 +41,17 @@ export const useStateContext = () => {
   return stateContexts;
 };
 
+const currentUserState = {
+  id: 0,
+  role: 0,
+  displayName: "",
+  iat: 0,
+  exp: 0
+};
+
 const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [userId, setUserId] = useState<number>(0);
-  const [currentUser, setCurrentUser] = useState<string | User>("");
+  const [currentUser, setCurrentUser] = useState<string | User>(currentUserState);
   const [allServices, setAllServices] = useState<ServiceState>([]);
 
   const values: StateValues = {
@@ -50,6 +59,7 @@ const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     setUserId,
     currentUser,
     setCurrentUser,
+    currentUserState,
     allServices,
     setAllServices
   };  

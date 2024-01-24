@@ -18,7 +18,7 @@ const AppointmentsList:React.FC = () => {
     price?: number;
   }[];
 
-  const { currentUser, setCurrentUser } = useStateContext();
+  const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const [appointmentList, setAppointmentList] = React.useState<AppointmentList>([]);
   const [loading, setLoading] = React.useState(false);
 
@@ -44,13 +44,14 @@ const AppointmentsList:React.FC = () => {
   React.useEffect(() => {
     appointments();
   }, []);
-console.log("current user: ", currentUser)
+
   // Fetch all appointments - query params as filter
   const appointments = async() => {
     try {
       setLoading(true);
-      if (currentUser) {
-        const fetchAppointments = await fetch(`https://localhost:3001/users/${ currentUser }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
+      const userLogged = typeof currentUser !== 'string' && currentUser.id
+      if (userLogged) {
+        const fetchAppointments = await fetch(`https://localhost:3001/users/${ userLogged }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
           method: "GET",
           credentials: "include",
           headers: {
@@ -59,7 +60,7 @@ console.log("current user: ", currentUser)
         });
 
         if (fetchAppointments.status === 401) {
-          setCurrentUser("");
+          setCurrentUser(currentUserState);
           
         } else {
           const result = await fetchAppointments.json();
