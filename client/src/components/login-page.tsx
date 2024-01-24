@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../contexts/state-contexts';
 import { BarLoader } from 'react-spinners';
-import { jwtDecode } from 'jwt-decode';
+import { setUser } from '../utils/set-user';
 
 export default function LoginPage() {
   const { userId, setUserId, currentUser, setCurrentUser } = useStateContext();
@@ -47,18 +47,10 @@ export default function LoginPage() {
       const loginResponse = login.status;
   
       if (loginResponse === 200) {
-        const cookies = document.cookie.split("; ");
-        const userCookie = cookies.find((cookie) => cookie.startsWith("user="));
-        const user = userCookie ? userCookie.split("=")[1] : "";
-
-        if (user !== null || user !== "") {
-          const decoded = jwtDecode<string>(user);
-          setCurrentUser(decoded);
+          const decodedUser = setUser();
+console.log("userrr: ", decodedUser)
+          setCurrentUser(decodedUser);
           navigate('/');
-        } else {
-          throw new Error()
-        }
-
       } else {
         throw new Error();
       }

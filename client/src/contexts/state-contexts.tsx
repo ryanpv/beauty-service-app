@@ -3,8 +3,8 @@ import React, { Dispatch, SetStateAction, createContext, useContext, useState } 
 interface StateValues {
   userId: number;
   setUserId: Dispatch<SetStateAction<number>>;
-  currentUser: string | null;
-  setCurrentUser: Dispatch<SetStateAction<string | null>>;
+  currentUser: string | User;
+  setCurrentUser: Dispatch<SetStateAction<string | User>>;
   allServices: ServiceState | [];
   setAllServices: Dispatch<SetStateAction<ServiceState | []>>;
 };
@@ -19,10 +19,12 @@ type ServiceState = {
   duration: number;     
 }[];
 
-type user = {
+type User = {
   id: number;
   role: number;
   displayName: string;
+  iat: number;
+  exp: number;
 };
 
 const StateContext = createContext<StateValues | null>(null);
@@ -40,7 +42,7 @@ export const useStateContext = () => {
 
 const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [userId, setUserId] = useState<number>(0);
-  const [currentUser, setCurrentUser] = useState<string | null>("");
+  const [currentUser, setCurrentUser] = useState<string | User>("");
   const [allServices, setAllServices] = useState<ServiceState>([]);
 
   const values: StateValues = {

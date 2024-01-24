@@ -53,6 +53,7 @@ export default function SignupPage() {
           const responseStatus = await signUp.status;
     
           if (responseStatus === 201) {
+            console.log("sijgnup cookie: ", document.cookie)
             navigate("/")
           } else if (responseStatus === 409) {
             console.log("User already exists.");
