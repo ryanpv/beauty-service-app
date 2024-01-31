@@ -1,0 +1,1 @@
+{"version":3,"file":"validate-newpass-request.js","sourceRoot":"","sources":["../../../src/middleware/validators/validate-newpass-request.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,mBAAmB,CAAC;AAEzC,MAAM,CAAC,MAAM,sBAAsB,GAAG;IACpC,IAAI,CAAC,OAAO,CAAC,CAAC,OAAO,EAAE,CAAC,IAAI,EAAE;CAC/B,CAAC"}

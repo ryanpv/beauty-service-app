@@ -27,6 +27,11 @@ import { passwordResetTokenCheck } from './controllers/token-password-reset.js';
 import { passwordReset } from './controllers/password-reset.js';
 import { appointmentTimes } from './controllers/appointment-times.js';
 
+// VALIDATORS
+import { validateNewpassRequest } from './middleware/validators/validate-newpass-request.js';
+import { validatePasswordResetToken } from './middleware/validators/validate-reset-token.js';
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -84,8 +89,8 @@ app.get('/service-categories', getServiceCategories)
 app.get('/check-user', checkUserRole)
 app.get('/upload-services', uploadServices)
 
-app.post('/password-resets', requestNewPassword)
-app.get('/password-resets/:token', passwordResetTokenCheck)
+app.post('/password-resets', validateNewpassRequest, requestNewPassword)
+app.get('/password-resets/:token', validatePasswordResetToken, passwordResetTokenCheck)
 app.put('/password-resets/:token', passwordReset)
 
 /////////////////////////
