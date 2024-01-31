@@ -1,7 +1,8 @@
 import NodeCache from 'node-cache';
 const cache = new NodeCache();
-export const routeCache = (duration) => ({ req, res, next }) => {
-    const key = req.originalUrl.replace(/%20/g, '') + req.sessionID;
+;
+const routeCache = (duration) => (req, res, next) => {
+    const key = req.originalUrl.replace(/%20/g, ''); // simple cache key because asset changes infrequently and is for all users
     const cacheResponse = cache.get(key);
     if (req.method === "POST" || req.method === "DELETE") {
         cache.del(key);
@@ -11,9 +12,13 @@ export const routeCache = (duration) => ({ req, res, next }) => {
         res.status(200).json(cacheResponse);
     }
     else {
-        // store
-        cache.set(key, res.send, duration);
+        res.originalSend = res.json;
+        res.json = (responseBody) => {
+            cache.set(key, responseBody, duration);
+            return res.status(200).originalSend(responseBody);
+        };
         next();
     }
 };
+export default routeCache;
 //# sourceMappingURL=route-cache.js.map

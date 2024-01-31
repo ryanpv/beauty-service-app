@@ -10,22 +10,44 @@ type RouteCacheArgs = {
   next: NextFunction;
 };
 
-export const routeCache = (duration: number) => ({ req, res, next }: RouteCacheArgs) => {
-  const key = req.originalUrl.replace(/%20/g, '') + req.sessionID;
+interface CachedResponse extends Response {
+  originalSend: Response['json'];
+};
+
+type ServiceResponse = {
+  id: number;
+  service_name: string;
+  price: string;
+  description: string;
+  service_categories_id: number;
+  duration: number;
+  service_category_name: string;
+}[];
+
+
+const routeCache = (duration: number) => (req: Request, res: Response, next: NextFunction) => {
+  const key = req.originalUrl.replace(/%20/g, ''); // simple cache key because asset changes infrequently and is for all users
   const cacheResponse = cache.get(key);
-  
-  if (req.method === "POST" || req.method === "DELETE") {
+
+  if (req.method === "POST" || req.method === "DELETE") {    
     cache.del(key);
 
     return next();
   }
 
-  if (cacheResponse) {
+  if (cacheResponse) {  
+    
     res.status(200).json(cacheResponse);
   } else {
-    // store
-    cache.set(key, res.send, duration)
+    (res as CachedResponse).originalSend = res.json;
 
+    res.json = (responseBody: ServiceResponse) => {
+      cache.set(key, responseBody, duration)
+      return (res as CachedResponse).status(200).originalSend(responseBody);
+    };
+    
     next();
   }
 };
+
+export default routeCache;
