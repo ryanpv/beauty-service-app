@@ -45,15 +45,15 @@ export default function LoginPage() {
       });
   
       const loginResponse = login.status;
-  
-      if (loginResponse === 200) {
-          const decodedUser = setUser();
-console.log("userrr: ", decodedUser)
-          setCurrentUser(decodedUser);
-          navigate('/');
-      } else {
-        throw new Error();
+
+      if (loginResponse !== 200) {
+        throw new Error("Invalid login credentials");
       }
+      
+      const decodedUser = setUser();
+      setCurrentUser(decodedUser);
+      
+      navigate('/');
       setLoading(false);
     } catch (error) {
       console.log("Login error: ", error);

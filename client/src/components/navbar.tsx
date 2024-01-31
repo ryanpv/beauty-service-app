@@ -1,8 +1,11 @@
 import React,  { FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { setUser } from '../utils/set-user';
+import { useStateContext } from '../contexts/state-contexts';
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
+  const { setCurrentUser } = useStateContext();
 
   const logout = async() => {
     try {
@@ -14,7 +17,9 @@ const Navbar: FC = () => {
       if (logoutRequest.status !== 200) {
         throw Error("Failed to logout.")
       } else {
-        navigate('/')
+        const loggedOutUser = setUser();
+        setCurrentUser(loggedOutUser);
+        navigate('/');
       }
     } catch (error) {
       console.log("Logout error: ", error)

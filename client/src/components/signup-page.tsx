@@ -114,6 +114,7 @@ export default function SignupPage() {
             <label>Phone Number</label>
             <input 
               className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'            
+              required
               name='phone_number'
               type='text'
               onChange={ handleFormInputs }
