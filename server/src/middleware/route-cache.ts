@@ -11,7 +11,7 @@ type RouteCacheArgs = {
 };
 
 interface CachedResponse extends Response {
-  originalSend: Response['json'];
+  originalJsonRes: Response['json'];
 };
 
 type ServiceResponse = {
@@ -39,11 +39,11 @@ const routeCache = (duration: number) => (req: Request, res: Response, next: Nex
     
     res.status(200).json(cacheResponse);
   } else {
-    (res as CachedResponse).originalSend = res.json;
+    (res as CachedResponse).originalJsonRes = res.json;
 
     res.json = (responseBody: ServiceResponse) => {
       cache.set(key, responseBody, duration)
-      return (res as CachedResponse).status(200).originalSend(responseBody);
+      return (res as CachedResponse).status(200).originalJsonRes(responseBody);
     };
     
     next();

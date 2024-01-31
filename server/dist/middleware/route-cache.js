@@ -12,10 +12,10 @@ const routeCache = (duration) => (req, res, next) => {
         res.status(200).json(cacheResponse);
     }
     else {
-        res.originalSend = res.json;
+        res.originalJsonRes = res.json;
         res.json = (responseBody) => {
             cache.set(key, responseBody, duration);
-            return res.status(200).originalSend(responseBody);
+            return res.status(200).originalJsonRes(responseBody);
         };
         next();
     }
