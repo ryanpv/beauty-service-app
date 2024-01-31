@@ -10,10 +10,11 @@ import { updateAppointment } from '../controllers/update-appointment.js';
 import { deleteAppointment } from '../controllers/delete-appointment.js';
 import { verifyUser } from '../middleware/check-user.js';
 import { getSingleAppointment } from '../controllers/get-single-appointment.js';
+import { validateSignup } from '../middleware/validators/validate-signup.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
     .get(getAllUsers) // Should be admin only route
-    .post(createUser);
+    .post(validateSignup, createUser);
 usersRouter.route('/:userId')
     .get(verifyUser, getUser)
     .put(verifyUser, updateUser)

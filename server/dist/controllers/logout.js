@@ -4,8 +4,7 @@ export const logout = (req, res) => {
             res.status(400).json({ message: "Failed to log out" });
         }
         else {
-            res.clearCookie('userRole');
-            res.clearCookie('currentUser');
+            res.clearCookie('id');
             res.clearCookie('user');
             res.status(200).json({ message: "Logout successful" });
         }

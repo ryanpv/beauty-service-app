@@ -1,50 +1,57 @@
 import { pool } from '../queries.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-const checkExistingUser = async (emailToCheck) => {
-    const result = await pool.query(`
-  SELECT name, email FROM users
-    WHERE email = $1
-  `, [emailToCheck]);
-    return result.rowCount > 0;
-};
+import { validationResult } from "express-validator";
 export const createUser = async (req, res) => {
     try {
-        const { name, email, phone_number, password } = req.body;
-        const emailLowerCased = email.toLowerCase();
-        const existingUser = await checkExistingUser(email);
-        const clientRole = 1;
-        const adminRole = 2;
-        if (existingUser) {
-            console.log("exists");
-            res.status(409).json({ message: "Email already exists" });
+        const result = validationResult(req);
+        if (result.isEmpty()) {
+            const checkExistingUser = async (emailToCheck) => {
+                const result = await pool.query(`
+        SELECT name, email FROM users
+          WHERE email = $1
+        `, [emailToCheck]);
+                return result.rowCount > 0;
+            };
+            const { name, email, phone_number, password } = req.body;
+            const emailLowerCased = email.toLowerCase();
+            const existingUser = await checkExistingUser(email);
+            const clientRole = 1;
+            const adminRole = 2;
+            if (existingUser) {
+                console.log("exists");
+                res.status(409).json({ message: "Email already exists" });
+            }
+            else {
+                const hashPassword = await bcrypt.hash(password, 10);
+                const newUser = await pool.query(`
+          INSERT INTO users (name, email, phone_number, password, role_id)
+          VALUES ($1, $2, $3, $4, $5)
+          RETURNING id
+        `, [name, emailLowerCased, phone_number, hashPassword, clientRole]);
+                const userEmail = email;
+                const userId = newUser.rows[0].id;
+                const userRole = clientRole;
+                const userDisplayName = newUser.rows[0].name;
+                const payload = {
+                    id: userId,
+                    role: userRole,
+                    displayName: userDisplayName,
+                    iat: Math.floor(Date.now() / 1000)
+                };
+                const jwtToken = jwt.sign(payload, process.env.JWT_SECRET, {
+                    expiresIn: "24h"
+                });
+                req.session.isAuthenticated = true;
+                req.session.userRole = "client";
+                req.session.accessToken = jwtToken;
+                res.cookie("user", jwtToken, { httpOnly: false });
+                res.cookie('id', req.sessionID, { httpOnly: true, secure: true });
+                return res.status(201).json({ message: `Successfully created user with id ${newUser.rows[0].id}` });
+            }
         }
         else {
-            const hashPassword = await bcrypt.hash(password, 10);
-            const newUser = await pool.query(`
-        INSERT INTO users (name, email, phone_number, password, role_id)
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING id
-      `, [name, emailLowerCased, phone_number, hashPassword, clientRole]);
-            const userEmail = email;
-            const userId = newUser.rows[0].id;
-            const userRole = clientRole;
-            const userDisplayName = newUser.rows[0].name;
-            const payload = {
-                id: userId,
-                role: userRole,
-                displayName: userDisplayName,
-                iat: Math.floor(Date.now() / 1000)
-            };
-            const jwtToken = jwt.sign(payload, process.env.JWT_SECRET, {
-                expiresIn: "24h"
-            });
-            req.session.isAuthenticated = true;
-            req.session.userRole = "client";
-            req.session.accessToken = jwtToken;
-            res.cookie("user", jwtToken, { httpOnly: false });
-            res.cookie('id', req.sessionID, { httpOnly: true, secure: true });
-            return res.status(201).json({ message: `Successfully created user with id ${newUser.rows[0].id}` });
+            throw new Error("INVALID sign up credentials");
         }
     }
     catch (error) {
