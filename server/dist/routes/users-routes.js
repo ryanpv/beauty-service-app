@@ -10,7 +10,9 @@ import { updateAppointment } from '../controllers/update-appointment.js';
 import { deleteAppointment } from '../controllers/delete-appointment.js';
 import { verifyUser } from '../middleware/check-user.js';
 import { getSingleAppointment } from '../controllers/get-single-appointment.js';
+// VALIDATORS
 import { validateSignup } from '../middleware/validators/validate-signup.js';
+import { validateAppointmentRequest } from '../middleware/validators/validate-appointment-request.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
     .get(getAllUsers) // Should be admin only route
@@ -22,7 +24,7 @@ usersRouter.route('/:userId')
 usersRouter.route('/:userSessionId/appointments')
     // .get(getUserAppointments)
     .get(verifyUser, getUserAppointments)
-    .post(verifyUser, addAppointment);
+    .post(verifyUser, validateAppointmentRequest, addAppointment);
 usersRouter.route('/:userSessionId/appointments/:appointmentId')
     .get(getSingleAppointment)
     .put(updateAppointment)

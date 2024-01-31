@@ -27,6 +27,7 @@ import { appointmentTimes } from './controllers/appointment-times.js';
 // VALIDATORS
 import { validateNewpassRequest } from './middleware/validators/validate-newpass-request.js';
 import { validatePasswordResetToken } from './middleware/validators/validate-reset-token.js';
+import { validateNewPassword } from './middleware/validators/validate-new-password.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
@@ -76,7 +77,7 @@ app.get('/check-user', checkUserRole);
 app.get('/upload-services', uploadServices);
 app.post('/password-resets', validateNewpassRequest, requestNewPassword);
 app.get('/password-resets/:token', validatePasswordResetToken, passwordResetTokenCheck);
-app.put('/password-resets/:token', passwordReset);
+app.put('/password-resets/:token', validateNewPassword, passwordReset);
 /////////////////////////
 app.get('/appointment-times', appointmentTimes);
 // app.post("/sessions", (req: Request, res: Response) => {
