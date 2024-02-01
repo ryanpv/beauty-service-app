@@ -1,6 +1,7 @@
 import React from 'react';
 import { SyncLoader } from 'react-spinners';
 import { useStateContext } from '../contexts/state-contexts'; 
+import { Link } from 'react-router-dom';
 
 interface Services {
   list: Array<{
@@ -30,12 +31,12 @@ const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading 
                 </div>
                 <p>{ service.description }</p>
                 { (typeof currentUser !== "string" && currentUser.role === 2) ?
-                <a 
-                  href={ `/update-service/${ service.id }` }
+                <Link 
+                  to={ `/update-service/${ service.id }` }
                   className='text-center bg-pink-300 hover:bg-pink-200 font-semibold text-white rounded-sm'
                   >
                     Edit service
-                  </a>
+                  </Link>
                   : null
                 }
             </div>          
