@@ -13,6 +13,7 @@ import { getSingleAppointment } from '../controllers/get-single-appointment.js';
 // VALIDATORS
 import { validateSignup } from '../middleware/validators/validate-signup.js';
 import { validateAppointmentRequest } from '../middleware/validators/validate-appointment-request.js';
+import { validateAppointmentUpdate } from '../middleware/validators/validate-appointment-update.js';
 export const usersRouter = express.Router();
 usersRouter.route('/')
     .get(getAllUsers) // Should be admin only route
@@ -27,6 +28,6 @@ usersRouter.route('/:userSessionId/appointments')
     .post(verifyUser, validateAppointmentRequest, addAppointment);
 usersRouter.route('/:userSessionId/appointments/:appointmentId')
     .get(getSingleAppointment)
-    .put(updateAppointment)
+    .put(validateAppointmentUpdate, updateAppointment)
     .delete(verifyUser, deleteAppointment);
 //# sourceMappingURL=users-routes.js.map

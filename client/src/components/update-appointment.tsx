@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const UpdateAppointment: React.FC = () => {
   type Appointment = {
-    appointmentId: number;
+    appointmentId: number; // changes to 'id' after appointment is fetched
     date: string | null;
     email: string;
     name?: string;
@@ -101,6 +101,7 @@ const UpdateAppointment: React.FC = () => {
         navigate("/appointments");
       }
     } catch (error) {
+      console.log("error: ", error)
       console.log("Error updating appointment")
     }
 
