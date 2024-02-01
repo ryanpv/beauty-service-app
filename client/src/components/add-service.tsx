@@ -35,14 +35,16 @@ const AddService:React.FC = () => {
   type FormState = {
     service_categories_id: number,
     service_name: string,
-    price: number,
+    duration: number,
+    price: string,
     description: string
   };
 
   const [serviceFormData, setServiceFormData] = useState<FormState>({
     service_categories_id: 0,
     service_name: '',
-    price: 0,
+    duration: 30,
+    price: '',
     description: ''
   });
 
@@ -88,6 +90,12 @@ const AddService:React.FC = () => {
                 Service Name
               </label>
               <input required name='service_name' type='text' onChange={ inputChangeHandler }/>
+            </div>
+            <div>
+              <label>
+                Duration
+              </label>
+              <input required name='duration' type='number' onChange={ inputChangeHandler }/>
             </div>
             <div>
               <label>

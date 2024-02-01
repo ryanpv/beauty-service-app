@@ -4,17 +4,24 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+import { validationResult } from 'express-validator';
 export const addService = (req, res) => {
-    const { service_name, price, description, service_categories_id } = req.body;
-    const service_categories_idNum = Number(service_categories_id); // parse id to number;
-    pool.query(`INSERT INTO service_types (service_name, price, description, service_categories_id)
-      VALUES ($1, $2, $3, $4) RETURNING *`, [service_name, price, description, service_categories_idNum], (error, result) => {
-        if (error) {
-            console.log("INSERT NEW SERVICE TYPE ERROR: ", error);
-            throw error;
-        }
-        res.status(200).json(result.rows[0].id);
-    });
+    const result = validationResult(req);
+    if (result.isEmpty()) {
+        const { service_name, price, description, service_categories_id, duration } = req.body;
+        const service_categories_idNum = Number(service_categories_id); // parse id to number;
+        pool.query(`INSERT INTO service_types (service_name, price, description, service_categories_id, duration)
+        VALUES ($1, $2, $3, $4, $5) RETURNING *`, [service_name, price, description, service_categories_idNum, duration], (error, result) => {
+            if (error) {
+                console.log("INSERT NEW SERVICE TYPE ERROR: ", error);
+                throw error;
+            }
+            res.status(200).json(result.rows[0].id);
+        });
+    }
+    else {
+        res.status(400).json({ message: "INVALID request to add service." });
+    }
 };
 export const uploadServices = (req, res) => {
     const serviceTypesTable = 'service_types';
