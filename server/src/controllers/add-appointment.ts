@@ -7,6 +7,7 @@ import { validationResult } from 'express-validator';
 export const addAppointment = async(req: Request, res: Response) => {
   try {
     const result = validationResult(req);
+    
     if (result.isEmpty()) {
       const { date, time, price_paid } = req.body;
       const userSessionId = req.cookies.id;
@@ -67,8 +68,17 @@ export const addAppointment = async(req: Request, res: Response) => {
           text: `Your appointment request has been received for "${ JSON.parse(req.body.id).service_name }" at ${ time } on ${ formattedDate }. 
           Please allow up to 24 hours for a response. Thank you for booking with me.`
         };
-        console.log("email request")
+
         await transporter.sendMail(emailMsg);
+
+        const notificationToAdmin = {
+          from: process.env.GMAIL_ACCOUNT,
+          to: process.env.GMAIL_ACCOUNT,
+          subject: 'Appointment Request',
+          text: `Appointment request from ${ userEmail } for "${ JSON.parse(req.body.id).service_name }" at ${ time } on ${ formattedDate }.`
+        };
+
+        await transporter.sendMail(notificationToAdmin); // email sent to admin for appointment request
   
         res.status(200).json({ message: "Appointment request sent" });
       } else {
