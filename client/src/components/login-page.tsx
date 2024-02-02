@@ -47,7 +47,7 @@ export default function LoginPage() {
       const loginResponse = login.status;
 
       if (loginResponse !== 200) {
-        throw new Error("Invalid login credentials");
+        setError("Invalid login credentials");
       }
       
       const decodedUser = setUser();

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
+import { useStateContext } from '../contexts/state-contexts';
+import { setUser } from '../utils/set-user';
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ export default function SignupPage() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { setCurrentUser } = useStateContext();
 
   const handleFormInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -53,7 +56,9 @@ export default function SignupPage() {
           const responseStatus = await signUp.status;
     
           if (responseStatus === 201) {
-            console.log("sijgnup cookie: ", document.cookie)
+            const decodedUser = setUser();
+            setCurrentUser(decodedUser);
+
             navigate("/")
           } else if (responseStatus === 409) {
             console.log("User already exists.");
