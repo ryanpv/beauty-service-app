@@ -10,7 +10,7 @@ export const getUserAppointments = async (req, res) => {
     const currentDate = `${year}-${month}-${day}`;
     const start_date = req.query.start_date === "" ? currentDate : req.query.start_date;
     const end_date = req.query.end_date === "" ? null : req.query.end_date;
-    const admin = false;
+    const admin = true;
     const client = true;
     const clientCookie = req.cookies.id;
     const authorizedClient = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;

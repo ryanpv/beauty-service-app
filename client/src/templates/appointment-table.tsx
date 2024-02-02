@@ -1,6 +1,7 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../contexts/state-contexts';
+import { BarLoader } from 'react-spinners';
 
 type AppointmentList = {
   date: string;
@@ -32,9 +33,11 @@ interface AppointmentsList {
 
 const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setAppointmentList, status }) => {
   const { currentUser } = useStateContext();
+  const [loading, setLoading] = useState(false);
 
   const deleteAppointment = async(appointmentId: number, service_name: string, date: string, time: string) => {
     try {
+      setLoading(true);
       const confirmDelete = window.confirm(`Do you wish to cancel your appointment for ${ service_name } on ${ date } at ${ time }`)
       if (confirmDelete) {
         const deleteRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
@@ -51,10 +54,13 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
   
           setAppointmentList(removeCancelled)
         };
+
+        setLoading(false);
       }
 
     } catch (error) {
       console.log("Failed to delete appointment", error);
+      setLoading(false);
     }
   };
 
@@ -103,9 +109,15 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
               <th className='px-4 py-2 w-1/4'></th>
             </tr>
           </thead>
-          <tbody>
-            { appointments() }
-          </tbody>
+          { loading ? 
+            <div>
+              <BarLoader color='#fbb6ce' /> 
+            </div>
+            : 
+            <tbody>
+              { appointments() }
+            </tbody>
+          }
         </table>
       </div>
     </>

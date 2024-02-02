@@ -11,8 +11,8 @@ export const addAppointment = async (req, res) => {
             const serviceId = JSON.parse(req.body.id).id;
             const status = 2; // default status for "requested" - admin to UPDATE to 1 ("upcoming") upon approval;
             const userEmail = req.session.userEmail;
-            // const requestDate = new Date(date);
-            // const formattedDate = requestDate.toLocaleDateString('default', { month: '2-digit', day: '2-digit', year: 'numeric' });
+            const requestDate = new Date(date);
+            const formattedDate = requestDate.toLocaleDateString('default', { month: 'long', day: '2-digit', year: 'numeric' });
             await pool.query(`
         CREATE OR REPLACE FUNCTION add_appointment(
           userId INT, 
@@ -55,13 +55,13 @@ export const addAppointment = async (req, res) => {
       `, [userId, date, time, serviceId, price_paid, status]);
             if (!isNaN(appointmentRequest.rows[0].add_appointment)) {
                 const emailMsg = {
-                    from: "PBC",
+                    from: process.env.GMAIL_ACCOUNT,
                     to: userEmail,
                     subject: `Appointment request received`,
-                    text: `Your appointment request has been received for "${JSON.parse(req.body.id).service_name}" at ${time} on ${date}. 
+                    text: `Your appointment request has been received for "${JSON.parse(req.body.id).service_name}" at ${time} on ${formattedDate}. 
           Please allow up to 24 hours for a response. Thank you for booking with me.`
                 };
-                console.log("number");
+                console.log("email request");
                 await transporter.sendMail(emailMsg);
                 res.status(200).json({ message: "Appointment request sent" });
             }
