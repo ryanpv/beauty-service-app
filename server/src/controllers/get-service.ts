@@ -14,7 +14,7 @@ export const getService = (req: Request, res: Response) => {
     `, [serviceId], (error, results) => {
       if (error) {
         console.log(`GET SERVICE ERROR: ${ error }`);
-        throw error;      
+        res.status(400).json({ message: "Unable to fetch service type." });     
       }
     res.status(200).json(results.rows);
   });

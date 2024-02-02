@@ -6,23 +6,30 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import { validationResult } from 'express-validator';
 export const addService = (req, res) => {
-    const result = validationResult(req);
-    if (result.isEmpty()) {
-        const { service_name, price, description, service_categories_id, duration } = req.body;
-        const service_categories_idNum = Number(service_categories_id); // parse id to number;
-        pool.query(`INSERT INTO service_types (service_name, price, description, service_categories_id, duration)
-        VALUES ($1, $2, $3, $4, $5) RETURNING *`, [service_name, price, description, service_categories_idNum, duration], (error, result) => {
-            if (error) {
-                console.log("INSERT NEW SERVICE TYPE ERROR: ", error);
-                throw error;
-            }
-            res.status(200).json(result.rows[0].id);
-        });
+    const userRole = req.session.userRole;
+    if (userRole === 'admin') {
+        const result = validationResult(req);
+        if (result.isEmpty()) {
+            const { service_name, price, description, service_categories_id, duration } = req.body;
+            const service_categories_idNum = Number(service_categories_id); // parse id to number;
+            pool.query(`INSERT INTO service_types (service_name, price, description, service_categories_id, duration)
+          VALUES ($1, $2, $3, $4, $5) RETURNING *`, [service_name, price, description, service_categories_idNum, duration], (error, result) => {
+                if (error) {
+                    console.log("INSERT NEW SERVICE TYPE ERROR: ", error);
+                    throw error;
+                }
+                res.status(200).json(result.rows[0].id);
+            });
+        }
+        else {
+            res.status(400).json({ message: "INVALID request to add service." });
+        }
     }
     else {
-        res.status(400).json({ message: "INVALID request to add service." });
+        res.status(403).json({ message: "Unauthorized. Please check credentials." });
     }
 };
+// Function to loop through services and insert each
 export const uploadServices = (req, res) => {
     const serviceTypesTable = 'service_types';
     const data = fs.readFileSync(__dirname + "/service-list.json", "utf-8");

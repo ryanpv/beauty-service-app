@@ -6,9 +6,9 @@ export const getSingleAppointment = async(req: Request, res: Response) => {
   try {
     const { appointmentId } = req.params;
     const userId = req.cookies.id === req.sessionID && (req.session as ModifiedSession).userId;
-    const admin = false;
+    const userRole = (req.session as ModifiedSession).userRole;
 
-    if (admin) {
+    if (userRole === 'admin') {
       const getUserAppointment = await pool.query(`
       SELECT 
         appointments.id, 
@@ -61,7 +61,7 @@ export const getSingleAppointment = async(req: Request, res: Response) => {
       `, [userId, appointmentId]);
     
       const userAppointment = await getUserAppointment;
-    console.log(userAppointment.rows)
+
       res.status(200).send(userAppointment.rows)
     }
   } catch (error) {

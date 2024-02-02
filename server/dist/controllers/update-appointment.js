@@ -1,5 +1,3 @@
-// UPDATE appointments should be admin function
-// ADMIN should confirm change requests to avoid scheduling conflicts
 import { pool } from "../queries.js";
 import { validationResult } from "express-validator";
 export const updateAppointment = (req, res) => {
@@ -9,8 +7,8 @@ export const updateAppointment = (req, res) => {
         const userSessionId = req.cookies.id;
         const { date, time, price_paid, serviceId, status } = req.body;
         const userId = req.sessionID === userSessionId && req.session.userId;
-        const admin = false; // ** FOR DEV PURPOSES 
-        if (admin) {
+        const userRole = req.session.userRole;
+        if (userRole === 'admin') {
             pool.query(`
         CREATE OR REPLACE FUNCTION update_appointment_admin(
           userId INT,

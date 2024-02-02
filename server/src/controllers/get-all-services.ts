@@ -10,7 +10,7 @@ export const getAllServices = (req: Request, res: Response) => {
       ORDER BY service_types.id`, (error, results) => {
           if (error) {
             console.log(`GET ALL SERVICES ERROR: ${ error }`);
-            throw error;
+            res.status(400).json({ message: "Unable to fetch list of services." })
           }
 
           res.status(200).json(results.rows);

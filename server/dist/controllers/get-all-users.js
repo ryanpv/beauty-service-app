@@ -1,6 +1,7 @@
 import { pool } from "../queries.js";
 export const getAllUsers = (req, res) => {
-    if (req.cookies.userRole !== 'admin') {
+    const userRole = req.session.userRole;
+    if (userRole !== 'admin') {
         res.status(403).json({ message: "Forbidden access." });
     }
     pool.query(`
@@ -9,6 +10,7 @@ export const getAllUsers = (req, res) => {
     `, (error, results) => {
         if (error) {
             console.log(`UNSUCCESSFUL GET all users request: ${error}`);
+            res.status(400).json({ message: "Unable to fetch all users' information." });
         }
         res.status(200).json(results.rows);
     });

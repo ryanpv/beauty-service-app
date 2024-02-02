@@ -2,10 +2,8 @@ import { pool } from "../queries.js";
 export const deleteAppointment = (req, res) => {
     const { userSessionId, appointmentId } = req.params;
     const userId = req.sessionID === userSessionId && req.session.userId;
-    console.log("params: ", req.params);
-    console.log("userid: ", userId);
-    const admin = true;
-    if (admin) {
+    const userRole = req.session.userRole;
+    if (userRole === 'admin') {
         pool.query(`
     DELETE FROM appointments
     WHERE id = $1
@@ -13,7 +11,7 @@ export const deleteAppointment = (req, res) => {
   `, [appointmentId], (error, results) => {
             if (error) {
                 console.log(`ERROR deleting appointment: ${error}`);
-                throw error;
+                res.status(400).json({ message: "Unable to remove appointment." });
             }
             res.status(201).json({ message: `Successfully deleted appointment with id: ${results.rows[0].id}`, id: results.rows[0].id });
         });
@@ -27,7 +25,7 @@ export const deleteAppointment = (req, res) => {
     `, [userId, appointmentId], (error, results) => {
             if (error) {
                 console.log(`ERROR deleting appointment: ${error}`);
-                throw error;
+                res.status(400).json({ message: "Unable to remove appointment." });
             }
             res.status(201).json({ message: `Successfully deleted appointment with id: ${results.rows[0].id}`, id: results.rows[0].id });
         });
