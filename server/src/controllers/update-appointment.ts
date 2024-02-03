@@ -7,7 +7,7 @@ import { transporter } from "../nodemailer-transporter.js";
 export const updateAppointment = async(req: Request, res: Response) => {
   try {
     const result = validationResult(req);
-    console.log("request: ", req.body)
+    console.log("request: ", req.body);
     
     if (result.isEmpty()) {
       const { appointmentId } = req.params;
@@ -86,6 +86,39 @@ export const updateAppointment = async(req: Request, res: Response) => {
         }
         
         res.status(201).json(adminUpdateAppointmentRequest.rows);
+      } else if (userRole !== 'admin' && status_name.toLowerCase() === 'upcoming') {
+        // This block is for if the update is to an existing ACCEPTED/UPCOMING appointment. No db call so client does not use original appointment
+        const emailMsg = {
+          from: process.env.GMAIL_ACCOUNT,
+          to: email,
+          subject: "PolishByCin - You have requested an update",
+          text: `This email is being sent because you have requested an update to your appointment with the details below: \n
+          Service: ${ service_name } \n
+          Date: ${ formattedDate } \n
+          Time: ${ time } \n
+          STATUS: ${ status_name } \n
+          \n
+          Please wait for a confirmation email. If you have any other questions/concerns, feel free to reach out. Thank you for booking with me
+          `
+        };
+
+        // Notification email to client about their appointment update request
+        await transporter.sendMail(emailMsg);     
+        
+        const emailToAdmin = {
+          from: process.env.GMAIL_ACCOUNT,
+          to: process.env.GMAIL_ACCOUNT,
+          subject: "PolishByCin - Client has requested an appointment change",
+          text: `Client with email ${ email } has requested an update to their appointment with the details below: \n
+          Service: ${ service_name } \n
+          Date: ${ formattedDate } \n
+          Time: ${ time } \n
+          STATUS: ${ status_name } \n
+          `
+        };
+
+        // Notification email sent to admin for change request
+        await transporter.sendMail(emailToAdmin);
       } else {
         await pool.query(`
           CREATE OR REPLACE FUNCTION update_appointment_client(
@@ -129,52 +162,51 @@ export const updateAppointment = async(req: Request, res: Response) => {
         const updateAppointmentRequest = await pool.query(`
           SELECT * FROM update_appointment_client($1, $2, $3, $4, $5);
         `, [userId, date, time, appointmentId, serviceId]);
-  
-        if (updateAppointmentRequest.rows[0].update_appointment_client) {
-          const emailMsg = {
-            from: process.env.GMAIL_ACCOUNT,
-            to: email,
-            subject: "PolishByCin - You have requested an update",
-            text: `This email is being sent because you have requested an update to your appointment with the details below: \n
-            Service: ${ service_name } \n
-            Date: ${ formattedDate } \n
-            Time: ${ time } \n
-            STATUS: ${ status_name } \n
-            \n
-            Please wait for a confirmation email. If you have any other questions/concerns, feel free to reach out. Thank you for booking with me
-            `
-          };
 
-          // Notification email to client about their appointment update request
-          await transporter.sendMail(emailMsg);     
-          
-          const emailToAdmin = {
-            from: process.env.GMAIL_ACCOUNT,
-            to: email,
-            subject: "PolishByCin - Client has requested an appointment change",
-            text: `Client with email ${ email } has requested an update to their appointment with the details below: \n
-            Service: ${ service_name } \n
-            Date: ${ formattedDate } \n
-            Time: ${ time } \n
-            STATUS: ${ status_name } \n
-            `
-          };
-
-          // Notification email sent to admin for change request
-          await transporter.sendMail(emailToAdmin); 
-
-        }
-        
         if (updateAppointmentRequest.rows[0].update_appointment_client === null) {
           throw new Error("Cannot find appointment.");
         }
+      
+        const emailMsg = {
+          from: process.env.GMAIL_ACCOUNT,
+          to: email,
+          subject: "PolishByCin - You have requested an update",
+          text: `This email is being sent because you have requested an update to your appointment with the details below: \n
+          Service: ${ service_name } \n
+          Date: ${ formattedDate } \n
+          Time: ${ time } \n
+          STATUS: ${ status_name } \n
+          -\n
+          Please wait for a confirmation email. If you have any other questions/concerns, feel free to reach out. Thank you for booking with me!
+          `
+        };
+
+        // Notification email to client about their appointment update request
+        await transporter.sendMail(emailMsg);     
+        
+        const emailToAdmin = {
+          from: process.env.GMAIL_ACCOUNT,
+          to: process.env.GMAIL_ACCOUNT,
+          subject: "PolishByCin - Client has requested an appointment change",
+          text: `Client with email ${ email } has requested an update to their appointment with the details below: \n
+          Service: ${ service_name } \n
+          Date: ${ formattedDate } \n
+          Time: ${ time } \n
+          STATUS: ${ status_name } \n
+          `
+        };
+
+        // Notification email sent to admin for change request
+        await transporter.sendMail(emailToAdmin);   
 
         res.status(201).json(updateAppointmentRequest.rows[0]);
       }
     } else {   
+      console.log("ERROR validating request: ", result)
       res.status(400).json({ message: "VALIDATION ERROR for appointment update request" });
     }
   } catch (error) {
+    console.log("Update appointment error: ", error)
     res.status(400).json({ message: "FAILED to update appointment." });
   }
 };

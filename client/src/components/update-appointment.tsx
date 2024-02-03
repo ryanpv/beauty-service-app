@@ -82,6 +82,7 @@ const UpdateAppointment: React.FC = () => {
   };
 console.log("status: ", appointment.status_name)
 console.log("statusid: ", appointment.status);
+console.log("appointment data: ", appointment)
 
   const submitForm = async(event: React.FormEvent) => {
     event.preventDefault();
