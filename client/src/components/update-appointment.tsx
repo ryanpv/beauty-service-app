@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker';
 import { useStateContext } from '../contexts/state-contexts';
 import { useNavigate, useParams } from 'react-router-dom';
+import { BarLoader } from 'react-spinners';
 
 const UpdateAppointment: React.FC = () => {
   type Appointment = {
@@ -34,6 +35,7 @@ const UpdateAppointment: React.FC = () => {
   const [appointment, setAppointment] = useState<Appointment>(appointmentState)
   const { appointmentId } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     fetchAppointment();
@@ -42,19 +44,23 @@ const UpdateAppointment: React.FC = () => {
   const fetchAppointment = async() => {
     console.log('fetch called')
     try {
+      setLoading(true);
       const getAppointment = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
         method: "GET",
         credentials: "include"
       });
   
       const result = await getAppointment.json();
-      console.log("result date: ", result)
+
       if (result.length > 0) {
         setAppointment(result[0]);
       } else {
         throw new Error("Appointment not found");
       }
+
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log("Error fetching users appointment", error);
     }
   };
@@ -80,14 +86,12 @@ const UpdateAppointment: React.FC = () => {
       }));
     }
   };
-console.log("status: ", appointment.status_name)
-console.log("statusid: ", appointment.status);
-console.log("appointment data: ", appointment)
 
   const submitForm = async(event: React.FormEvent) => {
     event.preventDefault();
 
     try {
+      setLoading(true);
       const putFormRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
         method: "PUT",
         credentials: "include",
@@ -102,19 +106,21 @@ console.log("appointment data: ", appointment)
       if (result.status !== 201) {
       throw new Error("Error updating appointment");
       } else {
-        alert("Appointment successfully updated");
+        alert("Appointment update request successfully sent.");
         navigate("/appointments");
       }
+      setLoading(false);
     } catch (error) {
+      setLoading(false)
       console.log("error: ", error)
       console.log("Error updating appointment")
     }
-
   };
 
   return (
     <div className='container flex flex-col space-y-6 p-5 max-w-screen-lg'>
       <h1 className='text-center'>Update Appointment</h1>
+      { loading && <BarLoader className='mx-auto' color='#fbb6ce' /> }
 
 
       <div className='sm:mx-auto sm:w-full sm:max-w-sm max-w-2xl font-medium'>
@@ -201,11 +207,15 @@ console.log("appointment data: ", appointment)
             </div>
           </div>
 
-          <div>
-            <button
-              className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
-              >Submit</button>
-          </div>
+          { loading ?         
+            <BarLoader color='#fbb6ce' /> 
+            :
+            <div>
+              <button
+                className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
+                >Submit</button>
+            </div>
+          }
         </form>
         :
         <form className='space-y-3' onSubmit={ submitForm }>
@@ -244,11 +254,21 @@ console.log("appointment data: ", appointment)
               />
             </div>
           </div>
-          <div>
-            <button
-              className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
-              >Submit</button>
-          </div>
+
+          { loading ?         
+            <div>
+              <button
+                disabled
+                className='px-3 py-1 rounded-sm focus:ring-2 bg-pink-200 hover:bg-pink-200 text-center text-white font-semibold'
+                >Submit</button>
+            </div>
+            :
+            <div>
+              <button
+                className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
+                >Submit</button>
+            </div>
+          }
         </form>
       }
       </div> 

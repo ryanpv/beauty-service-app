@@ -38,7 +38,7 @@ const AppointmentsList:React.FC = () => {
     search: "",
     startDate: currentDate,
     endDate: "",
-    status: 2 // default 2 for "requested"
+    status: 1 // default 2 for "upcoming"
   });
 
   React.useEffect(() => {
@@ -191,8 +191,8 @@ const AppointmentsList:React.FC = () => {
               className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
               name='status'
             >
-              <option value={ 1 }>Upcoming</option>
-              <option selected value={ 2 }>Requested</option>
+              <option selected value={ 1 }>Upcoming</option>
+              <option value={ 2 }>Requested</option>
               <option value={ 3 }>Cancelled</option>
               <option value={ 4 }>Completed</option>
               <option value={ 5 }>Misc</option>

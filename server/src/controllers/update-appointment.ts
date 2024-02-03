@@ -119,6 +119,7 @@ export const updateAppointment = async(req: Request, res: Response) => {
 
         // Notification email sent to admin for change request
         await transporter.sendMail(emailToAdmin);
+        res.status(201).json({ message: "Request to upcoming appointment received." })
       } else {
         await pool.query(`
           CREATE OR REPLACE FUNCTION update_appointment_client(
