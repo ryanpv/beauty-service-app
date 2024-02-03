@@ -53,7 +53,7 @@ export const addAppointment = async (req, res) => {
             const appointmentRequest = await pool.query(`
         SELECT * FROM add_appointment($1, $2, $3, $4, $5, $6);
       `, [userId, date, time, serviceId, price_paid, status]);
-            if (!isNaN(appointmentRequest.rows[0].add_appointment)) {
+            if (appointmentRequest.rows[0].add_appointment !== null) {
                 const emailMsg = {
                     from: process.env.GMAIL_ACCOUNT,
                     to: userEmail,

@@ -7,7 +7,7 @@ import { validationResult } from 'express-validator';
 export const addAppointment = async(req: Request, res: Response) => {
   try {
     const result = validationResult(req);
-    
+
     if (result.isEmpty()) {
       const { date, time, price_paid } = req.body;
       const userSessionId = req.cookies.id;
@@ -60,7 +60,7 @@ export const addAppointment = async(req: Request, res: Response) => {
         SELECT * FROM add_appointment($1, $2, $3, $4, $5, $6);
       `,[userId, date, time, serviceId, price_paid, status]);
   
-      if (!isNaN(appointmentRequest.rows[0].add_appointment)) {
+      if (appointmentRequest.rows[0].add_appointment !== null) {
         const emailMsg = {
           from: process.env.GMAIL_ACCOUNT,
           to: userEmail,
