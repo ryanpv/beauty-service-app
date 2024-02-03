@@ -7,7 +7,8 @@ export const validateAppointmentUpdate = [
   body('time').notEmpty().isString().escape().trim(),
   body('service_name').notEmpty().isString().escape().trim(),
   body('price_paid').escape().trim(),
-  body('status').isString().escape().trim(),
+  body('status').isNumeric(),
+  body('status_name').isString().escape().trim(),
   body('name').isString().escape().trim(),
   body('email').isEmail().escape().trim(),
 ];

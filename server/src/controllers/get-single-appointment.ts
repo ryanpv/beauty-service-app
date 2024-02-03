@@ -15,7 +15,8 @@ export const getSingleAppointment = async(req: Request, res: Response) => {
         appointments.status, 
         appointments.time,
         appointments.date,
-        status_types.status, 
+        status_types.id AS status,
+        status_types.status AS status_name, 
         service_types.service_name, 
         users.email, 
         appointment_line_items.price_paid, 
@@ -42,6 +43,7 @@ export const getSingleAppointment = async(req: Request, res: Response) => {
           appointments.status, 
           appointments.time,
           appointments.date,
+          status_types.id AS status_types_id,
           status_types.status, 
           service_types.service_name, 
           users.email, 
@@ -61,7 +63,6 @@ export const getSingleAppointment = async(req: Request, res: Response) => {
       `, [userId, appointmentId]);
     
       const userAppointment = await getUserAppointment;
-
       res.status(200).send(userAppointment.rows)
     }
   } catch (error) {

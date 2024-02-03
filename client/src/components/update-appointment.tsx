@@ -10,7 +10,8 @@ const UpdateAppointment: React.FC = () => {
     email: string;
     name?: string;
     service_name: string;
-    status: string;
+    status_name: string;
+    status: number;
     time: string | null;
     users_id: number;
     price_paid: string;
@@ -22,7 +23,8 @@ const UpdateAppointment: React.FC = () => {
     email: "",
     name: "",
     service_name: "",
-    status: "",
+    status_name: "",
+    status: 0,
     time: null,
     users_id: 0,
     price_paid: ""
@@ -78,6 +80,8 @@ const UpdateAppointment: React.FC = () => {
       }));
     }
   };
+console.log("status: ", appointment.status_name)
+console.log("statusid: ", appointment.status);
 
   const submitForm = async(event: React.FormEvent) => {
     event.preventDefault();
@@ -154,8 +158,9 @@ const UpdateAppointment: React.FC = () => {
               className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
               name='status'
             >
+              <option selected value={ appointment.status }>{ appointment.status_name }</option>
               <option value={ 1 }>Upcoming</option>
-              <option selected value={ 2 }>Requested</option>
+              <option value={ 2 }>Requested</option>
               <option value={ 3 }>Cancelled</option>
               <option value={ 4 }>Completed</option>
               <option value={ 5 }>Misc</option>

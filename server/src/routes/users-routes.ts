@@ -34,5 +34,5 @@ usersRouter.route('/:userSessionId/appointments')
 
 usersRouter.route('/:userSessionId/appointments/:appointmentId')
   .get(getSingleAppointment)
-  .put(validateAppointmentUpdate, updateAppointment)
+  .put(validateAppointmentUpdate, verifyUser, updateAppointment)
   .delete(verifyUser, deleteAppointment); 

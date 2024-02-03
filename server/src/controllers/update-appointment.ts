@@ -5,18 +5,19 @@ import { validationResult } from "express-validator";
 
 export const updateAppointment = (req: Request, res: Response) => {
   const result = validationResult(req);
-
-  if (result.isEmpty()) {
-    const { appointmentId } = req.params;
-    const userSessionId = req.cookies.id;
-    const { date, time, price_paid, serviceId, status } = req.body;
-    const userId = req.sessionID === userSessionId && (req.session as ModifiedSession).userId;
-    const userRole = (req.session as ModifiedSession).userRole;
-  
+console.log("request: ", req.body)
+console.log("result", result)
+if (result.isEmpty()) {
+  const { appointmentId } = req.params;
+  const userSessionId = req.cookies.id;
+  const { date, time, price_paid, serviceId, email, status } = req.body;
+  const userId = req.sessionID === userSessionId && (req.session as ModifiedSession).userId;
+  const userRole = (req.session as ModifiedSession).userRole;
+   
     if (userRole === 'admin') { 
       pool.query(`
         CREATE OR REPLACE FUNCTION update_appointment_admin(
-          userId INT,
+          userId TEXT,
           appointment_status INT,
           price INT,
           appointmentId INT,
@@ -38,9 +39,8 @@ export const updateAppointment = (req: Request, res: Response) => {
             date = COALESCE($5, date),
             time = COALESCE($6, time)
           WHERE id = $4
-            AND users_id = $1
           RETURNING id INTO updated_appointment_id;
-  
+
           UPDATE appointment_line_items
           SET
             price_paid = COALESCE($3, price_paid),
@@ -56,13 +56,14 @@ export const updateAppointment = (req: Request, res: Response) => {
         END;
         $BODY$
       `, [], (error, results) => {
+        console.log("successs appt")
         if (error) {
           console.log("error updating: ", error);
           throw error;
         }
         pool.query(`
           SELECT * FROM update_appointment_admin($1, $2, $3, $4, $5, $6, $7);
-        `, [userId, status, price_paid, appointmentId, date, time, serviceId], (error, results) => {
+        `, [email, status, price_paid, appointmentId, date, time, serviceId], (error, results) => {
           if (error) {
             console.log("Error in calling update func: ", error);
             throw error;
