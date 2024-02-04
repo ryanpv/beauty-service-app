@@ -8,6 +8,7 @@ import path, { dirname } from 'path';
 import cors from 'cors';
 import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
+import rateLimit, { MemoryStore } from 'express-rate-limit';
 // ROUTER IMPORTS
 import { testRoute } from './routes/test-route.js';
 import { servicesRouter } from './routes/service-routes.js';
@@ -32,6 +33,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT;
+const rate_limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: "Request limit has been reached. Please try again later.",
+    store: new MemoryStore()
+});
 app.use(cookieParser());
 app.use(cors({
     origin: [
@@ -57,6 +64,7 @@ app.use(session({
     } // ** REMOVE FOR PROD - 5 minutes
     // cookie: { maxAge: 24 * 30 * 60  * 60 * 1000 } // 30 days
 }));
+app.use(rate_limiter);
 // ROUTERS
 app.use('/test', testRoute);
 app.use('/services', servicesRouter);
