@@ -40,7 +40,8 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
       setLoading(true);
       const confirmDelete = window.confirm(`Do you wish to cancel your appointment for ${ service_name } on ${ date } at ${ time }`)
       if (confirmDelete) {
-        const deleteRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
+        const userId = typeof currentUser !== 'string' && currentUser.id;
+        const deleteRequest = await fetch(`https://localhost:3001/users/${ userId }/appointments/${ appointmentId }`, {
           method: "DELETE",
           credentials: "include",
         });
@@ -54,10 +55,9 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
   
           setAppointmentList(removeCancelled)
         };
-
-        setLoading(false);
       }
-
+      
+      setLoading(false);
     } catch (error) {
       console.log("Failed to delete appointment", error);
       setLoading(false);

@@ -26,7 +26,7 @@ usersRouter.route('/:userSessionId/appointments')
     // .get(getUserAppointments)
     .get(verifyUser, getUserAppointments)
     .post(verifyUser, validateAppointmentRequest, addAppointment);
-usersRouter.route('/:userSessionId/appointments/:appointmentId')
+usersRouter.route('/:userId/appointments/:appointmentId')
     .get(getSingleAppointment)
     .put(validateAppointmentUpdate, verifyUser, updateAppointment)
     .delete(verifyUser, deleteAppointment);

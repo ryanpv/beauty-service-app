@@ -65,7 +65,6 @@ const AppointmentsList:React.FC = () => {
         } else {
           const result = await fetchAppointments.json();
           setAppointmentList(result);
-          console.log("appointments: ", result)
         }
     
       } else {
