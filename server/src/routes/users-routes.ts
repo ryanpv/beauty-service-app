@@ -27,10 +27,10 @@ usersRouter.route('/:userId')
   .put(verifyUser, updateUser)
   .delete(verifyUser, deleteUser);
 
-usersRouter.route('/:userSessionId/appointments')
+usersRouter.route('/:userId/appointments')
   // .get(getUserAppointments)
   .get(verifyUser, getUserAppointments)
-  .post(verifyUser, validateAppointmentRequest, addAppointment);
+  .post(validateAppointmentRequest, verifyUser, addAppointment);
 
 usersRouter.route('/:userId/appointments/:appointmentId')
   .get(getSingleAppointment)
