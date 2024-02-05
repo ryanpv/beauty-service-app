@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import { transporter } from '../nodemailer-transporter.js';
+import { sendAllEmails } from '../utils/emailer-util.js';
 export const contactRequest = async (req, res) => {
     try {
         const result = validationResult(req);
@@ -16,7 +16,6 @@ export const contactRequest = async (req, res) => {
           ${message} \n
         `
             };
-            await transporter.sendMail(msgToAdmin);
             const msgToClient = {
                 from: process.env.GMAIL_ACCOUNT,
                 to: email,
@@ -31,7 +30,8 @@ export const contactRequest = async (req, res) => {
         I will try to respond as soon as I can. Thank you for your patience!
         `
             };
-            await transporter.sendMail(msgToClient);
+            const outboundEmails = [msgToAdmin, msgToClient];
+            sendAllEmails(outboundEmails);
         }
         res.status(201).json({ message: "Successfully sent contact form" });
     }

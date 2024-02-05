@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import { transporter } from '../nodemailer-transporter.js';
+import { sendAllEmails } from '../utils/emailer-util.js';
 
 export const contactRequest = async(req: Request, res: Response) => {
   try {
@@ -20,8 +20,6 @@ export const contactRequest = async(req: Request, res: Response) => {
         `
       };
 
-      await transporter.sendMail(msgToAdmin);
-
       const msgToClient = {
         from: process.env.GMAIL_ACCOUNT,
         to: email,
@@ -37,8 +35,9 @@ export const contactRequest = async(req: Request, res: Response) => {
         `
       };
 
-      await transporter.sendMail(msgToClient);
+      const outboundEmails = [msgToAdmin, msgToClient];
 
+      sendAllEmails(outboundEmails);
     }
     
     res.status(201).json({ message: "Successfully sent contact form" });
