@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { pool } from '../queries.js';
 import { ModifiedSession } from './login.js';
-import { transporter } from '../nodemailer-transporter.js';
 import { validationResult } from 'express-validator';
+import { sendAllEmails } from '../utils/emailer-util.js';
 
 export const addAppointment = async(req: Request, res: Response) => {
   try {
@@ -64,22 +64,21 @@ export const addAppointment = async(req: Request, res: Response) => {
         const emailMsg = {
           from: process.env.GMAIL_ACCOUNT,
           to: userEmail,
-          subject: `Appointment request received`,
+          subject: `PolishByCin - Appointment request received`,
           text: `Your appointment request has been received for "${ JSON.parse(req.body.id).service_name }" at ${ time } on ${ formattedDate }. 
           Please allow up to 24 hours for a response. Thank you for booking with me.`
         };
 
-        await transporter.sendMail(emailMsg);
-
         const notificationToAdmin = {
           from: process.env.GMAIL_ACCOUNT,
           to: process.env.GMAIL_ACCOUNT,
-          subject: 'Appointment Request',
+          subject: 'PolishByCin - Appointment Request',
           text: `Appointment request from ${ userEmail } for "${ JSON.parse(req.body.id).service_name }" at ${ time } on ${ formattedDate }.`
         };
 
-        await transporter.sendMail(notificationToAdmin); // email sent to admin for appointment request
-  
+        const outboundEmails = [emailMsg, notificationToAdmin];
+
+        sendAllEmails(outboundEmails);
         res.status(200).json({ message: "Appointment request sent" });
       } else {
         throw new Error("Unable to add appointment.")
