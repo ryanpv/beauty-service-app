@@ -11,8 +11,8 @@ export const contactRequest = async(req: Request, res: Response) => {
       const emailMsg = {
         from: email,
         to: process.env.GMAIL_ACCOUNT,
-        subject: `PolishByCin - Contact message: ${ subject }`,
-        text: `Message recieved from: ${ name && null } \n
+        subject: `PolishByCin - Message: ${ subject }`,
+        text: `Message recieved from: ${ name ? name : null } \n
           email: ${ email }, \n
           tel: ${ phone_number } \n
           Message: \n
@@ -20,8 +20,7 @@ export const contactRequest = async(req: Request, res: Response) => {
         `
       };
 
-      // await transporter.sendMail(emailMsg);
-      console.log("message: ", emailMsg)
+      await transporter.sendMail(emailMsg);
 
       res.status(201).json({ message: "Successfully sent contact form" });
     }

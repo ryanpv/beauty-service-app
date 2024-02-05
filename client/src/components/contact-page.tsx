@@ -47,6 +47,13 @@ export default function ContactPage() {
         throw new Error(); 
       } else {
         error !== "" && setError("");
+        setContactFormState({
+          name: '',
+          email: '',
+          phone_number: '',
+          subject: '',
+          message: ''
+        });
       }
 
       setLoading(false);
@@ -124,6 +131,7 @@ export default function ContactPage() {
                 onChange={ contactFormHandler }
                 name='name'  
                 type='text'
+                value={ contactFormState.name }
                 maxLength={ 50 }
                 pattern="^[A-Za-z\s.'\-]+$"
                 title="Special characters allowed: .-' "
@@ -134,6 +142,7 @@ export default function ContactPage() {
                 required
                 name='email'
                 type='email'
+                value={ contactFormState.email }
                 maxLength={ 50 }
                 className='py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
               />
@@ -141,6 +150,7 @@ export default function ContactPage() {
                 onChange={ contactFormHandler }
                 name='phone_number'
                 type='text'
+                value={ contactFormState.phone_number }
                 maxLength={ 25 }
                 className='py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
               />
@@ -151,6 +161,7 @@ export default function ContactPage() {
               required
               name='subject'
               type='text'
+              value={ contactFormState.subject }
               maxLength={ 90 }
               className='py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 leading-6'
             />
@@ -159,6 +170,7 @@ export default function ContactPage() {
               required
               maxLength={ 1000 }
               name='message'
+              value={ contactFormState.message }
               className='h-48 min-h-fit py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 leading-6'
             />
 
