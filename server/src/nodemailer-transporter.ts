@@ -5,5 +5,7 @@ export const transporter = nodemailer.createTransport({
   auth: {
       user: process.env.GMAIL_ACCOUNT,
       pass: process.env.GMAIL_PASS
-  }
+  },
+  pool: true,
+  maxConnections: 10
 });
