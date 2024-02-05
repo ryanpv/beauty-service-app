@@ -25,6 +25,7 @@ import { requestNewPassword } from './controllers/request-password-reset.js';
 import { passwordResetTokenCheck } from './controllers/token-password-reset.js';
 import { passwordReset } from './controllers/password-reset.js';
 import { appointmentTimes } from './controllers/appointment-times.js';
+import { contactRequest } from './controllers/contact-message.js';
 // VALIDATORS
 import { validateNewpassRequest } from './middleware/validators/validate-newpass-request.js';
 import { validatePasswordResetToken } from './middleware/validators/validate-reset-token.js';
@@ -83,6 +84,7 @@ app.get('/get-roles', getRoles);
 app.get('/service-categories', getServiceCategories);
 app.get('/check-user', checkUserRole);
 app.get('/upload-services', uploadServices);
+app.post('/contact-messages', contactRequest);
 app.post('/password-resets', validateNewpassRequest, requestNewPassword);
 app.get('/password-resets/:token', validatePasswordResetToken, passwordResetTokenCheck);
 app.put('/password-resets/:token', validateNewPassword, passwordReset);
