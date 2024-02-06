@@ -4,7 +4,7 @@ export const getUserAppointments = async (req, res) => {
     const userId = clientSession === req.sessionID && req.session.userId;
     const userRole = req.session.userRole;
     const clientCookie = req.cookies.id;
-    const authorizedClient = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
     const { status, search } = req.query;
     const date = new Date();
     const year = date.getFullYear();
@@ -13,7 +13,7 @@ export const getUserAppointments = async (req, res) => {
     const currentDate = `${year}-${month}-${day}`;
     const start_date = req.query.start_date === "" ? currentDate : req.query.start_date;
     const end_date = req.query.end_date === "" ? null : req.query.end_date;
-    if (userRole === 'admin') {
+    if (userRole === 'admin' && authorizedUser) {
         const appointments = await pool.query(`
       SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name
       FROM appointments
@@ -40,7 +40,7 @@ export const getUserAppointments = async (req, res) => {
         const results = appointments.rows;
         res.status(200).json(results);
     }
-    else if (authorizedClient) {
+    else if (authorizedUser) {
         pool.query(`
       SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name
       FROM appointments

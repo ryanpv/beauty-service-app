@@ -140,6 +140,7 @@ console.log("params: ", params.pathname)
     {/* FILTER FORM  */}
         <div className='sm:mx-auto max-w-2xl'>
           <form onSubmit={ submitFilter } className='space-y-3 mx-3'>
+            { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2 ? 
             <div>
               <label className='font-semibold'>
                 Search
@@ -153,6 +154,9 @@ console.log("params: ", params.pathname)
                 />
               </div>
             </div>
+            : 
+            null }
+            
             <div className='flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0'>
               <div>
                 <label className='font-semibold'>
