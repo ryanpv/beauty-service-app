@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStateContext } from '../contexts/state-contexts';
+import { BarLoader } from 'react-spinners';
 
 export default function UpdateService() {
   type CategoryListState = {
@@ -18,8 +19,10 @@ export default function UpdateService() {
     duration: 0,
   });
   const [categories, setCategories] = useState<CategoryListState>([]);
+  const [loading, setLoading] = useState(false);
   const { serviceId } = useParams();
   const { currentUser } = useStateContext();
+  const isAdmin = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
 
   // Fetch service to be updated
   useEffect(() => {
@@ -28,6 +31,7 @@ export default function UpdateService() {
 
   const service = async() => {
     try {
+      setLoading(true);
       const fetchService = await fetch(`https://localhost:3001/services/${ serviceId }`, {
         method: "GET",
         credentials: "include",
@@ -43,8 +47,11 @@ export default function UpdateService() {
       } else {
         setUpdateForm(result[0]); 
       }
+
+      setLoading(false);
     } catch (error) {
       console.log("fetch single service error: ", error)
+      setLoading(false);
     }
   };
 
@@ -116,7 +123,14 @@ export default function UpdateService() {
   return (
     <div className='container flex flex-col space-y-10'>
       <h1 className='text-center font-bold text-2xl'>Update Service</h1>
+      { loading ? 
+        <div className='mx-auto'>
+          <BarLoader color='#fbb6ce' /> 
+        </div> 
+        : null 
+      }
 
+    { isAdmin ?
       <div className='border-2 p-5 mb-5 sm:mx-auto sm:w-full sm:max-w-2xl'>
         <form onSubmit={ formSubmit }>
           <div className='flex flex-col space-y-6'>
@@ -125,7 +139,7 @@ export default function UpdateService() {
                 <label className='font-bold'>Service:</label>
                 <input
                   className='flex-2 py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
-                  value={ updateForm.service_name }
+                  value={ updateForm.id !== 0 ? updateForm.service_name : "" }
                   name='service_name'
                   onChange={ formValuesHandler }
                 />
@@ -135,7 +149,7 @@ export default function UpdateService() {
                 <label className='font-bold'>Price:</label>
                 <input
                   className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
-                  value={ updateForm.price }
+                  value={ updateForm.id !== 0 ? updateForm.price : "" }
                   name='price'
                   onChange={ formValuesHandler }
                 />
@@ -145,7 +159,7 @@ export default function UpdateService() {
                 <label className='font-bold'>Duration:</label>
                 <input
                   className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
-                  value={ updateForm.duration }
+                  value={ updateForm.id !== 0 ? updateForm.duration : 0 }
                   name='duration'
                   onChange={ formValuesHandler }
                 />
@@ -183,6 +197,8 @@ export default function UpdateService() {
           </div>
         </form>
       </div>
-    </div>
+      : <h1>Unauthorized</h1>
+    }
+    </div> 
   )
 }
