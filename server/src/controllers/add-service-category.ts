@@ -5,8 +5,12 @@ import { ModifiedSession } from './login.js';
 export const addNewServiceCategory = (req: Request, res: Response) => {
   const { service_category_name } = req.body;
   const userRole = (req.session as ModifiedSession).userRole;
+  const clientSession = req.sessionID;
+  const clientCookie = req.cookies.id;
+  const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+   
 
-  if (userRole === 'admin') {
+  if (userRole === 'admin' && authorizedUser) {
     pool.query('INSERT INTO service_categories (service_category_name) VALUES ($1) RETURNING *', [service_category_name], (error, results) => {
       if (error) {
         throw error

@@ -3,7 +3,10 @@ export const updateService = (req, res) => {
     const { serviceId } = req.params;
     const { service_name, price, description, service_categories_id, duration } = req.body;
     const userRole = req.session.userRole;
-    if (userRole === 'admin') {
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+    if (userRole === 'admin' && authorizedUser) {
         pool.query(`
       UPDATE service_types SET 
         service_name = COALESCE($1, service_name),
