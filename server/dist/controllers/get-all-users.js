@@ -1,7 +1,10 @@
 import { pool } from "../queries.js";
 export const getAllUsers = (req, res) => {
     const userRole = req.session.userRole;
-    if (userRole !== 'admin') {
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+    if (userRole !== 'admin' || !authorizedUser) {
         res.status(403).json({ message: "Forbidden access." });
     }
     pool.query(`
