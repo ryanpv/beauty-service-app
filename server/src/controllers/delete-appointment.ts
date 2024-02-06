@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { pool } from "../queries.js";
 import { ModifiedSession } from "./login.js";
 import { transporter } from "../nodemailer-transporter.js";
+import { sendAllEmails } from "../utils/emailer-util.js";
 
 export const deleteAppointment = async(req: Request, res: Response) => {
   try {
@@ -76,8 +77,6 @@ export const deleteAppointment = async(req: Request, res: Response) => {
         `
       };
 
-      await transporter.sendMail(emailToClient);
-
       const emailToAdmin = {
         from: process.env.GMAIL_ACCOUNT,
         to: process.env.GMAIL_ACCOUNT,
@@ -89,8 +88,9 @@ export const deleteAppointment = async(req: Request, res: Response) => {
         `
       };
 
-      await transporter.sendMail(emailToAdmin);
+      const outboundEmails = [emailToClient, emailToAdmin];
 
+      sendAllEmails(outboundEmails);
       res.status(201).json({ message: `Successfully deleted appointment with id: ${ results.rows[0].id }`, id: results.rows[0].id });   
     }
   } catch (error) {

@@ -1,5 +1,6 @@
 import { pool } from "../queries.js";
 import { transporter } from "../nodemailer-transporter.js";
+import { sendAllEmails } from "../utils/emailer-util.js";
 export const deleteAppointment = async (req, res) => {
     try {
         const { appointmentId, userId } = req.params;
@@ -65,7 +66,6 @@ export const deleteAppointment = async (req, res) => {
         If you have any questions/concerns please feel free to reach out. Hope to see you next time!
         `
             };
-            await transporter.sendMail(emailToClient);
             const emailToAdmin = {
                 from: process.env.GMAIL_ACCOUNT,
                 to: process.env.GMAIL_ACCOUNT,
@@ -76,7 +76,8 @@ export const deleteAppointment = async (req, res) => {
         Time: ${appointmentTime} \n 
         `
             };
-            await transporter.sendMail(emailToAdmin);
+            const outboundEmails = [emailToClient, emailToAdmin];
+            sendAllEmails(outboundEmails);
             res.status(201).json({ message: `Successfully deleted appointment with id: ${results.rows[0].id}`, id: results.rows[0].id });
         }
     }
