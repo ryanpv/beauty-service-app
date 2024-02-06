@@ -22,7 +22,8 @@ import { useStateContext } from './contexts/state-contexts';
 
 function App() {
   const { currentUser } = useStateContext();
-  const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0
+  const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0;
+  const adminUser = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
 console.log("no user: ", noUserLogged)
 console.log("current user: ", currentUser);
 
@@ -32,7 +33,7 @@ console.log("current user: ", currentUser);
       {/* <LoginPage /> */}
       <Routes>
         <Route path='/' element={ <HomePage /> } />
-        <Route path='/book-appointment' element={ <BookingPage /> } />
+        <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } />
         <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } />
         <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
         <Route path='/login' element={ <LoginPage /> } />
@@ -42,11 +43,11 @@ console.log("current user: ", currentUser);
         <Route path='/photo-gallery' element={ <PhotoGallery /> } />
         <Route path='/contact' element={ <ContactPage /> } />
         <Route path='/services' element={ <Services /> } />
-        <Route path='/update-service/:serviceId' element={ noUserLogged ? <Unauthorized /> : <UpdateService /> } />
+        <Route path='/update-service/:serviceId' element={ !adminUser ? <Unauthorized /> : <UpdateService /> } />
         <Route path='/about' element={ <AboutPage /> } />
         <Route path='/request-new-password' element={ <NewPasswordRequest /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />
-        <Route path='/add-new-service' element={ noUserLogged ? <Unauthorized /> : <AddService /> } />
+        <Route path='/add-new-service' element={ !adminUser ? <Unauthorized /> : <AddService /> } />
       </Routes>
     </div>
   );

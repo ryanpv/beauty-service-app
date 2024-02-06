@@ -6,6 +6,7 @@ export const addAppointment = async (req, res) => {
         const clientSession = req.sessionID;
         const clientCookie = req.cookies.id;
         const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+        const userRole = req.session.userRole;
         if (!authorizedUser)
             res.status(403).json({ message: "" });
         const result = validationResult(req);

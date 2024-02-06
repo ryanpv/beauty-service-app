@@ -21,6 +21,7 @@ const AppointmentsList:React.FC = () => {
   const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const [appointmentList, setAppointmentList] = React.useState<AppointmentList>([]);
   const [loading, setLoading] = React.useState(false);
+  const isAdmin = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
 
   const date = new Date();
   const year = date.getFullYear();
@@ -156,7 +157,7 @@ console.log("params: ", params.pathname)
             </div>
             : 
             null }
-            
+
             <div className='flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0'>
               <div>
                 <label className='font-semibold'>
@@ -198,9 +199,9 @@ console.log("params: ", params.pathname)
               >
                 <option selected value={ 1 }>Upcoming</option>
                 <option value={ 2 }>Requested</option>
-                <option value={ 3 }>Cancelled</option>
+                { isAdmin ? <option value={ 3 }>Cancelled</option> : null }
                 <option value={ 4 }>Completed</option>
-                <option value={ 5 }>Misc</option>
+                { isAdmin ? <option value={ 5 }>Misc</option> : null }
               </select>
             </div>
             <div className='flex justify-between'>
