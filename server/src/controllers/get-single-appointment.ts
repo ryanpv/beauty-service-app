@@ -7,8 +7,13 @@ export const getSingleAppointment = async(req: Request, res: Response) => {
     const { appointmentId } = req.params;
     const userId = req.cookies.id === req.sessionID && (req.session as ModifiedSession).userId;
     const userRole = (req.session as ModifiedSession).userRole;
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+     
+    if (!authorizedUser) res.status(403).json({ message: "No valid credentials. Log in required." });
 
-    if (userRole === 'admin') {
+    if (userRole === 'admin' && authorizedUser) {
       const getUserAppointment = await pool.query(`
       SELECT 
         appointments.id, 
@@ -36,7 +41,7 @@ export const getSingleAppointment = async(req: Request, res: Response) => {
     const userAppointment = await getUserAppointment;
 
     res.status(200).send(userAppointment.rows);
-    } else {
+    } else if (authorizedUser) {
       const getUserAppointment = await pool.query(`
         SELECT 
           appointments.id, 
