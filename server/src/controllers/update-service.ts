@@ -10,7 +10,6 @@ export const updateService = (req: Request, res: Response) => {
   const clientCookie = req.cookies.id;
   const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
    
-
   if (userRole === 'admin' && authorizedUser) {
     pool.query(`
       UPDATE service_types SET 

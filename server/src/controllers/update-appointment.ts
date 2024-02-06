@@ -15,10 +15,16 @@ export const updateAppointment = async(req: Request, res: Response) => {
       const { date, time, price_paid, serviceId, email, status, service_name, status_name } = req.body;
       const userId = req.sessionID === userSessionId && (req.session as ModifiedSession).userId;
       const userRole = (req.session as ModifiedSession).userRole;
+      const clientSession = req.sessionID;
+      const clientCookie = req.cookies.id;
+      const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+       
       const requestDate = new Date(date);
       const formattedDate = requestDate.toLocaleDateString('default', { month: 'long', day: '2-digit', year: 'numeric' }); 
-  
-      if (userRole === 'admin') { 
+      
+      if (!authorizedUser) res.status(401).json({ message: "No credentials. Log in required" });
+
+      if (userRole === 'admin' && authorizedUser) { 
         await pool.query(`
           CREATE OR REPLACE FUNCTION update_appointment_admin(
             userId TEXT,
@@ -86,7 +92,7 @@ export const updateAppointment = async(req: Request, res: Response) => {
         }
         
         res.status(201).json(adminUpdateAppointmentRequest.rows);
-      } else if (userRole !== 'admin' && status_name.toLowerCase() === 'upcoming') {
+      } else if (userRole !== 'admin' && authorizedUser && status_name.toLowerCase() === 'upcoming') {
         // This block is for if the update is to an existing ACCEPTED/UPCOMING appointment. No db call so client does not use original appointment
         const emailMsg = {
           from: process.env.GMAIL_ACCOUNT,
