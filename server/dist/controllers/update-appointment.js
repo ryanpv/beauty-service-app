@@ -1,10 +1,10 @@
 import { pool } from "../queries.js";
 import { validationResult } from "express-validator";
 import { transporter } from "../nodemailer-transporter.js";
+import { sendAllEmails } from "../utils/emailer-util.js";
 export const updateAppointment = async (req, res) => {
     try {
         const result = validationResult(req);
-        console.log("request: ", req.body);
         if (result.isEmpty()) {
             const { appointmentId } = req.params;
             const userSessionId = req.cookies.id;
@@ -92,8 +92,6 @@ export const updateAppointment = async (req, res) => {
           Please wait for a confirmation email. If you have any other questions/concerns, feel free to reach out. Thank you for booking with me
           `
                 };
-                // Notification email to client about their appointment update request
-                await transporter.sendMail(emailMsg);
                 const emailToAdmin = {
                     from: process.env.GMAIL_ACCOUNT,
                     to: process.env.GMAIL_ACCOUNT,
@@ -105,8 +103,8 @@ export const updateAppointment = async (req, res) => {
           STATUS: ${status_name} \n
           `
                 };
-                // Notification email sent to admin for change request
-                await transporter.sendMail(emailToAdmin);
+                const outboundEmails = [emailMsg, emailToAdmin];
+                sendAllEmails(outboundEmails);
                 res.status(201).json({ message: "Request to upcoming appointment received." });
             }
             else {
@@ -167,8 +165,6 @@ export const updateAppointment = async (req, res) => {
           Please wait for a confirmation email. If you have any other questions/concerns, feel free to reach out. Thank you for booking with me!
           `
                 };
-                // Notification email to client about their appointment update request
-                await transporter.sendMail(emailMsg);
                 const emailToAdmin = {
                     from: process.env.GMAIL_ACCOUNT,
                     to: process.env.GMAIL_ACCOUNT,
@@ -180,8 +176,8 @@ export const updateAppointment = async (req, res) => {
           STATUS: ${status_name} \n
           `
                 };
-                // Notification email sent to admin for change request
-                await transporter.sendMail(emailToAdmin);
+                const outboundEmails = [emailMsg, emailToAdmin];
+                sendAllEmails(outboundEmails);
                 res.status(201).json(updateAppointmentRequest.rows[0]);
             }
         }

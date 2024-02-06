@@ -3,11 +3,11 @@ import { pool } from "../queries.js";
 import { ModifiedSession } from "./login.js"; 
 import { validationResult } from "express-validator";
 import { transporter } from "../nodemailer-transporter.js";
+import { sendAllEmails } from "../utils/emailer-util.js";
 
 export const updateAppointment = async(req: Request, res: Response) => {
   try {
     const result = validationResult(req);
-    console.log("request: ", req.body);
     
     if (result.isEmpty()) {
       const { appointmentId } = req.params;
@@ -100,10 +100,7 @@ export const updateAppointment = async(req: Request, res: Response) => {
           \n
           Please wait for a confirmation email. If you have any other questions/concerns, feel free to reach out. Thank you for booking with me
           `
-        };
-
-        // Notification email to client about their appointment update request
-        await transporter.sendMail(emailMsg);     
+        };    
         
         const emailToAdmin = {
           from: process.env.GMAIL_ACCOUNT,
@@ -117,8 +114,10 @@ export const updateAppointment = async(req: Request, res: Response) => {
           `
         };
 
-        // Notification email sent to admin for change request
-        await transporter.sendMail(emailToAdmin);
+        const outboundEmails = [emailMsg, emailToAdmin];
+
+        sendAllEmails(outboundEmails);
+  
         res.status(201).json({ message: "Request to upcoming appointment received." })
       } else {
         await pool.query(`
@@ -181,9 +180,6 @@ export const updateAppointment = async(req: Request, res: Response) => {
           Please wait for a confirmation email. If you have any other questions/concerns, feel free to reach out. Thank you for booking with me!
           `
         };
-
-        // Notification email to client about their appointment update request
-        await transporter.sendMail(emailMsg);     
         
         const emailToAdmin = {
           from: process.env.GMAIL_ACCOUNT,
@@ -196,9 +192,10 @@ export const updateAppointment = async(req: Request, res: Response) => {
           STATUS: ${ status_name } \n
           `
         };
+ 
+        const outboundEmails = [emailMsg, emailToAdmin];
 
-        // Notification email sent to admin for change request
-        await transporter.sendMail(emailToAdmin);   
+        sendAllEmails(outboundEmails);
 
         res.status(201).json(updateAppointmentRequest.rows[0]);
       }
