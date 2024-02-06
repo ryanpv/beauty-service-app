@@ -17,8 +17,15 @@ import BookingPage from './components/booking-page';
 import AppointmentsList from './components/appointments-list';
 import UpdateAppointment from './components/update-appointment';
 import SignupSuccess from './templates/signup-success';
+import Unauthorized from './components/unauthorized';
+import { useStateContext } from './contexts/state-contexts';
 
 function App() {
+  const { currentUser } = useStateContext();
+  const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0
+console.log("no user: ", noUserLogged)
+console.log("current user: ", currentUser);
+
   return (
     <div className="App">
       <Navbar />
@@ -26,7 +33,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <HomePage /> } />
         <Route path='/book-appointment' element={ <BookingPage /> } />
-        <Route path='/appointments' element={ <AppointmentsList /> } />
+        <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } />
         <Route path='/update-appointment/:appointmentId' element={ <UpdateAppointment /> } />
         <Route path='/login' element={ <LoginPage /> } />
         <Route path='/signup' element={ <SignupPage /> } />

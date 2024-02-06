@@ -5,7 +5,7 @@ import { useStateContext } from '../contexts/state-contexts';
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
-  const { setCurrentUser } = useStateContext();
+  const { currentUser, setCurrentUser } = useStateContext();
 
   const logout = async() => {
     try {
@@ -49,11 +49,16 @@ const Navbar: FC = () => {
                   Services
                 </Link>
               </div>
+
+              { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? 
               <div className=''>
                 <Link to='/appointments'>
                   Appointments
                 </Link>
               </div>
+              : null
+              }
+              
               <div className=''>
                 <Link to='/photo-gallery'>
                   Photo Gallery
@@ -69,11 +74,8 @@ const Navbar: FC = () => {
                   About
                 </Link>
               </div>
-              <div className=''>
-                <Link to='/login'>
-                  Login
-                </Link>
-              </div>
+
+              { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? 
               <div className=''>
                 <button
                 onClick={ logout }
@@ -81,11 +83,21 @@ const Navbar: FC = () => {
                   Logout
                 </button>
               </div>
+              :
+              <>
+              <div className=''>
+                <Link to='/login'>
+                  Login
+                </Link>
+              </div>
               <div className=''>
                 <Link to='/signup'>
                   Sign Up
                 </Link>
               </div>
+              </>
+            }
+
             </div>
 
           </div>
