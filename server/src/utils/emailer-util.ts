@@ -13,9 +13,7 @@ export const sendAllEmails = async(emails) => {
   try {
     await Promise.all(emails.map(sendEmail));
     console.log("Successfully sent ALL emails.");
-    
   } catch (error) {
     console.log("Failed to send emails: ", error);
-    
   }
 };

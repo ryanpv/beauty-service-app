@@ -16,7 +16,7 @@ export const requestNewPassword = async (req, res, next) => {
             const emailMsg = {
                 from: "test person",
                 to: email,
-                subject: `Password Reset for your PolishByCin account`,
+                subject: `PolishByCin - Password Reset for your PolishByCin account`,
                 html: `<p>Click this link to reset your password!: </p><a href="${resetPasswordURL}/${resetToken}">Reset Password</a>`
             };
             // Check if user's email exists in DB
