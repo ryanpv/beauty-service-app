@@ -1,8 +1,15 @@
 import { Request, Response} from 'express';
 import { pool } from '../queries.js';
+import { ModifiedSession } from './login.js';
 
 export const appointmentTimes = async(req: Request, res: Response) => {
   try {
+    const userRole = (req.session as ModifiedSession).userRole;
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+   
+    if (!authorizedUser) res.status(403).json({ message: "No valid credentials. Log in required." });
     const { date } = req.query;
     const requestDate = new Date(JSON.stringify(date));
     const formattedDate = requestDate.toLocaleDateString('default', { month: '2-digit', day: '2-digit', year: 'numeric' });

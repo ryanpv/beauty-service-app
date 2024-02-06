@@ -5,8 +5,11 @@ import { ModifiedSession } from "./login.js";
 export const deleteUser = (req: Request, res: Response) => {
   const { userId } = req.params;
   const userRole = (req.session as ModifiedSession).userRole;
+  const clientSession = req.sessionID;
+  const clientCookie = req.cookies.id;
+  const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
 
-  if (userRole === 'admin') {
+  if (userRole === 'admin' && authorizedUser) {
     pool.query(`
       DELETE FROM users
       WHERE id = $1

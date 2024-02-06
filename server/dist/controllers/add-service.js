@@ -7,7 +7,10 @@ const __dirname = dirname(__filename);
 import { validationResult } from 'express-validator';
 export const addService = (req, res) => {
     const userRole = req.session.userRole;
-    if (userRole === 'admin') {
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+    if (userRole === 'admin' && authorizedUser) {
         const result = validationResult(req);
         if (result.isEmpty()) {
             const { service_name, price, description, service_categories_id, duration } = req.body;

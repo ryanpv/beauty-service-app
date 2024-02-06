@@ -2,7 +2,10 @@ import { pool } from "../queries.js";
 export const deleteUser = (req, res) => {
     const { userId } = req.params;
     const userRole = req.session.userRole;
-    if (userRole === 'admin') {
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+    if (userRole === 'admin' && authorizedUser) {
         pool.query(`
       DELETE FROM users
       WHERE id = $1

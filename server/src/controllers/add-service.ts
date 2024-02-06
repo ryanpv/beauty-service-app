@@ -10,8 +10,11 @@ import { ModifiedSession } from './login.js';
 
 export const addService = (req: Request, res: Response) => {
   const userRole = (req.session as ModifiedSession).userRole;
+  const clientSession = req.sessionID;
+  const clientCookie = req.cookies.id;
+  const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
 
-  if (userRole === 'admin') {
+  if (userRole === 'admin' && authorizedUser) {
     const result = validationResult(req);
     
     if (result.isEmpty()) {

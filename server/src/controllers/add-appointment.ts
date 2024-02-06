@@ -6,6 +6,11 @@ import { sendAllEmails } from '../utils/emailer-util.js';
 
 export const addAppointment = async(req: Request, res: Response) => {
   try {
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+   
+    if (!authorizedUser) res.status(403).json({ message: ""})
     const result = validationResult(req);
 
     if (result.isEmpty()) {

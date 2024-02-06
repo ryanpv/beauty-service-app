@@ -9,9 +9,14 @@ export const deleteAppointment = async(req: Request, res: Response) => {
     const { appointmentId, userId } = req.params;
     const userSessionId = req.cookies.id;
     const user_Id = req.sessionID === userSessionId && (req.session as ModifiedSession).userId;
-    const userRole = (req.session as ModifiedSession).userRole; 
+    const userRole = (req.session as ModifiedSession).userRole;
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+     
+    if (!authorizedUser) res.status(403).json({ message: "No valid credentials. Log in required." });
   
-    if (userRole === 'admin') {
+    if (userRole === 'admin' && authorizedUser) {
       const adminDeleteAppointment = await pool.query(`
         DELETE FROM appointments
         USING users, appointment_line_items, service_types
@@ -46,7 +51,7 @@ export const deleteAppointment = async(req: Request, res: Response) => {
       await transporter.sendMail(emailMsg);
 
       res.status(201).json({ message: `Successfully deleted appointment with id: ${ results.rows[0].id }`, id: results.rows[0].id });   
-    } else {
+    } else if (authorizedUser) {
       const userDeleteAppointment = await pool.query(`
         DELETE FROM appointments
         USING appointment_line_items, service_types
@@ -97,7 +102,6 @@ export const deleteAppointment = async(req: Request, res: Response) => {
     console.log("Delete appointment error: ", error)
     res.status(400).json({ message: "FAILED to cancel appointment" });
   }
-
 };
 
 // *** Consider when deleting appointment is NOT counted as a cancellation *** 

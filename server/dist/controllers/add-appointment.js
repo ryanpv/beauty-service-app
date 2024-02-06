@@ -3,6 +3,11 @@ import { validationResult } from 'express-validator';
 import { sendAllEmails } from '../utils/emailer-util.js';
 export const addAppointment = async (req, res) => {
     try {
+        const clientSession = req.sessionID;
+        const clientCookie = req.cookies.id;
+        const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+        if (!authorizedUser)
+            res.status(403).json({ message: "" });
         const result = validationResult(req);
         if (result.isEmpty()) {
             const { date, time, price_paid } = req.body;

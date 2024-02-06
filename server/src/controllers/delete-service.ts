@@ -5,8 +5,11 @@ import { ModifiedSession } from './login.js';
 export const deleteService = (req: Request, res: Response) => {
   const { serviceId } = req.params;
   const userRole = (req.session as ModifiedSession).userRole;
-
-  if (userRole === 'admin') {
+  const clientSession = req.sessionID;
+  const clientCookie = req.cookies.id;
+  const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+   
+  if (userRole === 'admin' && authorizedUser) {
     pool.query(
       `DELETE FROM service_types
       WHERE id = $1`

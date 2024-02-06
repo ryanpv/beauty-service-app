@@ -2,7 +2,10 @@ import { pool } from '../queries.js';
 export const deleteService = (req, res) => {
     const { serviceId } = req.params;
     const userRole = req.session.userRole;
-    if (userRole === 'admin') {
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+    if (userRole === 'admin' && authorizedUser) {
         pool.query(`DELETE FROM service_types
       WHERE id = $1`, [serviceId], (error, results) => {
             if (error) {
