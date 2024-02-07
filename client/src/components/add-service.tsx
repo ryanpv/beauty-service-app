@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useStateContext } from '../contexts/state-contexts';
 
 const AddService:React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const { currentUser, setCurrentUser, currentUserState } = useStateContext();
 
   useEffect(() => {
     serviceCategories();
@@ -17,8 +19,13 @@ const AddService:React.FC = () => {
   const serviceCategories = async() => {
     setLoading(true);
     const fetchCategories = await fetch(`https://localhost:3001/service-categories`);
-    const categories = await fetchCategories.json();
-    setCategoryList(categories);
+
+    if (fetchCategories.status === 403) {
+      setCurrentUser(currentUserState);
+    } else {
+      const categories = await fetchCategories.json();
+      setCategoryList(categories);
+    }
     setLoading(false);
   };
   console.log("cat: ", categoryList)

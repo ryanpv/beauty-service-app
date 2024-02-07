@@ -11,7 +11,8 @@ export const addAppointment = async(req: Request, res: Response) => {
     const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
     const userRole = (req.session as ModifiedSession).userRole;
 
-    if (!authorizedUser) res.status(403).json({ message: ""})
+    if (!authorizedUser) res.status(403).json({ message: ""});
+    
     const result = validationResult(req);
 
     if (result.isEmpty()) {
@@ -85,7 +86,7 @@ export const addAppointment = async(req: Request, res: Response) => {
         const outboundEmails = [emailMsg, notificationToAdmin];
 
         sendAllEmails(outboundEmails);
-        res.status(200).json({ message: "Appointment request sent" });
+        res.status(201).json({ message: "Appointment request sent" });
       } else {
         throw new Error("Unable to add appointment.")
       }

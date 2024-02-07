@@ -4,10 +4,12 @@ import 'react-calendar/dist/Calendar.css'; // default styling
 import { useStateContext } from '../contexts/state-contexts';
 import ServiceOptions from '../templates/service-options';
 import TimeSlots  from '../templates/timeslots';
+import { BarLoader } from 'react-spinners';
 
 const BookingPage: React.FC = () => {
-  const { currentUser, allServices, setAllServices } = useStateContext();
+  const { currentUser, setCurrentUser, currentUserState, allServices, setAllServices } = useStateContext();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const newAppointmentState = {
     date: new Date(),
     time: "",
@@ -45,6 +47,7 @@ const BookingPage: React.FC = () => {
 
   const servicesList = async() => {
     try {
+      setLoading(true);
       const fetchServices = await fetch(`https://localhost:3001/services/`, {
         method: "GET",
         credentials: "include",
@@ -53,11 +56,17 @@ const BookingPage: React.FC = () => {
         }
       });
   
-      const services = await fetchServices.json();
+      if (fetchServices.status === 403) {
+        setCurrentUser(currentUserState)
+      } else {
+        const services = await fetchServices.json();
+        setAllServices(services);
+      }
 
-      setAllServices(services);
+      setLoading(false);
     } catch (error) {
       console.log("Fetch services error: ", error);
+      setLoading(false);
     }
   };
 
@@ -105,8 +114,13 @@ const BookingPage: React.FC = () => {
           },
           body: JSON.stringify(newAppointment)
         });
+
+        if (appointmentRequest.status !== 201) {
+          setError("Failed to book appointment.")
+        } else {
+          setError("")
+        }
         
-        setError("")
         console.log("appointment req: ", appointmentRequest);
       }
 
@@ -135,9 +149,15 @@ const BookingPage: React.FC = () => {
         <div className='flex flex-col space-y-10'>
 
           {/* List of services for dropdown  */}
-          <div className='flex flex-col sm:flex-row justify-around space-y-5 sm:space-y-0'>
-            <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
-          </div>
+          { loading ? 
+            <div className='mx-auto'>
+              <BarLoader color='#fbb6ce' /> 
+            </div>
+            :
+            <div className='flex flex-col sm:flex-row justify-around space-y-5 sm:space-y-0'>
+              <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
+            </div>
+          }
 
           {/* calender component import */}
           <div className='mx-auto'>

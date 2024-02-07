@@ -8,6 +8,12 @@ import { sendAllEmails } from "../utils/emailer-util.js";
 export const updateAppointment = async(req: Request, res: Response) => {
   try {
     const result = validationResult(req);
+    const userRole = (req.session as ModifiedSession).userRole;
+    const clientSession = req.sessionID;
+    const clientCookie = req.cookies.id;
+    const authorizedUser = clientCookie === clientSession && clientCookie !== undefined && clientSession !== undefined;
+
+    if (!authorizedUser) res.status(403).json({ message: "No valid credentials." });
     
     if (result.isEmpty()) {
       const { appointmentId } = req.params;

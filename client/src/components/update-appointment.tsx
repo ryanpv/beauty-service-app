@@ -31,7 +31,7 @@ const UpdateAppointment: React.FC = () => {
     price_paid: ""
   };
 
-  const { currentUser } = useStateContext();
+  const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const [appointment, setAppointment] = useState<Appointment>(appointmentState)
   const { appointmentId } = useParams();
   const navigate = useNavigate();
@@ -103,8 +103,11 @@ const UpdateAppointment: React.FC = () => {
 
       const result = await putFormRequest;
 
-      if (result.status !== 201) {
-      throw new Error("Error updating appointment");
+      if (result.status === 403) {
+        setCurrentUser(currentUser)
+        throw new Error("Not user logged in.")
+      } else if (result.status !== 201) {
+        throw new Error("Error updating appointment");
       } else {
         alert("Appointment update request successfully sent.");
         navigate("/appointments");
@@ -112,8 +115,7 @@ const UpdateAppointment: React.FC = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false)
-      console.log("error: ", error)
-      console.log("Error updating appointment")
+      console.log("Error updating appointment: ", error)
     }
   };
 

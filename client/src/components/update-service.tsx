@@ -21,7 +21,7 @@ export default function UpdateService() {
   const [categories, setCategories] = useState<CategoryListState>([]);
   const [loading, setLoading] = useState(false);
   const { serviceId } = useParams();
-  const { currentUser } = useStateContext();
+  const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const isAdmin = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
 
   // Fetch service to be updated
@@ -39,14 +39,20 @@ export default function UpdateService() {
           "Content-type": "application/json"
         }
       });
-  
-      const result = await fetchService.json(); // Should only be single result
 
-      if (result.length > 1) {
-        throw Error
+      if (fetchService.status === 403) {
+        setCurrentUser(currentUserState)
       } else {
-        setUpdateForm(result[0]); 
+        const result = await fetchService.json(); // Should only be single result
+  
+        if (result.length > 1) {
+          throw Error
+        } else {
+          
+          setUpdateForm(result[0]); 
+        }
       }
+  
 
       setLoading(false);
     } catch (error) {
@@ -109,9 +115,11 @@ export default function UpdateService() {
         body: JSON.stringify(updateForm)
       });
   
+      
       if (submitServiceUpdate.status === 201) {
         alert("Successfully updated service!")
-      } else {
+      } else if (submitServiceUpdate.status === 403){
+        setCurrentUser(currentUserState);
         throw Error("Unable to update service");
       }
     } catch (error) {

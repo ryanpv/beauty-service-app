@@ -75,7 +75,7 @@ export const addAppointment = async (req, res) => {
                 };
                 const outboundEmails = [emailMsg, notificationToAdmin];
                 sendAllEmails(outboundEmails);
-                res.status(200).json({ message: "Appointment request sent" });
+                res.status(201).json({ message: "Appointment request sent" });
             }
             else {
                 throw new Error("Unable to add appointment.");
