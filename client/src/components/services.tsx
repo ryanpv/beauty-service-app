@@ -41,12 +41,12 @@ const Services:React.FC = () => {
   return (
     <div className='container flex flex-col max-w-screen-md space-y-6'>
       <h1 className='text-center font-bold text-2xl mt-5'>Available Services</h1>
-      <a
-        href='/add-new-service'
+      <Link
+        to='/add-new-service'
         className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300'
       >
         + Add new services
-      </a>
+      </Link>
       <Link
         to='/book-appointment'
         className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300'

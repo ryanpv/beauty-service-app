@@ -10,6 +10,7 @@
     "@types/jest": "^27.5.2",
     "@types/react": "^18.2.42",
     "dayjs": "^1.11.10",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-calendar": "^4.7.0",
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/jwt-decode": "^3.1.0",
     "@types/node": "^20.10.4",
     "@types/react-datepicker": "^4.19.5",

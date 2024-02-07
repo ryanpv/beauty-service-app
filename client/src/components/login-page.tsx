@@ -5,7 +5,7 @@ import { BarLoader } from 'react-spinners';
 import { setUser } from '../utils/set-user';
 
 export default function LoginPage() {
-  const { userId, setUserId, currentUser, setCurrentUser } = useStateContext();
+  const { setCurrentUser } = useStateContext();
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
 

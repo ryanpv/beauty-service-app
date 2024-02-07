@@ -1,15 +1,11 @@
 import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 export const setUser = () => {
-  if (document.cookie !== "") {
-    const cookies = document.cookie.split("; ");
-    const userCookie = cookies.find((cookie) => cookie.startsWith("user="));
-    const user = userCookie ? userCookie.split("=")[1] : "";
-  
-    if (user !== null || user !== "") {
-      const decoded = jwtDecode<string>(user);
-      return decoded;
-    } 
+  const userLogged = Cookies.get('user');
+  if (userLogged) {
+    const decoded = jwtDecode<string>(userLogged);
+    return decoded;
   }
 
   const initialUserState = {

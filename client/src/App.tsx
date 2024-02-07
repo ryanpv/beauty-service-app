@@ -19,13 +19,19 @@ import UpdateAppointment from './components/update-appointment';
 import SignupSuccess from './templates/signup-success';
 import Unauthorized from './components/unauthorized';
 import { useStateContext } from './contexts/state-contexts';
+import { setUser } from './utils/set-user';
 
 function App() {
-  const { currentUser } = useStateContext();
+  const { currentUser, setCurrentUser } = useStateContext();
   const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0;
   const adminUser = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
-console.log("no user: ", noUserLogged)
-console.log("current user: ", currentUser);
+
+  React.useEffect(() => {
+    const userLogged = setUser();
+    console.log('userLogged', userLogged);
+    
+    setCurrentUser(userLogged)
+  },[]);
 
   return (
     <div className="App">
