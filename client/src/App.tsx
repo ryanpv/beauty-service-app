@@ -20,17 +20,37 @@ import SignupSuccess from './templates/signup-success';
 import Unauthorized from './components/unauthorized';
 import { useStateContext } from './contexts/state-contexts';
 import { setUser } from './utils/set-user';
+import { useLocation } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 function App() {
   const { currentUser, setCurrentUser } = useStateContext();
   const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0;
   const adminUser = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
+  const location = useLocation();
 
   React.useEffect(() => {
     const userLogged = setUser();
     
     setCurrentUser(userLogged)
   },[]);
+
+  React.useEffect(() => {
+    if (Cookies.get('user') === undefined) {
+      const initialUserState = {
+        id: 0,
+        role: 0,
+        displayName: "",
+        iat: 0,
+        exp: 0
+      }
+      console.log("no current user logged in.");
+      
+      setCurrentUser(initialUserState);
+    } else {
+      console.log('currnt user: ', currentUser);
+    }
+  }, [location]);
 
   return (
     <div className="App">
