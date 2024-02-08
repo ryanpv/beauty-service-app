@@ -2,10 +2,28 @@ import React,  { FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { setUser } from '../utils/set-user';
 import { useStateContext } from '../contexts/state-contexts';
+import Cookies from 'js-cookie';
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useStateContext();
+
+  React.useEffect(() => {
+    if (Cookies.get('user') === undefined) {
+      const initialUserState = {
+        id: 0,
+        role: 0,
+        displayName: "",
+        iat: 0,
+        exp: 0
+      }
+      console.log("no current user logged in.");
+      
+      setCurrentUser(initialUserState);
+    } else {
+      console.log('currnt user: ', currentUser);
+    }
+  }, []);
 
   const logout = async() => {
     try {

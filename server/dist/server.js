@@ -61,12 +61,22 @@ app.use(session({
     unset: 'destroy',
     // rolling: true,
     cookie: {
-        maxAge: 5 * 60 * 1000,
+        maxAge: 15000,
         secure: true
     } // ** REMOVE FOR PROD - 5 minutes
     // cookie: { maxAge: 24 * 30 * 60  * 60 * 1000 } // 30 days
 }));
 app.use(rate_limiter);
+// if session expires/user cookie value does not match accessToken, user cookies will be cleared
+app.use((req, res, next) => {
+    const userCookie = req.cookies.user;
+    const sessionToken = req.session.accessToken;
+    if (userCookie !== sessionToken) {
+        res.clearCookie('user');
+        res.clearCookie('id');
+    }
+    next();
+});
 // ROUTERS
 app.use('/test', testRoute);
 app.use('/services', servicesRouter);

@@ -3,6 +3,7 @@ import ServiceCategory from '../templates/service-category';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '../contexts/state-contexts';
 import BarLoader from 'react-spinners/BarLoader';
+import Cookies from 'js-cookie';
 
 const Services:React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -13,6 +14,8 @@ const Services:React.FC = () => {
   const bioGel = 3;
   const nailCombo = 4;
   const additionalNail = 5;
+
+  console.log("check cookie", Cookies.get('user'))
 
   useEffect(() => {
     servicesList();

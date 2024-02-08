@@ -66,7 +66,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         (req.session as ModifiedSession).userRole = "client";
         (req.session as ModifiedSession).accessToken = jwtToken;
   
-        res.cookie("user", jwtToken, { httpOnly: false });
+        res.cookie("user", jwtToken, { httpOnly: false, secure: true });
         res.cookie('id', req.sessionID, { httpOnly: true, secure: true });
   
         return res.status(201).json({ message: `Successfully created user with id ${ newUser.rows[0].id }`})

@@ -5,7 +5,6 @@ import { ModifiedSession } from "./login.js";
 export const getUserAppointments = async(req: Request, res: Response) => {
   try {
     const { status, search } = req.query;
-    
     const clientSession = req.sessionID;
     const userId = clientSession === req.sessionID && (req.session as ModifiedSession).userId;
     const userRole = (req.session as ModifiedSession).userRole;

@@ -28,7 +28,6 @@ function App() {
 
   React.useEffect(() => {
     const userLogged = setUser();
-    console.log('userLogged', userLogged);
     
     setCurrentUser(userLogged)
   },[]);
