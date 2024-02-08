@@ -61,7 +61,7 @@ app.use(session({
     unset: 'destroy',
     // rolling: true,
     cookie: {
-        maxAge: 15000,
+        maxAge: 5 * 60 * 1000,
         secure: true
     } // ** REMOVE FOR PROD - 5 minutes
     // cookie: { maxAge: 24 * 30 * 60  * 60 * 1000 } // 30 days

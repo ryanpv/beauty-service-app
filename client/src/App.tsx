@@ -22,6 +22,7 @@ import { useStateContext } from './contexts/state-contexts';
 import { setUser } from './utils/set-user';
 import { useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import UserLoggedIn from './components/logged-in-check';
 
 function App() {
   const { currentUser, setCurrentUser } = useStateContext();
@@ -61,7 +62,7 @@ function App() {
         <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } />
         <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } />
         <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
-        <Route path='/login' element={ <LoginPage /> } />
+        <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
         <Route path='/signup' element={ <SignupPage /> } />
         <Route path='/successful-signup' element={ <SignupSuccess /> } />
         <Route path='/ig-auth' element={ <GetAuth /> } />
