@@ -36,6 +36,7 @@ const UpdateAppointment: React.FC = () => {
   const { appointmentId } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = React.useState("");
   
   useEffect(() => {
     fetchAppointment();
@@ -104,18 +105,19 @@ const UpdateAppointment: React.FC = () => {
       const result = await putFormRequest;
 
       if (result.status === 403) {
-        setCurrentUser(currentUser)
-        throw new Error("Not user logged in.")
+        setError("No user logged in. Unable to update appiontment")
       } else if (result.status !== 201) {
         throw new Error("Error updating appointment");
       } else {
         alert("Appointment update request successfully sent.");
+        setError("");
         navigate("/appointments");
       }
       setLoading(false);
     } catch (error) {
-      setLoading(false)
       console.log("Error updating appointment: ", error)
+      setError("Error updating appointment. Please try again later.")
+      setLoading(false)
     }
   };
 
@@ -124,6 +126,17 @@ const UpdateAppointment: React.FC = () => {
       <h1 className='text-center'>Update Appointment</h1>
       { loading && <BarLoader className='mx-auto' color='#fbb6ce' /> }
 
+      { error !== "" && 
+        <>
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong className="font-bold">ERROR: </strong>
+          <span className="block sm:inline">{ error }</span>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+          </span>
+        </div>
+        </>
+      }
 
       <div className='sm:mx-auto sm:w-full sm:max-w-sm max-w-2xl font-medium'>
 

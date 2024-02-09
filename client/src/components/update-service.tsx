@@ -20,6 +20,7 @@ export default function UpdateService() {
   });
   const [categories, setCategories] = useState<CategoryListState>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const { serviceId } = useParams();
   const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const isAdmin = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
@@ -41,14 +42,14 @@ export default function UpdateService() {
       });
 
       if (fetchService.status === 403) {
-        setCurrentUser(currentUserState)
+        setError("Invalid credentials. Please log in and try again.");
       } else {
         const result = await fetchService.json(); // Should only be single result
   
         if (result.length > 1) {
           throw Error
         } else {
-          
+          setError("");
           setUpdateForm(result[0]); 
         }
       }
@@ -57,6 +58,7 @@ export default function UpdateService() {
       setLoading(false);
     } catch (error) {
       console.log("fetch single service error: ", error)
+      setError("Unable to fetch service to update.");
       setLoading(false);
     }
   };
@@ -138,75 +140,87 @@ export default function UpdateService() {
         : null 
       }
 
-    { isAdmin ?
-      <div className='border-2 p-5 mb-5 sm:mx-auto sm:w-full sm:max-w-2xl'>
-        <form onSubmit={ formSubmit }>
-          <div className='flex flex-col space-y-6'>
-            <div className='flex flex-col justify-between space-y-6 sm:space-y-0'>
-              <div>
-                <label className='font-bold'>Service:</label>
-                <input
-                  className='flex-2 py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
-                  value={ updateForm.id !== 0 ? updateForm.service_name : "" }
-                  name='service_name'
-                  onChange={ formValuesHandler }
-                />
+      { error !== "" && 
+        <>
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong className="font-bold">ERROR: </strong>
+          <span className="block sm:inline">{ error }</span>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+          </span>
+        </div>
+        </>
+      }
+
+      { isAdmin ?
+        <div className='border-2 p-5 mb-5 sm:mx-auto sm:w-full sm:max-w-2xl'>
+          <form onSubmit={ formSubmit }>
+            <div className='flex flex-col space-y-6'>
+              <div className='flex flex-col justify-between space-y-6 sm:space-y-0'>
+                <div>
+                  <label className='font-bold'>Service:</label>
+                  <input
+                    className='flex-2 py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                    value={ updateForm.id !== 0 ? updateForm.service_name : "" }
+                    name='service_name'
+                    onChange={ formValuesHandler }
+                  />
+                </div>
+
+                <div>
+                  <label className='font-bold'>Price:</label>
+                  <input
+                    className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                    value={ updateForm.id !== 0 ? updateForm.price : "" }
+                    name='price'
+                    onChange={ formValuesHandler }
+                  />
+                </div>
+
+                <div>
+                  <label className='font-bold'>Duration:</label>
+                  <input
+                    className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                    value={ updateForm.id !== 0 ? updateForm.duration : 0 }
+                    name='duration'
+                    onChange={ formValuesHandler }
+                  />
+                </div>
+
+                <div>
+                  <label className='font-bold'>Category:</label>
+                  <select 
+                    className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                    name='service_categories_id'
+                    onChange={ formValuesHandler }
+                  >
+                    <option selected key={ updateForm.id } defaultValue={ updateForm.id }>{ updateForm.service_category_name }</option>
+                    { listCategories() }
+                  </select>
+                </div>
               </div>
 
               <div>
-                <label className='font-bold'>Price:</label>
-                <input
-                  className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
-                  value={ updateForm.id !== 0 ? updateForm.price : "" }
-                  name='price'
+                <label className='font-bold'>Description:</label>
+                <textarea
+                  name='description'
+                  value={ updateForm.description }
                   onChange={ formValuesHandler }
-                />
+                  className='h-48 min-h-fit py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 leading-6'
+                  />
               </div>
 
-              <div>
-                <label className='font-bold'>Duration:</label>
-                <input
-                  className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
-                  value={ updateForm.id !== 0 ? updateForm.duration : 0 }
-                  name='duration'
-                  onChange={ formValuesHandler }
-                />
-              </div>
-
-              <div>
-                <label className='font-bold'>Category:</label>
-                <select 
-                  className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
-                  name='service_categories_id'
-                  onChange={ formValuesHandler }
-                >
-                  <option selected key={ updateForm.id } defaultValue={ updateForm.id }>{ updateForm.service_category_name }</option>
-                  { listCategories() }
-                </select>
-              </div>
+              <button
+                type='submit'
+                className='mx-auto w-full bg-pink-300 hover:bg-pink-200 rounded-sm max-w-xs justify-center text-white font-semibold'
+              >
+                Update Service
+              </button>
             </div>
-
-            <div>
-              <label className='font-bold'>Description:</label>
-              <textarea
-                name='description'
-                value={ updateForm.description }
-                onChange={ formValuesHandler }
-                className='h-48 min-h-fit py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 leading-6'
-                />
-            </div>
-
-            <button
-              type='submit'
-              className='mx-auto w-full bg-pink-300 hover:bg-pink-200 rounded-sm max-w-xs justify-center text-white font-semibold'
-            >
-              Update Service
-            </button>
-          </div>
-        </form>
-      </div>
-      : <h1>Unauthorized</h1>
-    }
+          </form>
+        </div>
+        : <h1>Unauthorized</h1>
+      }
     </div> 
   )
 }
