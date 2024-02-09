@@ -3,7 +3,7 @@ import AppointmentsTable from '../templates/appointment-table';
 import { useStateContext } from '../contexts/state-contexts';
 import DatePicker from 'react-datepicker';
 import { BarLoader } from 'react-spinners';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const AppointmentsList:React.FC = () => {
   type AppointmentList = {
@@ -28,8 +28,7 @@ const AppointmentsList:React.FC = () => {
   const month = date.getMonth() + 1; // 0-index, must +1 to get accurate month value
   const day = date.getDate();
   const currentDate = `${ year }-${ month }-${ day }`
-const params = useLocation();
-console.log("params: ", params.pathname)
+
   type FormFilter = {
     search: string;
     startDate: string | Date;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { SyncLoader } from 'react-spinners';
 import { useStateContext } from '../contexts/state-contexts'; 
 import { Link } from 'react-router-dom';
 
@@ -30,7 +29,7 @@ const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading 
                   <h3>{ service.price }</h3>
                 </div>
                 <p>{ service.description }</p>
-                { (typeof currentUser !== "string" && currentUser.role === 2) ?
+                { (typeof currentUser !== "string" && currentUser.role === 2 && currentUser.id !== 0) ?
                 <Link 
                   to={ `/update-service/${ service.id }` }
                   className='text-center bg-pink-300 hover:bg-pink-200 font-semibold text-white rounded-sm'
