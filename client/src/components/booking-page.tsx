@@ -5,6 +5,7 @@ import { useStateContext } from '../contexts/state-contexts';
 import ServiceOptions from '../templates/service-options';
 import TimeSlots  from '../templates/timeslots';
 import { BarLoader } from 'react-spinners';
+import { useNavigate } from 'react-router-dom';
 
 const BookingPage: React.FC = () => {
   const { currentUser, setCurrentUser, currentUserState, allServices, setAllServices } = useStateContext();
@@ -18,7 +19,8 @@ const BookingPage: React.FC = () => {
   };
 
   const [newAppointment, setNewAppointment] = useState<NewAppointment>(newAppointmentState)
-  
+  const navigate = useNavigate();
+
   type CalendarDates = Date | null; // required for react-calendar as it has a prop for range
 
   type NewAppointment = {
@@ -118,7 +120,8 @@ const BookingPage: React.FC = () => {
         if (appointmentRequest.status !== 201) {
           setError("Failed to book appointment.")
         } else {
-          setError("")
+          setError("");
+          navigate("/booking-success");
         }
         
         console.log("appointment req: ", appointmentRequest);
@@ -126,6 +129,7 @@ const BookingPage: React.FC = () => {
 
     } catch (error) {
       console.log("Appointment booking error: ", error);
+      setError("Unable to book appointment.")
     }
   };
 
@@ -171,7 +175,7 @@ const BookingPage: React.FC = () => {
           
           <div className='mx-auto space-y-2'>
             <h1>Confirm your details below before submitted the booking request:</h1>
-            
+
             { error !== "" && 
               <>
               <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">

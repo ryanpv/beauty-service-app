@@ -14,6 +14,7 @@ import ResetPassword from './components/reset-password-form';
 import AddService from './components/add-service';
 import UpdateService from './components/update-service';
 import BookingPage from './components/booking-page';
+import BookingSuccessPage from './templates/booking-success';
 import AppointmentsList from './components/appointments-list';
 import UpdateAppointment from './components/update-appointment';
 import SignupSuccess from './templates/signup-success';
@@ -60,6 +61,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <HomePage /> } />
         <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } />
+        <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } />
         <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } />
         <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
         <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
