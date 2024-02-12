@@ -8,7 +8,6 @@ const AddService:React.FC = () => {
   const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const isAdmin = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
 
-
   useEffect(() => {
     serviceCategories();
   },[]);
@@ -58,7 +57,6 @@ const AddService:React.FC = () => {
     price: '',
     description: ''
   });
-  console.log("formdata: ", serviceFormData);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;

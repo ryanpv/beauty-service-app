@@ -19,7 +19,7 @@ export default function PhotoGallery() {
     data: new Set([]),
     paging: {
       cursors: {},
-      next: `https://graph.instagram.com/me/media?limit=10&fields=id,caption,media_url&access_token=${ process.env.REACT_APP_IG_LLT }`,
+      next: `https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token=${ process.env.REACT_APP_IG_LLT }`,
       previous: ""
     }
   };
@@ -48,41 +48,70 @@ export default function PhotoGallery() {
     console.log('clearing cache');
     
     localStorage.clear();
-
   }
-
 
   const fetchInstagramPhotos = async(media_url: string) => {
     setLoading(true);
     try {
       const localStoragePhotos = localStorage.getItem('igPhotos');
       const checkLocalStorage = localStoragePhotos ? JSON.parse(localStoragePhotos) : null;
-      console.log('check1 : ', checkLocalStorage);
-      // console.log('check2 : ', checkLocalStorage[1]);
-      
-      
+      // const lastItemLocalStorage = localStorage.getItem('lastItem');
+      // const checkLastItem = lastItemLocalStorage ? JSON.parse(lastItemLocalStorage) : null;
+
+      // *** FOR CACHING IG API RESPONSE ***
+      // Check to see if a next URL exists from IG API stored in localstorage. Return to end execution if none
+      if (checkLocalStorage && checkLocalStorage.nextPage !== -1) {
+        setIgPhotos({
+          data: new Set(checkLocalStorage.data),
+          paging: {
+            next: checkLocalStorage.nextPage === -1 ? "" : checkLocalStorage.nextPage
+          }
+        });
+
+      } else if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
+        setIgPhotos({
+          data: new Set(checkLocalStorage.data),
+          paging: {
+            next: ""
+          }
+        });
+
+        return;
+      }
+
+
       if (igPhotos.paging.next !== "") {
         const queryInstagramUser = await fetch(media_url)
         const results = await queryInstagramUser.json();
-        console.log("RESULTS URL undefined?: ", results.paging.next === undefined)
+        const nextPage = results.paging.next !== undefined ? results.paging.next : -1
+        const lastItem = {
+          time: new Date(),
+          lastURL: nextPage
+        };
+        
+        const photosForLocal = {
+          data: results.data,
+          nextPage: results.paging.next
+        };
+                
+        console.log('FETCHED IG API');
         
         // if fetch operation is required, check if local storage 'igPhotos' exists and store accordingly
         if (checkLocalStorage === null) {
-          const photoMap = new Map();
-          photoMap.set(results.paging.next, results.data); // store the unique pagination URL as the key
+          console.log('NULL STORAGE');
           
-          localStorage.setItem("igPhotos", JSON.stringify(Array.from(photoMap.entries())));
-
-          console.log('checklocal: ', photoMap);
+          localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
+          localStorage.setItem('lastItem', JSON.stringify(lastItem))
         } else {
-          console.log('local storage exists');
-
-          const photoMap2 = new Map()
-          photoMap2.set(results.paging.next !== undefined ? results.paging.next : -1, results.data);
-          const photoMapToArray = Array.from(photoMap2.entries());
-
-          checkLocalStorage.push(photoMapToArray);   
-          localStorage.setItem('igPhotos', JSON.stringify(Array.from(checkLocalStorage)));
+          console.log('ELSE CALLED');
+          
+          const updateLocalPhotos = {
+            data: [...checkLocalStorage.data, ...results.data],
+            nextPage: nextPage
+          };
+          
+          localStorage.setItem('igPhotos', JSON.stringify(updateLocalPhotos))
+          localStorage.setItem('lastItem', JSON.stringify(lastItem))
         }
         
         setIgPhotos((prev) => ({
@@ -92,7 +121,7 @@ export default function PhotoGallery() {
           }
         }));
       } else {
-        console.log('no more');
+        console.log('NO MORE PHOTOS FROM IG API');
         return;
       }
 
@@ -130,7 +159,7 @@ export default function PhotoGallery() {
       return;
     } else {
       // Offset state used to trigger fetch useEffect
-      console.log('offset called');
+      console.log('OFFSET UPDATED');
       
       setOffset(prev => prev + 1);
     }
@@ -142,6 +171,7 @@ export default function PhotoGallery() {
         <h1>PhotoGallery</h1>
         <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-300"></hr>
       </div>
+      {/* TEMP CLEAR LOCALSTORAGE BUTTON  */}
 <button onClick={ clearStorage }>CLEAR STORAGE</button>
       <div className='container grid grid-cols-1 max-w-4xl'>
           { loading ? <div className='mx-auto '><BarLoader color='#fbb6ce'/></div> : null }
@@ -157,30 +187,8 @@ export default function PhotoGallery() {
             })
             : null
           }
-        </div>  
-          
+        </div>   
       </div>
-
-
-            {/* <div className='container max-w-2xl overflow-auto'>
-        <div className='grid grid-cols-2'>
-          <div>
-            <img src={ require("./balloon-sq1.jpg") } alt="placeholder" />
-          </div>
-          <div>
-            <img src={ require("./balloon-sq2.jpg") } alt="placeholder" />
-          </div>
-          <div>
-            <img src={ require("./balloon-sq3.jpg") } alt="placeholder" />
-          </div>
-          <div>
-            <img src={ require("./balloon-sq4.jpg") } alt="placeholder" />
-          </div>
-          <div>
-            <img src={ require("./balloon-sq5.jpg") } alt="placeholder" />
-          </div>
-        </div>
-      </div>    */}
     </div>
   )
 }

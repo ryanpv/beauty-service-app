@@ -46,7 +46,7 @@ function App() {
         iat: 0,
         exp: 0
       }
-      console.log("no current user logged in.");
+      // console.log("no current user logged in.");
       
       setCurrentUser(initialUserState);
     } else {
