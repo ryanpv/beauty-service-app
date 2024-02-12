@@ -65,7 +65,7 @@ const Services:React.FC = () => {
       { loading ? <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> : 
       <div className='space-y-6'>
 {/* REGULAR POLISH SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
+      <hr className="px-5 min-w-full h-px rounded-sm border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Regular Polish Services</h2>
@@ -77,7 +77,7 @@ const Services:React.FC = () => {
       <ServiceCategory list={ allServices } serviceCategoryId={ regularShellac } loading={ loading }/>
       
 {/* GEL/SHELLAC SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
+      <hr className="px-5 min-w-full h-px rounded-sm border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Gel/Shellac Services</h2>
@@ -87,7 +87,7 @@ const Services:React.FC = () => {
       <ServiceCategory list={ allServices } serviceCategoryId={ gelShellac } loading={ loading }/>
 
 {/* BIO GEL SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
+      <hr className="px-5 min-w-full h-px rounded-sm border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Bio Gel Services</h2>
@@ -97,7 +97,7 @@ const Services:React.FC = () => {
       <ServiceCategory list={ allServices } serviceCategoryId={ bioGel } loading={ loading }/>
 
 {/* NAIL COMBO SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
+      <hr className="px-5 min-w-full h-px rounded-sm border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Nail Combo Services</h2>

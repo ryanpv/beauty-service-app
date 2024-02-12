@@ -83,7 +83,7 @@ const AddService:React.FC = () => {
 
   return (
     <div className='container flex flex-col space-y-10'>
-      <h1 className='text-center font-bold text-2xl'>Add New Service</h1>
+      <h1 className='text-center font-bold text-2xl mt-5'>Add New Service</h1>
       { loading ? 
         <div className='mx-auto'>
           <BarLoader color='#fbb6ce' /> 

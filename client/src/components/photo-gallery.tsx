@@ -32,13 +32,11 @@ export default function PhotoGallery() {
 
   // Initial fetch of instagram photos
   React.useEffect(() => {
-    const instagram_photo_url = igPhotos.paging.next && igPhotos.paging.next;
-
-    if (instagram_photo_url !== "" && instagram_photo_url !== undefined) {
-      console.log('USESTATE FETCH CALLED');
+    const instagram_photo_url = igPhotos.paging.next ? igPhotos.paging.next : "";
+    console.log('USESTATE FETCH CALLED');
+    if (!loading) {
       fetchInstagramPhotos(instagram_photo_url);
     } 
-
   },[offset]);
 
   // Fetch instagram photos on scroll for infinite scroll
@@ -50,18 +48,22 @@ export default function PhotoGallery() {
   const fetchInstagramPhotos = async(media_url: string) => {
     setLoading(true);
     try {
-      const queryInstagramUser = await fetch(media_url)
-      const results = await queryInstagramUser.json();
-      console.log("RESULTS URL undefined?: ", results.paging.next === undefined)
-      // if (results.paging.next !== undefined) {
+      if (igPhotos.paging.next !== "") {
+        const queryInstagramUser = await fetch(media_url)
+        const results = await queryInstagramUser.json();
+        console.log("RESULTS URL undefined?: ", results.paging.next === undefined)
+  
+        setIgPhotos((prev) => ({
+          data: new Set([...Array.from(prev.data), ...results.data]),
+          paging: {
+            next: results.paging.next !== undefined ? results.paging.next : ""
+          }
+        }));
+      } else {
+        console.log('no more');
+        return;
+      }
 
-      setIgPhotos((prev) => ({
-        data: new Set([...Array.from(prev.data), ...results.data]),
-        paging: {
-          next: results.paging.next !== undefined ? results.paging.next : ""
-        }
-      }));
-    
     } catch (error) {
       console.log("error fetching instagram photos: ", error);
       setError("Error fetching instagram photos.");
@@ -96,17 +98,20 @@ export default function PhotoGallery() {
       return;
     } else {
       // Offset state used to trigger fetch useEffect
+      console.log('offset called');
+      
       setOffset(prev => prev + 1);
     }
   };
 
   return (
-    <>
-      <div className='text-center'>
+    <div className='container space-y-10'>
+      <div className='mx-auto text-center font-bold text-2xl mt-5 space-y-3 r'>
         <h1>PhotoGallery</h1>
+        <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-300"></hr>
       </div>
 
-      <div className='container grid max-w-4xl'>
+      <div className='container grid grid-cols-1 max-w-4xl'>
           { loading ? <div className='mx-auto '><BarLoader color='#fbb6ce'/></div> : null }
           
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-1 m-auto'>
@@ -144,6 +149,6 @@ export default function PhotoGallery() {
           </div>
         </div>
       </div>    */}
-    </>
+    </div>
   )
 }
