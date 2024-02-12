@@ -143,7 +143,7 @@ const UpdateAppointment: React.FC = () => {
       { (typeof currentUser !== 'string' && currentUser.role === 2) ?
         <form className='space-y-3' onSubmit={ submitForm }>
           <div>
-            <label>Client</label>
+            <label className='font-bold'>Client</label>
             <div>
               <input
                 name='name'
@@ -153,7 +153,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label>Contact Info</label>
+            <label className='font-bold'>Contact Info</label>
             <div>
               <input
                 name='email'
@@ -163,7 +163,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label>Service</label>
+            <label className='font-bold'>Service</label>
             <div>
               <input
                 onChange={ putFormHandler }
@@ -189,7 +189,7 @@ const UpdateAppointment: React.FC = () => {
             </select>
           </div>
           <div className=''>
-            <label>Date</label>
+            <label className='font-bold'>Date</label>
             <div>
               <DatePicker 
                 className='block sm:w-96 py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
@@ -200,7 +200,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label>Time</label>
+            <label className='font-bold'>Time</label>
             <div>
               <input
                 onChange={ putFormHandler }
@@ -211,7 +211,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label>Price</label>
+            <label className='font-bold'>Price</label>
             <div>
               <input
                 onChange={ putFormHandler }
@@ -235,7 +235,7 @@ const UpdateAppointment: React.FC = () => {
         :
         <form className='space-y-3' onSubmit={ submitForm }>
           <div>
-            <label>Service</label>
+            <label className='font-bold'>Service</label>
             <div>
               <input
                 onChange={ putFormHandler }
@@ -247,7 +247,7 @@ const UpdateAppointment: React.FC = () => {
           </div>
 
           <div className=''>
-            <label>Date</label>
+            <label className='font-bold'>Date</label>
             <div>
               <DatePicker 
                 className='block sm:w-96 py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
@@ -259,7 +259,7 @@ const UpdateAppointment: React.FC = () => {
           </div>
 
           <div>
-            <label>Time</label>
+            <label className='font-bold'>Time</label>
             <div>
               <input
                 onChange={ putFormHandler }
