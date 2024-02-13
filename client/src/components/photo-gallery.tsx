@@ -79,7 +79,6 @@ export default function PhotoGallery() {
         return;
       }
 
-
       if (igPhotos.paging.next !== "") {
         const queryInstagramUser = await fetch(media_url)
         const results = await queryInstagramUser.json();

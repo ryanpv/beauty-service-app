@@ -22,9 +22,9 @@ export default function HomePage() {
 
         <Link
         to='/book-appointment' 
-        className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
+        className='bg-pink-300 hover:bg-pink-200 px-8 py-1.5 mx-auto rounded-sm text-center text-lg font-semibold text-white focus:ring-2 focus:ring-pink-300 '
         >
-          Book Appointment
+          BOOK APPOINTMENT
         </Link>
       </header>
 

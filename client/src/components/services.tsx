@@ -48,9 +48,9 @@ const Services:React.FC = () => {
       { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2 ?
         <Link
           to='/add-new-service'
-          className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300'
+          className='bg-pink-300 hover:bg-pink-200 px-8 py-1.5 mx-auto rounded-sm text-center font-semibold text-lg text-white focus:ring-2 focus:ring-pink-300'
         >
-          + Add new services
+          + ADD NEW SERVICES
         </Link>
         :
         null
@@ -58,14 +58,14 @@ const Services:React.FC = () => {
       
       <Link
         to='/book-appointment'
-        className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300'
+        className='bg-pink-300 hover:bg-pink-200 px-8 py-1.5 mx-auto rounded-sm text-center font-semibold text-lg text-white focus:ring-2 focus:ring-pink-300'
       >
-        Book Appointment
+        BOOK APPOINTMENT
       </Link>
       { loading ? <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> : 
       <div className='space-y-6'>
 {/* REGULAR POLISH SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm border-pink-300"></hr>
+      <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Regular Polish Services</h2>
@@ -77,7 +77,7 @@ const Services:React.FC = () => {
       <ServiceCategory list={ allServices } serviceCategoryId={ regularShellac } loading={ loading }/>
       
 {/* GEL/SHELLAC SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm border-pink-300"></hr>
+      <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Gel/Shellac Services</h2>
@@ -87,7 +87,7 @@ const Services:React.FC = () => {
       <ServiceCategory list={ allServices } serviceCategoryId={ gelShellac } loading={ loading }/>
 
 {/* BIO GEL SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm border-pink-300"></hr>
+      <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Bio Gel Services</h2>
@@ -97,7 +97,7 @@ const Services:React.FC = () => {
       <ServiceCategory list={ allServices } serviceCategoryId={ bioGel } loading={ loading }/>
 
 {/* NAIL COMBO SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm border-pink-300"></hr>
+      <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Nail Combo Services</h2>
@@ -107,7 +107,7 @@ const Services:React.FC = () => {
       <ServiceCategory list={ allServices } serviceCategoryId={ nailCombo } loading={ loading }/>
 
 {/* ADDITIONAL NAIL SERVICES SECTION */}
-      <hr className="px-5 min-w-full h-px rounded-sm bg-pink-300"></hr>
+      <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
 
       <div className='mx-3'>
         <h2 className='font-semibold text-2xl mb-2'>Additional Nail Services</h2>
