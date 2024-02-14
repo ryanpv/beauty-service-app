@@ -22,7 +22,6 @@ import Unauthorized from './components/unauthorized';
 import { useStateContext } from './contexts/state-contexts';
 import { setUser } from './utils/set-user';
 import { useLocation } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import UserLoggedIn from './components/logged-in-check';
 
 function App() {
@@ -35,24 +34,38 @@ function App() {
     const userLogged = setUser();
     
     setCurrentUser(userLogged)
-  },[]);
+  },[location]);
 
   React.useEffect(() => {
-    if (Cookies.get('user') === undefined) {
-      const initialUserState = {
-        id: 0,
-        role: 0,
-        displayName: "",
-        iat: 0,
-        exp: 0
-      }
-      // console.log("no current user logged in.");
-      
-      setCurrentUser(initialUserState);
-    } else {
-      console.log('currnt user: ', currentUser);
+    const galleryTimer = localStorage.getItem('lastItem');
+    const parseGalleeryTimer = galleryTimer && new Date(JSON.parse(galleryTimer).time);
+    const storageTime = parseGalleeryTimer && parseGalleeryTimer.getTime()
+    const storageExpiryInterval = 3600000 // 4 hours;
+    const currentTime = new Date().getTime();
+
+    // If localstorage for IG photos are more than 4 hours old, localstorage will be cleared
+    if (storageTime && storageTime + storageExpiryInterval < currentTime) {
+      localStorage.removeItem('igPhotos');
+      localStorage.removeItem('lastItem');
     }
-  }, [location]);
+  }, [location])
+
+  // React.useEffect(() => {
+  //   if (Cookies.get('user') === undefined) {
+  //     const initialUserState = {
+  //       id: 0,
+  //       role: 0,
+  //       displayName: "",
+  //       iat: 0,
+  //       exp: 0
+  //     }
+  //     // console.log("no current user logged in.");
+      
+  //     setCurrentUser(initialUserState);
+  //   } else {
+  //     console.log('currnt user: ', currentUser);
+  //   }
+  // }, [location]);
 
   return (
     <div className="App">

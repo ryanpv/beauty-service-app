@@ -44,6 +44,11 @@ export default function PhotoGallery() {
     return () => window.removeEventListener("scroll", paginatePhotos);
   }, [loading]);
 
+  React.useEffect(() => {
+    window.addEventListener("resize", handleScreenResizing);
+    return () => window.removeEventListener("resize", handleScreenResizing);
+  }, [loading]);
+
   const clearStorage = () => {
     console.log('clearing cache');
     
@@ -142,14 +147,13 @@ export default function PhotoGallery() {
   // *** add overlay of design name?
   const Photos = (props: IgPhotosProp) => {
     return (
-      <div className='hover:scale-125' >
+      <div className='hover:scale-125 transition-all duration-300' >
         <img className='h-auto rounded-sm min-h-full' src={ props.media_url } alt=''/>
       </div>
     )
   };
 
-
-  const paginatePhotos = async() => {
+  const paginatePhotos = () => {
     if (igPhotos.paging.next === "") return;
 
     // return nothing until innerHeight + scrollTop is close to offsetHeight value
@@ -164,9 +168,19 @@ export default function PhotoGallery() {
     }
   };
 
+  const handleScreenResizing = () => {
+    if (igPhotos.paging.next === "") return;
+
+    if (window.innerHeight + 100 < document.documentElement.offsetHeight) {
+      return;
+    }
+
+    setOffset(prev => prev + 1);
+  };
+
   return (
     <div className='container space-y-10'>
-      <div className='mx-auto text-center font-bold text-2xl mt-5 space-y-3 r'>
+      <div className='mx-auto text-center text-gray-400 font-bold text-4xl mt-5 space-y-3 r'>
         <h1>PhotoGallery</h1>
         <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-300"></hr>
       </div>
