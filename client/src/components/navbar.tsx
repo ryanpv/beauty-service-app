@@ -1,12 +1,14 @@
 import React,  { FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { setUser } from '../utils/set-user';
-import { useStateContext } from '../contexts/state-contexts';;
+import { useStateContext } from '../contexts/state-contexts';
+import { FiMenu } from 'react-icons/fi';
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useStateContext();
-  const [show, setShow] = React.useState(true);
+  const [show, setShow] = React.useState(false);
+  const [isClicked, setIsClicked] = React.useState(false);
 
   const logout = async() => {
     try {
@@ -28,16 +30,9 @@ const Navbar: FC = () => {
   };
 
   const navDisplay = () => {
-    const navLinks = document.getElementById('navLinks');
-
-    if (show) {
-      navLinks?.classList.remove('hidden')
-    } else {
-      navLinks?.classList.add('hidden')
-    }
-
     setShow(prev => !prev);
   };
+  
 
   return (
     <>
@@ -50,16 +45,20 @@ const Navbar: FC = () => {
 
         <div className="block lg:hidden">
           <button 
-            onClick={ navDisplay }
-            className="flex items-center px-3 py-2 border-2 rounded-sm text-white border-white hover:text-pink-500 hover:border-pink-500"
+            onMouseEnter={ navDisplay }
+            className="flex items-center px-2.5 py-1.5 hover:text-pink-500 hover:border-pink-500"
             >
-            <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+              <FiMenu />
           </button>
         </div>
 
-        <div id='navLinks' className="hidden mt-5 lg:mt-0 lg:justify-end w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div className='lg:space-x-5 font-semibold lg:text-xl'>
-            <div className='hover:text-gray-200 block lg:inline-block hover:text-pink-500'>
+        <div 
+          id='navLinks' 
+          onMouseLeave={ navDisplay }      
+          className={`lg:mt-0 lg:justify-end w-full block flex-grow lg:flex lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100 ${ show ? 'opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' }`}
+          >
+          <div className='nav-links lg:space-x-5 font-semibold lg:text-xl'>
+            <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-500'>
               <Link to='/'>
                 Home
               </Link>
