@@ -29,6 +29,12 @@ const Navbar: FC = () => {
   };
 
   const navDisplay = () => {
+    if (!show) {
+      document.getElementById('navbar')?.classList.remove('bg-opacity-75');
+    } else {
+      document.getElementById('navbar')?.classList.add('bg-opacity-75');
+    }
+
     setShow(prev => !prev);
   };
 
