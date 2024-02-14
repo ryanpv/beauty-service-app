@@ -8,7 +8,6 @@ const Navbar: FC = () => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useStateContext();
   const [show, setShow] = React.useState(false);
-  const [isClicked, setIsClicked] = React.useState(false);
 
   const logout = async() => {
     try {
@@ -32,11 +31,25 @@ const Navbar: FC = () => {
   const navDisplay = () => {
     setShow(prev => !prev);
   };
-  
 
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleScroll = () => {
+    if (document.documentElement.scrollTop > 0) {
+      document.getElementById('navbar')?.classList.add('bg-opacity-75');
+    } else {
+      document.getElementById('navbar')?.classList.remove('bg-opacity-75');
+    }
+  };
+  
   return (
     <>
-      <nav className="flex sticky top-0 items-center justify-between flex-wrap bg-pink-300 p-6 text-white">
+      <nav 
+        id='navbar'
+        className="flex sticky top-0 items-center justify-between flex-wrap bg-pink-300 p-6 text-white transition-all">
         <div className='justify-start lg:px-5 text-4xl font-bold'>
           <Link to='/'>
             PolishByCin

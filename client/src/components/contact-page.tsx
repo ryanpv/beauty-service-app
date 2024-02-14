@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarLoader } from 'react-spinners';
+import { FcCellPhone, FcClock, FcGlobe } from 'react-icons/fc';
 
 type ContactForm = {
   name: string;
@@ -69,11 +70,7 @@ export default function ContactPage() {
       <h1 className='text-center mt-10 text-2xl font-bold text-gray-900'>Contact Us</h1>
       <div className='grid sm:grid-cols-3 sm:space-y-0 space-y-10 py-6 items-start text-center'>
         <div className=''>
-          <img
-            className='mx-auto h-10 w-auto'
-            src={ require('./logo192.png') }
-            alt='logo'
-          />
+          <FcCellPhone className='mx-auto h-10 w-auto'/>
           <label className='font-bold'>
             Contact
           </label>
@@ -86,11 +83,7 @@ export default function ContactPage() {
         </div>
 
         <div>
-        <img
-            className='mx-auto h-10 w-auto'
-            src={ require('./logo192.png') }
-            alt='logo'
-          />          
+          <FcClock className='mx-auto h-10 w-auto' />    
           <label className='font-bold'>
             Hours
           </label>
@@ -102,11 +95,7 @@ export default function ContactPage() {
         </div>
 
         <div>
-        <img
-            className='mx-auto h-10 w-auto'
-            src={ require('./logo192.png') }
-            alt='logo'
-          />
+          <FcGlobe className='mx-auto h-10 w-auto' />
           <label className='font-bold'>
             Location
           </label>
