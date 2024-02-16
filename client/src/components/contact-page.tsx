@@ -66,7 +66,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className='container flex flex-1 flex-col space-y-10'>
+    <div className='container flex flex-1 flex-col space-y-10 px-6 py-12'>
       <h1 className='text-center mt-10 text-2xl font-bold text-gray-900'>Contact Us</h1>
       <div className='grid sm:grid-cols-3 sm:space-y-0 space-y-10 py-6 items-start text-center'>
         <div className=''>
@@ -106,87 +106,89 @@ export default function ContactPage() {
         </div>
       </div>
 
+      <div className='border border-gray-100 rounded-sm sm:p-16 p-10 shadow-xl sm:mx-auto'>
+        <h3 className='text-center mb-10 font-bold text-2xl'>Leave us a message!</h3>
+        <div className=''>
 
-      <h3 className='text-center font-bold text-2xl'>Leave us a message!</h3>
+          <form onSubmit={ submitContactForm }>
+            <div className='flex flex-col space-y-6'>
+              <div className='flex justify-between flex-col sm:flex-row space-y-6 sm:space-y-0'>
+                <input placeholder='Name *'
+                  onChange={ contactFormHandler }
+                  name='name'  
+                  type='text'
+                  value={ contactFormState.name }
+                  maxLength={ 50 }
+                  pattern="^[A-Za-z\s.'\-]+$"
+                  title="Special characters allowed: .-' "
+                  className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                />
+                <input placeholder='Email *' 
+                  onChange={ contactFormHandler }
+                  required
+                  name='email'
+                  type='email'
+                  value={ contactFormState.email }
+                  maxLength={ 50 }
+                  className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                />
+                <input placeholder='Phone *' 
+                  onChange={ contactFormHandler }
+                  name='phone_number'
+                  type='text'
+                  value={ contactFormState.phone_number }
+                  maxLength={ 25 }
+                  className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                />
+              </div>
 
-
-      <div className='p-5 mb-5 sm:mx-auto sm:w-full sm:max-w-2xl'>
-        
-        { error !== "" && 
-          <>
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <strong className="font-bold">ERROR: </strong>
-            <span className="block sm:inline">{ error }</span>
-            <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-              <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-            </span>
-          </div>
-          </>
-          }    
-
-        <form onSubmit={ submitContactForm }>
-          <div className='flex flex-col space-y-6'>
-            <div className='flex justify-between flex-col sm:flex-row space-y-6 sm:space-y-0'>
-              <input placeholder='Name *'
-                onChange={ contactFormHandler }
-                name='name'  
-                type='text'
-                value={ contactFormState.name }
-                maxLength={ 50 }
-                pattern="^[A-Za-z\s.'\-]+$"
-                title="Special characters allowed: .-' "
-                className='py-1.5 px-2.5 border-0 rounded-sm ring-2 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
-              />
-              <input placeholder='Email *' 
+              <input placeholder='Subject *' 
                 onChange={ contactFormHandler }
                 required
-                name='email'
-                type='email'
-                value={ contactFormState.email }
-                maxLength={ 50 }
-                className='py-1.5 px-2.5 border-0 rounded-sm ring-2 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
-              />
-              <input placeholder='Phone *' 
-                onChange={ contactFormHandler }
-                name='phone_number'
+                name='subject'
                 type='text'
-                value={ contactFormState.phone_number }
-                maxLength={ 25 }
-                className='py-1.5 px-2.5 border-0 rounded-sm ring-2 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                value={ contactFormState.subject }
+                maxLength={ 90 }
+                className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
               />
+              <textarea placeholder='Message *' 
+                onChange={ contactFormHandler }
+                required
+                maxLength={ 1000 }
+                name='message'
+                value={ contactFormState.message }
+                className='h-48 min-h-fit py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
+              />
+
+
+              { loading ? <BarLoader className='mx-auto' color='#fbb6ce' /> 
+              : 
+              <div className='pt-4'>
+                <button
+                  type='submit'
+                  className='flex w-full bg-pink-300 justify-center rounded-sm ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'
+                >
+                  Send Message
+                </button>
+              </div>
+              }
+
             </div>
+          </form>
 
-            <input placeholder='Subject *' 
-              onChange={ contactFormHandler }
-              required
-              name='subject'
-              type='text'
-              value={ contactFormState.subject }
-              maxLength={ 90 }
-              className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
-            />
-            <textarea placeholder='Message *' 
-              onChange={ contactFormHandler }
-              required
-              maxLength={ 1000 }
-              name='message'
-              value={ contactFormState.message }
-              className='h-48 min-h-fit py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
-            />
+          { error !== "" && 
+            <>
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+              <strong className="font-bold">ERROR: </strong>
+              <span className="block sm:inline">{ error }</span>
+              <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+              </span>
+            </div>
+            </>
+            }  
+        </div>
 
-
-            { loading ? <BarLoader className='mx-auto' color='#fbb6ce' /> 
-            : 
-            <button
-              type='submit'
-              className='mx-auto w-full bg-pink-300 hover:bg-pink-200 rounded-sm max-w-xs justify-center text-white font-semibold'
-            >
-              Send Message
-            </button>
-            }
-
-          </div>
-        </form>
       </div>
     </div>
   )
