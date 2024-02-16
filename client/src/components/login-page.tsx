@@ -73,9 +73,9 @@ export default function LoginPage() {
               src={ require('./logo192.png') }
               alt='logo'
             />
-            <h2 className='mt-10 text-2xl font-bold text-gray-900'>
-              Login Page
-            </h2>
+            {/* <h2 className='mt-10 text-2xl font-bold text-gray-900'>
+              Sign In to your account
+            </h2> */}
           </div>
 
           { error !== "" ? 
@@ -89,16 +89,23 @@ export default function LoginPage() {
           : null }
 
         { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? <span>already logged in </span> : null }
-          <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm text-sm font-medium'>
+          <div className='shadow-xl space-y-10 shadow-gray-300 overflow-hidden rounded-sm border border-gray-100 mt-10 p-16 sm:mx-auto sm:w-full sm:max-w-lg sm:min-h-80 text-sm font-medium'>
 
-            <form className='space-y-6' onSubmit={ submitLogin }>
+          {/* <div className='text-center border-2 text-gray-900 sm:py-2 sm:mx-auto sm:w-full sm:max-w-sm'> */}
+
+            <h2 className='text-2xl font-bold text-gray-900'>
+              Sign in to your account
+            </h2>
+          {/* </div> */}
+          
+            <form className='space-y-8' onSubmit={ submitLogin }>
               <div>
-                <label className=''>
-                  Email Address
+                <label className='font-bold'>
+                  Email
                 </label>
                 <div className='mt-2'>
                   <input 
-                    className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                    className='block w-full py-2.5 px-3.5 border-0 transition-all duration-300 rounded-sm ring-pink-300 focus:ring-gray-300 focus:ring-offset-2 ring-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     required
                     type='email'
                     name='email'
@@ -109,7 +116,7 @@ export default function LoginPage() {
 
               <div>
                 <div className='flex justify-between'>
-                  <label className=''>
+                  <label className='font-bold'>
                     Password
                   </label>
                   <div>
@@ -121,7 +128,7 @@ export default function LoginPage() {
 
                 <div className='mt-2'>
                   <input 
-                    className='block w-full py-1.5 px-2.5 border-0 rounded-md ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                    className='block w-full py-2.5 px-3.5 border-0 transition-all duration-300 rounded-sm ring-pink-300 focus:ring-gray-300 focus:ring-offset-2 ring-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     required
                     type='password'
                     name='password'
@@ -131,23 +138,24 @@ export default function LoginPage() {
               </div>
 
               { loading ? <div className='flex justify-center'><BarLoader color='#fbb6ce' /></div> :
-              <div>
+              <div className='pt-4'>
                 <button
                   type='submit'
-                  className='flex w-full bg-pink-300 justify-center rounded-md px-3 py-1.5 text-white hover:bg-pink-200 font-semibold'>
+                  className='flex w-full bg-pink-300 justify-center rounded-sm ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'>
                     Sign In
                   </button>
               </div> }
                 
             </form>
-
-            <p className='mt-10 text-center text-sm text-gray-500'>
-              Don't have an account? {' '}
-              <a href='/signup' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
-                Sign up here
-              </a>
-            </p>
           </div>
+
+          <p className='mt-10 text-center text-sm text-gray-500'>
+            Don't have an account? {' '}
+            <a href='/signup' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
+              Sign up here
+            </a>
+          </p>
+
         </div>
       </div>
     </>
