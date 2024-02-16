@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStateContext } from '../contexts/state-contexts';
 import { BarLoader } from 'react-spinners';
 import { setUser } from '../utils/set-user';
@@ -107,9 +107,9 @@ export default function LoginPage() {
                     Password
                   </label>
                   <div>
-                    <a href='/request-new-password' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
+                    <Link to='/request-new-password' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
                       Forgot password?
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -146,9 +146,9 @@ export default function LoginPage() {
 
           <p className='mt-10 text-center text-sm text-gray-500'>
             Don't have an account? {' '}
-            <a href='/signup' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
+            <Link to='/signup' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>
               Sign up here
-            </a>
+            </Link>
           </p>
 
         </div>

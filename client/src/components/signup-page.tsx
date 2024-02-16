@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 import { useStateContext } from '../contexts/state-contexts';
 import { setUser } from '../utils/set-user';
@@ -93,7 +93,7 @@ export default function SignupPage() {
         
         <div className='text-gray-900'>
           <h1 className='text-2xl font-bold text-gray-900'>Create an account</h1>
-          <p><i>Track your appointments or book a new one</i></p>
+          <p><i>Track your appointments or request a new one!</i></p>
         </div>
         
         <form className='space-y-6' onSubmit={ submitSignup }>
@@ -174,7 +174,7 @@ export default function SignupPage() {
 
     <div className='mt-10 text-center text-sm text-gray-500'>
       Have an account? {' '}
-      <a href='/login' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>Go to the login page</a>
+      <Link to='/login' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>Go to the login page</Link>
     </div>
 
     </div>

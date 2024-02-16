@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 
 export default function PhotoGallery() {
@@ -72,6 +73,7 @@ export default function PhotoGallery() {
             next: checkLocalStorage.nextPage === -1 ? "" : checkLocalStorage.nextPage
           }
         });
+console.log('storage: ', checkLocalStorage);
 
       } else if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
         setIgPhotos({
@@ -147,8 +149,13 @@ export default function PhotoGallery() {
   // *** add overlay of design name?
   const Photos = (props: IgPhotosProp) => {
     return (
-      <div className='hover:scale-125 transition-all duration-300' >
-        <img className='h-auto rounded-sm min-h-full' src={ props.media_url } alt=''/>
+      <div className='relative hover:z-30 hover:scale-125 transition-all duration-200' >
+        <Link to={`${props.media_url}`} target='_blank'>  
+          <img className='h-auto rounded-sm min-h-full' src={ props.media_url } alt=''/>
+        </Link>
+        <div className='absolute top-0 left-0 w-full px-4 py-2 text-center text-white pointer-events-none'>
+          <p className='font-bold text-lg'>{ props.caption?.split('-')[0] }</p>
+        </div>
       </div>
     )
   };
@@ -179,7 +186,7 @@ export default function PhotoGallery() {
   };
 
   return (
-    <div className='container space-y-10'>
+    <div className='container space-y-10 mb-10'>
       <div className='mx-auto text-center text-gray-400 font-bold text-4xl mt-5 space-y-3 r'>
         <h1>PhotoGallery</h1>
         <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-300"></hr>
@@ -187,10 +194,7 @@ export default function PhotoGallery() {
       {/* TEMP CLEAR LOCALSTORAGE BUTTON  */}
 <button onClick={ clearStorage }>CLEAR STORAGE</button>
       <div className='container grid grid-cols-1 max-w-4xl'>
-          { loading ? <div className='mx-auto '><BarLoader color='#fbb6ce'/></div> : null }
-          
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-1 m-auto'>
-          {/* { displayPhotos() } */}
           {
             // Array.isArray(igPhotos?.data) && igPhotos.data.length > 0 
             igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData) => {
@@ -201,6 +205,8 @@ export default function PhotoGallery() {
             : null
           }
         </div>   
+          { loading ? <div className='mx-auto '><BarLoader color='#fbb6ce'/></div> : null }
+          
       </div>
     </div>
   )
