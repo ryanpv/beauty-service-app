@@ -125,7 +125,7 @@ const AppointmentsList:React.FC = () => {
   };
 
   return (
-    <div className='container flex flex-col space-y-6 max-w-screen-lg px-12'>
+    <div className='container flex flex-col space-y-6 max-w-screen-lg px-8 sm:px-12'>
 
       { typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0 ?
       <h1 className='text-center font-semibold text-red-700'>
@@ -135,7 +135,7 @@ const AppointmentsList:React.FC = () => {
       :
       <>
     {/* FILTER FORM  */}
-        <div className='p-10 mt-10 border-8 shadow-lg bg-pink-100 rounded-sm sm:mx-auto max-w-2xl space-y-6'>
+        <div className='sm:p-10 px-4 py-12 mt-10 shadow-lg bg-pink-100 rounded sm:mx-auto max-w-2xl space-y-6'>
           <h1 className='text-center text-2xl font-bold'>
           Appointments
           </h1>
@@ -151,7 +151,7 @@ const AppointmentsList:React.FC = () => {
                   onChange={ filterHandler }
                   name='search'
                   placeholder='Enter name or contact information'
-                  className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                  className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
                 />
               </div>
             </div>
@@ -165,7 +165,7 @@ const AppointmentsList:React.FC = () => {
                 </label>
                 <div>
                 <DatePicker 
-                  className='block py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'  
+                  className='block py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'  
                   selected={ new Date(formState.startDate) }
                   selectsStart
                   startDate={ new Date(formState.startDate) }
@@ -180,7 +180,7 @@ const AppointmentsList:React.FC = () => {
                 </label>
                 <div>
                 <DatePicker 
-                  className='block py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'  
+                  className='block py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300 ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'  
                   selectsEnd
                   startDate={ new Date(formState.startDate) }
                   endDate={ formState.endDate !== "" ? new Date(formState.endDate) : null }
@@ -194,7 +194,7 @@ const AppointmentsList:React.FC = () => {
               <label className='font-bold'>Status:</label>
               <select 
                 onChange={ filterHandler }
-                className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+                className='py-1.5 px-2.5 w-full border-0 rounded ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
                 name='status'
               >
                 <option selected value={ 1 }>Upcoming</option>
@@ -207,11 +207,11 @@ const AppointmentsList:React.FC = () => {
             <div className='flex justify-between pt-5'>
               <button
                 type='submit'
-                className='bg-pink-300 justify-center rounded-sm ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
+                className='bg-pink-300 justify-center rounded ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
                 >Filter</button>
               <button
                 onClick={ resetForm }
-                className='bg-pink-300 justify-center rounded-sm ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
+                className='bg-pink-300 justify-center rounded ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
                 >Reset</button>
             </div>
           </form>

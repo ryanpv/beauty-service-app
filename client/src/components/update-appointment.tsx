@@ -122,10 +122,13 @@ const UpdateAppointment: React.FC = () => {
   };
 
   return (
-    <div className='container flex flex-col space-y-6 p-5 max-w-screen-lg'>
-      <h1 className='text-center'>Update Appointment</h1>
+    <div className='border-8 container flex flex-col space-y-6 p-5 max-w-lg sm:max-w-full'>
+      {/* <h1 className='text-center'>Update Appointment</h1> */}
 
-      <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded-sm border border-gray-100 mt-10 p-16 sm:mx-auto sm:w-full sm:max-w-lg sm:min-h-80 font-medium'>
+      <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded border border-gray-100 mt-10 px-6 py-16 sm:p-16 sm:mx-auto sm:w-full sm:max-w-lg sm:min-h-80 font-medium'>
+        <h2 className='text-2xl font-bold text-gray-900'>
+          Update Appointment
+        </h2>
       { loading && <BarLoader className='mx-auto' color='#fbb6ce' /> }
 
       { (typeof currentUser !== 'string' && currentUser.role === 2) ?
@@ -136,7 +139,7 @@ const UpdateAppointment: React.FC = () => {
               <input
                 name='name'
                 value={ appointment.name }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
               />
             </div>
           </div>
@@ -146,7 +149,7 @@ const UpdateAppointment: React.FC = () => {
               <input
                 name='email'
                 value={ appointment.email }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
               />
             </div>
           </div>
@@ -157,7 +160,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='service_name'
                 value={ appointment.service_name }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
               />
             </div>
           </div>
@@ -165,7 +168,7 @@ const UpdateAppointment: React.FC = () => {
             <label className='font-bold'>Status:</label>
             <select 
               onChange={ putFormHandler }
-              className='py-1.5 px-2.5 w-full border-0 rounded-sm ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
+              className='py-1.5 px-2.5 w-full border-0 rounded ring-1 ring-inset ring-pink-300 text-gray-900 sm:text-sm sm:leading-6'
               name='status'
             >
               <option selected value={ appointment.status }>{ appointment.status_name }</option>
@@ -180,7 +183,7 @@ const UpdateAppointment: React.FC = () => {
             <label className='font-bold'>Date</label>
             <div>
               <DatePicker 
-                className='block sm:w-96 py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block sm:w-96 py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
                 dateFormat="MMMM d yyyy"
                 selected={ appointment.date ? new Date(appointment.date) : null }
                 onChange={ (date) => date && putFormHandler(date) }
@@ -194,7 +197,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='time'
                 value={ appointment.time ? appointment.time : "" }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
               />
             </div>
           </div>
@@ -205,7 +208,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='price_paid'
                 value={ appointment.price_paid }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
               />
             </div>
           </div>
@@ -214,13 +217,13 @@ const UpdateAppointment: React.FC = () => {
             <div className='pt-4'>
               <button
                 disabled
-                className='px-3 py-1 rounded-sm focus:ring-2 bg-pink-200 hover:bg-pink-200 text-center text-white font-semibold'
+                className='px-3 py-1 rounded focus:ring-2 bg-pink-200 hover:bg-pink-200 text-center text-white font-semibold'
                 >Submit</button>
             </div>
             :
             <div className='pt-4'>
               <button
-                className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
+                className='px-3 py-1 rounded focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
                 >Submit</button>
             </div>
           }
@@ -234,7 +237,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='service_name'
                 value={ appointment.service_name }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
               />
             </div>
           </div>
@@ -243,7 +246,7 @@ const UpdateAppointment: React.FC = () => {
             <label className='font-bold'>Date</label>
             <div>
               <DatePicker 
-                className='block sm:w-96 py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block sm:w-96 py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
                 dateFormat="MMMM d yyyy"
                 selected={ appointment.date ? new Date(appointment.date) : null }
                 onChange={ (date) => date && putFormHandler(date) }
@@ -258,7 +261,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='time'
                 value={ appointment.time ? appointment.time : "" }
-                className='block w-full py-1.5 px-2.5 border-0 rounded-sm ring-1 ring-pink-300'
+                className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-300'
               />
             </div>
           </div>
@@ -267,13 +270,13 @@ const UpdateAppointment: React.FC = () => {
             <div>
               <button
                 disabled
-                className='px-3 py-1 rounded-sm focus:ring-2 bg-pink-200 hover:bg-pink-200 text-center text-white font-semibold'
+                className='px-3 py-1 rounded focus:ring-2 bg-pink-200 hover:bg-pink-200 text-center text-white font-semibold'
                 >Submit</button>
             </div>
             :
             <div>
               <button
-                className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
+                className='px-3 py-1 rounded focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
                 >Submit</button>
             </div>
           }
