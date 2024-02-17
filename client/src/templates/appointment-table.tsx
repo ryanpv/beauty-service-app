@@ -72,7 +72,7 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
         const reformatDate = `${ date.getFullYear() }-${ month }-${ date.getDate() }`
 
         return (
-        <tr className='bg-pink-200' key={ appointment.id }>
+        <tr className='bg-pink-100' key={ appointment.id }>
           <td className='px-4 py-2'>{ appointment.name }</td>
           <td className='px-4 py-2'>{ appointment.email }</td>
           <td className='px-4 py-2'>{ appointment.service_name }</td>
@@ -81,9 +81,13 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
           <td className='px-4 py-2'>{ appointment.time }</td>
           <td className='px-4 py-2'>{ appointment.price }</td>
           <td className='px-4 py-2'>
-            <div className='space-x-1'>
-              <Link to={ `/update-appointment/${ appointment.id }` }>Edit</Link> | 
-              <button onClick={ () => deleteAppointment(appointment.id, appointment.service_name, appointment.date, appointment.time) }>Del</button>
+            <div className='inline-flex space-x-2'>
+              <Link className='font-semibold underline pt-2' to={ `/update-appointment/${ appointment.id }` }>Edit </Link> 
+              <p className='pt-2'>|</p>
+              <button 
+                className='bg-pink-300 hover:bg-red-600 hover:text-white hover:font-semibold m-2 rounded-sm px-2 pb-1'
+                onClick={ () => deleteAppointment(appointment.id, appointment.service_name, appointment.date, appointment.time) }
+              >Del</button>
             </div>
           </td>
         </tr>
@@ -93,11 +97,14 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
 
   return (
     <>
-    <h1 className='text-center font-semibold'>{ status === 1 ? "Upcoming" : "Requested" } Appointments</h1>
+      <div className='mx-auto w-full text-center text-gray-700 font-bold text-4xl mt-5 space-y-3'>
+        <h1 className='pt-10 text-center font-semibold text-xl'>{ status === 1 ? "Upcoming" : "Requested" } Appointments</h1>
+        <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr>
+      </div>
 
-    <div className='overflow-auto text-left p-5'>
+      <div className='overflow-auto text-left p-5 ***'>
         <table className='table-auto overflow-scroll border-separate border-spacing-y-1'>
-          <thead className='uppercase border'>
+          <thead className='uppercase border text-white mt-10'>
             <tr className='bg-pink-300'>
               <th className='px-4 py-2 w-1/4'>Client</th>
               <th className='px-4 py-2 w-1/4'>Contact</th>

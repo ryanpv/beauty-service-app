@@ -189,9 +189,9 @@ export default function PhotoGallery() {
 
   return (
     <div className='container space-y-10 mb-10'>
-      <div className='mx-auto text-center text-gray-400 font-bold text-4xl mt-5 space-y-3 r'>
+      <div className='mx-auto text-center text-gray-400 font-bold text-4xl mt-5 space-y-3'>
         <h1>PhotoGallery</h1>
-        <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-300"></hr>
+        <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr>
       </div>
       {/* TEMP CLEAR LOCALSTORAGE BUTTON  */}
 <button onClick={ clearStorage }>CLEAR STORAGE</button>

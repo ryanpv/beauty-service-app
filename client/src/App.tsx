@@ -73,9 +73,11 @@ function App() {
       {/* <LoginPage /> */}
       <Routes>
         <Route path='/' element={ <HomePage /> } />
-        <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } />
+        {/* <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } /> */}
+        <Route path='/book-appointment' element={ <BookingPage /> } />
         <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } />
-        <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } />
+        {/* <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } /> */}
+        <Route path='/appointments' element={ <AppointmentsList /> } />
         <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
         <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
         <Route path='/signup' element={ <SignupPage /> } />
