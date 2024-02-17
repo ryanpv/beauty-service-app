@@ -9,6 +9,7 @@ interface StateValues {
   allServices: ServiceState | [];
   setAllServices: Dispatch<SetStateAction<ServiceState | []>>;
 };
+console.log('state context read');
 
 type ServiceState = {
   id: number;

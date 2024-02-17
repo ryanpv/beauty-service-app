@@ -124,21 +124,9 @@ const UpdateAppointment: React.FC = () => {
   return (
     <div className='container flex flex-col space-y-6 p-5 max-w-screen-lg'>
       <h1 className='text-center'>Update Appointment</h1>
+
+      <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded-sm border border-gray-100 mt-10 p-16 sm:mx-auto sm:w-full sm:max-w-lg sm:min-h-80 font-medium'>
       { loading && <BarLoader className='mx-auto' color='#fbb6ce' /> }
-
-      { error !== "" && 
-        <>
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-          <strong className="font-bold">ERROR: </strong>
-          <span className="block sm:inline">{ error }</span>
-          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-            <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-          </span>
-        </div>
-        </>
-      }
-
-      <div className='sm:mx-auto sm:w-full sm:max-w-sm max-w-2xl font-medium'>
 
       { (typeof currentUser !== 'string' && currentUser.role === 2) ?
         <form className='space-y-3' onSubmit={ submitForm }>
@@ -223,9 +211,14 @@ const UpdateAppointment: React.FC = () => {
           </div>
 
           { loading ?         
-            <BarLoader color='#fbb6ce' /> 
+            <div className='pt-4'>
+              <button
+                disabled
+                className='px-3 py-1 rounded-sm focus:ring-2 bg-pink-200 hover:bg-pink-200 text-center text-white font-semibold'
+                >Submit</button>
+            </div>
             :
-            <div>
+            <div className='pt-4'>
               <button
                 className='px-3 py-1 rounded-sm focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:bg-pink-200 text-center text-white font-semibold'
                 >Submit</button>
@@ -285,6 +278,18 @@ const UpdateAppointment: React.FC = () => {
             </div>
           }
         </form>
+      }
+
+      { error !== "" && 
+        <>
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong className="font-bold">ERROR: </strong>
+          <span className="block sm:inline">{ error }</span>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+          </span>
+        </div>
+        </>
       }
       </div> 
     </div>

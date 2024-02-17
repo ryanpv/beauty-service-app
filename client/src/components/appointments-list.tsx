@@ -125,7 +125,7 @@ const AppointmentsList:React.FC = () => {
   };
 
   return (
-    <div className='container flex flex-col space-y-6 max-w-screen-lg'>
+    <div className='container flex flex-col space-y-6 max-w-screen-lg px-12'>
 
       { typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0 ?
       <h1 className='text-center font-semibold text-red-700'>
@@ -135,7 +135,7 @@ const AppointmentsList:React.FC = () => {
       :
       <>
     {/* FILTER FORM  */}
-        <div className='p-10 mt-10 shadow-lg bg-pink-100 rounded-sm sm:mx-auto max-w-2xl space-y-6'>
+        <div className='p-10 mt-10 border-8 shadow-lg bg-pink-100 rounded-sm sm:mx-auto max-w-2xl space-y-6'>
           <h1 className='text-center text-2xl font-bold'>
           Appointments
           </h1>
