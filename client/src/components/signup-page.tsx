@@ -80,7 +80,7 @@ export default function SignupPage() {
 };
 
   return (
-    <div className='container border-2 flex flex-col px-6 py-12 lg:px-8'>
+    <div className='container flex flex-col px-6 py-12 lg:px-8'>
       <div className='text-center text-gray-900 '>
         <img
               className='mx-auto h-10 w-auto'
@@ -89,7 +89,7 @@ export default function SignupPage() {
             />
       </div>
 
-      <div className='border border-gray-100 space-y-6 mt-10 p-16 sm:mx-auto sm:w-full sm:w-full sm:max-w-lg shadow-xl shadow-gray-300'>
+      <div className='border border-gray-100 bg-pink-100 space-y-6 mt-10 p-16 sm:mx-auto sm:w-full sm:w-full sm:max-w-lg shadow-xl shadow-gray-300'>
         
         <div className='text-gray-900'>
           <h1 className='text-2xl font-bold text-gray-900'>Create an account</h1>

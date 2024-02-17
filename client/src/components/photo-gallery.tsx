@@ -7,7 +7,8 @@ export default function PhotoGallery() {
       data: Set<{
         id?: string,
         caption?: string,
-        media_url?: string
+        media_url?: string,
+        permalink?: string
   }>,
       paging: {
         cursors?: object,
@@ -20,7 +21,7 @@ export default function PhotoGallery() {
     data: new Set([]),
     paging: {
       cursors: {},
-      next: `https://graph.instagram.com/me/media?fields=id,caption,media_url&access_token=${ process.env.REACT_APP_IG_LLT }`,
+      next: `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink&access_token=${ process.env.REACT_APP_IG_LLT }`,
       previous: ""
     }
   };
@@ -73,7 +74,6 @@ export default function PhotoGallery() {
             next: checkLocalStorage.nextPage === -1 ? "" : checkLocalStorage.nextPage
           }
         });
-console.log('storage: ', checkLocalStorage);
 
       } else if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
         setIgPhotos({
@@ -94,6 +94,7 @@ console.log('storage: ', checkLocalStorage);
           time: new Date(),
           lastURL: nextPage
         };
+        console.log('results: ', results);
         
         const photosForLocal = {
           data: results.data,
@@ -143,14 +144,15 @@ console.log('storage: ', checkLocalStorage);
   type IgPhotosProp = {
     id?: string,
     caption?: string,
-    media_url?: string
+    media_url?: string,
+    permalink?: string
   };
 
   // *** add overlay of design name?
   const Photos = (props: IgPhotosProp) => {
     return (
       <div className='relative hover:z-30 hover:scale-125 transition-all duration-200' >
-        <Link to={`${props.media_url}`} target='_blank'>  
+        <Link to={`${props.permalink}`} target='_blank'>  
           <img className='h-auto rounded-sm min-h-full' src={ props.media_url } alt=''/>
         </Link>
         <div className='absolute top-0 left-0 w-full px-4 py-2 text-center text-white pointer-events-none'>
@@ -199,7 +201,7 @@ console.log('storage: ', checkLocalStorage);
             // Array.isArray(igPhotos?.data) && igPhotos.data.length > 0 
             igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData) => {
               return (
-                <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url }/>
+                <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
               )
             })
             : null

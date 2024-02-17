@@ -68,7 +68,7 @@ export default function ContactPage() {
   return (
     <div className='container flex flex-1 flex-col space-y-10 px-6 py-12'>
       <h1 className='text-center mt-10 text-2xl font-bold text-gray-900'>Contact Us</h1>
-      <div className='grid sm:grid-cols-3 sm:space-y-0 space-y-10 py-6 items-start text-center'>
+      <div className='grid sm:grid-cols-3 px-10 sm:space-y-0 space-y-10 py-6 items-start text-center'>
         <div className=''>
           <FcCellPhone className='mx-auto h-10 w-auto'/>
           <label className='font-bold'>
@@ -106,8 +106,8 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className='border border-gray-100 rounded-sm sm:p-16 p-10 shadow-xl sm:mx-auto'>
-        <h3 className='text-center mb-10 font-bold text-2xl'>Leave us a message!</h3>
+      <div className='bg-pink-100 border border-gray-100 rounded-sm sm:p-16 p-10 shadow-xl sm:mx-auto'>
+        <h3 className='text-center mb-10 font-bold text-2xl text-gray-600'>Leave us a message!</h3>
         <div className=''>
 
           <form onSubmit={ submitContactForm }>
