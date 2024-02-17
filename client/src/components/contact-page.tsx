@@ -66,9 +66,9 @@ export default function ContactPage() {
   };
 
   return (
-    <div className='container flex flex-1 flex-col space-y-10 px-6 py-12'>
+    <div className='container flex flex-1 flex-col space-y-10 px-8 sm:px-16 py-12'>
       <h1 className='text-center mt-10 text-2xl font-bold text-gray-900'>Contact Us</h1>
-      <div className='grid sm:grid-cols-3 px-10 sm:space-y-0 space-y-10 py-6 items-start text-center'>
+      <div className='grid md:grid-cols-3 px-10 md:space-y-0 space-y-10 py-6 items-start text-center'>
         <div className=''>
           <FcCellPhone className='mx-auto h-10 w-auto'/>
           <label className='font-bold'>
@@ -106,13 +106,13 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className='bg-pink-100 border border-gray-100 rounded-sm sm:p-16 p-10 shadow-xl sm:mx-auto'>
+      <div className='bg-pink-100 border border-pink-100 rounded sm:py-16 md:px-8 py-16 px-6 shadow-xl lg:mx-auto'>
         <h3 className='text-center mb-10 font-bold text-2xl text-gray-600'>Leave us a message!</h3>
         <div className=''>
 
           <form onSubmit={ submitContactForm }>
             <div className='flex flex-col space-y-6'>
-              <div className='flex justify-between flex-col sm:flex-row space-y-6 sm:space-y-0'>
+              <div className='flex justify-between flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-1'>
                 <input placeholder='Name *'
                   onChange={ contactFormHandler }
                   name='name'  
@@ -121,7 +121,7 @@ export default function ContactPage() {
                   maxLength={ 50 }
                   pattern="^[A-Za-z\s.'\-]+$"
                   title="Special characters allowed: .-' "
-                  className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                  className='py-1.5 px-2.5 border-0 rounded ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                 />
                 <input placeholder='Email *' 
                   onChange={ contactFormHandler }
@@ -130,7 +130,7 @@ export default function ContactPage() {
                   type='email'
                   value={ contactFormState.email }
                   maxLength={ 50 }
-                  className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                  className='py-1.5 px-2.5 border-0 rounded ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                 />
                 <input placeholder='Phone *' 
                   onChange={ contactFormHandler }
@@ -138,7 +138,7 @@ export default function ContactPage() {
                   type='text'
                   value={ contactFormState.phone_number }
                   maxLength={ 25 }
-                  className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                  className='py-1.5 px-2.5 border-0 rounded ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                 />
               </div>
 
@@ -149,7 +149,7 @@ export default function ContactPage() {
                 type='text'
                 value={ contactFormState.subject }
                 maxLength={ 90 }
-                className='py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
+                className='py-1.5 px-2.5 border-0 rounded ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
               />
               <textarea placeholder='Message *' 
                 onChange={ contactFormHandler }
@@ -157,7 +157,7 @@ export default function ContactPage() {
                 maxLength={ 1000 }
                 name='message'
                 value={ contactFormState.message }
-                className='h-48 min-h-fit py-1.5 px-2.5 border-0 rounded-sm ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
+                className='h-48 min-h-fit py-1.5 px-2.5 border-0 rounded ring-pink-300 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
               />
 
 
