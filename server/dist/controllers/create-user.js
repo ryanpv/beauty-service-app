@@ -2,7 +2,7 @@ import { pool } from '../queries.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { validationResult } from "express-validator";
-import { sendAllEmails } from "../utils/emailer-util.js";
+import { sendEmail } from "../utils/emailer-util.js";
 export const createUser = async (req, res) => {
     try {
         const result = validationResult(req);
@@ -72,7 +72,7 @@ export const createUser = async (req, res) => {
           </div>       
           `
                 };
-                sendAllEmails([emailMsg]);
+                sendEmail(emailMsg);
                 return res.status(201).json({ message: `Successfully created user with id ${newUser.rows[0].id}` });
             }
         }

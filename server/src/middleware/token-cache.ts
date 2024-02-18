@@ -28,7 +28,7 @@ export const tokenCache = ({ key, body, duration, req, res, next }: tokenCachePa
     if (userEmail) {
       return userEmail;
     } else {
-      res.status(400).json({ message: "Invalid key" });
+      throw new Error ("Invalid key.")
     }
   }
   

@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { Session } from "express-session";
 import { validationResult } from "express-validator";
-import { sendAllEmails } from "../utils/emailer-util.js";
+import { sendEmail } from "../utils/emailer-util.js";
 
 
 interface ModifiedSession extends Session {
@@ -95,7 +95,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
           `
         };
 
-        sendAllEmails([emailMsg]);
+        sendEmail(emailMsg);
   
         return res.status(201).json({ message: `Successfully created user with id ${ newUser.rows[0].id }`});
       }

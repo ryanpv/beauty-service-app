@@ -1,6 +1,6 @@
 import { transporter } from '../nodemailer-transporter.js';
 
-const sendEmail = async(email) => {
+export const sendEmail = async(email) => {
   try {
     await transporter.sendMail(email);
     console.log("Email sent successfully.")

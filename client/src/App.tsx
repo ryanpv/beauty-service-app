@@ -24,6 +24,7 @@ import { setUser } from './utils/set-user';
 import { useLocation } from 'react-router-dom';
 import UserLoggedIn from './components/logged-in-check';
 import PasswordResetSuccess from './templates/password-reset-success';
+import FailedPasswordReset from './templates/failed-password-reset';
 
 function App() {
   const { currentUser, setCurrentUser } = useStateContext();
@@ -93,6 +94,7 @@ function App() {
         <Route path='/request-new-password' element={ <NewPasswordRequest /> } />
         <Route path='/reset-password' element={ <ResetPassword /> } />
         <Route path='/password-reset-success' element={ <PasswordResetSuccess /> } />
+        <Route path='/token-expired' element={ <FailedPasswordReset /> } />
         <Route path='/add-new-service' element={ !adminUser ? <Unauthorized /> : <AddService /> } />
       </Routes>
     </div>

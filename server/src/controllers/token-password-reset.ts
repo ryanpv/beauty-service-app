@@ -6,15 +6,20 @@ interface ModifiedRequest extends Request {
 }
 
 export const passwordResetTokenCheck = async(req: Request, res:Response) => {
-  const { token } = req.params;
-
-  // User email stored in cache with key === token
-  const resetToken = await tokenCache({ key: token, res: res });
-
-  if (!resetToken) {
-    res.status(400).json({ message: "Invalid/expired token" });
-  } else {
-    res.redirect(`http://localhost:3000/reset-password?recovery-token=${ token }`);
+  try {
+    const { token } = req.params;
+  
+    // User email stored in cache with key === token
+    const resetToken = await tokenCache({ key: token, res: res });
+  
+    if (!resetToken) {
+      res.status(400).json({ message: "Invalid/expired token" });
+    } else {
+      res.redirect(`http://localhost:3000/reset-password?recovery-token=${ token }`);
+    }
+  } catch (error) {
+    console.log('Error with password reset request', error);
+    res.redirect('http://localhost:3000/token-expired');
   }
 };
 
