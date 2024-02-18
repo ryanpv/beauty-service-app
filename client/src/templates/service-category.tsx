@@ -30,9 +30,10 @@ const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading 
                 </div>
                 <p>{ service.description }</p>
                 { (typeof currentUser !== "string" && currentUser.role === 2 && currentUser.id !== 0) ?
+
                 <Link 
                   to={ `/update-service/${ service.id }` }
-                  className='text-center bg-pink-300 hover:bg-pink-200 font-semibold text-white rounded-sm'
+                  className='text-center bg-pink-300 hover:bg-pink-400 font-semibold text-white rounded-xl'
                   >
                     Edit service
                   </Link>

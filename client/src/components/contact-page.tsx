@@ -66,7 +66,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className='container flex flex-1 flex-col space-y-10 px-8 sm:px-16 py-12'>
+    <div className='container flex flex-1 flex-col space-y-10 px-8 sm:px-16 py-12 transition-all'>
       <h1 className='text-center mt-10 text-2xl font-bold text-gray-900'>Contact Us</h1>
       <div className='grid md:grid-cols-3 px-10 md:space-y-0 space-y-10 py-6 items-start text-center'>
         <div className=''>

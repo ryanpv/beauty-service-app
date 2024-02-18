@@ -161,7 +161,7 @@ const AddService:React.FC = () => {
 
               <button
                 type='submit'
-                className='flex w-full bg-pink-300 max-w-sm mx-auto justify-center rounded ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'
+                className='flex w-full bg-pink-300 max-w-sm mx-auto justify-center rounded-xl ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'
                 >
                 Update Service
               </button>

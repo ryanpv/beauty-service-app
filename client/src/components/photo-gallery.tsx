@@ -153,7 +153,7 @@ export default function PhotoGallery() {
     return (
       <div className='relative hover:z-30 hover:scale-125 transition-all duration-200' >
         <Link to={`${props.permalink}`} target='_blank'>  
-          <img className='h-auto rounded-sm min-h-full' src={ props.media_url } alt=''/>
+          <img className='h-auto rounded min-h-full' src={ props.media_url } alt=''/>
         </Link>
         <div className='absolute top-0 left-0 w-full px-4 py-2 text-center text-white pointer-events-none'>
           <p className='font-bold text-lg'>{ props.caption?.split('-')[0] }</p>

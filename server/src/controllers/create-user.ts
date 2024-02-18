@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { Session } from "express-session";
 import { validationResult } from "express-validator";
+import { sendAllEmails } from "../utils/emailer-util.js";
 
 
 interface ModifiedSession extends Session {
@@ -44,7 +45,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         `, [name, emailLowerCased, phone_number, hashPassword, clientRole]
         );  
   
-        const userEmail = email;
+        const userEmail = emailLowerCased;
         const userId = newUser.rows[0].id;
         const userRole = clientRole;
         const userDisplayName = newUser.rows[0].name;
@@ -68,8 +69,35 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
   
         res.cookie("user", jwtToken, { httpOnly: false, secure: true });
         res.cookie('id', req.sessionID, { httpOnly: true, secure: true });
+
+        const emailMsg = {
+          from: process.env.GMAIL_ACCOUNT,
+          to: userEmail,
+          subject: `PolishByCin - Thank you for signing up!`,
+          html: `
+          <div>
+            <p>Hello ${ name },</p>
+            <p>
+              You have successfully created an account with us at PolishByCin. You will now be able to track your appointments, see appointment status updates, and request 
+              changes to your appointments.
+            </p>
+            <p>
+            You will only receive emails for appointment bookings, appointment updates/cancellations, responses to inquiries sent from the contact page or by direct emails.
+            Feel free to reach out if you have any questions/concerns.
+            </p>
+            <br></br>
+
+            <p>Thank you again for registering!</p>
+            <br></br>
+
+            <p>PolishByCin</p>
+          </div>       
+          `
+        };
+
+        sendAllEmails([emailMsg]);
   
-        return res.status(201).json({ message: `Successfully created user with id ${ newUser.rows[0].id }`})
+        return res.status(201).json({ message: `Successfully created user with id ${ newUser.rows[0].id }`});
       }
     } else {
       throw new Error("INVALID sign up credentials")
