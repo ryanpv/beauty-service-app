@@ -49,7 +49,7 @@ const NewPasswordRequest:React.FC = () => {
       <div className='flex flex-1 flex-col py-12 px-8 max-w-md sm:max-w-lg mx-auto'>
         <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded border border-pink-100 mt-10 w-full px-6 sm:px-10 py-16 mx-auto sm:w-full sm:max-w-md sm:min-h-80 font-medium'>
           <h2 className='font-bold text-2xl'>Request Password Reset</h2>
-          <i className='text-pink-700'>Forgot your password? Enter your email address to request a new password.</i>
+          <i className='text-pink-700'>Forgot your password? Enter your email address to receive a password reset link.</i>
 
           <form onSubmit={ submitForm } className='space-y-8'>
             <div>
