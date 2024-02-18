@@ -97,7 +97,7 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, bookedTimes, ne
           name='time'
           value={ times.startTime }
           onClick={ formChangeHandler }
-          className='w-24 sm:mx-3 bg-pink-300 hover:bg-pink-200 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring focus:ring-pink-500 focus:bg-pink-400'
+          className='w-24 sm:mx-3 bg-pink-300 hover:bg-pink-400 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring focus:ring-pink-500'
         >{ convertTime(times.startTime) }</button>
       </div>
       ));  
@@ -159,9 +159,12 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, bookedTimes, ne
   const serviceDurationFilter = filteredTimeSlots.filter((slot) => !checkServiceDuration(slot));
 
   return (
-    <div className='m-auto px-5 border-2 border-solid border-blue-300 grid grid-cols-3 sm:grid-cols-4 gap-2'>
-      { displayTimes() }
-    </div>
+    <>
+      <h3 className='text-center font-semibold text-2xl'>Available times:</h3>
+      <div className='m-auto px-5 grid grid-cols-3 sm:grid-cols-4 gap-2'>
+        { displayTimes() }
+      </div>
+    </>
   )
 };
 

@@ -76,7 +76,7 @@ export default function LoginPage() {
           </div>
 
         { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? <span>already logged in </span> : null }
-          <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded border border-gray-100 mt-10 w-full px-6 sm:px-10 py-16 mx-auto sm:w-full sm:max-w-md sm:min-h-80 font-medium'>
+          <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded border border-pink-100 mt-10 w-full px-6 sm:px-10 py-16 mx-auto sm:w-full sm:max-w-md sm:min-h-80 font-medium'>
 
           {/* <div className='text-center border-2 text-gray-900 sm:py-2 sm:mx-auto sm:w-full sm:max-w-sm'> */}
 

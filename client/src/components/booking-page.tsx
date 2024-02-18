@@ -141,14 +141,14 @@ const BookingPage: React.FC = () => {
   };
 
   return (
-    <div className='container flex flex-col border-2 border-solid space-y-10 my-10'>
+    <div className='container flex flex-col space-y-10 my-10'>
       <h1 className='text-center font-bold text-2xl'>Book Appointment</h1>
       <i className='text-center'>Please confirm your appointment request details before submitting. You will receive an email for when it has been accepted</i>
 
-    <div className='border-2 border-solid sm:mx-auto sm:w-full sm:max-w-screen-xl'>
+    <div className='mx-auto sm:w-full sm:max-w-screen-xl'>
       <form 
         onSubmit={ appointmentFormSubmit }
-        className='border-2 border-solid border-pink-300 justify-between'
+        className='justify-between'
         >
         <div className='flex flex-col space-y-10'>
 
@@ -158,7 +158,7 @@ const BookingPage: React.FC = () => {
               <BarLoader color='#fbb6ce' /> 
             </div>
             :
-            <div className='flex flex-col sm:flex-row justify-around space-y-5 sm:space-y-0'>
+            <div className='flex flex-col mx-auto sm:flex-row justify-around space-y-5 sm:space-y-0'>
               <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
             </div>
           }
@@ -173,7 +173,7 @@ const BookingPage: React.FC = () => {
 
           <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes } newAppointment={ newAppointment } />
           
-          <div className='mx-auto space-y-2'>
+          <div className='mx-auto space-y-2 px-6'>
             <h1>Confirm your details below before submitted the booking request:</h1>
 
             { error !== "" && 
@@ -198,7 +198,7 @@ const BookingPage: React.FC = () => {
           </div>
 
           <button
-            className='bg-pink-300 hover:bg-pink-200 px-3 py-1.5 mx-auto rounded-sm text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
+            className='bg-pink-300 hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3 py-1.5 mx-auto rounded text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
           >
             Submit Request
           </button>
