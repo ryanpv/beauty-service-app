@@ -142,7 +142,7 @@ const BookingPage: React.FC = () => {
 
   return (
     <div className='container flex flex-col space-y-10 my-10'>
-      <h1 className='text-center font-bold text-2xl'>Book Appointment</h1>
+      <h1 className='font-bold text-2xl'>Book Appointment</h1>
       <i className='text-center'>Please confirm your appointment request details before submitting. You will receive an email for when it has been accepted</i>
 
     <div className='mx-auto sm:w-full sm:max-w-screen-xl'>

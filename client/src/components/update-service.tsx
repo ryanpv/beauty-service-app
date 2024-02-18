@@ -143,7 +143,7 @@ export default function UpdateService() {
 
       {/* { isAdmin ? */}
         <div className='shadow-xl shadow-gray-300 space-y-10 bg-pink-100 rounded px-6 sm:p-16 sm:mx-auto sm:w-full sm:max-w-2xl py-16 mx-6'>
-          <h1 className='text-center font-bold text-2xl'>Update Service</h1>
+          <h1 className='font-bold text-2xl'>Update Service</h1>
 
           <form onSubmit={ formSubmit }>
             <div className='flex flex-col space-y-6'>

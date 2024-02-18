@@ -156,7 +156,7 @@ export default function SignupPage() {
           <div className='pt-4'>
             <button
               type='submit'
-              className='flex w-full bg-pink-300 justify-center rounded ring-2 ring-pink-300 hover:ring-pink-400 px-3 py-1.5 text-white hover:bg-pink-400 font-semibold'            
+              className='flex w-full bg-pink-300 justify-center rounded-xl ring-2 ring-pink-300 hover:ring-pink-400 px-3 py-1.5 text-white hover:bg-pink-400 font-semibold'            
             >Create account</button>
           </div>
           }
@@ -174,7 +174,7 @@ export default function SignupPage() {
 
     <div className='mt-10 text-center text-sm text-gray-500'>
       Have an account? {' '}
-      <Link to='/login' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>Go to the login page</Link>
+      <Link to='/login' className='font-semibold text-sm text-pink-400 hover:text-pink-900'>Go to the login page</Link>
     </div>
 
     </div>

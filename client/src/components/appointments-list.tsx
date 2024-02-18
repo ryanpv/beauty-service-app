@@ -136,7 +136,7 @@ const AppointmentsList:React.FC = () => {
       <>
     {/* FILTER FORM  */}
         <div className='sm:p-10 px-4 py-12 mt-10 shadow-lg bg-pink-100 rounded sm:mx-auto max-w-2xl space-y-6'>
-          <h1 className='text-center text-2xl font-bold'>
+          <h1 className='text-2xl font-bold'>
           Appointments
           </h1>
 
