@@ -128,7 +128,7 @@ export default function LoginPage() {
               <div className='pt-4'>
                 <button
                   type='submit'
-                  className='flex w-full bg-pink-300 justify-center rounded-xl ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'>
+                  className='flex w-full bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'>
                     Sign In
                   </button>
               </div> }

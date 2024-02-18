@@ -97,7 +97,7 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, bookedTimes, ne
           name='time'
           value={ times.startTime }
           onClick={ formChangeHandler }
-          className='w-24 sm:mx-3 bg-pink-300 hover:bg-pink-400 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring focus:ring-pink-500'
+          className='w-24 sm:mx-3 bg-pink-300 hover:bg-pink-400 px-3 py-1.5 rounded text-center font-semibold text-white focus:ring focus:ring-pink-500'
         >{ convertTime(times.startTime) }</button>
       </div>
       ));  

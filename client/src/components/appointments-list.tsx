@@ -207,11 +207,11 @@ const AppointmentsList:React.FC = () => {
             <div className='flex justify-between pt-5'>
               <button
                 type='submit'
-                className='bg-pink-300 justify-center rounded ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
+                className='bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
                 >Filter</button>
               <button
                 onClick={ resetForm }
-                className='bg-pink-300 justify-center rounded ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
+                className='bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
                 >Reset</button>
             </div>
           </form>

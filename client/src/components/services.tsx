@@ -47,7 +47,7 @@ const Services:React.FC = () => {
       { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2 ?
         <Link
           to='/add-new-service'
-          className='px-8 py-1.5 mx-auto rounded-xl text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400'
+          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400'
         >
           + ADD NEW SERVICES
         </Link>
@@ -57,7 +57,7 @@ const Services:React.FC = () => {
       
       <Link
         to='/book-appointment'
-        className='px-8 py-1.5 mx-auto rounded-xl text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400'
+        className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400'
         >
         BOOK APPOINTMENT
       </Link>

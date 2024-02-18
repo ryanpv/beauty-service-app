@@ -217,13 +217,13 @@ const UpdateAppointment: React.FC = () => {
             <div className='pt-4'>
               <button
                 disabled
-                className='px-3 py-1 rounded focus:ring-2 bg-pink-200 text-center text-white font-semibold'
+                className='px-3 py-1 rounded-full focus:ring-2 bg-pink-200 text-center text-white font-semibold'
                 >Submit</button>
             </div>
             :
             <div className='pt-4'>
               <button
-                className='px-3 py-1 rounded focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
+                className='px-3 py-1 rounded-full focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
                 >Submit</button>
             </div>
           }
@@ -270,13 +270,13 @@ const UpdateAppointment: React.FC = () => {
             <div className='pt-4'>
               <button
                 disabled
-                className='px-3 py-1 rounded hover:bg-pink-200 focus:ring-2 bg-pink-500 text-center text-white font-semibold'
+                className='px-3 py-1 rounded-full hover:bg-pink-200 focus:ring-2 bg-pink-500 text-center text-white font-semibold'
                 >Submit</button>
             </div>
             :
             <div className='pt-4'>
               <button
-                className='px-3 py-1 rounded focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
+                className='px-3 py-1 rounded-full focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
                 >Submit</button>
             </div>
           }

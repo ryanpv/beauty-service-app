@@ -69,7 +69,7 @@ const ResetPassword:React.FC = () => {
                 New Password
               </label>
               <input 
-                type='text' 
+                type='password' 
                 onChange={(e) => seeValue(e)} 
                 ref={ newPassRef }
                 className='mt-2 block w-full py-2.5 px-3.5 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
@@ -81,7 +81,7 @@ const ResetPassword:React.FC = () => {
                 Confirm New Password
               </label>
               <input 
-                type='text' 
+                type='password' 
                 ref={ confirmNewPassRef }
                 className='mt-2 block w-full py-2.5 px-3.5 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
               />
@@ -91,7 +91,7 @@ const ResetPassword:React.FC = () => {
             <div className='pt-4'>
               <button 
                 type='submit'
-                className='flex w-full bg-pink-300 justify-center rounded-xl ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'
+                className='flex w-full bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'
                 >Change Password
               </button>
             </div> }
