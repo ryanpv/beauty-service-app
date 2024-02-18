@@ -1,5 +1,5 @@
 import NodeCache from "node-cache";
-const resetTokenCache = new NodeCache();
+export const resetTokenCache = new NodeCache();
 export const tokenCache = ({ key, body, duration, req, res, next }) => {
     const cacheKey = key;
     if (req) {

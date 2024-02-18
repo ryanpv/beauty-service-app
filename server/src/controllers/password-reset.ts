@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { pool } from "../queries.js";
-import { tokenCache } from "../middleware/token-cache.js";
+import { tokenCache, resetTokenCache } from "../middleware/token-cache.js";
 import bcrypt from 'bcrypt';
 import { sendEmail } from "../utils/emailer-util.js";
 
@@ -26,21 +26,16 @@ export const passwordReset = async(req: Request, res: Response) => {
         const emailMsg = {
           from: process.env.GMAIL_ACCOUNT,
           to: userEmail,
-          subject: `PolishByCin - Thank you for signing up!`,
+          subject: `PolishByCin - Account Changes`,
           html: `
           <div>
             <p>Hello,</p>
             <p>
-              You have successfully created an account with us at PolishByCin. You will now be able to track your appointments, see appointment status updates, and request 
-              changes to your appointments.
-            </p>
-            <p>
-            You will only receive emails for appointment bookings, appointment updates/cancellations, responses to inquiries sent from the contact page or by direct emails.
-            Feel free to reach out if you have any questions/concerns.
+              You have successfully updated your password. If this was not you, please contact us and we'll fix it for you.
             </p>
             <br></br>
   
-            <p>Thank you again for registering!</p>
+            <p>Thank you!</p>
             <br></br>
   
             <p>PolishByCin</p>
@@ -50,6 +45,8 @@ export const passwordReset = async(req: Request, res: Response) => {
 
         sendEmail(emailMsg)
   
+        resetTokenCache.del(token);
+        
         res.status(201).json({ message: "Password changed!" });
       }
     }

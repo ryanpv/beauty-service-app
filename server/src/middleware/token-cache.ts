@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import NodeCache from "node-cache";
 
-const resetTokenCache = new NodeCache();
+export const resetTokenCache = new NodeCache();
 
 type tokenCacheParams = {
   key: string;
