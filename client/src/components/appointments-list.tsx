@@ -125,7 +125,7 @@ const AppointmentsList:React.FC = () => {
   };
 
   return (
-    <div className='container flex flex-col space-y-6 max-w-screen-lg px-8 sm:px-12'>
+    <div className='container flex flex-col space-y-6 max-w-screen-lg px-8 py-12 sm:px-12'>
 
       { typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0 ?
       <h1 className='text-center font-semibold text-red-700'>
@@ -204,14 +204,14 @@ const AppointmentsList:React.FC = () => {
                 { isAdmin ? <option value={ 5 }>Misc</option> : null }
               </select>
             </div>
-            <div className='flex justify-between pt-5'>
+            <div className='flex justify-between'>
               <button
                 type='submit'
-                className='bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
+                className='bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-5 text-white hover:bg-pink-400 font-semibold'
                 >Filter</button>
               <button
                 onClick={ resetForm }
-                className='bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-3 text-white hover:bg-pink-400 font-semibold'
+                className='bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-5 text-white hover:bg-pink-400 font-semibold'
                 >Reset</button>
             </div>
           </form>

@@ -148,7 +148,6 @@ export default function PhotoGallery() {
     permalink?: string
   };
 
-  // *** add overlay of design name?
   const Photos = (props: IgPhotosProp) => {
     return (
       <div className='relative hover:z-30 hover:scale-125 transition-all duration-200' >

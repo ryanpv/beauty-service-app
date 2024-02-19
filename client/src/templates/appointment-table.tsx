@@ -102,8 +102,8 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
         <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr>
       </div>
 
-      <div className='overflow-auto text-left p-5 ***'>
-        <table className='table-auto overflow-scroll border-separate border-spacing-y-1'>
+      <div className='overflow-auto text-left shadow-lg py-3 rounded'>
+        <table className='table-auto border-separate border-spacing-y-1'>
           <thead className='uppercase border text-white mt-10'>
             <tr className='bg-pink-300'>
               <th className='px-4 py-2 w-1/4'>Client</th>
