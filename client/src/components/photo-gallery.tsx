@@ -152,11 +152,21 @@ export default function PhotoGallery() {
     return (
       <div className='relative hover:z-30 hover:scale-125 transition-all duration-200' >
         <Link to={`${props.permalink}`} target='_blank'>  
-          <img className='h-auto rounded min-h-full' src={ props.media_url } alt=''/>
+          <img className='h-full rounded-xl max-w-full' src={ props.media_url } alt=''/>
         </Link>
         <div className='absolute top-0 left-0 w-full px-4 py-2 text-center text-white pointer-events-none'>
           <p className='font-bold text-lg'>{ props.caption?.split('-')[0] }</p>
         </div>
+      </div>
+    )
+  };
+
+  const SpanPhotos = (props: IgPhotosProp) => {
+    return (
+      <div className='hover:z-30 hover:scale-125 transition-all duration-200' >
+        <Link to={`${props.permalink}`} target='_blank'>  
+          <img className='h-auto rounded w-1/2 max-w-full' src={ props.media_url } alt=''/>
+        </Link>
       </div>
     )
   };
@@ -195,13 +205,23 @@ export default function PhotoGallery() {
       {/* TEMP CLEAR LOCALSTORAGE BUTTON  */}
 <button onClick={ clearStorage }>CLEAR STORAGE</button>
       <div className='container grid grid-cols-1 max-w-4xl'>
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-1 m-auto'>
+        <div className='grid grid-cols-2 grid-flow-dense md:grid-cols-3 gap-1 m-auto'>
           {
             // Array.isArray(igPhotos?.data) && igPhotos.data.length > 0 
-            igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData) => {
-              return (
-                <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
-              )
+            igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
+              // const isEvenIdx = idx % 3 === 0;
+              // // const photoGridSpan
+              // if (isEvenIdx) {
+
+                return (
+                  <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
+                  )
+              //   } else {
+              //   return (
+              //     <SpanPhotos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
+              //     )
+
+              // }
             })
             : null
           }

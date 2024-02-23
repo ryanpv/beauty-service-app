@@ -70,33 +70,41 @@ function App() {
   // }, [location]);
 
   return (
-    <div className="App">
+    <div className="App flex flex-col min-h-screen">
       <Navbar />
       {/* <LoginPage /> */}
-      <Routes>
-        <Route path='/' element={ <HomePage /> } />
-        {/* <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } /> */}
-        <Route path='/book-appointment' element={ <BookingPage /> } />
-        {/* <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } /> */}
-        <Route path='/booking-success' element={ <BookingSuccessPage /> } />
-        {/* <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } /> */}
-        <Route path='/appointments' element={ <AppointmentsList /> } />
-        <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
-        <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
-        <Route path='/signup' element={ <SignupPage /> } />
-        <Route path='/successful-signup' element={ <SignupSuccess /> } />
-        <Route path='/ig-auth' element={ <GetAuth /> } />
-        <Route path='/photo-gallery' element={ <PhotoGallery /> } />
-        <Route path='/contact' element={ <ContactPage /> } />
-        <Route path='/services' element={ <Services /> } />
-        <Route path='/update-service/:serviceId' element={ !adminUser ? <Unauthorized /> : <UpdateService /> } />
-        <Route path='/about' element={ <AboutPage /> } />
-        <Route path='/request-new-password' element={ <NewPasswordRequest /> } />
-        <Route path='/reset-password' element={ <ResetPassword /> } />
-        <Route path='/password-reset-success' element={ <PasswordResetSuccess /> } />
-        <Route path='/token-expired' element={ <FailedPasswordReset /> } />
-        <Route path='/add-new-service' element={ !adminUser ? <Unauthorized /> : <AddService /> } />
-      </Routes>
+      <div className='flex-1'>
+        <Routes>
+          <Route path='/' element={ <HomePage /> } />
+          {/* <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } /> */}
+          <Route path='/book-appointment' element={ <BookingPage /> } />
+          {/* <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } /> */}
+          <Route path='/booking-success' element={ <BookingSuccessPage /> } />
+          {/* <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } /> */}
+          <Route path='/appointments' element={ <AppointmentsList /> } />
+          <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
+          <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
+          <Route path='/signup' element={ <SignupPage /> } />
+          <Route path='/successful-signup' element={ <SignupSuccess /> } />
+          <Route path='/ig-auth' element={ <GetAuth /> } />
+          <Route path='/photo-gallery' element={ <PhotoGallery /> } />
+          <Route path='/contact' element={ <ContactPage /> } />
+          <Route path='/services' element={ <Services /> } />
+          <Route path='/update-service/:serviceId' element={ !adminUser ? <Unauthorized /> : <UpdateService /> } />
+          <Route path='/about' element={ <AboutPage /> } />
+          <Route path='/request-new-password' element={ <NewPasswordRequest /> } />
+          <Route path='/reset-password' element={ <ResetPassword /> } />
+          <Route path='/password-reset-success' element={ <PasswordResetSuccess /> } />
+          <Route path='/token-expired' element={ <FailedPasswordReset /> } />
+          <Route path='/add-new-service' element={ !adminUser ? <Unauthorized /> : <AddService /> } />
+        </Routes>
+      </div>
+
+      <footer
+        className="z-50 text-center bg-pink-300 p-6 text-white text-xs font-semibold"
+      > 
+        COPYRIGHT © 2023 POLISHBYCIN - ALL RIGHTS RESERVED.
+      </footer>
     </div>
   );
 }

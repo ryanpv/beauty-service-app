@@ -64,7 +64,7 @@ const Navbar: FC = () => {
 
         <div className="block lg:hidden">
           <button 
-            onMouseEnter={ navDisplay }
+            onClick={ navDisplay }
             className="flex items-center px-2.5 py-1.5 hover:text-pink-500 hover:border-pink-500"
             >
               <FiMenu />
@@ -73,7 +73,7 @@ const Navbar: FC = () => {
 
         <div 
           id='navLinks' 
-          onMouseLeave={ navDisplay }      
+          // onMouseLeave={ navDisplay }      
           className={`lg:mt-0 lg:justify-end w-full block flex-grow lg:flex lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100 ${ show ? 'opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' }`}
           >
           <div className='nav-links lg:space-x-5 font-semibold lg:text-xl'>

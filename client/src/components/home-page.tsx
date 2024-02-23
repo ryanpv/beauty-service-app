@@ -141,7 +141,17 @@ const igPhotoState = {
     return (
       <div className='hover:z-30 hover:scale-125 transition-all duration-200' >
         <Link to={`${props.permalink}`} target='_blank'>  
-          <img className='h-auto rounded min-h-full' src={ props.media_url } alt=''/>
+          <img className='rounded min-h-64 max-h-64 ' src={ props.media_url } alt=''/>
+        </Link>
+      </div>
+    )
+  };
+
+  const SpanPhotos = (props: IgPhotosProp) => {
+    return (
+      <div className='col-span-3 hover:z-30 hover:scale-125 transition-all duration-200' >
+        <Link to={`${props.permalink}`} target='_blank'>  
+          <img className='h-auto rounded max-w-full' src={ props.media_url } alt=''/>
         </Link>
       </div>
     )
@@ -188,22 +198,22 @@ const igPhotoState = {
                 url='www.instagram.com' 
                 href='https://www.instagram.com/polishbycin/'
                 bgColor='#fbb6ce'
-                className='bg-pink-500'
+                // className='bg-pink-500'
               />
             </div>
-            <p className='pt-3 px-3 text-lg font-semibold text-pink-300'>PolishByCin</p>
+            <p className='pt-3 px-3 text-lg font-semibold text-pink-300 underline'>PolishByCin</p>
           </div>
         </a>
       </div>
 
-      <div ref={ photoRef } className='container max-w-2xl overflow-auto shadow-lg py-5'>
-        <div className='grid grid-cols-1 max-w-2xl h-96 border-4'>
-          <div className={`grid grid-cols-2 sm:grid-cols-4 gap-2 m-auto`}>
+      <div ref={ photoRef } className='container max-w-4xl'>
+        <div className="flex justify-between overflow-x-hidden w-full rounded-full max-h-64 ring-pink-400 ring-2 overflow-visible">
+          <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0">
             {
-              igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData) => {
+              igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
                 return (
                   <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
-                )
+                  )
               })
               : null
             }
@@ -211,9 +221,8 @@ const igPhotoState = {
             { loading ? <div className='mx-auto '><BarLoader color='#fbb6ce'/></div> : null }
             
         </div>
-      </div>
-
-      
+        <h1 className='text-center mt-3 font-bold text-xl text-pink-300'>Go to photo gallery</h1>
+      </div>      
     </div>
   )
 }
