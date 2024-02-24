@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 import { SocialIcon } from 'react-social-icons';
+import { TbCircleArrowRight } from "react-icons/tb";
 
 export default function HomePage() {
   type PhotoState = {
@@ -141,7 +142,7 @@ const igPhotoState = {
     return (
       <div className='hover:z-30 hover:scale-125 transition-all duration-200' >
         <Link to={`${props.permalink}`} target='_blank'>  
-          <img className='rounded min-h-64 max-h-64 ' src={ props.media_url } alt=''/>
+          <img className='rounded min-h-64 max-h-80' src={ props.media_url } alt=''/>
         </Link>
       </div>
     )
@@ -159,13 +160,16 @@ const igPhotoState = {
 
   
   return (
-    <div className='container flex flex-col max-w-screen-md mt-10 space-y-10 py-12'>
-      <header className='flex flex-col mx-auto space-y-10'>
-        <img
-          className='mx-auto h-10 w-auto'
-          src={ require('./logo192.png') }
+    <div className='flex flex-col bg-pink-100'>
+      {/* <header className='flex flex-col space-y-10 h-[70vh] fixed top-0 border-4' style={ { backgroundImage: `url(${require('./cover-photo.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }>
+      </header> */}
+
+      <div className='flex flex-col fixed top-0 h-[80vh]' style={ { backgroundImage: `url(${require('./cover-photo.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }>
+        {/* <img
+          className='max-w-fit'
+          src={ require('./cover-photo.jpg') }
           alt='test logo'
-        />
+        /> */}
         <h1 className='text-center'>Polish By Cin</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa nisl, aliquam vitae felis ut, 
           efficitur blandit neque. Duis dapibus diam eget imperdiet mollis. Aliquam massa turpis, venenatis quis 
@@ -181,33 +185,44 @@ const igPhotoState = {
         >
           Book Appointment
         </Link>
-      </header>
-
-      <div className='flex justify-center'>
-        <a href='#'>
-          <div className='flex flex-cols-2'>
-            {/* <img
-              className='h-10'
-              src={ require('./logo192.png') }
-              alt='test logo'
-            /> */}
-            <div
-              className=''
-            >
-              <SocialIcon 
-                url='www.instagram.com' 
-                href='https://www.instagram.com/polishbycin/'
-                bgColor='#fbb6ce'
-                // className='bg-pink-500'
-              />
+        <div className='flex justify-center mx-auto py-3 px-10 rounded-full'>
+          <a href='https://www.instagram.com/polishbycin/' target='_blank' rel='noreferrer'>
+            <div className='flex flex-cols-2'>
+              <div
+                className=''
+              >
+                <SocialIcon 
+                  url='www.instagram.com' 
+                  href='https://www.instagram.com/polishbycin/'
+                  bgColor='#fbb6ce'
+                  target='_blank'
+                  rel='noreferrer'
+                />
+              </div>
+              <p className='pt-3 px-3 text-lg font-semibold text-pink-300 underline'>PolishByCin</p>
             </div>
-            <p className='pt-3 px-3 text-lg font-semibold text-pink-300 underline'>PolishByCin</p>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
 
-      <div ref={ photoRef } className='container max-w-4xl'>
-        <div className="flex justify-between overflow-x-hidden w-full rounded-full max-h-64 ring-pink-400 ring-2 overflow-visible">
+<div className='z-10 bg-pink-100 pb-10 space-y-3 mt-[70vh]'>
+
+    {/* <div className='flex py-3 px-10 rounded-full justify-center'> */}
+
+      <div className='flex flex-cols-2 mt-10 space-x-2 justify-center'>
+        <div className='justify-items'>
+          <TbCircleArrowRight className='mt-1' color='#fbb6ce' size='35'/>
+        </div>
+        <Link to='/photo-gallery' className='text-center font-bold text-4xl text-pink-300'>
+          Gallery
+        </Link>
+      </div>
+
+    {/* </div> */}
+      <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-400"></hr>
+
+      <div ref={ photoRef } className='container mb-10'>
+        <div className="flex justify-between overflow-x-hidden rounded-full h-80 ring-pink-200 ring-4">
           <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0">
             {
               igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
@@ -221,8 +236,8 @@ const igPhotoState = {
             { loading ? <div className='mx-auto '><BarLoader color='#fbb6ce'/></div> : null }
             
         </div>
-        <h1 className='text-center mt-3 font-bold text-xl text-pink-300'>Go to photo gallery</h1>
       </div>      
+</div>
     </div>
   )
 }

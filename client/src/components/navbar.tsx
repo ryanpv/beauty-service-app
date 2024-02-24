@@ -55,7 +55,7 @@ const Navbar: FC = () => {
     <>
       <nav 
         id='navbar'
-        className="z-50 flex sticky top-0 items-center justify-between flex-wrap bg-pink-300 p-6 text-white transition-all">
+        className="absolute z-50 flex sticky top-0 items-center justify-between flex-wrap bg-pink-300 p-6 text-white transition-all">
         <div className='justify-start lg:px-5 text-4xl font-bold'>
           <Link to='/'>
             PolishByCin
