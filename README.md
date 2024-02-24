@@ -44,9 +44,10 @@ If you'd like to take a look at the full source code, go to [beauty-service-app]
 * Nodemailer - send email notifications to users and clients
 * JWT - handle auth
 
-## Future ideas/features
-* Search function for user's saved list
-* CRUD operations on user's MAL saved list
+## Future ideas/features/improvements
+* Aggregate users appointment status data (i.e number for miscs/cancellations) for admins
+* Add fetch functionality for scrolling gallery on homepage
+* Possibly fetch services list on first time web-app is loaded to avoid loading for users
 
 ## Deployment (CI/CD pipeline) - *** TO BE COMPLETED *** 
 * 
