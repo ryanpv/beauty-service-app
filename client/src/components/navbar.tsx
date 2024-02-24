@@ -1,5 +1,5 @@
 import React,  { FC } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setUser } from '../utils/set-user';
 import { useStateContext } from '../contexts/state-contexts';
 import { FiMenu } from 'react-icons/fi';
@@ -8,6 +8,19 @@ const Navbar: FC = () => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useStateContext();
   const [show, setShow] = React.useState(false);
+  const [isHome, setIsHome] = React.useState(false);
+  const location = useLocation();
+
+  React.useEffect(() => {
+    console.log('called useef');
+    
+    if (location.pathname === '/') {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+    }
+  }, [location])
+console.log('uselocation: ', location.pathname === '/');
 
   const logout = async() => {
     try {
@@ -55,7 +68,8 @@ const Navbar: FC = () => {
     <>
       <nav 
         id='navbar'
-        className="absolute z-50 flex sticky top-0 items-center justify-between flex-wrap bg-pink-300 p-6 text-white transition-all">
+        className={ `z-50 flex sticky top-0 items-center justify-between flex-wrap p-6 text-white transition-all ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36' : 'bg-pink-300'}` }
+      >
         <div className='justify-start lg:px-5 text-4xl font-bold'>
           <Link to='/'>
             PolishByCin
@@ -74,7 +88,7 @@ const Navbar: FC = () => {
         <div 
           id='navLinks' 
           // onMouseLeave={ navDisplay }      
-          className={`lg:mt-0 lg:justify-end w-full block flex-grow lg:flex lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100 ${ show ? 'opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' }`}
+          className={` lg:mt-0 lg:justify-end w-full block flex-grow lg:flex lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100 ${ show ? 'p-5 bg-pink-200 bg-opacity-50 opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' }`}
           >
           <div className='nav-links lg:space-x-5 font-semibold lg:text-xl'>
             <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-500'>

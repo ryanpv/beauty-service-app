@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 import { SocialIcon } from 'react-social-icons';
-import { TbCircleArrowRight } from "react-icons/tb";
+import { HiMiniArrowRightCircle } from "react-icons/hi2";
 
 export default function HomePage() {
   type PhotoState = {
@@ -147,44 +147,15 @@ const igPhotoState = {
       </div>
     )
   };
-
-  const SpanPhotos = (props: IgPhotosProp) => {
-    return (
-      <div className='col-span-3 hover:z-30 hover:scale-125 transition-all duration-200' >
-        <Link to={`${props.permalink}`} target='_blank'>  
-          <img className='h-auto rounded max-w-full' src={ props.media_url } alt=''/>
-        </Link>
-      </div>
-    )
-  };
-
   
   return (
-    <div className='flex flex-col bg-pink-100'>
-      {/* <header className='flex flex-col space-y-10 h-[70vh] fixed top-0 border-4' style={ { backgroundImage: `url(${require('./cover-photo.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }>
-      </header> */}
+    <div className='flex flex-col bg-gray-100 '>
+      <header 
+        className='flex flex-col w-full space-y-10 h-[70vh] fixed top-0 z-10 opacity-[.85]' 
+        style={ { backgroundImage: `url(${require('./cover-photo.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }
+      />
 
-      <div className='flex flex-col fixed top-0 h-[80vh]' style={ { backgroundImage: `url(${require('./cover-photo.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }>
-        {/* <img
-          className='max-w-fit'
-          src={ require('./cover-photo.jpg') }
-          alt='test logo'
-        /> */}
-        <h1 className='text-center'>Polish By Cin</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa nisl, aliquam vitae felis ut, 
-          efficitur blandit neque. Duis dapibus diam eget imperdiet mollis. Aliquam massa turpis, venenatis quis 
-          accumsan ac, convallis eget velit. Nunc sed porta mi. In lobortis feugiat iaculis. Pellentesque eros 
-          lectus, posuere a leo et, lacinia pretium quam. Donec quis ornare velit, sed pellentesque ipsum. In 
-          semper nisl magna, quis molestie velit dapibus ac. Nunc rhoncus nibh libero, eget tristique tortor 
-          maximus suscipit. Integer interdum ultrices nisi non rutrum.
-        </p>
-
-        <Link
-          to='/book-appointment' 
-          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400'
-        >
-          Book Appointment
-        </Link>
+      <div className='flex flex-col space-y-8 mt-10 z-20 p-5'>
         <div className='flex justify-center mx-auto py-3 px-10 rounded-full'>
           <a href='https://www.instagram.com/polishbycin/' target='_blank' rel='noreferrer'>
             <div className='flex flex-cols-2'>
@@ -199,45 +170,54 @@ const igPhotoState = {
                   rel='noreferrer'
                 />
               </div>
-              <p className='pt-3 px-3 text-lg font-semibold text-pink-300 underline'>PolishByCin</p>
+              <p className='pt-3 px-3 text-2xl font-bold text-white underline decoration-pink-300'>PolishByCin</p>
             </div>
           </a>
         </div>
-      </div>
 
-<div className='z-10 bg-pink-100 pb-10 space-y-3 mt-[70vh]'>
-
-    {/* <div className='flex py-3 px-10 rounded-full justify-center'> */}
-
-      <div className='flex flex-cols-2 mt-10 space-x-2 justify-center'>
-        <div className='justify-items'>
-          <TbCircleArrowRight className='mt-1' color='#fbb6ce' size='35'/>
-        </div>
-        <Link to='/photo-gallery' className='text-center font-bold text-4xl text-pink-300'>
-          Gallery
+        <Link
+          to='/book-appointment' 
+          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 underline'
+        >
+          Book Appointment
         </Link>
+
+        <p className='text-white'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa nisl, aliquam vitae felis ut, 
+          efficitur blandit neque. Duis dapibus diam eget imperdiet mollis. Aliquam massa turpis, venenatis quis 
+          accumsan ac, convallis eget velit. Nunc sed porta mi. In l
+        </p>
       </div>
 
-    {/* </div> */}
-      <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-400"></hr>
+      <div className='z-10 bg-gray-100 pb-10 space-y-3 mt-[12vh]'>
+    {/* <div className='flex py-3 px-10 rounded-full justify-center'> */}
+        <Link to='/photo-gallery' className='text-center font-semibold text-4xl text-pink-300'>
+          <div className='flex flex-cols-2 mt-10 space-x-3 justify-center'>
+            Gallery
+            <div className=''>
+              <HiMiniArrowRightCircle className='mt-1 ml-1' color='#fbb6ce' size='35'/>
+            </div>
+          </div>
+        </Link>
 
-      <div ref={ photoRef } className='container mb-10'>
-        <div className="flex justify-between overflow-x-hidden rounded-full h-80 ring-pink-200 ring-4">
-          <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0">
-            {
-              igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
-                return (
-                  <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
-                  )
-              })
-              : null
-            }
-          </div>   
-            { loading ? <div className='mx-auto '><BarLoader color='#fbb6ce'/></div> : null }
-            
-        </div>
-      </div>      
-</div>
+        <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-400"></hr>
+
+        <div ref={ photoRef } className='container mb-10'>
+          <div className="flex justify-between overflow-x-hidden rounded-full h-80 ring-pink-200 ring-4">
+            <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0">
+              {
+                igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
+                  return (
+                    <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
+                    )
+                })
+                : null
+              }
+            </div>   
+              { loading ? <div className='mx-auto '><BarLoader color='#fbb6ce'/></div> : null }
+              
+          </div>
+        </div>      
+      </div>
     </div>
   )
 }
