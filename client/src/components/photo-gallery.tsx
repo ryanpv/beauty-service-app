@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
+import { fetchInstagramPhotos } from '../utils/fetch-photos'
 
 export default function PhotoGallery() {
   type PhotoState = {
@@ -33,12 +34,19 @@ export default function PhotoGallery() {
 
   // Initial fetch of instagram photos
   React.useEffect(() => {
-    const instagram_photo_url = igPhotos.paging.next ? igPhotos.paging.next : "";
+    const media_url = igPhotos.paging.next ? igPhotos.paging.next : "";
+    const fetchPhotosParams = {
+      setIgPhotos,
+      igPhotos,
+      setLoading,
+      setError,
+      media_url
+    };
 
     if (!loading) {
-      fetchInstagramPhotos(instagram_photo_url);
+      fetchInstagramPhotos(fetchPhotosParams);
     } 
-  },[offset]);
+  }, [offset]);
 
   // Fetch instagram photos on scroll for infinite scroll
   React.useEffect(() => {
@@ -55,89 +63,6 @@ export default function PhotoGallery() {
     console.log('clearing cache');
     
     localStorage.clear();
-  }
-
-  const fetchInstagramPhotos = async(media_url: string) => {
-    setLoading(true);
-    try {
-      const localStoragePhotos = localStorage.getItem('igPhotos');
-      const checkLocalStorage = localStoragePhotos ? JSON.parse(localStoragePhotos) : null;
-      // const lastItemLocalStorage = localStorage.getItem('lastItem');
-      // const checkLastItem = lastItemLocalStorage ? JSON.parse(lastItemLocalStorage) : null;
-
-      // *** FOR CACHING IG API RESPONSE ***
-      // Check to see if a next URL exists from IG API stored in localstorage. Return to end execution if none
-      if (checkLocalStorage && checkLocalStorage.nextPage !== -1) {
-        setIgPhotos({
-          data: new Set(checkLocalStorage.data),
-          paging: {
-            next: checkLocalStorage.nextPage === -1 ? "" : checkLocalStorage.nextPage
-          }
-        });
-
-      } else if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
-        setIgPhotos({
-          data: new Set(checkLocalStorage.data),
-          paging: {
-            next: ""
-          }
-        });
-
-        return;
-      }
-
-      if (igPhotos.paging.next !== "") {
-        const queryInstagramUser = await fetch(media_url)
-        const results = await queryInstagramUser.json();
-        const nextPage = results.paging.next !== undefined ? results.paging.next : -1
-        const lastItem = {
-          time: new Date(),
-          lastURL: nextPage
-        };
-        console.log('results: ', results);
-        
-        const photosForLocal = {
-          data: results.data,
-          nextPage: results.paging.next
-        };
-                
-        console.log('FETCHED IG API');
-        
-        // if fetch operation is required, check if local storage 'igPhotos' exists and store accordingly
-        if (checkLocalStorage === null) {
-          console.log('NULL STORAGE');
-          
-          localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
-          localStorage.setItem('lastItem', JSON.stringify(lastItem))
-        } else {
-          console.log('ELSE CALLED');
-          
-          const updateLocalPhotos = {
-            data: [...checkLocalStorage.data, ...results.data],
-            nextPage: nextPage
-          };
-          
-          localStorage.setItem('igPhotos', JSON.stringify(updateLocalPhotos))
-          localStorage.setItem('lastItem', JSON.stringify(lastItem))
-        }
-        
-        setIgPhotos((prev) => ({
-          data: new Set([...Array.from(prev.data), ...results.data]),
-          paging: {
-            next: results.paging.next !== undefined ? results.paging.next : ""
-          }
-        }));
-      } else {
-        console.log('NO MORE PHOTOS FROM IG API');
-        return;
-      }
-
-    } catch (error) {
-      console.log("error fetching instagram photos: ", error);
-      setError("Error fetching instagram photos.");
-    } finally{
-      setLoading(false)
-    }
   };
 
   // Type for IG photos prop

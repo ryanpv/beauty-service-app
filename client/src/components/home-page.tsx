@@ -4,6 +4,9 @@ import { BarLoader } from 'react-spinners';
 import { SocialIcon } from 'react-social-icons';
 import { HiMiniArrowRightCircle } from "react-icons/hi2";
 
+// Utils
+import { fetchInstagramPhotos } from '../utils/fetch-photos';
+
 export default function HomePage() {
   type PhotoState = {
     data: Set<{
@@ -37,99 +40,22 @@ const igPhotoState = {
   const photoContainerHeight = photoRef.current && photoRef.current.clientHeight;
   const photoContainerScrollTop = photoRef.current && photoRef.current.scrollTop;
   const photoColumnLength = igPhotos.data && igPhotos.data.size;
-  console.log("length: ", photoColumnLength);
   
 
   React.useEffect(() => {
-    const instagram_photo_url = igPhotos.paging.next ? igPhotos.paging.next : "";
+    const media_url = igPhotos.paging.next ? igPhotos.paging.next : "";
+    const fetchPhotosParams = {
+      setIgPhotos,
+      igPhotos,
+      setLoading,
+      setError,
+      media_url
+    };
 
     if (!loading) {
-      fetchInstagramPhotos(instagram_photo_url);
+      fetchInstagramPhotos(fetchPhotosParams);
     } 
-  },[offset]);
-
-  const fetchInstagramPhotos = async(media_url: string) => {
-    setLoading(true);
-    try {
-      const localStoragePhotos = localStorage.getItem('igPhotos');
-      const checkLocalStorage = localStoragePhotos ? JSON.parse(localStoragePhotos) : null;
-      // const lastItemLocalStorage = localStorage.getItem('lastItem');
-      // const checkLastItem = lastItemLocalStorage ? JSON.parse(lastItemLocalStorage) : null;
-
-      // *** FOR CACHING IG API RESPONSE ***
-      // Check to see if a next URL exists from IG API stored in localstorage. Return to end execution if none
-      if (checkLocalStorage && checkLocalStorage.nextPage !== -1) {
-        setIgPhotos({
-          data: new Set(checkLocalStorage.data),
-          paging: {
-            next: checkLocalStorage.nextPage === -1 ? "" : checkLocalStorage.nextPage
-          }
-        });
-
-      } else if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
-        setIgPhotos({
-          data: new Set(checkLocalStorage.data),
-          paging: {
-            next: ""
-          }
-        });
-
-        return;
-      }
-
-      if (igPhotos.paging.next !== "") {
-        const queryInstagramUser = await fetch(media_url)
-        const results = await queryInstagramUser.json();
-        const nextPage = results.paging.next !== undefined ? results.paging.next : -1
-        const lastItem = {
-          time: new Date(),
-          lastURL: nextPage
-        };
-        console.log('results: ', results);
-        
-        const photosForLocal = {
-          data: results.data,
-          nextPage: results.paging.next
-        };
-                
-        console.log('FETCHED IG API');
-        
-        // if fetch operation is required, check if local storage 'igPhotos' exists and store accordingly
-        if (checkLocalStorage === null) {
-          console.log('NULL STORAGE');
-          
-          localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
-          localStorage.setItem('lastItem', JSON.stringify(lastItem))
-        } else {
-          console.log('ELSE CALLED');
-          
-          const updateLocalPhotos = {
-            data: [...checkLocalStorage.data, ...results.data],
-            nextPage: nextPage
-          };
-          
-          localStorage.setItem('igPhotos', JSON.stringify(updateLocalPhotos))
-          localStorage.setItem('lastItem', JSON.stringify(lastItem))
-        }
-        
-        setIgPhotos((prev) => ({
-          data: new Set([...Array.from(prev.data), ...results.data]),
-          paging: {
-            next: results.paging.next !== undefined ? results.paging.next : ""
-          }
-        }));
-      } else {
-        console.log('NO MORE PHOTOS FROM IG API');
-        return;
-      }
-
-    } catch (error) {
-      console.log("error fetching instagram photos: ", error);
-      setError("Error fetching instagram photos.");
-    } finally{
-      setLoading(false)
-    }
-  };
+  }, [offset]);
 
   type IgPhotosProp = {
     id?: string,
@@ -157,22 +83,21 @@ const igPhotoState = {
 
       <div className='flex flex-col space-y-8 mt-10 z-20 p-5'>
         <div className='flex justify-center mx-auto py-3 px-10 rounded-full'>
-          <a href='https://www.instagram.com/polishbycin/' target='_blank' rel='noreferrer'>
-            <div className='flex flex-cols-2'>
-              <div
-                className=''
-              >
-                <SocialIcon 
-                  url='www.instagram.com' 
-                  href='https://www.instagram.com/polishbycin/'
-                  bgColor='#fbb6ce'
-                  target='_blank'
-                  rel='noreferrer'
-                />
-              </div>
-              <p className='pt-3 px-3 text-2xl font-bold text-white underline decoration-pink-300'>PolishByCin</p>
+          <div className='flex flex-cols-2'>
+            <div>
+              <SocialIcon 
+                url='www.instagram.com' 
+                href='https://www.instagram.com/polishbycin/'
+                bgColor='#fbb6ce'
+                target='_blank'
+                rel='noreferrer'
+              />
             </div>
-          </a>
+
+            <a href='https://www.instagram.com/polishbycin/' target='_blank' rel='noreferrer'>
+              <p className='pt-2 px-3 text-2xl font-bold text-white underline decoration-pink-300'>PolishByCin</p>
+            </a>
+          </div>
         </div>
 
         <Link
@@ -182,7 +107,7 @@ const igPhotoState = {
           Book Appointment
         </Link>
 
-        <p className='text-white'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa nisl, aliquam vitae felis ut, 
+        <p className='text-gray-300'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa nisl, aliquam vitae felis ut, 
           efficitur blandit neque. Duis dapibus diam eget imperdiet mollis. Aliquam massa turpis, venenatis quis 
           accumsan ac, convallis eget velit. Nunc sed porta mi. In l
         </p>
