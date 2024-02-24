@@ -3,39 +3,17 @@ import { Link } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 import { SocialIcon } from 'react-social-icons';
 import { HiMiniArrowRightCircle } from "react-icons/hi2";
+import { useStateContext } from '../contexts/state-contexts';
 
 // Utils
 import { fetchInstagramPhotos } from '../utils/fetch-photos';
 
 export default function HomePage() {
-  type PhotoState = {
-    data: Set<{
-      id?: string,
-      caption?: string,
-      media_url?: string,
-      permalink?: string
-}>,
-    paging: {
-      cursors?: object,
-      next?: string,
-      previous?: string
-    }
-};
-
-const igPhotoState = {
-  data: new Set([]),
-  paging: {
-    cursors: {},
-    next: `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink&access_token=${ process.env.REACT_APP_IG_LLT }`,
-    previous: ""
-  }
-};
-
   const [error, setError] = React.useState("");
-  const [igPhotos, setIgPhotos] = React.useState<PhotoState>(igPhotoState);
   const [loading, setLoading] = React.useState(false);
   const [offset, setOffset] = React.useState(0);
-
+  const { igPhotos, setIgPhotos } = useStateContext();
+  
   const photoRef = React.useRef<HTMLDivElement>(null);
   const photoContainerHeight = photoRef.current && photoRef.current.clientHeight;
   const photoContainerScrollTop = photoRef.current && photoRef.current.scrollTop;

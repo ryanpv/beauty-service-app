@@ -8,6 +8,8 @@ interface StateValues {
   currentUserState: User;
   allServices: ServiceState | [];
   setAllServices: Dispatch<SetStateAction<ServiceState | []>>;
+  igPhotos: PhotoState;
+  setIgPhotos: Dispatch<SetStateAction<PhotoState>>;
 };
 
 type ServiceState = {
@@ -28,8 +30,21 @@ type User = {
   exp: number;
 };
 
-const StateContext = createContext<StateValues | null>(null);
+type PhotoState = {
+  data: Set<{
+    id?: string,
+    caption?: string,
+    media_url?: string,
+    permalink?: string
+}>,
+  paging: {
+    cursors?: object,
+    next?: string,
+    previous?: string
+  }
+};
 
+const StateContext = createContext<StateValues | null>(null);
 
 export const useStateContext = () => {
   const stateContexts = useContext(StateContext);
@@ -49,10 +64,21 @@ const currentUserState = {
   exp: 0
 };
 
+const igPhotoState = {
+  data: new Set([]),
+  paging: {
+    cursors: {},
+    next: `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink&access_token=${ process.env.REACT_APP_IG_LLT }`,
+    previous: ""
+  }
+};
+
 const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [userId, setUserId] = useState<number>(0);
   const [currentUser, setCurrentUser] = useState<string | User>(currentUserState);
   const [allServices, setAllServices] = useState<ServiceState>([]);
+  const [igPhotos, setIgPhotos] = React.useState<PhotoState>(igPhotoState);
+
 
   const values: StateValues = {
     userId,
@@ -61,7 +87,9 @@ const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     setCurrentUser,
     currentUserState,
     allServices,
-    setAllServices
+    setAllServices,
+    igPhotos,
+    setIgPhotos,
   };  
 
   return (

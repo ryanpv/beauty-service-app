@@ -2,35 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 import { fetchInstagramPhotos } from '../utils/fetch-photos'
+import { useStateContext } from '../contexts/state-contexts';
 
 export default function PhotoGallery() {
-  type PhotoState = {
-      data: Set<{
-        id?: string,
-        caption?: string,
-        media_url?: string,
-        permalink?: string
-  }>,
-      paging: {
-        cursors?: object,
-        next?: string,
-        previous?: string
-      }
-  };
-
-  const igPhotoState = {
-    data: new Set([]),
-    paging: {
-      cursors: {},
-      next: `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink&access_token=${ process.env.REACT_APP_IG_LLT }`,
-      previous: ""
-    }
-  };
-
   const [error, setError] = React.useState("");
-  const [igPhotos, setIgPhotos] = React.useState<PhotoState>(igPhotoState);
   const [loading, setLoading] = React.useState(false);
   const [offset, setOffset] = React.useState(0);
+  const { igPhotos, setIgPhotos } = useStateContext();
 
   // Initial fetch of instagram photos
   React.useEffect(() => {
