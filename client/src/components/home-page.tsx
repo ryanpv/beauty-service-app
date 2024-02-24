@@ -177,7 +177,7 @@ const igPhotoState = {
 
         <Link
           to='/book-appointment' 
-          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 underline'
+          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400'
         >
           Book Appointment
         </Link>
@@ -190,12 +190,12 @@ const igPhotoState = {
 
       <div className='z-10 bg-gray-100 pb-10 space-y-3 mt-[12vh]'>
     {/* <div className='flex py-3 px-10 rounded-full justify-center'> */}
-        <Link to='/photo-gallery' className='text-center font-semibold text-4xl text-pink-300'>
+        <Link to='/photo-gallery' className='text-center font-semibold text-4xl text-gray-400'>
           <div className='flex flex-cols-2 mt-10 space-x-3 justify-center'>
-            Gallery
-            <div className=''>
+            <div>
               <HiMiniArrowRightCircle className='mt-1 ml-1' color='#fbb6ce' size='35'/>
             </div>
+            <p className='underline decoration-pink-200'>Gallery</p>
           </div>
         </Link>
 

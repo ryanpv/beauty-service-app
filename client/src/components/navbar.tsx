@@ -11,16 +11,25 @@ const Navbar: FC = () => {
   const [isHome, setIsHome] = React.useState(false);
   const location = useLocation();
 
-  React.useEffect(() => {
-    console.log('called useef');
-    
+  // Sets the state for different navbar styling for homepage (homepage uses gradient)
+  React.useEffect(() => {   
     if (location.pathname === '/') {
       setIsHome(true);
     } else {
       setIsHome(false);
     }
-  }, [location])
-console.log('uselocation: ', location.pathname === '/');
+  }, [location]);
+
+  // Event listener to check if screen is back to large (1024p+), if it is then revert menu back to original styling state
+  React.useEffect(() => {
+    const handleScreenResize = () => {
+      if (window.innerWidth >= 1024) setShow(false);
+    };
+
+    window.addEventListener('resize', handleScreenResize);
+
+    return () => window.removeEventListener('resize', handleScreenResize);
+  }, []);
 
   const logout = async() => {
     try {
@@ -68,7 +77,7 @@ console.log('uselocation: ', location.pathname === '/');
     <>
       <nav 
         id='navbar'
-        className={ `z-50 flex sticky top-0 items-center justify-between flex-wrap p-6 text-white transition-all ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36' : 'bg-pink-300'}` }
+        className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36 px-6 pb-10' : 'p-6 bg-pink-300'}` }
       >
         <div className='justify-start lg:px-5 text-4xl font-bold'>
           <Link to='/'>
@@ -88,7 +97,7 @@ console.log('uselocation: ', location.pathname === '/');
         <div 
           id='navLinks' 
           // onMouseLeave={ navDisplay }      
-          className={` lg:mt-0 lg:justify-end w-full block flex-grow lg:flex lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100 ${ show ? 'p-5 bg-pink-200 bg-opacity-50 opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' }`}
+          className={ `${ show ? 'p-5 bg-pink-200 bg-opacity-50 opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' } lg:mt-0 lg:justify-end w-full block lg:flex flex-grow lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100` }
           >
           <div className='nav-links lg:space-x-5 font-semibold lg:text-xl'>
             <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-500'>
