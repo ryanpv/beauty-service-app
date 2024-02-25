@@ -57,7 +57,7 @@ export default function PhotoGallery() {
         <Link to={`${props.permalink}`} target='_blank'>  
           <img className='h-full rounded-xl max-w-full' src={ props.media_url } alt=''/>
         </Link>
-        <div className='absolute top-0 left-0 w-full px-4 py-2 text-center text-white pointer-events-none'>
+        <div className='absolute top-0 left-0 w-full px-4 text-center py-2 text-white pointer-events-none'>
           <p className='font-bold text-lg'>{ props.caption?.split('-')[0] }</p>
         </div>
       </div>
