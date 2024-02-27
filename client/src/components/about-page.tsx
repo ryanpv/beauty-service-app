@@ -7,9 +7,19 @@ export default function AboutPage() {
       <div className='bg-gray-100'>
         <h1 className='text-center p-5'>About Me</h1>
         <p className='p-5'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa nisl, aliquam vitae felis ut, 
-          efficitur blandit neque. Duis dapibus diam eget imperdiet mollis. Aliquam massa turpis, venenatis quis 
-          accumsan ac, convallis eget velit. Nunc sed porta mi. In l </p>
+        Hey everyone! My name is Cindy and I am a nail technician that specializes in gel nail art. I started about 7 years ago when my mom owned a nail salon
+        and my passion for it kept growing ever since. It's one of my favourite things to do! There was something about turning nails into canvases that brings
+        me joy. I've always had a passion for art, and doing nails allows me to express that every time. It makes me especially happy when I see the smile
+        on my clients' faces when I doll up their nails. 
+<br></br>
+<br></br>
+        But it's not just about making people happy. The whole process of doing nails is like therapy for me. It can be exciting, yet also calming and relaxing. 
+        Chatting with my clients is also great. It can feel like catching up with old friends.
+<br></br>
+<br></br>
+        At the end of the day, I hope to inspire others with my work. Whether it's through a funky design or just spreading some positivity, I want to leave 
+        a little sparkle whenever I share my art. So, if you're ready to add some flair to your nails and maybe share a few laughs along the way, I'm your girl! Let's 
+        create some beautiful nail art together!</p>
 
       </div>
       <div

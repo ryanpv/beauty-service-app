@@ -103,7 +103,7 @@ function App() {
       <footer
         className="z-50 text-center bg-pink-300 p-6 text-white text-xs font-semibold"
       > 
-        COPYRIGHT © 2023 POLISHBYCIN - ALL RIGHTS RESERVED.
+        COPYRIGHT © 2024 POLISHBYCIN - ALL RIGHTS RESERVED.
       </footer>
     </div>
   );
