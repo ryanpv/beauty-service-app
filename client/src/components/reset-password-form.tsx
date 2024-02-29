@@ -61,11 +61,11 @@ const ResetPassword:React.FC = () => {
     <div className='container flex'>
       <div className='flex flex-1 flex-col py-12 px-8 max-w-md sm:max-w-lg mx-auto'>
         <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded border border-pink-100 mt-10 w-full px-6 sm:px-10 py-16 mx-auto sm:w-full sm:max-w-md sm:min-h-80 font-medium'>
-          <h1 className='font-bold text-2xl'>Reset your password</h1>
+          <h1 className='font-bold text-2xl text-gray-600'>Reset your password</h1>
           
           <form onSubmit={submitForm} className='space-y-8'>
             <div>
-              <label className='font-semibold'>
+              <label className='font-semibold text-gray-600'>
                 New Password
               </label>
               <input 
@@ -77,7 +77,7 @@ const ResetPassword:React.FC = () => {
             </div>
 
             <div>
-              <label className='font-semibold'>
+              <label className='font-semibold text-gray-600'>
                 Confirm New Password
               </label>
               <input 

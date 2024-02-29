@@ -152,7 +152,7 @@ const Navbar: FC = () => {
               </Link>
             </div>
             <div className='block lg:inline-block hover:text-pink-500'>
-              <Link to='/signup'>
+              <Link to='/register'>
                 Sign Up
               </Link>
             </div>

@@ -81,14 +81,14 @@ export default function LoginPage() {
 
           {/* <div className='text-center border-2 text-gray-900 sm:py-2 sm:mx-auto sm:w-full sm:max-w-sm'> */}
 
-            <h2 className='text-2xl font-bold text-gray-900'>
+            <h2 className='text-2xl font-bold text-gray-600'>
               Sign in to your account
             </h2>
           {/* </div> */}
           
             <form className='space-y-8' onSubmit={ submitLogin }>
               <div>
-                <label className='font-semibold'>
+                <label className='font-semibold text-gray-600'>
                   Email
                 </label>
                 <div className='mt-2'>
@@ -104,7 +104,7 @@ export default function LoginPage() {
 
               <div>
                 <div className='flex justify-between'>
-                  <label className='font-semibold'>
+                  <label className='font-semibold text-gray-600'>
                     Password
                   </label>
                   <div>

@@ -80,7 +80,7 @@ export default function HomePage() {
 
         <Link
           to='/book-appointment' 
-          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400'
+          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 hover:bg-pink-400'
         >
           Book Appointment
         </Link>

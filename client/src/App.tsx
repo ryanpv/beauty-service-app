@@ -69,7 +69,7 @@ function App() {
           <Route path='/appointments' element={ <AppointmentsList /> } />
           <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
           <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
-          <Route path='/signup' element={ <SignupPage /> } />
+          <Route path='/register' element={ <SignupPage /> } />
           <Route path='/successful-signup' element={ <SignupSuccess /> } />
           <Route path='/ig-auth' element={ <GetAuth /> } />
           <Route path='/photo-gallery' element={ <PhotoGallery /> } />
@@ -78,7 +78,7 @@ function App() {
           <Route path='/update-service/:serviceId' element={ !adminUser ? <Unauthorized /> : <UpdateService /> } />
           <Route path='/about' element={ <AboutPage /> } />
           <Route path='/request-new-password' element={ <NewPasswordRequest /> } />
-          <Route path='/reset-password' element={ <ResetPassword /> } />
+          <Route path='/reset-password' element={ noUserLogged ? <Unauthorized /> : <ResetPassword /> } />
           <Route path='/password-reset-success' element={ <PasswordResetSuccess /> } />
           <Route path='/token-expired' element={ <FailedPasswordReset /> } />
           <Route path='/add-new-service' element={ !adminUser ? <Unauthorized /> : <AddService /> } />
