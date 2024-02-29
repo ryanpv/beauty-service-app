@@ -30,7 +30,7 @@ export default function LandingPage() {
           also reach out through the contact page.
           <br></br>
           <br></br>
-          If you wish to demo this page with all functionalities, just head over to the <Link className='text-pink-500' to='/register'>signup page</Link> and create an account. Otherwise,
+          If you wish to demo this page with all functionalities, just head over to the <Link className='text-pink-500 hover:text-pink-700' to='/register'>signup page</Link> and create an account. Otherwise,
           feel free to just have a look around!
         </p>
       </div>
