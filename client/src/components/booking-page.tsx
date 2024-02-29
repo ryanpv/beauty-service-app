@@ -77,13 +77,10 @@ const BookingPage: React.FC = () => {
     const result = await getAppointmentTimes.json();
 
     setBookedTimes(result);
-    console.log("times: ", result)
   };
 
   const formChangeHandler = (event: Date | CalendarDates[] | React.MouseEvent<HTMLButtonElement> | React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {   
-    console.log("changed service")
     if (event instanceof Date) {
-      console.log("event date: ", event)
       setNewAppointment((prev) => ({
         ...prev,
         date: event

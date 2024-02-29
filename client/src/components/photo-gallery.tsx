@@ -72,9 +72,7 @@ export default function PhotoGallery() {
 
       return;
     } else {
-      // Offset state used to trigger fetch useEffect
-      console.log('OFFSET UPDATED');
-      
+      // Offset state used to trigger fetch useEffect      
       setOffset(prev => prev + 1);
     }
   };

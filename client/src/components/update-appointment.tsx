@@ -43,7 +43,6 @@ const UpdateAppointment: React.FC = () => {
   }, []);
 
   const fetchAppointment = async() => {
-    console.log('fetch called')
     try {
       setLoading(true);
       const getAppointment = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {

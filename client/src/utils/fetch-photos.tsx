@@ -59,24 +59,17 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
         time: new Date(),
         lastURL: nextPage
       };
-      console.log('results: ', results);
       
       const photosForLocal = {
         data: results.data,
         nextPage: results.paging.next
       };
-              
-      console.log('FETCHED IG API');
-      
+                    
       // if fetch operation is required, check if local storage 'igPhotos' exists and store accordingly
-      if (checkLocalStorage === null) {
-        console.log('NULL STORAGE');
-        
+      if (checkLocalStorage === null) {        
         localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
         localStorage.setItem('lastItem', JSON.stringify(lastItem))
-      } else {
-        console.log('ELSE CALLED');
-        
+      } else {        
         const updateLocalPhotos = {
           data: [...checkLocalStorage.data, ...results.data],
           nextPage: nextPage
@@ -93,7 +86,6 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
         }
       }));
     } else {
-      console.log('NO MORE PHOTOS FROM IG API');
       return;
     }
 
