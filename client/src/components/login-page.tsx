@@ -67,12 +67,13 @@ export default function LoginPage() {
     <>
       <div className='container flex'>
         <div className='flex flex-1 flex-col py-12 px-8 max-w-md sm:max-w-lg mx-auto'>
-          <div className='text-center text-gray-900 sm:py-2 sm:mx-auto sm:max-w-sm'>
-            <img
+          <div className='text-center sm:py-2 sm:mx-auto sm:max-w-sm'>
+            {/* <img
               className='mx-auto h-10 w-auto'
               src={ require('./logo192.png') }
               alt='logo'
-            />
+            /> */}
+            <h1 className='text-4xl text-pink-300 underline decoration-gray-400'>PolishByCin</h1>
           </div>
 
         { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? <span>already logged in </span> : null }

@@ -93,7 +93,7 @@ export default function HomePage() {
 
       <div className='z-10 bg-gray-100 pb-10 space-y-3 mt-[12vh]'>
     {/* <div className='flex py-3 px-10 rounded-full justify-center'> */}
-        <Link to='/photo-gallery' className='text-center font-semibold text-4xl text-gray-400'>
+        <Link to='/photo-gallery' className='text-center font-semibold text-4xl text-gray-600'>
           <div className='flex flex-cols-2 mt-10 space-x-3 justify-center'>
             <div>
               <HiMiniArrowRightCircle className='mt-1 ml-1' color='#fbb6ce' size='35'/>
@@ -102,9 +102,9 @@ export default function HomePage() {
           </div>
         </Link>
 
-        <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-400"></hr>
+        {/* <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr> */}
 
-        <div ref={ photoRef } className='container mb-10'>
+        <div ref={ photoRef } className='container py-5'>
           <div className="flex justify-between overflow-x-hidden rounded-full h-80 ring-pink-200 ring-4">
             <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0">
               {

@@ -102,13 +102,13 @@ const AddService:React.FC = () => {
 
       {/* { isAdmin ? */}
         <div className='shadow-xl shadow-gray-300 px-6 py-12 sm:p-16 mb-5 sm:mx-auto sm:w-full sm:max-w-2xl bg-pink-100 rounded mx-6 space-y-10'>
-          <h1 className='font-bold text-2xl mt-5'>Add New Service</h1>
+          <h1 className='font-bold text-2xl mt-5 text-gray-600'>Add New Service</h1>
 
           <form onSubmit={ formSubmit }>
             <div className='flex flex-col space-y-6'>
               <div className='flex flex-col justify-between space-y-6'>
                 <div>
-                  <label className='font-semibold'>Service:</label>
+                  <label className='font-semibold text-gray-600'>Service:</label>
                   <input
                     className='mt-2 flex-2 py-1.5 px-2.5 w-full border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     value={ serviceFormData.service_name }
@@ -118,7 +118,7 @@ const AddService:React.FC = () => {
                 </div>
 
                 <div>
-                  <label className='font-semibold'>Price:</label>
+                  <label className='font-semibold text-gray-600'>Price:</label>
                   <input
                     className='mt-2 py-1.5 px-2.5 w-full border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     name='price'
@@ -128,7 +128,7 @@ const AddService:React.FC = () => {
                 </div>
 
                 <div>
-                  <label className='font-semibold'>Duration:</label>
+                  <label className='font-semibold text-gray-600'>Duration:</label>
                   <input
                     className='mt-2 py-1.5 px-2.5 w-full border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     name='duration'
@@ -138,7 +138,7 @@ const AddService:React.FC = () => {
                 </div>
 
                 <div>
-                  <label className='font-semibold'>Category:</label>
+                  <label className='font-semibold text-gray-600'>Category:</label>
                   <select 
                     className='mt-2 py-1.5 px-2.5 w-full border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     name='service_categories_id'
@@ -151,7 +151,7 @@ const AddService:React.FC = () => {
               </div>
 
               <div>
-                <label className='font-semibold'>Description:</label>
+                <label className='font-semibold text-gray-600'>Description:</label>
                 <textarea
                   name='description'
                   onChange={ inputChangeHandler }

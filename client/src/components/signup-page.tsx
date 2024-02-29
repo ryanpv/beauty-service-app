@@ -82,11 +82,12 @@ export default function SignupPage() {
   return (
     <div className='container flex flex-col px-6 py-12 max-w-md sm:max-w-lg'>
       <div className='text-center text-gray-900 '>
-        <img
-              className='mx-auto h-10 w-auto'
-              src={ require('./logo192.png') }
-              alt='logo'
-            />
+        {/* <img
+          className='mx-auto h-10 w-auto'
+          src={ require('./logo192.png') }
+          alt='logo'
+        /> */}
+        <h1 className='text-4xl text-pink-300 underline decoration-gray-400'>PolishByCin</h1>
       </div>
 
       <div className='border border-pink-100 rounded bg-pink-100 space-y-6 mt-10 py-16 px-8 sm:mx-auto sm:w-full sm:w-full sm:max-w-lg shadow-xl shadow-gray-300'>

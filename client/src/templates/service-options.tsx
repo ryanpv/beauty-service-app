@@ -39,7 +39,7 @@ const ServiceOptions: React.FC<Services> = ({ serviceList, newAppointment, formH
 
   return (
     <div className='w-80 text-center'>
-      <label className='font-semibold'>Selected a service to see available times:</label>
+      <label className='font-semibold text-gray-600 text-xl'>Select a service to see available times:</label>
       <select
         required
         name='id'

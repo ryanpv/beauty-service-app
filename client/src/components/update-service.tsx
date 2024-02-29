@@ -143,13 +143,13 @@ export default function UpdateService() {
 
       {/* { isAdmin ? */}
         <div className='shadow-xl shadow-gray-300 space-y-10 bg-pink-100 rounded px-6 sm:p-16 sm:mx-auto sm:w-full sm:max-w-2xl py-16 mx-6'>
-          <h1 className='font-bold text-2xl'>Update Service</h1>
+          <h1 className='font-bold text-2xl text-gray-600'>Update Service</h1>
 
           <form onSubmit={ formSubmit }>
             <div className='flex flex-col space-y-6'>
               <div className='flex flex-col justify-between space-y-6'>
                 <div>
-                  <label className='font-semibold'>Service:</label>
+                  <label className='font-semibold text-gray-600'>Service:</label>
                   <input
                     className='mt-2 flex-2 py-1.5 px-2.5 w-full border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     value={ updateForm && updateForm.id !== 0 ? updateForm.service_name : "" }
@@ -159,7 +159,7 @@ export default function UpdateService() {
                 </div>
 
                 <div>
-                  <label className='font-semibold'>Price:</label>
+                  <label className='font-semibold text-gray-600'>Price:</label>
                   <input
                     className='mt-2 py-1.5 px-2.5 w-full border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     value={ updateForm && updateForm.id !== 0 ? updateForm.price : "" }
@@ -169,7 +169,7 @@ export default function UpdateService() {
                 </div>
 
                 <div>
-                  <label className='font-semibold'>Duration:</label>
+                  <label className='font-semibold text-gray-600'>Duration:</label>
                   <input
                     className='mt-2 py-1.5 px-2.5 w-full border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     value={ updateForm && updateForm.id !== 0 ? updateForm.duration : 0 }
@@ -179,7 +179,7 @@ export default function UpdateService() {
                 </div>
 
                 <div>
-                  <label className='font-semibold'>Category:</label>
+                  <label className='font-semibold text-gray-600'>Category:</label>
                   <select 
                     className='mt-2 py-1.5 px-2.5 w-full border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     name='service_categories_id'
@@ -192,7 +192,7 @@ export default function UpdateService() {
               </div>
 
               <div>
-                <label className='font-semibold'>Description:</label>
+                <label className='font-semibold text-gray-600'>Description:</label>
                 <textarea
                   name='description'
                   value={ updateForm && updateForm.description }

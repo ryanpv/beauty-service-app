@@ -40,9 +40,10 @@ const Services:React.FC = () => {
 
   return (
     <div className='container flex flex-col max-w-screen-md space-y-6'>
-      <h1 className='text-center font-bold text-2xl mt-5'>Available Services</h1>
-      
-      <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
+      <div className='space-y-3'>
+        <h1 className='text-center font-bold text-gray-600 text-4xl mt-10'>Available Services</h1>
+        <hr className="mx-5 lg:mx-0 border-pink-200" />
+      </div>
 
       { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2 ?
         <Link
@@ -59,10 +60,10 @@ const Services:React.FC = () => {
         to='/book-appointment'
         className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-300 font-semibold text-lg text-white hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400'
         >
-        BOOK APPOINTMENT
+        Book Appointment
       </Link>
       { loading ? <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> : 
-      <div className='space-y-6'>
+      <div className='space-y-6 text-gray-600'>
   {/* REGULAR POLISH SERVICES SECTION */}
         <div className='mx-3'>
           <h2 className='font-semibold text-2xl mb-2'>Regular Polish Services</h2>

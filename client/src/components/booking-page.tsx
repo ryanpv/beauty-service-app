@@ -142,69 +142,71 @@ const BookingPage: React.FC = () => {
 
   return (
     <div className='container flex flex-col space-y-10 my-10'>
-      <h1 className='font-bold text-2xl text-center'>Book Appointment</h1>
-      <i className='text-center'>Please confirm your appointment request details before submitting. You will receive an email for when it has been accepted</i>
+      <div className='space-y-3'>
+        <h1 className='font-bold text-4xl text-center text-gray-600'>Book Appointment</h1>
+        <hr className='h-px mx-3 border-pink-200 w-full sm:max-w-screen-md mx-auto' />
+      </div>
+      <i className='text-center text-gray-600 text-lg'>Please confirm your appointment request details before submitting. You will receive an email for when it has been accepted</i>
 
-    <div className='mx-auto sm:w-full sm:max-w-screen-xl'>
-      <form 
-        onSubmit={ appointmentFormSubmit }
-        className='justify-between'
-        >
-        <div className='flex flex-col space-y-10'>
-
-          {/* List of services for dropdown  */}
-          { loading ? 
-            <div className='mx-auto'>
-              <BarLoader color='#fbb6ce' /> 
-            </div>
-            :
-            <div className='flex flex-col mx-auto sm:flex-row justify-around space-y-5 sm:space-y-0'>
-              <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
-            </div>
-          }
-
-          {/* calender component import */}
-          <div className='mx-auto'>
-            <Calendar 
-              onChange={ (date) => date && formChangeHandler(date) }
-              value={ newAppointment.date instanceof Date ? newAppointment.date : new Date(newAppointment.date) }
-            />
-          </div>
-
-          <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes } newAppointment={ newAppointment } />
-          
-          <div className='mx-auto space-y-2 px-6'>
-            <h1>Confirm your details below before submitted the booking request:</h1>
-
-            { error !== "" && 
-              <>
-              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                <strong className="font-bold">ERROR: </strong>
-                <span className="block sm:inline">{ error }</span>
-                <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span>
-              </div>
-              </>
-             }
-
-            <div>
-              <ul>
-                <li><strong>Service:</strong> { newAppointment.id !== "" && JSON.parse(newAppointment.id).service_name }</li>
-                <li><strong>Date:</strong> { formatDate() }</li>
-                <li><strong>Time:</strong> { newAppointment.time }</li>
-              </ul>
-            </div>
-          </div>
-
-          <button
-            className='bg-pink-300 hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3 py-1.5 mx-auto rounded-full text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
+      <div className='mx-auto sm:w-full sm:max-w-screen-xl'>
+        <form 
+          onSubmit={ appointmentFormSubmit }
+          className='justify-between'
           >
-            Submit Request
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className='flex flex-col space-y-10'>
+
+            {/* List of services for dropdown  */}
+            { loading ? 
+              <div className='mx-auto'>
+                <BarLoader color='#fbb6ce' /> 
+              </div>
+              :
+              <div className='flex flex-col mx-auto sm:flex-row justify-around space-y-5 sm:space-y-0'>
+                <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
+              </div>
+            }
+
+            {/* calender component import */}
+            <div className='mx-auto'>
+              <Calendar 
+                onChange={ (date) => date && formChangeHandler(date) }
+                value={ newAppointment.date instanceof Date ? newAppointment.date : new Date(newAppointment.date) }
+              />
+            </div>
+
+            <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes } newAppointment={ newAppointment } />
+            
+            <div className='mx-auto space-y-2 px-6 text-gray-600'>
+              <h1>Confirm your details below before submitted the booking request:</h1>
+
+              { error !== "" && 
+                <>
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                  <strong className="font-bold">ERROR: </strong>
+                  <span className="block sm:inline">{ error }</span>
+                  <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+                  </span>
+                </div>
+                </>
+              }
+
+              <div>
+                <ul>
+                  <li><strong>Service:</strong> { newAppointment.id !== "" && JSON.parse(newAppointment.id).service_name }</li>
+                  <li><strong>Date:</strong> { formatDate() }</li>
+                  <li><strong>Time:</strong> { newAppointment.time }</li>
+                </ul>
+              </div>
+            </div>
+
+            <button
+              className='bg-pink-300 hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3 py-1.5 mx-auto rounded-full text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
+            >
+              Submit Request
+            </button>
+          </div>
+        </form>
+      </div>
 
     </div>
   )
