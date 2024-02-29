@@ -46,7 +46,7 @@ export default function HomePage() {
     return (
       <div className='hover:z-30 hover:scale-125 transition-all duration-200' >
         <Link to={`${props.permalink}`} target='_blank'>  
-          <img className='rounded min-h-64 max-h-80' src={ props.media_url } alt=''/>
+          <img className='min-h-64 max-h-80' src={ props.media_url } alt=''/>
         </Link>
       </div>
     )
@@ -104,8 +104,8 @@ export default function HomePage() {
         {/* <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr> */}
 
         <div ref={ photoRef } className='container py-5'>
-          <div className="flex justify-between overflow-x-hidden rounded-full h-80 ring-pink-200 ring-4">
-            <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0">
+          <div className="flex justify-between overflow-x-hidden rounded-full h-80  ">
+            <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0 gap-1">
               {
                 igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
                   return (

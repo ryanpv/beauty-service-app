@@ -13,7 +13,7 @@ const Navbar: FC = () => {
 
   // Sets the state for different navbar styling for homepage (homepage uses gradient)
   React.useEffect(() => {   
-    if (location.pathname === '/') {
+    if (location.pathname === '/home') {
       setIsHome(true);
     } else {
       setIsHome(false);
@@ -80,7 +80,7 @@ const Navbar: FC = () => {
         className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36 px-6 pb-10' : 'p-6 bg-pink-300'}` }
       >
         <div className='justify-start lg:px-5 text-4xl'>
-          <Link to='/'>
+          <Link to='/home'>
             PolishByCin
           </Link>
         </div>
@@ -101,7 +101,7 @@ const Navbar: FC = () => {
           >
           <div className='nav-links lg:space-x-5 font- lg:text-2xl'>
             <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-500'>
-              <Link to='/'>
+              <Link to='/home'>
                 Home
               </Link>
             </div>

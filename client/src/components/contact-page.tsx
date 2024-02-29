@@ -82,7 +82,7 @@ export default function ContactPage() {
             Tel: (123) 456 - 7890
           </p>
           <p>
-            serviceemail@email.com
+            PolishByCin@gmail.com
           </p>
         </div>
 

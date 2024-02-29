@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import LandingPage from '../src/components/landing-page';
 import HomePage from '../src/components/home-page';
 import Navbar from '../src/components/navbar';
 import LoginPage from '../src/components/login-page';
@@ -52,35 +53,19 @@ function App() {
     }
   }, [location])
 
-  // React.useEffect(() => {
-  //   if (Cookies.get('user') === undefined) {
-  //     const initialUserState = {
-  //       id: 0,
-  //       role: 0,
-  //       displayName: "",
-  //       iat: 0,
-  //       exp: 0
-  //     }
-  //     // console.log("no current user logged in.");
-      
-  //     setCurrentUser(initialUserState);
-  //   } else {
-  //     console.log('currnt user: ', currentUser);
-  //   }
-  // }, [location]);
-
   return (
     <div className="App flex flex-col min-h-screen">
       <Navbar />
-      {/* <LoginPage /> */}
+
       <div className='flex-1'>
         <Routes>
-          <Route path='/' element={ <HomePage /> } />
-          {/* <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } /> */}
-          <Route path='/book-appointment' element={ <BookingPage /> } />
-          {/* <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } /> */}
-          <Route path='/booking-success' element={ <BookingSuccessPage /> } />
-          {/* <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } /> */}
+          <Route path='/' element={ <LandingPage /> } />
+          <Route path='/home' element={ <HomePage /> } />
+          <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } />
+          {/* <Route path='/book-appointment' element={ <BookingPage /> } /> */}
+          <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } />
+          {/* <Route path='/booking-success' element={ <BookingSuccessPage /> } /> */}
+          <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } />
           <Route path='/appointments' element={ <AppointmentsList /> } />
           <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
           <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />

@@ -94,25 +94,15 @@ export default function PhotoGallery() {
         <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr>
       </div>
       {/* TEMP CLEAR LOCALSTORAGE BUTTON  */}
-<button onClick={ clearStorage }>CLEAR STORAGE</button>
+{/* <button onClick={ clearStorage }>CLEAR STORAGE</button> */}
       <div className='container grid grid-cols-1 max-w-4xl'>
         <div className='grid grid-cols-2 grid-flow-dense md:grid-cols-3 gap-1 m-auto'>
           {
             // Array.isArray(igPhotos?.data) && igPhotos.data.length > 0 
             igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
-              // const isEvenIdx = idx % 3 === 0;
-              // // const photoGridSpan
-              // if (isEvenIdx) {
-
-                return (
-                  <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
-                  )
-              //   } else {
-              //   return (
-              //     <SpanPhotos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
-              //     )
-
-              // }
+              return (
+                <Photos key={ photoData.id } id={ photoData.id } caption={ photoData.caption } media_url={ photoData.media_url } permalink={ photoData.permalink } />
+                )
             })
             : null
           }
