@@ -97,8 +97,8 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
 
   return (
     <>
-      <div className='mx-auto w-full text-center text-gray-700 font-bold text-4xl mt-5 space-y-3'>
-        <h1 className='pt-10 text-center font-semibold text-xl'>{ status === 1 ? "Upcoming" : "Requested" } Appointments</h1>
+      <div className='mx-auto w-full text-center text-gray-600 font-bold mt-5 space-y-3'>
+        <h1 className='pt-10 text-center font-semibold text-2xl'>{ status === 1 ? "Upcoming" : "Requested" } Appointments</h1>
         <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr>
       </div>
 

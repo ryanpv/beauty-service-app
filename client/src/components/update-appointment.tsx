@@ -122,11 +122,9 @@ const UpdateAppointment: React.FC = () => {
   };
 
   return (
-    <div className='container flex flex-col space-y-6 p-5 max-w-lg sm:max-w-full'>
-      {/* <h1 className='text-center'>Update Appointment</h1> */}
-
+    <div className='container flex flex-col space-y-6 px-5 py-16 max-w-lg sm:max-w-full'>
       <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded border border-pink-100 mt-10 px-6 py-16 sm:p-16 sm:mx-auto sm:w-full sm:max-w-lg sm:min-h-80 font-medium'>
-        <h2 className='text-2xl font-bold text-gray-900'>
+        <h2 className='text-2xl font-bold text-gray-600'>
           Update Appointment
         </h2>
       { loading && <BarLoader className='mx-auto' color='#fbb6ce' /> }
@@ -134,7 +132,7 @@ const UpdateAppointment: React.FC = () => {
       { (typeof currentUser !== 'string' && currentUser.role === 2) ?
         <form className='space-y-6' onSubmit={ submitForm }>
           <div>
-            <label className='font-bold'>Client</label>
+            <label className='font-bold text-gray-600 text-lg'>Client</label>
             <div>
               <input
                 name='name'
@@ -144,7 +142,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label className='font-bold'>Contact Info</label>
+            <label className='font-bold text-gray-600 text-lg'>Contact Info</label>
             <div>
               <input
                 name='email'
@@ -154,7 +152,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label className='font-bold'>Service</label>
+            <label className='font-bold text-gray-600 text-lg'>Service</label>
             <div>
               <input
                 onChange={ putFormHandler }
@@ -165,7 +163,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label className='font-bold'>Status</label>
+            <label className='font-bold text-gray-600 text-lg'>Status</label>
             <select 
               onChange={ putFormHandler }
               className='py-1.5 px-2.5 w-full mt-2 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
@@ -180,7 +178,7 @@ const UpdateAppointment: React.FC = () => {
             </select>
           </div>
           <div className=''>
-            <label className='font-bold'>Date</label>
+            <label className='font-bold text-gray-600 text-lg'>Date</label>
             <div>
               <DatePicker 
                 className='block sm:w-96 mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
@@ -191,7 +189,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label className='font-bold'>Time</label>
+            <label className='font-bold text-gray-600 text-lg'>Time</label>
             <div>
               <input
                 onChange={ putFormHandler }
@@ -202,7 +200,7 @@ const UpdateAppointment: React.FC = () => {
             </div>
           </div>
           <div>
-            <label className='font-bold'>Price</label>
+            <label className='font-bold text-gray-600 text-lg'>Price</label>
             <div>
               <input
                 onChange={ putFormHandler }
@@ -289,7 +287,6 @@ const UpdateAppointment: React.FC = () => {
           <strong className="font-bold">ERROR: </strong>
           <span className="block sm:inline">{ error }</span>
           <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-            <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
           </span>
         </div>
         </>

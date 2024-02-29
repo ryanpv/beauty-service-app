@@ -136,14 +136,14 @@ const AppointmentsList:React.FC = () => {
       <>
     {/* FILTER FORM  */}
         <div className='sm:px-10 px-4 py-16 mt-10 shadow-lg bg-pink-100 rounded sm:mx-auto max-w-2xl space-y-10'>
-          <h1 className='text-center text-2xl font-bold'>
+          <h1 className='text-center text-4xl font-bold text-gray-600'>
           Appointments
           </h1>
 
           <form onSubmit={ submitFilter } className='space-y-6 mx-3'>
             { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2 ? 
             <div>
-              <label className='font-semibold'>
+              <label className='font-semibold text-xl text-gray-600'>
                 Search
               </label>
               <div className='mt-2'>
@@ -160,7 +160,7 @@ const AppointmentsList:React.FC = () => {
 
             <div className='flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0'>
               <div>
-                <label className='font-semibold'>
+                <label className='font-semibold text-lg text-gray-600'>
                   Start Date
                 </label>
                 <div>
@@ -175,7 +175,7 @@ const AppointmentsList:React.FC = () => {
                 </div>
               </div>
               <div>
-                <label className='font-semibold'>
+                <label className='font-semibold text-lg text-gray-600'>
                   End Date
                 </label>
                 <div>
@@ -191,7 +191,7 @@ const AppointmentsList:React.FC = () => {
               </div>
             </div>
             <div>
-              <label className='font-bold'>Status:</label>
+              <label className='font-bold text-lg text-gray-600'>Status:</label>
               <select 
                 onChange={ filterHandler }
                 className='py-1.5 px-2.5 w-full border-0 rounded ring-1 ring-inset ring-pink-200 text-gray-900 sm:text-sm sm:leading-6'
