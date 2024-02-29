@@ -85,9 +85,8 @@ export default function HomePage() {
           Book Appointment
         </Link>
 
-        <p className='text-gray-300'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa nisl, aliquam vitae felis ut, 
-          efficitur blandit neque. Duis dapibus diam eget imperdiet mollis. Aliquam massa turpis, venenatis quis 
-          accumsan ac, convallis eget velit. Nunc sed porta mi. In l
+        <p className='text-white text-xl font-semibold text-center'>
+          Welcome to my world as a nail technician!
         </p>
       </div>
 
