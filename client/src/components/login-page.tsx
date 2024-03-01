@@ -51,8 +51,7 @@ export default function LoginPage() {
         setError("Invalid login credentials");
       } else {
         const decodedUser = setUser();
-        console.log('decoded user: ', decodedUser);
-        
+       
         setCurrentUser(decodedUser);
         setError("");
         navigate('/home');

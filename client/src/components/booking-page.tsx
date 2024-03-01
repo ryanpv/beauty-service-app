@@ -74,7 +74,7 @@ const BookingPage: React.FC = () => {
   };
 
   const appointmentTimes = async() => {
-    const getAppointmentTimes = await fetch(`https://localhost:3001/appointment-times?date=${ newAppointment.date }`)
+    const getAppointmentTimes = await fetch(`${ serverUrl }/appointment-times?date=${ newAppointment.date }`)
     const result = await getAppointmentTimes.json();
 
     setBookedTimes(result);
@@ -198,7 +198,7 @@ const BookingPage: React.FC = () => {
             </div>
 
             <button
-              className='bg-pink-300 hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3 py-1.5 mx-auto rounded-full text-center font-semibold text-white focus:ring-2 focus:ring-pink-300 '
+              className='bg-pink-300 hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3 py-1.5 mx-auto rounded-full text-center font-semibold text-white'
             >
               Submit Request
             </button>
