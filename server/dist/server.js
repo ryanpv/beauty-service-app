@@ -109,12 +109,19 @@ app.get('/appointment-times', appointmentTimes);
 //   console.log("user session end");
 //   res.end();  
 // });
-const options = {
-    key: fs.readFileSync(path.join(__dirname, "localhost-key.pem")),
-    cert: fs.readFileSync(path.join(__dirname, "localhost.pem")),
-};
-const server = https.createServer(options, app);
-server.listen(PORT, () => {
-    console.log(`Listening on port: ${PORT}`);
-});
+if (process.env.NODE_ENV === 'development') {
+    const options = {
+        key: fs.readFileSync(path.join(__dirname, "localhost-key.pem")),
+        cert: fs.readFileSync(path.join(__dirname, "localhost.pem")),
+    };
+    const server = https.createServer(options, app);
+    server.listen(PORT, () => {
+        console.log(`Listening on port: ${PORT}`);
+    });
+}
+else {
+    app.listen(PORT, () => {
+        console.log('Server is connected to port: ', PORT);
+    });
+}
 //# sourceMappingURL=server.js.map
