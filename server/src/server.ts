@@ -147,6 +147,6 @@ if (process.env.NODE_ENV === 'development') {
   });
 } else {
   app.listen(PORT, () => {
-    console.log('Server is connected to port: ', PORT);
+    console.log(`In ${ process.env.NODE_ENV }: server is listening on port ${ PORT }`);
   });
 }
