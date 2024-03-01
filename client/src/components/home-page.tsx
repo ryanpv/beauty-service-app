@@ -19,8 +19,6 @@ export default function HomePage() {
   const photoContainerScrollTop = photoRef.current && photoRef.current.scrollTop;
   const photoColumnLength = igPhotos.data && igPhotos.data.size;
   
-console.log('cookies: ', document.cookie);
-
   React.useEffect(() => {
     const media_url = igPhotos.paging.next ? igPhotos.paging.next : "";
     const fetchPhotosParams = {

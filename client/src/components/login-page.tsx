@@ -9,7 +9,6 @@ export default function LoginPage() {
   const { currentUser, setCurrentUser } = useStateContext();
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
-console.log('current user: ', currentUser);
 
   type LoginForm = {
     email: string;

@@ -44,7 +44,7 @@ const Navbar: FC = () => {
       } else {
         const loggedOutUser = setUser();
         setCurrentUser(loggedOutUser);
-        navigate('/');
+        navigate('/home');
       }
     } catch (error) {
       console.log("Logout error: ", error)

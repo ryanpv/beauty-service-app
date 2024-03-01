@@ -6,7 +6,6 @@ import { Session } from "express-session";
 import { validationResult } from "express-validator";
 import { sendEmail } from "../utils/emailer-util.js";
 
-
 interface ModifiedSession extends Session {
   isAuthenticated: boolean;
   userRole: string;

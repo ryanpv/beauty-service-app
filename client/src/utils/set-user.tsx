@@ -2,9 +2,7 @@ import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 
 export const setUser = () => {
-  const userLogged = Cookies.get('user');
-  console.log("user logged", userLogged);
-  
+  const userLogged = Cookies.get('user');  
   const initialUserState = {
     id: 0,
     role: 0,

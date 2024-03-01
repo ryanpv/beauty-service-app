@@ -7,8 +7,6 @@ import BarLoader from 'react-spinners/BarLoader';
 const Services:React.FC = () => {
   const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const [loading, setLoading] = useState(false);
-console.log("server: ", process.env.NODE_ENV);
-
   const { currentUser, allServices, setAllServices } = useStateContext();
   const regularShellac = 1;
   const gelShellac = 2;
