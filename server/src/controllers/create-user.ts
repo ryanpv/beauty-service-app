@@ -67,8 +67,10 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         (req.session as ModifiedSession).userRole = "client";
         (req.session as ModifiedSession).accessToken = jwtToken;
   
-        res.cookie("user", jwtToken, { httpOnly: false, domain: 'https://beauty-service-app-1.onrender.com' });
-        res.cookie('id', req.sessionID, { httpOnly: true, domain: 'https://beauty-service-app-1.onrender.com' });
+        const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
+
+        res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
+        res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
 
         const emailMsg = {
           from: process.env.GMAIL_ACCOUNT,
