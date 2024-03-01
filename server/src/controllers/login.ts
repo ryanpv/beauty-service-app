@@ -63,7 +63,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
           res.cookie('user', jwtToken, { httpOnly: false, secure: true });
           res.cookie('id', req.sessionID, { httpOnly: true, secure: true });
           
-          res.status(200).json({ message: "Successfully authenticated user" });
+          res.status(200).json({ message: "Successfully authenticated user!" });
         }
       }
 

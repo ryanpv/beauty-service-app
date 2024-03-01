@@ -46,6 +46,7 @@ export default function LoginPage() {
       });
   
       const loginResponse = login.status;
+console.log('login response', loginResponse);
 
       if (loginResponse !== 200) {
         setError("Invalid login credentials");
