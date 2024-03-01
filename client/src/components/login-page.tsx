@@ -47,12 +47,13 @@ console.log('current user: ', currentUser);
       });
   
       const loginResponse = login.status;
-console.log('login http response', loginResponse);
 
       if (loginResponse !== 200) {
         setError("Invalid login credentials");
       } else {
         const decodedUser = setUser();
+        console.log('decoded user: ', decodedUser);
+        
         setCurrentUser(decodedUser);
         setError("");
         navigate('/home');
