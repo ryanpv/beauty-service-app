@@ -3,11 +3,6 @@ import Cookies from 'js-cookie';
 
 export const setUser = () => {
   const userLogged = Cookies.get('user');
-  if (userLogged) {
-    const decoded = jwtDecode<string>(userLogged);
-    return decoded;
-  }
-
   const initialUserState = {
     id: 0,
     role: 0,
@@ -16,5 +11,10 @@ export const setUser = () => {
     exp: 0
   }
 
-  return initialUserState;
+  if (userLogged) {
+    const decoded = jwtDecode<string>(userLogged);
+    return decoded;
+  } else {
+    return initialUserState;
+  }
 };
