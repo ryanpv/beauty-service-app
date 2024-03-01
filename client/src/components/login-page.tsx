@@ -53,7 +53,7 @@ export default function LoginPage() {
         const decodedUser = setUser();
         setCurrentUser(decodedUser);
         setError("");
-        navigate('/');
+        navigate('/home');
       }
       
       setLoading(false);
