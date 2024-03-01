@@ -59,12 +59,15 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     unset: 'destroy',
-    // rolling: true,
+    rolling: true,
+    // cookie: { 
+    //   maxAge: 5 * 60 * 1000,
+    //   secure: true
+    //  } // ** REMOVE FOR PROD - 5 minutes
     cookie: {
-        maxAge: 5 * 60 * 1000,
+        maxAge: 24 * 30 * 60 * 60 * 1000,
         secure: true
-    } // ** REMOVE FOR PROD - 5 minutes
-    // cookie: { maxAge: 24 * 30 * 60  * 60 * 1000 } // 30 days
+    }
 }));
 app.use(rate_limiter);
 // if session expires/user cookie value does not match accessToken, user cookies will be cleared
