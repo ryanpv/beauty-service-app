@@ -42,8 +42,8 @@ export const login = async (req, res) => {
                     req.session.accessToken = jwtToken;
                     req.session.userEmail = userEmail;
                     req.session.userId = userId;
-                    res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none', domain: 'https://beauty-service-app-1.onrender.com' });
-                    res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none', domain: 'https://beauty-service-app-1.onrender.com' });
+                    res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none', domain: '.onrender.com' });
+                    res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none', domain: '.onrender.com' });
                     res.status(200).json({ message: "Successfully authenticated user!" });
                 }
             }
