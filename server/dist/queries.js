@@ -1,10 +1,10 @@
 import pg from 'pg';
 const Pool = pg.Pool;
 export const pool = new Pool({
-    user: process.env.PSQL_USER,
+    user: process.env.NODE_ENV === 'development' ? process.env.PSQL_USER : process.env.PSQL_PRODUSER,
     host: process.env.NODE_ENV === 'development' ? process.env.PSQL_LOCALHOST : process.env.PSQL_PRODHOST,
     database: 'beauty_service_app',
-    password: process.env.PSQL_PASSWORD,
+    password: process.env.NODE_ENV === 'development' ? process.env.PSQL_PASSWORD : process.env.PRODPASS,
     port: parseInt(process.env.PSQL_PORT),
 });
 //# sourceMappingURL=queries.js.map
