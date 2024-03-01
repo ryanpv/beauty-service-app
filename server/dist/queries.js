@@ -6,6 +6,6 @@ export const pool = new Pool({
     database: process.env.NODE_ENV === 'development' ? 'beauty_service_app' : 'beauty_service_app_db',
     password: process.env.NODE_ENV === 'development' ? process.env.PSQL_PASSWORD : process.env.PSQL_PRODPASS,
     port: parseInt(process.env.PSQL_PORT),
-    ssl: true
+    ssl: process.env.NODE_ENV === 'development' ? false : true
 });
 //# sourceMappingURL=queries.js.map

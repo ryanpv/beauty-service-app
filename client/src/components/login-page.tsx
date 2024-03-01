@@ -9,6 +9,7 @@ export default function LoginPage() {
   const { currentUser, setCurrentUser } = useStateContext();
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
+console.log('current user: ', currentUser);
 
   type LoginForm = {
     email: string;
@@ -46,7 +47,7 @@ export default function LoginPage() {
       });
   
       const loginResponse = login.status;
-console.log('login response', loginResponse);
+console.log('login http response', loginResponse);
 
       if (loginResponse !== 200) {
         setError("Invalid login credentials");
