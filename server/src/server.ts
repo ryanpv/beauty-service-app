@@ -52,7 +52,9 @@ const rate_limiter = rateLimit({
 app.use(cookieParser());
 app.use(cors({
   origin: [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://beauty-service-app-1.onrender.com',
+    'https://polishbycin.com'
   ],
   credentials: true,
 }));
