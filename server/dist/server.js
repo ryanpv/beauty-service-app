@@ -48,7 +48,8 @@ app.use(cors({
         'http://localhost:3000',
         'https://beauty-service-app.onrender.com',
         'https://beauty-service-app-1.onrender.com',
-        'https://polishbycin.com'
+        'https://www.polishbycin.com',
+        'https://api.polishbycin.com'
     ],
     credentials: true,
 }));
