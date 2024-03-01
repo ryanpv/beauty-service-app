@@ -46,8 +46,8 @@ export const createUser = async (req, res) => {
                 req.session.isAuthenticated = true;
                 req.session.userRole = "client";
                 req.session.accessToken = jwtToken;
-                res.cookie("user", jwtToken, { httpOnly: false, secure: true });
-                res.cookie('id', req.sessionID, { httpOnly: true, secure: true });
+                res.cookie("user", jwtToken, { httpOnly: false, secure: true, domain: 'https://beauty-service-app-1.onrender.com' });
+                res.cookie('id', req.sessionID, { httpOnly: true, secure: true, domain: 'https://beauty-service-app-1.onrender.com' });
                 const emailMsg = {
                     from: process.env.GMAIL_ACCOUNT,
                     to: userEmail,
