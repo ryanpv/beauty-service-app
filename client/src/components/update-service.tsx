@@ -24,6 +24,7 @@ export default function UpdateService() {
   const { serviceId } = useParams();
   const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const isAdmin = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
 
   // Fetch service to be updated
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function UpdateService() {
   const service = async() => {
     try {
       setLoading(true);
-      const fetchService = await fetch(`https://localhost:3001/services/${ serviceId }`, {
+      const fetchService = await fetch(`${ serverUrl }/services/${ serviceId }`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -70,7 +71,7 @@ export default function UpdateService() {
 
   const serviceCategories = async() => {
     try {
-      const fetchCategories = await fetch(`https://localhost:3001/service-categories`, {
+      const fetchCategories = await fetch(`${ serverUrl }/service-categories`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -108,7 +109,7 @@ export default function UpdateService() {
     event.preventDefault();
 
     try {
-      const submitServiceUpdate = await fetch(`https://localhost:3001/services/${ serviceId }`, {
+      const submitServiceUpdate = await fetch(`${ serverUrl }/services/${ serviceId }`, {
         method: "PUT",
         credentials: "include",
         headers: {

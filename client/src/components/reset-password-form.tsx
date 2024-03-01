@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 
 const ResetPassword:React.FC = () => {
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const newPassRef = React.useRef<HTMLInputElement | null>(null);
   const confirmNewPassRef = React.useRef<HTMLInputElement | null>(null);
   const queryParams = new URLSearchParams(window.location.search);
@@ -26,7 +27,7 @@ const ResetPassword:React.FC = () => {
       const confirmPassValue = confirmNewPassRef.current?.value;
   
       if (newPassValue !== undefined && newPassValue === confirmPassValue) {
-        const resetPassword = await fetch(`https://localhost:3001/password-resets/${ token }`,{
+        const resetPassword = await fetch(`${ serverUrl }/password-resets/${ token }`,{
           method: "PUT",
           credentials: "include",
           headers: {

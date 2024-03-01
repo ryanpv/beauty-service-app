@@ -22,6 +22,7 @@ const AppointmentsList:React.FC = () => {
   const [appointmentList, setAppointmentList] = React.useState<AppointmentList>([]);
   const [loading, setLoading] = React.useState(false);
   const isAdmin = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
 
   const date = new Date();
   const year = date.getFullYear();
@@ -52,7 +53,7 @@ const AppointmentsList:React.FC = () => {
       setLoading(true);
       const userId = typeof currentUser !== 'string' && currentUser.id
       if (userId) {
-        const fetchAppointments = await fetch(`https://localhost:3001/users/${ userId }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
+        const fetchAppointments = await fetch(`${ serverUrl }/users/${ userId }/appointments?status=${ formState.status }&start_date=${ formState.startDate }&end_date=${ formState.endDate }&search=${ formState.search }`, {
           method: "GET",
           credentials: "include",
           headers: {

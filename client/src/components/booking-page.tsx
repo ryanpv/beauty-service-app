@@ -8,6 +8,7 @@ import { BarLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
 
 const BookingPage: React.FC = () => {
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const { currentUser, setCurrentUser, currentUserState, allServices, setAllServices } = useStateContext();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -50,7 +51,7 @@ const BookingPage: React.FC = () => {
   const servicesList = async() => {
     try {
       setLoading(true);
-      const fetchServices = await fetch(`https://localhost:3001/services/`, {
+      const fetchServices = await fetch(`${ serverUrl }/services/`, {
         method: "GET",
         credentials: "include",
         headers: {

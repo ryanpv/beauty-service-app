@@ -6,7 +6,9 @@
    "type": "module",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "concurrently -k \"tsc -p ../server -w\" \"nodemon\"",
+      "dev": "export NODE_ENV=development concurrently -k \"tsc -p ../server -w\" \"nodemon\"",
+      "tsc": "tsc",
+      "prod": "node dist/server.js",
       "start": "ts-node src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs",
       "migration": " npm run typeorm migration:run -- -d ./src/data-source.ts"

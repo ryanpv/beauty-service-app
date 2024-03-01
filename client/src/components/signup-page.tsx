@@ -5,6 +5,7 @@ import { useStateContext } from '../contexts/state-contexts';
 import { setUser } from '../utils/set-user';
 
 export default function SignupPage() {
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const navigate = useNavigate();
   type SignupForm = {
     email: string;
@@ -44,7 +45,7 @@ export default function SignupPage() {
         && signupFormData.password !== ""
         && signupFormData.confirm_password !== ""
         ) {
-          const signUp = await fetch(`https://localhost:3001/users`, {
+          const signUp = await fetch(`${ serverUrl }/users`, {
             method: "POST",
             credentials: "include",
             headers: {

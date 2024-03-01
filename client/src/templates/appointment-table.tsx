@@ -32,6 +32,7 @@ interface AppointmentsList {
 };
 
 const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setAppointmentList, status }) => {
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const { currentUser } = useStateContext();
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +42,7 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
       const confirmDelete = window.confirm(`Do you wish to cancel your appointment for ${ service_name } on ${ date } at ${ time }`)
       if (confirmDelete) {
         const userId = typeof currentUser !== 'string' && currentUser.id;
-        const deleteRequest = await fetch(`https://localhost:3001/users/${ userId }/appointments/${ appointmentId }`, {
+        const deleteRequest = await fetch(`${ serverUrl }/users/${ userId }/appointments/${ appointmentId }`, {
           method: "DELETE",
           credentials: "include",
         });

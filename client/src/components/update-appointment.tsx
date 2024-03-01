@@ -31,6 +31,7 @@ const UpdateAppointment: React.FC = () => {
     price_paid: ""
   };
 
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const [appointment, setAppointment] = useState<Appointment>(appointmentState)
   const { appointmentId } = useParams();
@@ -45,7 +46,7 @@ const UpdateAppointment: React.FC = () => {
   const fetchAppointment = async() => {
     try {
       setLoading(true);
-      const getAppointment = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
+      const getAppointment = await fetch(`${ serverUrl }/users/${ currentUser }/appointments/${ appointmentId }`, {
         method: "GET",
         credentials: "include"
       });
@@ -92,7 +93,7 @@ const UpdateAppointment: React.FC = () => {
 
     try {
       setLoading(true);
-      const putFormRequest = await fetch(`https://localhost:3001/users/${ currentUser }/appointments/${ appointmentId }`, {
+      const putFormRequest = await fetch(`${ serverUrl }/users/${ currentUser }/appointments/${ appointmentId }`, {
         method: "PUT",
         credentials: "include",
         headers: {

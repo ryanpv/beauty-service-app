@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 
 const NewPasswordRequest:React.FC = () => {
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const emailInputRef = React.useRef<HTMLInputElement | null>(null);
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -17,7 +18,7 @@ const NewPasswordRequest:React.FC = () => {
   
       if (emailRegex.test(emailInputValue)) {
   
-        const newPasswordRequest = await fetch("https://localhost:3001/password-resets",{
+        const newPasswordRequest = await fetch(`${ serverUrl }/password-resets`,{
           method: "POST",
           credentials: "include",
           headers: {

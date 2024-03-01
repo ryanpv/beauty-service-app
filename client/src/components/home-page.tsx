@@ -104,7 +104,7 @@ export default function HomePage() {
         {/* <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr> */}
 
         <div ref={ photoRef } className='container py-5'>
-          <div className="flex justify-between overflow-x-hidden rounded-full h-80  ">
+          <div className="flex justify-between overflow-x-hidden rounded-full h-80">
             <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0 gap-1">
               {
                 igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {

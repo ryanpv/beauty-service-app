@@ -5,6 +5,7 @@ import { useStateContext } from '../contexts/state-contexts';
 import BarLoader from 'react-spinners/BarLoader';
 
 const Services:React.FC = () => {
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const [loading, setLoading] = useState(false);
 
   const { currentUser, allServices, setAllServices } = useStateContext();
@@ -21,7 +22,7 @@ const Services:React.FC = () => {
   const servicesList = async() => {
     try {
       setLoading(true);
-      const fetchServices = await fetch(`https://localhost:3001/services`, {
+      const fetchServices = await fetch(`${ serverUrl }/services`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -33,7 +34,7 @@ const Services:React.FC = () => {
       setAllServices(services);
       setLoading(false);
     } catch (error) {
-      console.log("Fetch services ferror: ", error);
+      console.log("Fetch services error: ", error);
       setLoading(false);
     }
   };

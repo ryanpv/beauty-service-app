@@ -7,6 +7,7 @@ const AddService:React.FC = () => {
   const [error, setError] = useState("");
   const { currentUser, setCurrentUser, currentUserState } = useStateContext();
   const isAdmin = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
 
   useEffect(() => {
     serviceCategories();
@@ -21,7 +22,7 @@ const AddService:React.FC = () => {
 
   const serviceCategories = async() => {
     setLoading(true);
-    const fetchCategories = await fetch(`https://localhost:3001/service-categories`);
+    const fetchCategories = await fetch(`${ serverUrl }/service-categories`);
 
     if (fetchCategories.status === 403) {
       setCurrentUser(currentUserState);

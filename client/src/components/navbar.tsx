@@ -5,6 +5,7 @@ import { useStateContext } from '../contexts/state-contexts';
 import { FiMenu } from 'react-icons/fi';
 
 const Navbar: FC = () => {
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useStateContext();
   const [show, setShow] = React.useState(false);
@@ -33,7 +34,7 @@ const Navbar: FC = () => {
 
   const logout = async() => {
     try {
-      const logoutRequest = await fetch(`https://localhost:3001/sessions`, {
+      const logoutRequest = await fetch(`${ serverUrl }/sessions`, {
         method: "DELETE",
         credentials: "include"
       });

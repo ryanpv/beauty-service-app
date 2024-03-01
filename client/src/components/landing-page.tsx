@@ -3,9 +3,11 @@ import { BsArrowRight } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 export default function LandingPage() {
+  console.log("env: ", process.env.NODE_ENV);
+  
   return (
     <>
-    <div className='flex flex-col space-y-10 px-8 sm:px-16 min-h-screen w-screen bg-gray-100'>
+    <div className='flex flex-col space-y-10 px-8 sm:px-16 min-h-full w-screen bg-gray-100'>
       <div className='space-y-3'>
         <h1 className='text-center mt-10 text-4xl font-bold text-pink-300 underline decoration-gray-400'>PolishByCin</h1>
         <hr className='h-px mx-3 border-pink-200 w-full sm:max-w-screen-md mx-auto' />
@@ -37,8 +39,9 @@ export default function LandingPage() {
 
 
     </div>
+
       <footer className='flex bg-gray-100'>
-        <div className='mx-auto space-y-2 pb-5'>
+        <div className='mx-auto space-y-2 pb-5 mt-10'>
           <p>Thanks for stopping by! To check out my other projects or connect with me, you can visit one of my links:</p>
           <div className='flex flex-cols-2 justify-center space-x-2'>
             <BsArrowRight/>

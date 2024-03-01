@@ -20,6 +20,7 @@ export default function ContactPage() {
   });
   const [error, setError] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
 
   const contactFormHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -36,7 +37,7 @@ export default function ContactPage() {
     try {
       setLoading(true);
 
-      const sendContactForm = await fetch("https://localhost:3001/contact-messages", {
+      const sendContactForm = await fetch(`${ serverUrl }/contact-messages`, {
         method: "POST",
         headers: {
           "Content-type": "application/json"

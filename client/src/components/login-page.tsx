@@ -5,6 +5,7 @@ import { BarLoader } from 'react-spinners';
 import { setUser } from '../utils/set-user';
 
 export default function LoginPage() {
+  const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const { currentUser, setCurrentUser } = useStateContext();
   const [error, setError] = React.useState("");
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function LoginPage() {
     event.preventDefault();
     try {
       setLoading(true);
-      const login = await fetch(`https://localhost:3001/sessions`, {
+      const login = await fetch(`${ serverUrl }/sessions`, {
         method: "POST",
         credentials: "include",
         headers: {
