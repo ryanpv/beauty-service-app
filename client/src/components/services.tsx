@@ -64,7 +64,7 @@ console.log("server: ", process.env.NODE_ENV);
         >
         Book Appointment
       </Link>
-      { loading ? <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> : 
+
       <div className='space-y-6 text-gray-600'>
   {/* REGULAR POLISH SERVICES SECTION */}
         <div className='mx-3'>
@@ -74,8 +74,12 @@ console.log("server: ", process.env.NODE_ENV);
             open toe shoes for pedicures, and expect additional time for drying!</p>
         </div>
 
-        <ServiceCategory list={ allServices } serviceCategoryId={ regularShellac } loading={ loading }/>
-        
+        { loading ? 
+          <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> 
+          :
+          <ServiceCategory list={ allServices } serviceCategoryId={ regularShellac } loading={ loading }/> 
+        }
+          
   {/* GEL/SHELLAC SERVICES SECTION */}
         <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
 
@@ -84,7 +88,11 @@ console.log("server: ", process.env.NODE_ENV);
           <p>Beautiful pigments with a glossy finish. Or choose a matte top coat if you prefer! Gel/Shellac can be expected to last about 2-3 weeks with care. Feel confident with our 1 week guarantee!</p>
         </div>
 
-        <ServiceCategory list={ allServices } serviceCategoryId={ gelShellac } loading={ loading }/>
+        { loading ? 
+          <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> 
+          :
+          <ServiceCategory list={ allServices } serviceCategoryId={ gelShellac } loading={ loading }/>
+        }
 
   {/* BIO GEL SERVICES SECTION */}
         <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
@@ -94,7 +102,11 @@ console.log("server: ", process.env.NODE_ENV);
           <p>Strong and durable nails with a glossy or matte finish. Perfect for long nails or weak/brittle nails. Can be expected to last about 3-4 weeks. Backed by our 1 week guarantee.</p>
         </div>
 
-        <ServiceCategory list={ allServices } serviceCategoryId={ bioGel } loading={ loading }/>
+        { loading ? 
+          <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> 
+          :
+          <ServiceCategory list={ allServices } serviceCategoryId={ bioGel } loading={ loading }/>
+        }
 
   {/* NAIL COMBO SERVICES SECTION */}
         <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
@@ -104,7 +116,11 @@ console.log("server: ", process.env.NODE_ENV);
           <p></p>
         </div>
 
-        <ServiceCategory list={ allServices } serviceCategoryId={ nailCombo } loading={ loading }/>
+        { loading ? 
+          <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> 
+          :
+          <ServiceCategory list={ allServices } serviceCategoryId={ nailCombo } loading={ loading }/>
+        }
 
   {/* ADDITIONAL NAIL SERVICES SECTION */}
         <hr className="mx-5 lg:mx-0 border-pink-300"></hr>
@@ -114,9 +130,13 @@ console.log("server: ", process.env.NODE_ENV);
           <p>We are pleased to offer high quality, beautiful designs from our talented nail techs. We are always on trend and constantly update our skills to keep up with the latest styles. We offer everything from the classic French to ombré to marble to lots of bling! We have pearls, metal shapes, foil, stickers, dust, glitter…you name it! To top it all off, we offer Swarovski crystals for maximum sparkle and shine. Be sure to check out our Instagram for our latest creations!</p>
         </div>
 
-        <ServiceCategory list={ allServices } serviceCategoryId={ additionalNail } loading={ loading }/>
+        { loading ? 
+          <div className='mx-auto mt-10'><BarLoader color='#fbb6ce'/></div> 
+          :
+          <ServiceCategory list={ allServices } serviceCategoryId={ additionalNail } loading={ loading }/>
+        }
     </div>
-    }
+    
     </div>
   )
 };
