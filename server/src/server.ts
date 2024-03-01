@@ -53,6 +53,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     'http://localhost:3000',
+    'https://beauty-service-app.onrender.com',
     'https://beauty-service-app-1.onrender.com',
     'https://polishbycin.com'
   ],
