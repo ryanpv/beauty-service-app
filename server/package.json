@@ -6,7 +6,7 @@
    "type": "module",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "export NODE_ENV=development concurrently -k \"tsc -p ../server -w\" \"nodemon\"",
+      "dev": "NODE_ENV=development concurrently -k \"tsc -p ../server -w\" \"nodemon\"",
       "build": "tsc",
       "prod": "NODE_ENV=production node dist/server.js",
       "start": "ts-node src/index.ts",
