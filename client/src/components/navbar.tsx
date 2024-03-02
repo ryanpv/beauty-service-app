@@ -21,6 +21,10 @@ const Navbar: FC = () => {
     }
   }, [location]);
 
+  React.useEffect(() => {
+    setShow(false);
+  }, [location]);
+
   // Event listener to check if screen is back to large (1024p+), if it is then revert menu back to original styling state
   React.useEffect(() => {
     const handleScreenResize = () => {
