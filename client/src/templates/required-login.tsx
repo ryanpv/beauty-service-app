@@ -6,7 +6,7 @@ export default function RequiredLogin() {
   return (
     <>
       <Unauthorized />
-      
+
       <div className='container flex mt-10 text-xl'>
         <div className='flex flex-1 flex-col justify-center'>
           <div className='mx-auto font-bold'>
@@ -14,7 +14,7 @@ export default function RequiredLogin() {
           </div>
 
           <div className='mx-auto'>
-            <p>You can follow this link to <Link to='/services' className='font-bold text-pink-300 hover:text-pink-700'>signup</Link></p>
+            <p>You can follow this link to <Link to='/register' className='font-bold text-pink-300 hover:text-pink-700'>signup</Link></p>
           </div>
 
           <div className='mx-auto'>
