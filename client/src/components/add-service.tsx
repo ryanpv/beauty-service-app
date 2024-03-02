@@ -69,7 +69,7 @@ const AddService:React.FC = () => {
 
   const formSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    fetch(`https://localhost:3001/services`, {
+    fetch(`${ serverUrl }:3001/services`, {
       method: "POST",
       credentials: "include",
       headers: {
