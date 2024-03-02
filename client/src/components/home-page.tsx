@@ -85,7 +85,7 @@ export default function HomePage() {
         </Link>
 
         <p className='text-white text-xl font-semibold text-center'>
-          Welcome to my world as a nail technician!
+          Welcome to my world of nail art!
         </p>
       </div>
 
