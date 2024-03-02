@@ -13,7 +13,7 @@ export default function BookingSuccessPage() {
 
 
   if (bookingSuccess) {
-    navigate("/");
+    navigate("/home");
   }
 
   return (

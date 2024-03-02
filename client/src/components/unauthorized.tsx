@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 export default function Unauthorized() {
   const location = useLocation();
-console.log("unauthorized component called");
 
   return (
     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">

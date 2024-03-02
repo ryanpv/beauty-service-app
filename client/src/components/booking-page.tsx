@@ -121,8 +121,6 @@ const BookingPage: React.FC = () => {
           setError("");
           navigate("/booking-success");
         }
-        
-        console.log("appointment req: ", appointmentRequest);
       }
 
     } catch (error) {
