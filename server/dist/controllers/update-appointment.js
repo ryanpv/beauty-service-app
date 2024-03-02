@@ -69,7 +69,8 @@ export const updateAppointment = async (req, res) => {
                 const adminUpdateAppointmentRequest = await pool.query(`
           SELECT * FROM update_appointment_admin($1, $2, $3, $4, $5, $6, $7);
         `, [email, status, price_paid, appointmentId, date, time, serviceId]);
-                if (adminUpdateAppointmentRequest.rows[0].update_appointment_admin !== null && status_name.toLowerCase() === 'upcoming') {
+                // if (adminUpdateAppointmentRequest.rows[0].update_appointment_admin !== null && (status_name.toLowerCase() === 'upcoming' || Number(status) === 1)) {
+                if (adminUpdateAppointmentRequest.rows[0].update_appointment_admin !== null && Number(status) === 1) {
                     const emailMsg = {
                         from: process.env.GMAIL_ACCOUNT,
                         to: email,
