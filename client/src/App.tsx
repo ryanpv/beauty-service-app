@@ -26,6 +26,7 @@ import { useLocation } from 'react-router-dom';
 import UserLoggedIn from './components/logged-in-check';
 import PasswordResetSuccess from './templates/password-reset-success';
 import FailedPasswordReset from './templates/failed-password-reset';
+import RequiredLogin from './templates/required-login';
 
 function App() {
   const { currentUser, setCurrentUser } = useStateContext();
@@ -82,6 +83,7 @@ function App() {
           <Route path='/password-reset-success' element={ <PasswordResetSuccess /> } />
           <Route path='/token-expired' element={ <FailedPasswordReset /> } />
           <Route path='/add-new-service' element={ !adminUser ? <Unauthorized /> : <AddService /> } />
+          <Route path='/login-required' element={ <RequiredLogin /> } />
         </Routes>
       </div>
 
