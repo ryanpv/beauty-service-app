@@ -53,7 +53,7 @@ export default function PhotoGallery() {
 
   const Photos = (props: IgPhotosProp) => {
     return (
-      <div className='relative hover:z-30 hover:scale-125 transition-all duration-200' >
+      <div className='relative hover:z-30 sm:hover:scale-125 transition-all duration-200' >
         <Link to={`${props.permalink}`} target='_blank'>  
           <img className='h-full rounded-xl max-w-full' src={ props.media_url } alt=''/>
         </Link>
