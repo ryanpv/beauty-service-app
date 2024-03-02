@@ -73,7 +73,11 @@ export const addAppointment = async(req: Request, res: Response) => {
           to: userEmail,
           subject: `PolishByCin - Appointment request received`,
           text: `Your appointment request has been received for "${ JSON.parse(req.body.id).service_name }" at ${ time } on ${ formattedDate }. 
-          Please allow up to 24 hours for a response. Thank you for booking with me.`
+          This appointment is NOT confirmed until you receive a confirmation email.
+          Please allow up to 24 hours for a response. 
+          Thank you for your booking request! \n
+          -\n
+          PolishByCin`
         };
 
         const notificationToAdmin = {
