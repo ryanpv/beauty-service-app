@@ -62,7 +62,7 @@ function App() {
         <Routes>
           <Route path='/' element={ <LandingPage /> } />
           <Route path='/home' element={ <HomePage /> } />
-          <Route path='/book-appointment' element={ noUserLogged ? <Unauthorized /> : <BookingPage /> } />
+          <Route path='/book-appointment' element={ noUserLogged ? <RequiredLogin /> : <BookingPage /> } />
           {/* <Route path='/book-appointment' element={ <BookingPage /> } /> */}
           <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } />
           {/* <Route path='/booking-success' element={ <BookingSuccessPage /> } /> */}
@@ -83,7 +83,7 @@ function App() {
           <Route path='/password-reset-success' element={ <PasswordResetSuccess /> } />
           <Route path='/token-expired' element={ <FailedPasswordReset /> } />
           <Route path='/add-new-service' element={ !adminUser ? <Unauthorized /> : <AddService /> } />
-          <Route path='/login-required' element={ <RequiredLogin /> } />
+          {/* <Route path='/login-required' element={ <RequiredLogin /> } /> */}
         </Routes>
       </div>
 
