@@ -1,4 +1,4 @@
-# PolishByCin - A beauty service web-app *** INCOMPLETE README ***
+# PolishByCin - A beauty service web-app
 
 This is a project I developed for a client I know personally. They requested the app for a business they are planning in the future. However, in the mean time, it can also be used to showcase their current works. Throughout the development life cycle, we discussed plans about designs and features to be implemented that we believe provides the best user experiences. 
 
@@ -6,11 +6,11 @@ This was also an opportunity for myself to strengthen my skills in typescript an
 
 As the web-app stays live, we will continue to iterate and plan more features or improve existing ones for better user experience
 
-<!-- To check out the live site, visit [PolishByCin](site address) -->
+To check out the live site, visit [PolishByCin](https://www.polishbycin.com)
 
 If you'd like to take a look at the full source code, go to [beauty-service-app](https://github.com/ryanpv/beauty-service-app)
 
-<!-- ![PolishByCin-Screenshot](https://github.com/ryanpv/beauty-service-app/blob/main/public/(screenshot.jpg)) -->
+![PolishByCin-Screenshot](https://github.com/ryanpv/beauty-service-app/blob/main/public/(polishbycin-screenshot.jpg))
 
 ## Features
 * View list of available beauty(nail) services
@@ -49,8 +49,8 @@ If you'd like to take a look at the full source code, go to [beauty-service-app]
 * Add fetch functionality for scrolling gallery on homepage
 * Possibly fetch services list on first time web-app is loaded to avoid loading for users
 
-## Deployment (CI/CD pipeline) - *** TO BE COMPLETED *** 
-* 
+## Deployment
+* Full application including the PostgreSQL db is deployed through Render services (render.com)
 
 ## Run locally
 If anyone wishes to run this locally, PostgreSQL must be installed on your system along with all other packages. After, start the server with "npm run dev" and then client side with "npm run start". Please see package.json files for both for more scripts.
