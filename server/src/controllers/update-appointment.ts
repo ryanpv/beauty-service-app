@@ -78,7 +78,12 @@ export const updateAppointment = async(req: Request, res: Response) => {
         `, [email, status, price_paid, appointmentId, date, time, serviceId]);
             
         // if (adminUpdateAppointmentRequest.rows[0].update_appointment_admin !== null && (status_name.toLowerCase() === 'upcoming' || Number(status) === 1)) {
-        if (adminUpdateAppointmentRequest.rows[0].update_appointment_admin !== null && Number(status) === 1) {
+        // status 1 === "upcoming"
+        if (
+          adminUpdateAppointmentRequest.rows[0].update_appointment_admin !== null 
+          && (Number(status) === 1
+          || Number(status) === 2)
+          ) {
           const emailMsg = {
             from: process.env.GMAIL_ACCOUNT,
             to: email,
@@ -87,7 +92,7 @@ export const updateAppointment = async(req: Request, res: Response) => {
             Service: ${ service_name } \n
             Date: ${ formattedDate } \n
             Time: ${ time } \n
-            STATUS: ${ status_name } \n
+            STATUS: ${ Number(status) === 1 ? 'UPCOMING' : Number(status) === 2 ? 'REQUESTED' : '' } \n
             If you have any questions/concerns, please feel free to reach out. Thank you for booking with me!`
           };
 
