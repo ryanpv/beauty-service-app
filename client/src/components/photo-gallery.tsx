@@ -58,7 +58,7 @@ export default function PhotoGallery() {
           <img className='rounded-xl max-w-full object-cover h-full' src={ props.media_url } alt=''/>
         </Link>
         <div className='absolute top-0 left-0 w-full px-4 text-center py-2 text-white pointer-events-none'>
-          <p className='font-bold text-lg'>{ props.caption?.split('-')[0] }</p>
+          <p className='font-bold text-xs sm:text-lg'>{ props.caption?.split('-')[0] }</p>
         </div>
       </div>
     )
@@ -96,7 +96,7 @@ export default function PhotoGallery() {
       {/* TEMP CLEAR LOCALSTORAGE BUTTON  */}
 {/* <button onClick={ clearStorage }>CLEAR STORAGE</button> */}
       <div className='container grid grid-cols-1 max-w-4xl'>
-        <div className='grid grid-cols-2 md:grid-cols-3 gap-1 m-auto'>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-1'>
           {
             // Array.isArray(igPhotos?.data) && igPhotos.data.length > 0 
             igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
