@@ -10,7 +10,7 @@ To check out the live site, visit [PolishByCin](https://www.polishbycin.com)
 
 If you'd like to take a look at the full source code, go to [beauty-service-app](https://github.com/ryanpv/beauty-service-app)
 
-![PolishByCin-Screenshot](https://github.com/ryanpv/beauty-service-app/blob/main/public/(polishbycin-screenshot.jpg))
+![PolishByCin-Screenshot](https://github.com/ryanpv/beauty-service-app/blob/main/public/(polishbycin-screenshot.png))
 
 ## Features
 * View list of available beauty(nail) services
