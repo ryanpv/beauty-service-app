@@ -45,6 +45,7 @@ export const getUserAppointments = async(req: Request, res: Response) => {
         `, [status, start_date, end_date, search]);
         
       const results = appointments.rows;
+      
       res.status(200).json(results)
     } else if (authorizedUser) {    
       pool.query(`
