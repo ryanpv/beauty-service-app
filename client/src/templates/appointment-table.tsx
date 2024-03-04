@@ -69,8 +69,8 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
     if (appointmentList.length > 0) {
       return appointmentList.map((appointment) => {
         const date = new Date(appointment.date)
-        const month = date.toLocaleDateString('default', { month: 'short' });
-        const reformatDate = `${ date.getFullYear() }-${ month }-${ date.getDate() }`
+        const month = date.toLocaleDateString('default', { month: 'short', timeZone: 'UTC' });
+        const reformatDate = `${ date.getFullYear() }-${ month }-${ date.getUTCDate() }`
         console.log('fetched date: ', appointment.date);
         
 console.log('reformatted: ', reformatDate);
