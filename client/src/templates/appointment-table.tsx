@@ -71,7 +71,11 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
         const date = new Date(appointment.date)
         const month = date.toLocaleDateString('default', { month: 'short' });
         const reformatDate = `${ date.getFullYear() }-${ month }-${ date.getDate() }`
-console.log('dates', reformatDate);
+        console.log('fetched date: ', appointment.date);
+        
+console.log('reformatted: ', reformatDate);
+console.log('new date: ', date);
+
 
         return (
         <tr className='bg-pink-100' key={ appointment.id }>
