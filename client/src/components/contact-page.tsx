@@ -1,6 +1,7 @@
 import React from 'react';
 import { BarLoader } from 'react-spinners';
 import { FcCellPhone, FcClock, FcGlobe } from 'react-icons/fc';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 type ContactForm = {
   name: string;
@@ -8,6 +9,7 @@ type ContactForm = {
   phone_number: string;
   subject: string;
   message: string;
+  captchaToken: string;
 };
 
 export default function ContactPage() {
@@ -16,19 +18,32 @@ export default function ContactPage() {
     email: '',
     phone_number: '',
     subject: '',
-    message: ''
+    message: '',
+    captchaToken: '',    
   });
   const [error, setError] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
+  const captchaRef = React.useRef<ReCAPTCHA>(null);
 
   const contactFormHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
 
     setContactFormState((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
+  };
+
+  const handleCaptcha = (value: string | null) => {
+    if (value !== null) {
+      setContactFormState((prev) => (
+        {
+          ...prev,
+          captchaToken: value
+        }
+      ));
+    }
   };
 
   const submitContactForm = async(event: React.FormEvent) => {
@@ -36,7 +51,7 @@ export default function ContactPage() {
 
     try {
       setLoading(true);
-
+      
       const sendContactForm = await fetch(`${ serverUrl }/contact-messages`, {
         method: "POST",
         headers: {
@@ -54,13 +69,18 @@ export default function ContactPage() {
           email: '',
           phone_number: '',
           subject: '',
-          message: ''
+          message: '',
+          captchaToken: '',
         });
+
+        alert("Message successfully sent!");
       }
 
+      captchaRef.current?.reset();
       setLoading(false);
     } catch (error) {
       console.log("error form")
+      captchaRef.current?.reset();
       setError("Message/contact request was UNSUCCESSFUL.");
       setLoading(false);
     }
@@ -164,7 +184,14 @@ export default function ContactPage() {
                 value={ contactFormState.message }
                 className='h-48 min-h-fit py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 leading-6'
               />
-
+              
+              <div className='mx-auto'>
+                <ReCAPTCHA 
+                  sitekey={ process.env.REACT_APP_CAPTCHA_KEY || '' }
+                  ref={ captchaRef }
+                  onChange={ handleCaptcha }
+                />
+              </div>
 
               { loading ? <BarLoader className='mx-auto' color='#fbb6ce' /> 
               : 
