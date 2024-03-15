@@ -54,7 +54,7 @@ export default function HomePage() {
   return (
     <div className='flex flex-col bg-gray-100 '>
       <header 
-        className='flex flex-col w-full space-y-10 h-[70vh] fixed top-0 z-10 opacity-[.85]' 
+        className='flex flex-col contrast-125 w-full space-y-10 h-[70vh] fixed top-0 z-10 opacity-[.85]' 
         style={ { backgroundImage: `url(${require('./cover-photo.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }
       />
 
@@ -76,6 +76,10 @@ export default function HomePage() {
             </a>
           </div>
         </div>
+        <p className='text-white text-4xl font-bold text-center'>
+          Welcome to my world of nail art!
+        </p>
+
 
         <Link
           to='/book-appointment' 
@@ -83,10 +87,6 @@ export default function HomePage() {
         >
           Book Appointment
         </Link>
-
-        <p className='text-white text-xl font-semibold text-center'>
-          Welcome to my world of nail art!
-        </p>
       </div>
 
       <div className='z-10 bg-gray-100 pb-10 space-y-3 mt-[12vh]'>
