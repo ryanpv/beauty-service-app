@@ -27,6 +27,7 @@ import UserLoggedIn from './components/logged-in-check';
 import PasswordResetSuccess from './templates/password-reset-success';
 import FailedPasswordReset from './templates/failed-password-reset';
 import RequiredLogin from './templates/required-login';
+import Tester from './components/test-component';
 
 function App() {
   const { currentUser, setCurrentUser } = useStateContext();
@@ -60,6 +61,7 @@ function App() {
 
       <div className='flex-1'>
         <Routes>
+          <Route path='/tester' element={ <Tester /> } />
           <Route path='/' element={ <LandingPage /> } />
           <Route path='/home' element={ <HomePage /> } />
           <Route path='/book-appointment' element={ noUserLogged ? <RequiredLogin /> : <BookingPage /> } />

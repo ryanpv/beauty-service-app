@@ -30,3 +30,8 @@ yarn-error.log*
 /src/components/balloon-sq4.jpg
 /src/components/balloon-sq5.jpg
 /src/components/balloon-sq6.jpg
+
+/src/components/test-component.tsx
+/src/components/test1.png
+/src/components/test2.png
+/src/components/test3.png
