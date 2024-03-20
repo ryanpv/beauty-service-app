@@ -27,7 +27,7 @@ import UserLoggedIn from './components/logged-in-check';
 import PasswordResetSuccess from './templates/password-reset-success';
 import FailedPasswordReset from './templates/failed-password-reset';
 import RequiredLogin from './templates/required-login';
-import Tester from './components/test-component';
+// import Tester from './components/test-component';
 
 function App() {
   const { currentUser, setCurrentUser } = useStateContext();
