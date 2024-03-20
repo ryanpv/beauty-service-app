@@ -61,7 +61,7 @@ function App() {
 
       <div className='flex-1'>
         <Routes>
-          <Route path='/tester' element={ <Tester /> } />
+          {/* <Route path='/tester' element={ <Tester /> } /> */}
           <Route path='/' element={ <LandingPage /> } />
           <Route path='/home' element={ <HomePage /> } />
           <Route path='/book-appointment' element={ noUserLogged ? <RequiredLogin /> : <BookingPage /> } />
