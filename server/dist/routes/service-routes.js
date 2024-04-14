@@ -9,7 +9,7 @@ import { validateServiceForms } from '../middleware/validators/validate-new-serv
 import { verifyUser } from '../middleware/check-user.js';
 export const servicesRouter = express.Router();
 servicesRouter.route('/')
-    .get(routeCache(3600), getAllServices) // GET list of ALL service categories
+    .get(routeCache, getAllServices) // GET list of ALL service categories
     .post(validateServiceForms, verifyUser, addService); // POST new service - admin route
 servicesRouter.route('/:serviceId')
     .get(verifyUser, getService)

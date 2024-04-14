@@ -1,7 +1,7 @@
 import express from 'express';
+import https from 'https';
 import cookieParser from 'cookie-parser';
 import "dotenv/config.js";
-import https from 'https';
 import * as fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
@@ -31,11 +31,11 @@ import { validateNewpassRequest } from './middleware/validators/validate-newpass
 import { validatePasswordResetToken } from './middleware/validators/validate-reset-token.js';
 import { validateNewPassword } from './middleware/validators/validate-new-password.js';
 import { validateContactForm } from './middleware/validators/validate-contact-form.js';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3001;
-app.set('trust proxy', true);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+// app.set('trust proxy', true);
 const rate_limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
@@ -46,6 +46,7 @@ app.use(cookieParser());
 app.use(cors({
     origin: [
         'http://localhost:3000',
+        'https://localhost:3001',
         'https://beauty-service-app.onrender.com',
         'https://beauty-service-app-1.onrender.com',
         'https://www.polishbycin.com',
@@ -74,7 +75,7 @@ app.use(session({
         secure: true
     }
 }));
-app.use(rate_limiter);
+// app.use(rate_limiter);
 // if session expires/user cookie value does not match accessToken, user cookies will be cleared
 app.use((req, res, next) => {
     const userCookie = req.cookies.user;
@@ -109,14 +110,6 @@ app.get('/password-resets/:token', validatePasswordResetToken, passwordResetToke
 app.put('/password-resets/:token', validateNewPassword, passwordReset);
 /////////////////////////
 app.get('/appointment-times', appointmentTimes);
-// app.post("/sessions", (req: Request, res: Response) => {
-//   console.log("user session start");
-//   res.end();
-// });
-// app.delete("/sessions", (req: Request, res: Response) => {
-//   console.log("user session end");
-//   res.end();  
-// });
 if (process.env.NODE_ENV === 'development') {
     const options = {
         key: fs.readFileSync(path.join(__dirname, "localhost-key.pem")),

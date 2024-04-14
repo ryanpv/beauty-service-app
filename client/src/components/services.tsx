@@ -19,6 +19,7 @@ const Services:React.FC = () => {
   }, []);
   
   const servicesList = async() => {
+    
     try {
       setLoading(true);
       const fetchServices = await fetch(`${ serverUrl }/services`, {
@@ -28,7 +29,7 @@ const Services:React.FC = () => {
           "Content-type": "application/json"
         }
       });
-  
+
       const services = await fetchServices.json();
       setAllServices(services);
       setLoading(false);

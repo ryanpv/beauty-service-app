@@ -30,7 +30,8 @@ export const verifyUser = (req, res, next) => {
                     throw error;
                 res.status(400).json({ message: "Failed to logout" });
             });
-            res.cookie('userRole', null, { httpOnly: false });
+            res.cookie('user', null, { httpOnly: false });
+            res.cookie('id', null, { httpOnly: false });
             res.status(401).json({ message: "Invalid token" });
         }
     }

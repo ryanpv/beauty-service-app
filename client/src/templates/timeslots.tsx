@@ -17,11 +17,6 @@ type BookedTimeList = {
   duration: number;
 }[];
 
-// type DefaultTimeSlots = {
-//   startTime: string;
-//   duration: number;
-// }[];
-
 type NewAppointment = {
   date: Date | string;
   time: string;
@@ -102,30 +97,15 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, bookedTimes, ne
       </div>
       ));  
     } else {
-      return ;
-    // uses "filteredTimeSlots" that is a list of time slots that was filtered from times used by already booked appointments *** CAN REMOVE BLOCK??? ***
-    // return filteredTimeSlots.map((times: { startTime: string; duration: number; }) => 
-    //   (
-    //     <div>
-    //       <button
-    //       name='time'
-    //       value={ times.startTime }
-    //       onClick={ formChangeHandler }
-    //       className='w-24 sm:mx-3 bg-pink-300 hover:bg-pink-200 px-3 py-1.5 rounded-sm text-center font-semibold text-white focus:ring focus:ring-pink-500 focus:bg-pink-400'
-    //     >{ convertTime(times.startTime) }</button>
-    //   </div>
-    //   ));    
-  };
-}
-  // function that checks timeslots against the timeslots taken by booked appointments including durations. Targets times that are UNAVAILABLE - returns a bool to use for filter
+      return;
+    };
+  }
+  // Find timeslots that are unavailable/booked
   const checkBooked = (timeSlot: { startTime: string; duration: number }) => {
     return bookedTimes.some((booking) => {
       const bookedStart = dayjs(booking.time, 'HH:mm');
       const bookedEnd = bookedStart.add(booking.duration, 'minutes');
-
       const slotStart = dayjs(timeSlot.startTime, 'HH:mm');
-      // const parseService = newAppointment.id !== "" && JSON.parse(newAppointment.id);
-      // const slotEnd = slotStart.add(timeSlot.duration, 'minutes');
 
       return (
         bookedStart.isSame(slotStart) || // booked time is same as slot time
@@ -136,9 +116,10 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, bookedTimes, ne
     });
   };
 
-  const filteredTimeSlots = defaultTimeSlots.filter((slot) => !checkBooked(slot)); // the "!" operator is used because checkBooked() looks for timeslots that MATCH the already booked appointment times
+  // Filters out leftover timeslots
+  const filteredTimeSlots = defaultTimeSlots.filter((slot) => !checkBooked(slot)); 
 
-  // function to check if requested appointment + service duration overlaps any time slots already taken by booked appointments including durations - returns bool to help filter function (serviceDurationFIlter())
+  // find timeslots where service + duration overlap booked appointments in any way
   const checkServiceDuration = (timeSlot: { startTime: string; duration: number }) => {
     return bookedTimes.some((booking) => {
       const bookedTime = dayjs(booking.time, 'HH:mm'); // Booked appointment time
@@ -148,14 +129,14 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, bookedTimes, ne
       const serviceEnd = slotStart.add(serviceDuration.duration, 'minutes') // expected time at end of service
 
       return (
-        (serviceEnd.isAfter(bookedTime) && serviceEnd.isBefore(bookedTime.add(booking.duration, 'minutes'))) // expected time at end of service is after booked appointment start time AND end of service time is before the end of booked appointment
-        || (serviceEnd.isAfter(bookedTime) && serviceEnd.isSame(bookedTime.add(booking.duration, 'minutes'))) // expected time at end of service is after booked appointment start AND is the same time as the end of the booked appointment time
-        || (slotStart.isBefore(bookedTime) && serviceEnd.isAfter(bookedTime.add(booking.duration, 'minutes'))) // requested appointment time is before booked appointment start AND end of service time is after end of booked appointment time
+        (serviceEnd.isAfter(bookedTime) && serviceEnd.isBefore(bookedTime.add(booking.duration, 'minutes'))) // find times where service including its duration that falls within an already booked appointment and duration
+        || (serviceEnd.isAfter(bookedTime) && serviceEnd.isSame(bookedTime.add(booking.duration, 'minutes'))) // find times where end time of service is after booked appointment time and the end time of service ends at the same time as the booked service
+        || (slotStart.isBefore(bookedTime) && serviceEnd.isAfter(bookedTime.add(booking.duration, 'minutes'))) // find time where its before booked appointment time AND end of service time is after end of booked appointment time
       )
     })
   };
     
-  // uses checkServiceDuration() to see which times (timeslots + duration of service) do NOT overlap with times used by already booked appointments including durations
+  // Filters out remaining timeslots where service + duration can fit and not overlap any appointments
   const serviceDurationFilter = filteredTimeSlots.filter((slot) => !checkServiceDuration(slot));
 
   return (
