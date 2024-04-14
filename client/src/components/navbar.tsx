@@ -11,6 +11,9 @@ const Navbar: FC = () => {
   const [show, setShow] = React.useState(false);
   const [isHome, setIsHome] = React.useState(false);
   const location = useLocation();
+console.log('current user check: ', typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0);
+console.log('actual user: ', currentUser);
+
 
   // Sets the state for different navbar styling for homepage (homepage uses gradient)
   React.useEffect(() => {   

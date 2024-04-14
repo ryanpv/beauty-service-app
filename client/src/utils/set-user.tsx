@@ -10,7 +10,7 @@ export const setUser = () => {
     iat: 0,
     exp: 0
   }
-
+console.log("userLogged: ", userLogged)
   if (userLogged) {
     const decoded = jwtDecode<string>(userLogged);
     return decoded;
