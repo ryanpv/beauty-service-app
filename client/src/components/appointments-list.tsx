@@ -4,6 +4,7 @@ import { useStateContext } from '../contexts/state-contexts';
 import DatePicker from 'react-datepicker';
 import { BarLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
+import { setUser } from '../utils/set-user';
 
 const AppointmentsList:React.FC = () => {
   type AppointmentList = {
@@ -62,7 +63,9 @@ const AppointmentsList:React.FC = () => {
         });
 
         if (fetchAppointments.status === 401) {
-          setCurrentUser(currentUserState);
+          const resetUser = setUser();
+          
+          setCurrentUser(resetUser);
         } else if (fetchAppointments.status === 200) {
           const result = await fetchAppointments.json();
           setAppointmentList(result);

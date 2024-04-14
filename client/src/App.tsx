@@ -71,7 +71,7 @@ function App() {
           <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } />
           {/* <Route path='/appointments' element={ <AppointmentsList /> } /> */}
           <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
-          <Route path='/login' element={ noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
+          <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
           <Route path='/register' element={ <SignupPage /> } />
           <Route path='/successful-signup' element={ <SignupSuccess /> } />
           <Route path='/ig-auth' element={ <GetAuth /> } />
