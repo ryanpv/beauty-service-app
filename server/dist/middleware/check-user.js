@@ -36,6 +36,9 @@ export const verifyUser = (req, res, next) => {
         }
     }
     catch (error) {
+        console.error("check-user.verifyUser error: ", error);
+        res.cookie('user', null, { httpOnly: false });
+        res.cookie('id', null, { httpOnly: false });
         res.status(401).json({
             message: "Unsuccessful authentication."
         });

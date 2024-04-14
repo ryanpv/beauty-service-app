@@ -43,6 +43,10 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
       res.status(401).json({ message: "Invalid token" });
     }
   } catch (error) {
+    console.error("check-user.verifyUser error: ", error)
+    res.cookie('user', null, { httpOnly: false });
+    res.cookie('id', null, { httpOnly: false });
+    
     res.status(401).json({
       message: "Unsuccessful authentication."
     });
