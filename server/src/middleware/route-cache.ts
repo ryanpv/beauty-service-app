@@ -25,28 +25,32 @@ type ServiceResponse = {
 }[];
 
 
-const routeCache = (duration: number) => (req: Request, res: Response, next: NextFunction) => {
-  const key = req.originalUrl.replace(/%20/g, ''); // simple cache key because asset changes infrequently and is for all users
-  const cacheResponse = cache.get(key);
-
-  if (req.method === "POST" || req.method === "DELETE") {    
-    cache.del(key);
-
-    return next();
-  }
-
-  if (cacheResponse) {  
-    
-    res.status(200).json(cacheResponse);
-  } else {
-    (res as CachedResponse).originalJsonRes = res.json;
-
-    res.json = (responseBody: ServiceResponse) => {
-      cache.set(key, responseBody, duration)
-      return (res as CachedResponse).status(200).originalJsonRes(responseBody);
-    };
-    
-    next();
+const routeCache = (duration?: number) => async(req: Request, res: Response, next: NextFunction) => {
+  try {
+    const key = req.originalUrl.replace(/%20/g, ''); // simple cache key because asset changes infrequently and is for all users
+    const cacheResponse = cache.get(key);
+  
+    if (req.method === "POST" || req.method === "DELETE") {    
+      cache.del(key);
+  
+      return next();
+    }
+  
+    if (cacheResponse) {  
+      
+      res.status(200).json(cacheResponse);
+    } else {
+      (res as CachedResponse).originalJsonRes = res.json;
+  
+      res.json = (responseBody: ServiceResponse) => {
+        cache.set(key, responseBody, duration)
+        return (res as CachedResponse).status(200).originalJsonRes(responseBody);
+      };
+      
+      next();
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Cache error for database" });
   }
 };
 
