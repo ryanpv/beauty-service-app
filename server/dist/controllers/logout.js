@@ -5,8 +5,10 @@ export const logout = (req, res) => {
             res.status(400).json({ message: "Failed to log out" });
         }
         else {
+            console.log("user logout success");
             res.clearCookie('id', { domain: domain });
             res.clearCookie('user', { domain: domain });
+            res.clearCookie('connect.sid', { domain: domain });
             res.status(200).json({ message: "Logout successful" });
         }
     });
