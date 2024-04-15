@@ -52,7 +52,7 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
       console.error("error with check-user.verifyUser", error)
       res.cookie('user', null, { httpOnly: false });
       res.cookie('id', null, { httpOnly: false });
-      res.clearCookie('connect.sid');
+      // res.clearCookie('connect.sid');
     });
 
     res.status(401).json({
