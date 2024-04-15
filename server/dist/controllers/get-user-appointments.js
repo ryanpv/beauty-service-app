@@ -14,10 +14,6 @@ export const getUserAppointments = async (req, res) => {
         const currentDate = `${year}-${month}-${day}`;
         const start_date = req.query.start_date === "" ? currentDate : req.query.start_date;
         const end_date = req.query.end_date === "" ? null : req.query.end_date;
-        console.log("get-user-appointments, user check: ", userRole);
-        console.log("sessions check: ", clientSession);
-        console.log("cookies check: ", clientCookie);
-        console.log("user check: ", req.cookies.user);
         if (userRole === 'admin' && authorizedUser) {
             const appointments = await pool.query(`
         SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name
