@@ -26,6 +26,7 @@ export const verifyUser = (req, res, next) => {
         }
         else {
             req.session.destroy((error) => {
+                console.error("session destroy error:  ", error);
                 if (error)
                     throw error;
                 res.status(400).json({ message: "Failed to logout" });
@@ -39,6 +40,9 @@ export const verifyUser = (req, res, next) => {
         console.error("check-user.verifyUser error: ", error);
         res.cookie('user', null, { httpOnly: false });
         res.cookie('id', null, { httpOnly: false });
+        req.session.destroy((error) => {
+            console.error("error with check-user.verifyUser", error);
+        });
         res.status(401).json({
             message: "Unsuccessful authentication."
         });
