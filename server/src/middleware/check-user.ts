@@ -43,10 +43,12 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
 
       res.cookie('user', null, { httpOnly: false });
       res.cookie('id', null, { httpOnly: false });
+      res.cookie('connect.sid', { httpOnly: 'false' });
       res.status(401).json({ message: "Invalid token" });
     }
   } catch (error) {
     console.error("check-user.verifyUser error: ", error)
+    res.cookie('connect.sid', { httpOnly: 'false' });
     res.cookie('user', null, { httpOnly: false });
     res.cookie('id', null, { httpOnly: false });
     req.session.destroy((error) => {

@@ -87,21 +87,21 @@ app.use(session({
 app.use(rate_limiter);
 
 // if session expires/user cookie value does not match accessToken, user cookies will be cleared
-app.use((req, res, next) => {
-  const userCookie = req.cookies.user;
-  const sessionToken = (req.session as ModifiedSession).accessToken;
+// app.use((req, res, next) => {
+//   const userCookie = req.cookies.user;
+//   const sessionToken = (req.session as ModifiedSession).accessToken;
 
-  if (userCookie !== sessionToken) {
-    console.log('server.js: cleared sessions from app.use');
+//   if (userCookie !== sessionToken) {
+//     console.log('server.js: cleared sessions from app.use');
     
-    res.clearCookie('user');
-    res.clearCookie('id');
-    req.session.destroy((error) => {
-      console.error('server.js: error with sessions', error);
-    });
-  }
-  next();
-});
+//     res.clearCookie('user');
+//     res.clearCookie('id');
+//     req.session.destroy((error) => {
+//       console.error('server.js: error with sessions', error);
+//     });
+//   }
+//   next();
+// });
 
 // ROUTERS
 app.use('/test', testRoute);
