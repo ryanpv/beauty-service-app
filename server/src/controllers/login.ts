@@ -62,8 +62,8 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
 
           const domain = process.env.NODE_ENV === 'production' ? 'polishbycin.com' : 'localhost'
   
-          res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
-          res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
+          res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none' });
+          res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none' });
           
           res.status(200).json({ message: "Successfully authenticated user!" });
         }
