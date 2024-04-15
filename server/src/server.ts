@@ -92,8 +92,13 @@ app.use((req, res, next) => {
   const sessionToken = (req.session as ModifiedSession).accessToken;
 
   if (userCookie !== sessionToken) {
+    console.log('server.js: cleared sessions from app.use');
+    
     res.clearCookie('user');
     res.clearCookie('id');
+    req.session.destroy((error) => {
+      console.error('server.js: error with sessions', error);
+    });
   }
   next();
 });
