@@ -20,7 +20,8 @@ export const getUserAppointments = async(req: Request, res: Response) => {
     const end_date = req.query.end_date === "" ? null : req.query.end_date;
 
     console.log("get-user-appointments, user check: ", userRole);
-    console.log("sessions check: ", authorizedUser);
+    console.log("sessions check: ", clientSession);
+    console.log("cookies check: ", clientCookie);
       
       
     if (userRole === 'admin' && authorizedUser) {
