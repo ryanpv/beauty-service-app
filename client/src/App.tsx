@@ -37,7 +37,7 @@ function App() {
 
   React.useEffect(() => {
     const userLogged = setUser();
-    
+    console.log("app setting user: ", userLogged)
     setCurrentUser(userLogged)
   },[location]);
 
