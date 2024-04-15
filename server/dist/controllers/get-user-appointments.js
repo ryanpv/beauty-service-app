@@ -14,6 +14,8 @@ export const getUserAppointments = async (req, res) => {
         const currentDate = `${year}-${month}-${day}`;
         const start_date = req.query.start_date === "" ? currentDate : req.query.start_date;
         const end_date = req.query.end_date === "" ? null : req.query.end_date;
+        console.log("get-user-appointments, user check: ", userRole);
+        console.log("sessions check: ", authorizedUser);
         if (userRole === 'admin' && authorizedUser) {
             const appointments = await pool.query(`
         SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name
@@ -74,6 +76,8 @@ export const getUserAppointments = async (req, res) => {
             });
         }
         else {
+            console.error("User authorized?: ", authorizedUser);
+            console.error("user role: ", userRole);
             res.status(403).json({ message: "Unauthorized, login required" });
         }
     }
