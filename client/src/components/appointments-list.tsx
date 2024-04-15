@@ -61,10 +61,10 @@ const AppointmentsList:React.FC = () => {
             "Content-type": "application/json"
           }
         });
-
+console.log("appointments-list: ", fetchAppointments)
         if (fetchAppointments.status === 401) {
           const resetUser = setUser();
-          
+
           setCurrentUser(resetUser);
         } else if (fetchAppointments.status === 200) {
           const result = await fetchAppointments.json();

@@ -75,7 +75,7 @@ app.use(session({
         secure: true
     }
 }));
-// app.use(rate_limiter);
+app.use(rate_limiter);
 // if session expires/user cookie value does not match accessToken, user cookies will be cleared
 app.use((req, res, next) => {
     const userCookie = req.cookies.user;

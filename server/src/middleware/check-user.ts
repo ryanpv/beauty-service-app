@@ -31,12 +31,13 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     jwt.verify(token, process.env.JWT_SECRET);
 
     if (isAuthenticated) {
+      console.log("check-user.ts: user token authenticated");
+      
       next();
     } else {
       req.session.destroy((error) => {
         console.error("session destroy error:  ", error);
         
-        if (error) throw error;
         res.status(400).json({ message: "Failed to logout" });
       });
 
