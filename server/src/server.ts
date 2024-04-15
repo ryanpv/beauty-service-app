@@ -42,7 +42,7 @@ const PORT = process.env.PORT || 3001;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-// app.set('trust proxy', true);
+app.set('trust proxy', true);
 
 const rate_limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

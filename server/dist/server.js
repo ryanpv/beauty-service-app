@@ -35,7 +35,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-// app.set('trust proxy', true);
+app.set('trust proxy', true);
 const rate_limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 100,
@@ -103,6 +103,10 @@ app.get("/", (req, res) => {
 app.get("/test-auth", (req, res) => {
     console.log("response from ig auth");
     res.send("response from ig auth endpoint");
+});
+app.get("/clear-session", (req, res) => {
+    res.clearCookie('connect.sid');
+    res.status(200).json({ message: 'connect.sid cookie cleared' });
 });
 app.get('/get-roles', getRoles);
 app.get('/service-categories', getServiceCategories);
