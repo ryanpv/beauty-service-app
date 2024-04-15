@@ -22,6 +22,8 @@ export const getUserAppointments = async(req: Request, res: Response) => {
     console.log("get-user-appointments, user check: ", userRole);
     console.log("sessions check: ", clientSession);
     console.log("cookies check: ", clientCookie);
+    console.log("user check: ", req.cookies.user);
+    
       
       
     if (userRole === 'admin' && authorizedUser) {

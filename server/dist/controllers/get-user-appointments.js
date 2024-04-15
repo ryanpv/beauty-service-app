@@ -17,6 +17,7 @@ export const getUserAppointments = async (req, res) => {
         console.log("get-user-appointments, user check: ", userRole);
         console.log("sessions check: ", clientSession);
         console.log("cookies check: ", clientCookie);
+        console.log("user check: ", req.cookies.user);
         if (userRole === 'admin' && authorizedUser) {
             const appointments = await pool.query(`
         SELECT appointments.*, status_types.status, service_types.service_name, users.email, users.name

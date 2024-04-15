@@ -22,6 +22,8 @@ export const verifyUser = (req, res, next) => {
         const token = req.session.accessToken;
         const isAuthenticated = req.session.isAuthenticated;
         jwt.verify(token, process.env.JWT_SECRET);
+        console.log("cookie: ", req.cookies.id);
+        console.log('sessiondi: ', req.sessionID);
         if (isAuthenticated) {
             console.log("check-user.ts: user token authenticated");
             next();

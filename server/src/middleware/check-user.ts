@@ -30,6 +30,9 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     const isAuthenticated = (req.session as ModifiedSession).isAuthenticated;
     
     jwt.verify(token, process.env.JWT_SECRET);
+console.log("cookie: ", req.cookies.id);
+console.log('sessiondi: ', req.sessionID);
+
 
     if (isAuthenticated) {
       console.log("check-user.ts: user token authenticated");
