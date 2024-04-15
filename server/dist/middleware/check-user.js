@@ -16,6 +16,7 @@ export const checkUserRole = async (req, res, next) => {
         `, [userId]);
     res.status(200).json(userRole.rows[0]);
 };
+const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost';
 export const verifyUser = (req, res, next) => {
     try {
         const token = req.session.accessToken;
@@ -32,13 +33,13 @@ export const verifyUser = (req, res, next) => {
             });
             res.cookie('user', null, { httpOnly: false });
             res.cookie('id', null, { httpOnly: false });
-            res.cookie('connect.sid', null, { httpOnly: false });
+            res.clearCookie('connect.sid', { domain: domain });
             res.status(401).json({ message: "Invalid token" });
         }
     }
     catch (error) {
         console.error("check-user.verifyUser error: ", error);
-        res.cookie('connect.sid', null, { httpOnly: false });
+        res.clearCookie('connect.sid', { domain: domain });
         res.cookie('user', null, { httpOnly: false });
         res.cookie('id', null, { httpOnly: false });
         req.session.destroy((error) => {
