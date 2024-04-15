@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 
 export const setUser = () => {
   const userLogged = Cookies.get('user');  
-  console.log('set user: ', userLogged);
   
   const initialUserState = {
     id: 0,
