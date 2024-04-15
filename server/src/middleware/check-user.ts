@@ -38,8 +38,6 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     } else {
       req.session.destroy((error) => {
         console.error("session destroy error:  ", error);
-        
-        res.status(400).json({ message: "Failed to logout" });
       });
 
       res.cookie('user', null, { httpOnly: false });
@@ -48,11 +46,11 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     }
   } catch (error) {
     console.error("check-user.verifyUser error: ", error)
+    res.cookie('user', null, { httpOnly: false });
+    res.cookie('id', null, { httpOnly: false });
+    res.cookie('connect.sid', 'null')
     req.session.destroy((error) => {
       console.error("error with check-user.verifyUser", error)
-      res.cookie('user', null, { httpOnly: false });
-      res.cookie('id', null, { httpOnly: false });
-      // res.clearCookie('connect.sid');
     });
 
     res.status(401).json({
