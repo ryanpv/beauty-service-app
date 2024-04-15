@@ -42,9 +42,10 @@ export const login = async (req, res) => {
                     req.session.accessToken = jwtToken;
                     req.session.userEmail = userEmail;
                     req.session.userId = userId;
-                    const domain = process.env.NODE_ENV === 'production' ? 'polishbycin.com' : 'localhost';
-                    res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none' });
-                    res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none' });
+                    const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost';
+                    console.log("current domain: ", domain);
+                    res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
+                    res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
                     res.status(200).json({ message: "Successfully authenticated user!" });
                 }
             }
