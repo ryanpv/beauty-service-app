@@ -103,6 +103,11 @@ app.use(rate_limiter);
 //   next();
 // });
 
+app.use((req, res, next) => {
+  res.clearCookie('connect.sid')
+  next();
+});
+
 
 // ROUTERS
 app.use('/test', testRoute);
