@@ -103,10 +103,6 @@ app.use(rate_limiter);
 //   next();
 // });
 
-app.use((req, res, next) => {
-  res.clearCookie('connect.sid')
-  next();
-});
 
 
 // ROUTERS
@@ -126,6 +122,11 @@ app.get("/test-auth", (req: Request, res: Response) => {
   console.log("response from ig auth")
   res.send("response from ig auth endpoint");
 });
+
+app.get("/clear-session", (req: Request, res: Response) => {
+  res.clearCookie('connect.sid');
+  res.status(200).json({ message: 'connect.sid cookie cleared' });
+})
 
 app.get('/get-roles', getRoles)
 

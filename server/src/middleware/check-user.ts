@@ -48,7 +48,6 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     console.error("check-user.verifyUser error: ", error)
     res.cookie('user', null, { httpOnly: false });
     res.cookie('id', null, { httpOnly: false });
-    res.cookie('connect.sid', 'null')
     req.session.destroy((error) => {
       console.error("error with check-user.verifyUser", error)
     });
