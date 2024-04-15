@@ -30,19 +30,17 @@ export const verifyUser = (req, res, next) => {
             req.session.destroy((error) => {
                 console.error("session destroy error:  ", error);
             });
-            res.cookie('user', null, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
-            res.cookie('id', null, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
+            res.clearCookie('id', { domain: domain });
+            res.clearCookie('user', { domain: domain });
             res.status(401).json({ message: "Invalid token" });
         }
     }
     catch (error) {
         console.error("check-user.verifyUser error: ", error);
-        // res.cookie('user', null, { httpOnly: false });
-        // res.cookie('id', null, { httpOnly: false });
-        res.cookie('user', null, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
-        res.cookie('id', null, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
         req.session.destroy((error) => {
             console.error("error with check-user.verifyUser", error);
+            res.clearCookie('id', { domain: domain });
+            res.clearCookie('user', { domain: domain });
         });
         res.status(401).json({
             message: "Unsuccessful authentication."
