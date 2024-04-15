@@ -60,7 +60,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
           (req.session as ModifiedSession).userEmail = userEmail;
           (req.session as ModifiedSession).userId = userId;
 
-          const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
+          const domain = process.env.NODE_ENV === 'production' ? 'polishbycin.com' : 'localhost'
   
           res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
           res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });

@@ -16,14 +16,11 @@ export const checkUserRole = async (req, res, next) => {
         `, [userId]);
     res.status(200).json(userRole.rows[0]);
 };
-const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost';
 export const verifyUser = (req, res, next) => {
     try {
         const token = req.session.accessToken;
         const isAuthenticated = req.session.isAuthenticated;
         jwt.verify(token, process.env.JWT_SECRET);
-        console.log("cookie: ", req.cookies.id);
-        console.log('sessiondi: ', req.sessionID);
         if (isAuthenticated) {
             console.log("check-user.ts: user token authenticated");
             next();
