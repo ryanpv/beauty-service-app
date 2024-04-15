@@ -11,7 +11,7 @@ export const logout = (req: Request, res: Response) => {
 
       res.clearCookie('id', { domain: domain });
       res.clearCookie('user', { domain: domain });
-      res.clearCookie('connect.sid', { httpOnly: false });
+      res.clearCookie('connect.sid');
 
       res.status(200).json({ message: "Logout successful" });
     }

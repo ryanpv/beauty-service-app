@@ -44,18 +44,16 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
 
       res.cookie('user', null, { httpOnly: false });
       res.cookie('id', null, { httpOnly: false });
-      res.clearCookie('connect.sid', { httpOnly: false });
       res.status(401).json({ message: "Invalid token" });
     }
   } catch (error) {
     console.error("check-user.verifyUser error: ", error)
-    res.cookie('user', null, { httpOnly: false });
-    res.cookie('id', null, { httpOnly: false });
     req.session.destroy((error) => {
       console.error("error with check-user.verifyUser", error)
+      res.cookie('user', null, { httpOnly: false });
+      res.cookie('id', null, { httpOnly: false });
+      res.clearCookie('connect.sid');
     });
-    res.clearCookie('connect.sid', { httpOnly: false });
-    // res.clearCookie('connect.sid', { domain: domain });
 
     res.status(401).json({
       message: "Unsuccessful authentication."
