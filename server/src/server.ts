@@ -103,6 +103,13 @@ app.use(rate_limiter);
 //   next();
 // });
 
+app.use((req, res, next) => {
+  res.cookie('connect.sid', null, {
+    expires: new Date('Thu, 01 Jan 1970 00:00:00 UTC'),
+    httpOnly: true,
+  });
+})
+
 // ROUTERS
 app.use('/test', testRoute);
 app.use('/services', servicesRouter);
