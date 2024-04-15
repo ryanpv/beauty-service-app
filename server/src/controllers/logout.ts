@@ -9,9 +9,11 @@ export const logout = (req: Request, res: Response) => {
     } else {   
       console.log("user logout success")
 
-      res.clearCookie('id', { domain: domain });
-      res.clearCookie('user', { domain: domain });
+      // res.clearCookie('id', { domain: domain });
+      // res.clearCookie('user', { domain: domain });
       // res.clearCookie('connect.sid');
+      res.cookie('user', null, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
+      res.cookie('id', null, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
 
       res.status(200).json({ message: "Logout successful" });
     }

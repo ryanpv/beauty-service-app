@@ -5,6 +5,7 @@ import { pool } from '../queries.js';
 //   userRole?: string;
 //   accessToken?: string;
 // };
+const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost';
 export const checkUserRole = async (req, res, next) => {
     const { userId } = req.params;
     const userRole = await pool.query(`
@@ -36,8 +37,10 @@ export const verifyUser = (req, res, next) => {
     }
     catch (error) {
         console.error("check-user.verifyUser error: ", error);
-        res.cookie('user', null, { httpOnly: false });
-        res.cookie('id', null, { httpOnly: false });
+        // res.cookie('user', null, { httpOnly: false });
+        // res.cookie('id', null, { httpOnly: false });
+        res.cookie('user', null, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
+        res.cookie('id', null, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
         req.session.destroy((error) => {
             console.error("error with check-user.verifyUser", error);
         });

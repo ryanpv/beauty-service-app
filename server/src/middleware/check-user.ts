@@ -9,6 +9,7 @@ import { ModifiedSession } from '../controllers/login.js';
 //   userRole?: string;
 //   accessToken?: string;
 // };
+const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
 
 export const checkUserRole = async (req: Request, res: Response, next: NextFunction) => {
   const { userId } = req.params; 
@@ -45,8 +46,10 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     }
   } catch (error) {
     console.error("check-user.verifyUser error: ", error)
-    res.cookie('user', null, { httpOnly: false });
-    res.cookie('id', null, { httpOnly: false });
+    // res.cookie('user', null, { httpOnly: false });
+    // res.cookie('id', null, { httpOnly: false });
+    res.cookie('user', null, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
+    res.cookie('id', null, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
     req.session.destroy((error) => {
       console.error("error with check-user.verifyUser", error)
     });
