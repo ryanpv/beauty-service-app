@@ -33,7 +33,7 @@ export const verifyUser = (req, res, next) => {
             });
             res.cookie('user', null, { httpOnly: false });
             res.cookie('id', null, { httpOnly: false });
-            // res.clearCookie('connect.sid', { domain: domain });
+            res.clearCookie('connect.sid', { httpOnly: false });
             res.status(401).json({ message: "Invalid token" });
         }
     }
@@ -44,7 +44,7 @@ export const verifyUser = (req, res, next) => {
         req.session.destroy((error) => {
             console.error("error with check-user.verifyUser", error);
         });
-        res.cookie('connect.sid', null);
+        res.clearCookie('connect.sid', { httpOnly: false });
         // res.clearCookie('connect.sid', { domain: domain });
         res.status(401).json({
             message: "Unsuccessful authentication."
