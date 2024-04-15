@@ -40,8 +40,8 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
         console.error("session destroy error:  ", error);
       });
 
-      res.cookie('user', null, { httpOnly: false });
-      res.cookie('id', null, { httpOnly: false });
+      res.cookie('user', null, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
+      res.cookie('id', null, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
       res.status(401).json({ message: "Invalid token" });
     }
   } catch (error) {
