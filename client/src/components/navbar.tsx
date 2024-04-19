@@ -42,7 +42,7 @@ const Navbar: FC = () => {
         method: "DELETE",
         credentials: "include"
       });
-  
+
       if (logoutRequest.status !== 200) {
         throw Error("Failed to logout.")
       } else {

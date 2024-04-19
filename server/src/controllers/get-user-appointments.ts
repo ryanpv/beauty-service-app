@@ -86,6 +86,7 @@ export const getUserAppointments = async(req: Request, res: Response) => {
     }
 
   } catch (error) {
+    console.error("Error fetching appointments: ", error)
     res.status(400).json({ message: "Unable to get appointments" });
   }
 };

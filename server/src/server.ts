@@ -75,12 +75,9 @@ app.use(session({
   saveUninitialized: false,
   unset: 'destroy',
   rolling: true,
-  // cookie: { 
-  //   maxAge: 5 * 60 * 1000,
-  //   secure: true
-  //  } // ** REMOVE FOR PROD - 5 minutes
   cookie: { 
     maxAge: 24 * 30 * 60  * 60 * 1000, // 30 days
+    // maxAge: 10000, // DEV VALUE
     secure: true
    }
 }));
@@ -102,8 +99,6 @@ app.use(rate_limiter);
 //   }
 //   next();
 // });
-
-
 
 // ROUTERS
 app.use('/test', testRoute);

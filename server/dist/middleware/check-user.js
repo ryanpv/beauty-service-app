@@ -21,30 +21,26 @@ export const verifyUser = (req, res, next) => {
     try {
         const token = req.session.accessToken;
         const isAuthenticated = req.session.isAuthenticated;
-        jwt.verify(token, process.env.JWT_SECRET);
+        jwt.verify(token, process.env.JWT_SECRET); // throws error on invalid token
         if (isAuthenticated) {
             console.log("check-user.ts: user token authenticated");
             next();
-        }
-        else {
-            req.session.destroy((error) => {
-                console.error("session destroy error:  ", error);
-            });
-            res.clearCookie('id', { domain: domain });
-            res.clearCookie('user', { domain: domain });
-            res.status(401).json({ message: "Invalid token" });
         }
     }
     catch (error) {
         console.error("check-user.verifyUser error: ", error);
         req.session.destroy((error) => {
-            console.error("error with check-user.verifyUser", error);
+            if (error) {
+                console.error("error with check-user.verifyUser", error);
+                res.status(500).json({ message: "Internal server error: check-user session destroy." });
+            }
             res.clearCookie('id', { domain: domain });
             res.clearCookie('user', { domain: domain });
+            res.status(401).json({
+                message: "Unsuccessful authentication."
+            });
         });
-        res.status(401).json({
-            message: "Unsuccessful authentication."
-        });
+        return;
     }
 };
 //# sourceMappingURL=check-user.js.map
