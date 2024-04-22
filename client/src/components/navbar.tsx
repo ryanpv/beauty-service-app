@@ -48,7 +48,7 @@ const Navbar: FC = () => {
       } else {
         const loggedOutUser = setUser();
         setCurrentUser(loggedOutUser);
-        navigate('/home');
+        navigate('/');
       }
     } catch (error) {
       console.log("Logout error: ", error)
@@ -82,11 +82,13 @@ const Navbar: FC = () => {
     <>
       <nav 
         id='navbar'
-        className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36 px-6 pb-10' : 'p-6 bg-pink-300 shadow-md' }` }
+        // style={{ backgroundColor: "#342D59" }}
+        className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white shadow-xl px-6 h-16 bg-[#342D59]` }
+        // className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36 px-6 pb-10' : 'p-6 bg-pink-300 shadow-md' }` }
       >
         <div className='justify-start lg:px-5 text-4xl'>
-          <Link to='/home'>
-            PolishByCin
+          <Link to='/'>
+            PolishBy<span className="text-pink-300">Cin</span>
           </Link>
         </div>
 
@@ -104,9 +106,9 @@ const Navbar: FC = () => {
           // onMouseLeave={ navDisplay }      
           className={ `${ show ? 'p-5 z-60 drop-shadow-md rounded bg-pink-200 bg-opacity-50 backdrop-blur-sm opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' } lg:mt-0 lg:justify-end w-full block lg:flex flex-grow lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100` }
           >
-          <div className='nav-links lg:space-x-5 font- lg:text-2xl'>
-            <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-500'>
-              <Link to='/home'>
+          <div className='nav-links lg:space-x-5 lg:text-lg'>
+            <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-300'>
+              <Link to='/'>
                 Home
               </Link>
             </div>
