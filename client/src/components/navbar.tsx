@@ -83,9 +83,10 @@ const Navbar: FC = () => {
       <nav 
         id='navbar'
         // style={{ backgroundColor: "#342D59" }}
-        className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white shadow-xl px-6 h-16 bg-[#342D59]` }
+        className={ `block z-50 sticky top-0 text-white shadow-xl bg-[#342D59]` }
         // className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36 px-6 pb-10' : 'p-6 bg-pink-300 shadow-md' }` }
       >
+        <div className='container flex flex-wrap px-6 h-16 justify-between items-center'>
         <div className='justify-start lg:px-5 text-4xl'>
           <Link to='/'>
             PolishBy<span className="text-pink-300">Cin</span>
@@ -167,6 +168,8 @@ const Navbar: FC = () => {
             }
 
           </div>
+        </div>
+
         </div>
       </nav>
     </>
