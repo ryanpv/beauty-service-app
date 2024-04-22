@@ -65,25 +65,6 @@ export default function HomePage() {
         // style={ { backgroundImage: `url(${require('./pink-design.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center', height: `${ window.innerHeight * 0.7 }px` } }
       >
         <div className='flex flex-col space-y-8 lg:p-5 m-auto lg:my-auto lg:ml-auto max-w-[75%] lg:text-right' >
-          {/* <div className='flex justify-center mx-auto py-3 px-10 rounded-full'>
-            <div className='flex flex-cols-2'>
-              <div>
-                <SocialIcon 
-                  url='www.instagram.com' 
-                  href='https://www.instagram.com/polishbycin/'
-                  bgColor='#fbb6ce'
-                  target='_blank'
-                  rel='noreferrer'
-                />
-              </div>
-
-              <a href='https://www.instagram.com/polishbycin/' target='_blank' rel='noreferrer'>
-                <p 
-                  className='pt-2 px-3 text-2xl font-bold text-pink-700 underline decoration-pink-300'
-                >PolishBy<span className='ext-pink-300'>Cin</span></p>
-              </a>
-            </div>
-          </div> */}
           <p className='text-2xl text-pink-700 font-semibold'>Welcome to PolishByCin</p>
           
           <div className='text-5xl font-semibold text-[#342D59]'>
@@ -134,7 +115,6 @@ export default function HomePage() {
             </div>
           </Link>
         </div>
-        {/* <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-pink-200"></hr> */}
 
         <div ref={ photoRef } className='container py-5'>
           <div className="flex justify-between overflow-x-hidden rounded-full h-80">
@@ -154,23 +134,24 @@ export default function HomePage() {
         </div>      
       </div>
 
-      
-      <div className='flex flex-cols-2 justify-center pb-20' >
-        <div>
-          <SocialIcon 
-            url='www.instagram.com' 
-            href='https://www.instagram.com/polishbycin/'
-            bgColor='#fbb6ce'
-            target='_blank'
-            rel='noreferrer'
-          />
-        </div>
+      <div className='flex pb-20'>
+        <div className='flex flex-cols-2 justify-center mx-auto bg-pink-100 px-5 py-3 rounded shadow-xl'>
+          <div>
+            <SocialIcon 
+              url='www.instagram.com' 
+              href='https://www.instagram.com/polishbycin/'
+              bgColor='#fbb6ce'
+              target='_blank'
+              rel='noreferrer'
+            />
+          </div>
 
-        <a href='https://www.instagram.com/polishbycin/' target='_blank' rel='noreferrer'>
-          <p 
-            className='pt-2 px-3 text-2xl font-bold text-pink-700 underline decoration-pink-700 decoration-2'
-          >PolishBy<span className='text-[#342D59]'>Cin</span></p>
-        </a>
+          <a href='https://www.instagram.com/polishbycin/' target='_blank' rel='noreferrer'>
+            <p 
+              className='pt-2 px-3 text-2xl font-bold text-pink-700 underline decoration-pink-700 decoration-2'
+            >PolishBy<span className='text-[#342D59]'>Cin</span></p>
+          </a>
+        </div>
       </div>
 
     </div>

@@ -131,7 +131,10 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className='bg-pink-100 border border-pink-100 rounded sm:py-16 md:px-8 py-16 px-6 shadow-xl shadow-gray-300 lg:mx-auto'>
+      <div 
+        className='bg-pink-100 border border-pink-100 rounded sm:py-16 md:px-8 py-16 px-6 shadow-xl shadow-gray-300 lg:mx-auto'
+        // style={ { backgroundImage: `url(${require('./pink-design.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }
+      >
         <h3 className='text-center mb-10 font-bold text-2xl text-gray-600'>Leave us a message!</h3>
         <div className=''>
 
