@@ -58,7 +58,7 @@ function App() {
   return (
     <div 
       className="App flex flex-col min-h-screen" 
-      style={{ backgroundImage: `url(${require('./marble-background.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      // style={{ backgroundImage: `url(${require('./marble-background.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       <Navbar />
 
