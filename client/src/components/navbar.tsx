@@ -105,9 +105,9 @@ const Navbar: FC = () => {
         <div 
           id='navLinks' 
           // onMouseLeave={ navDisplay }      
-          className={ `${ show ? 'p-5 z-60 drop-shadow-md rounded bg-pink-200 bg-opacity-50 backdrop-blur-sm opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' } lg:mt-0 lg:justify-end w-full block lg:flex flex-grow lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100` }
+          className={ `${ show ? 'p-5 z-60 drop-shadow-md rounded bg-[#342D59] bg-opacity-75 backdrop-blur-sm opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' } lg:mt-0 lg:justify-end w-full block lg:flex flex-grow lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100` }
           >
-          <div className='nav-links lg:space-x-5 lg:text-lg'>
+          <div className='nav-links lg:space-x-5 text-lg'>
             <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-300'>
               <Link to='/'>
                 Home
