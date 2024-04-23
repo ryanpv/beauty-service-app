@@ -140,7 +140,7 @@ const AppointmentsList:React.FC = () => {
       <>
     {/* FILTER FORM  */}
         <div className='sm:px-10 px-4 py-16 mt-10 shadow-lg bg-pink-100 rounded sm:mx-auto max-w-2xl space-y-10'>
-          <h1 className='text-center text-4xl font-bold text-gray-600'>
+          <h1 className='text-center text-4xl font-bold text-[#d64f92]'>
           Appointments
           </h1>
 
@@ -211,11 +211,11 @@ const AppointmentsList:React.FC = () => {
             <div className='flex justify-between'>
               <button
                 type='submit'
-                className='bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-5 text-white hover:bg-pink-400 font-semibold'
+                className='bg-pink-700 justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 py-1 px-5 text-white hover:bg-pink-400 font-semibold'
                 >Filter</button>
               <button
                 onClick={ resetForm }
-                className='bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-1 px-5 text-white hover:bg-pink-400 font-semibold'
+                className='bg-pink-700 justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 py-1 px-5 text-white hover:bg-pink-400 font-semibold'
                 >Reset</button>
             </div>
           </form>

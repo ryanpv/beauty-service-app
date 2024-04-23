@@ -124,7 +124,7 @@ const UpdateAppointment: React.FC = () => {
   return (
     <div className='container flex flex-col space-y-6 px-5 py-16 max-w-lg sm:max-w-full'>
       <div className='shadow-xl space-y-10 bg-pink-100 shadow-gray-300 rounded border border-pink-100 mt-10 px-6 py-16 sm:p-16 sm:mx-auto sm:w-full sm:max-w-lg sm:min-h-80 font-medium'>
-        <h2 className='text-2xl font-bold text-gray-600'>
+        <h2 className='text-2xl font-bold text-[#d64f92]'>
           Update Appointment
         </h2>
       { loading && <BarLoader className='mx-auto' color='#fbb6ce' /> }
@@ -215,13 +215,13 @@ const UpdateAppointment: React.FC = () => {
             <div className='pt-4'>
               <button
                 disabled
-                className='px-3 py-1 rounded-full focus:ring-2 bg-pink-200 text-center text-white font-semibold'
+                className='px-3.5 py-2.5 rounded-full focus:ring-2 bg-pink-200 text-center text-white font-semibold'
                 >Submit</button>
             </div>
             :
             <div className='pt-4'>
               <button
-                className='px-3 py-1 rounded-full focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
+                className='px-3.5 py-2.5 rounded-full ring-2 ring-pink-700 bg-pink-700 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
                 >Submit</button>
             </div>
           }
@@ -268,13 +268,13 @@ const UpdateAppointment: React.FC = () => {
             <div className='pt-4'>
               <button
                 disabled
-                className='px-3 py-1 rounded-full hover:bg-pink-200 focus:ring-2 bg-pink-500 text-center text-white font-semibold'
+                className='px-3.5 py-2.5 rounded-full hover:bg-pink-200 focus:ring-2 bg-pink-500 text-center text-white font-semibold'
                 >Submit</button>
             </div>
             :
             <div className='pt-4'>
               <button
-                className='px-3 py-1 rounded-full focus:ring-2 focus:ring-pink-300 bg-pink-300 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
+                className='px-3.5 py-2.5 rounded-full focus:ring-2 focus:ring-pink-300 bg-pink-700 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
                 >Submit</button>
             </div>
           }
