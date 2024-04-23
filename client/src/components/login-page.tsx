@@ -75,7 +75,7 @@ export default function LoginPage() {
               src={ require('./logo192.png') }
               alt='logo'
             /> */}
-            <h1 className='text-4xl text-pink-300 underline decoration-gray-400'>PolishByCin</h1>
+            <h1 className='text-4xl text-[#d64f92] font-semibold'>PolishByCin</h1>
           </div>
 
         { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? <span>already logged in </span> : null }
@@ -83,7 +83,7 @@ export default function LoginPage() {
 
           {/* <div className='text-center border-2 text-gray-900 sm:py-2 sm:mx-auto sm:w-full sm:max-w-sm'> */}
 
-            <h2 className='text-2xl font-bold text-gray-600'>
+            <h2 className='text-2xl font-bold text-[#d64f92]'>
               Sign in to your account
             </h2>
           {/* </div> */}
@@ -131,7 +131,7 @@ export default function LoginPage() {
               <div className='pt-4'>
                 <button
                   type='submit'
-                  className='flex w-full bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'>
+                  className='flex w-full bg-pink-700 justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'>
                     Sign In
                   </button>
               </div> }

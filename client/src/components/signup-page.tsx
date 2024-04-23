@@ -88,13 +88,13 @@ export default function SignupPage() {
           src={ require('./logo192.png') }
           alt='logo'
         /> */}
-        <h1 className='text-4xl text-pink-300 underline decoration-gray-400'>PolishByCin</h1>
+        <h1 className='text-4xl text-[#d64f92] font-semibold'>PolishByCin</h1>
       </div>
 
       <div className='border border-pink-100 rounded bg-pink-100 space-y-6 mt-10 py-16 px-8 sm:mx-auto sm:w-full sm:w-full sm:max-w-lg shadow-xl shadow-gray-300'>
         
         <div className='text-gray-600'>
-          <h1 className='text-2xl font-bold text-gray-600'>Create an account</h1>
+          <h1 className='text-2xl font-bold text-[#d64f92]'>Create an account</h1>
           <p><i>Track your appointments or request a new one!</i></p>
         </div>
         
@@ -158,7 +158,7 @@ export default function SignupPage() {
           <div className='pt-4'>
             <button
               type='submit'
-              className='flex w-full bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 px-3 py-1.5 text-white hover:bg-pink-400 font-semibold'            
+              className='flex w-full bg-pink-700 justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 px-3.5 py-2.5 text-white hover:bg-pink-400 font-semibold'            
             >Create account</button>
           </div>
           }

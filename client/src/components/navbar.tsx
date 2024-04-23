@@ -96,7 +96,7 @@ const Navbar: FC = () => {
         <div className="block lg:hidden">
           <button 
             onClick={ navDisplay }
-            className="flex items-center px-2.5 py-1.5 hover:text-pink-500 hover:border-pink-500"
+            className="flex items-center px-2.5 py-1.5 hover:text-pink-300 hover:border-pink-300"
             >
               <FiMenu />
           </button>
@@ -113,14 +113,14 @@ const Navbar: FC = () => {
                 Home
               </Link>
             </div>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/services'>
                 Services
               </Link>
             </div>
 
             { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? 
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/appointments'>
                 Appointments
               </Link>
@@ -128,24 +128,24 @@ const Navbar: FC = () => {
             : null
             }
             
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/photo-gallery'>
                 Photo Gallery
               </Link>
             </div>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/contact'>
                 Contact
               </Link>
             </div>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/about'>
                 About
               </Link>
             </div>
 
             { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? 
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <button
               onClick={ logout }
               >
@@ -154,12 +154,12 @@ const Navbar: FC = () => {
             </div>
             :
             <>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/login'>
                 Login
               </Link>
             </div>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/register'>
                 Sign Up
               </Link>

@@ -141,7 +141,7 @@ const TimeSlots: React.FC<TimeslotProps> = ({ formChangeHandler, bookedTimes, ne
 
   return (
     <>
-      <h3 className='text-center font-semibold text-2xl text-gray-600'>Available times:</h3>
+      <h3 className='text-center font-semibold text-2xl text-[#342D59]'>Available times:</h3>
       <div className='m-auto px-5 grid grid-cols-3 sm:grid-cols-4 gap-2'>
         { displayTimes() }
       </div>

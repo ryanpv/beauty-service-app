@@ -87,7 +87,7 @@ export default function HomePage() {
             </Link>
             <Link
               to='/login' 
-              className='px-8 py-2.5 text-center rounded-full border-2 bg-pink-700 border-pink-700 font-semibold text-lg text-white hover:border-pink-300 hover:bg-pink-300'
+              className='px-8 py-2.5 text-center rounded-full border-2 bg-pink-700 border-pink-700 font-semibold text-lg text-white hover:border-pink-400 hover:bg-pink-400'
             >
               Login
             </Link>

@@ -42,8 +42,8 @@ const Services:React.FC = () => {
   return (
     <div className='container flex flex-col max-w-screen-md pb-10 space-y-10'>
       <div className='space-y-3'>
-        <h1 className='text-center font-bold text-[#342D59] text-4xl mt-10'>Available Services</h1>
-        <hr className="mx-5 lg:mx-0 border-pink-700" />
+        <h1 className='text-center font-semibold text-[#342D59] text-5xl mt-10'>Available Services</h1>
+        {/* <hr className="mx-5 lg:mx-0 border-[#342D59]" /> */}
       </div>
 
       { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2 ?
@@ -64,7 +64,7 @@ const Services:React.FC = () => {
         Book Appointment
       </Link>
 
-      <div className='space-y-6 text-gray-700 bg-pink-100 rounded shadow-xl p-5 mx-5 sm:mx-0'>
+      <div className='space-y-6 text-gray-700 bg-pink-100 rounded shadow-xl px-5 py-10 mx-5 sm:mx-0'>
   {/* REGULAR POLISH SERVICES SECTION */}
         <div className='mx-3'>
           <h2 className='font-semibold text-3xl mb-2 text-[#342D59]'>Regular Polish Services</h2>
