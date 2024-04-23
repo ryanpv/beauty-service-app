@@ -48,7 +48,7 @@ const Navbar: FC = () => {
       } else {
         const loggedOutUser = setUser();
         setCurrentUser(loggedOutUser);
-        navigate('/home');
+        navigate('/');
       }
     } catch (error) {
       console.log("Logout error: ", error)
@@ -82,18 +82,21 @@ const Navbar: FC = () => {
     <>
       <nav 
         id='navbar'
-        className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36 px-6 pb-10' : 'p-6 bg-pink-300 shadow-md' }` }
+        // style={{ backgroundColor: "#342D59" }}
+        className={ `block z-50 sticky top-0 text-white shadow-xl bg-[#342D59]` }
+        // className={ `block z-50 flex sticky top-0 items-center justify-between flex-wrap text-white ${ isHome ? 'bg-gradient-to-b from-pink-300 from-20% h-36 px-6 pb-10' : 'p-6 bg-pink-300 shadow-md' }` }
       >
+        <div className='container flex flex-wrap px-6 h-16 justify-between items-center'>
         <div className='justify-start lg:px-5 text-4xl'>
-          <Link to='/home'>
-            PolishByCin
+          <Link to='/'>
+            PolishBy<span className="text-pink-300">Cin</span>
           </Link>
         </div>
 
         <div className="block lg:hidden">
           <button 
             onClick={ navDisplay }
-            className="flex items-center px-2.5 py-1.5 hover:text-pink-500 hover:border-pink-500"
+            className="flex items-center px-2.5 py-1.5 hover:text-pink-300 hover:border-pink-300"
             >
               <FiMenu />
           </button>
@@ -102,22 +105,22 @@ const Navbar: FC = () => {
         <div 
           id='navLinks' 
           // onMouseLeave={ navDisplay }      
-          className={ `${ show ? 'p-5 z-60 drop-shadow-md rounded bg-pink-200 bg-opacity-50 backdrop-blur-sm opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' } lg:mt-0 lg:justify-end w-full block lg:flex flex-grow lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100` }
+          className={ `${ show ? 'p-5 z-60 drop-shadow-md rounded bg-[#342D59] bg-opacity-75 backdrop-blur-sm opacity-100 scale-100 mt-5' : 'opacity-0 scale-0 h-0' } lg:mt-0 lg:justify-end w-full block lg:flex flex-grow lg:items-center lg:w-auto transition-all transform-gpu duration-300 lg:opacity-100 lg:scale-100` }
           >
-          <div className='nav-links lg:space-x-5 font- lg:text-2xl'>
-            <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-500'>
-              <Link to='/home'>
+          <div className='nav-links lg:space-x-5 text-lg'>
+            <div className='nav-links hover:text-gray-200 block lg:inline-block hover:text-pink-300'>
+              <Link to='/'>
                 Home
               </Link>
             </div>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/services'>
                 Services
               </Link>
             </div>
 
             { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? 
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/appointments'>
                 Appointments
               </Link>
@@ -125,24 +128,24 @@ const Navbar: FC = () => {
             : null
             }
             
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/photo-gallery'>
                 Photo Gallery
               </Link>
             </div>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/contact'>
                 Contact
               </Link>
             </div>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/about'>
                 About
               </Link>
             </div>
 
             { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? 
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <button
               onClick={ logout }
               >
@@ -151,12 +154,12 @@ const Navbar: FC = () => {
             </div>
             :
             <>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/login'>
                 Login
               </Link>
             </div>
-            <div className='block lg:inline-block hover:text-pink-500'>
+            <div className='block lg:inline-block hover:text-pink-300'>
               <Link to='/register'>
                 Sign Up
               </Link>
@@ -165,6 +168,8 @@ const Navbar: FC = () => {
             }
 
           </div>
+        </div>
+
         </div>
       </nav>
     </>

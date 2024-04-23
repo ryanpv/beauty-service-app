@@ -56,14 +56,17 @@ function App() {
   }, [location])
 
   return (
-    <div className="App flex flex-col min-h-screen">
+    <div 
+      className="App flex flex-col min-h-screen" 
+      // style={{ backgroundImage: `url(${require('./marble-background.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+    >
       <Navbar />
 
       <div className='flex-1'>
         <Routes>
           {/* <Route path='/tester' element={ <Tester /> } /> */}
-          <Route path='/' element={ <LandingPage /> } />
-          <Route path='/home' element={ <HomePage /> } />
+          <Route path='/' element={ <HomePage /> } />
+          {/* <Route path='/home' element={ <HomePage /> } /> */}
           <Route path='/book-appointment' element={ noUserLogged ? <RequiredLogin /> : <BookingPage /> } />
           {/* <Route path='/book-appointment' element={ <BookingPage /> } /> */}
           <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } />
@@ -90,7 +93,8 @@ function App() {
       </div>
 
       <footer
-        className="z-50 text-center bg-pink-300 p-6 text-white text-xs font-semibold"
+        className="z-50 text-center p-6 text-pink-300 text-xs font-semibold"
+        style={{ backgroundColor: "#342D59" }}
       > 
         COPYRIGHT © 2024 POLISHBYCIN - ALL RIGHTS RESERVED.
       </footer>

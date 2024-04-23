@@ -89,14 +89,14 @@ export default function ContactPage() {
   return (
     <div className='container flex flex-col space-y-10 px-8 sm:px-16 pb-16 transition-all'>
       <div className='space-y-3'>
-        <h1 className='text-center mt-10 text-4xl font-bold text-gray-600'>Contact Us</h1>
-        <hr className='h-px mx-3 border-pink-200 w-full sm:max-w-screen-md mx-auto' />
+        <h1 className='text-center mt-10 text-5xl font-semibold text-[#342D59]'>Contact Us</h1>
+        {/* <hr className='h-px mx-3 border-[#342D59] w-full sm:max-w-screen-md mx-auto' /> */}
       </div>
 
-      <div className='grid md:grid-cols-3 px-10 md:space-y-0 space-y-10 py-6 items-start text-center'>
+      <div className='grid md:grid-cols-3 px-10 md:space-y-0 space-y-10 py-6 items-start text-center text-pink-700 font-semibold text-lg'>
         <div className=''>
           <FcCellPhone className='mx-auto h-10 w-auto'/>
-          <label className='font-bold'>
+          <label className='font-bold text-pink-700'>
             Contact
           </label>
           <p>          
@@ -107,12 +107,12 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div>
+        <div className=''>
           <FcClock className='mx-auto h-10 w-auto' />    
-          <label className='font-bold'>
+          <label className='font-bold text-pink-700'>
             Hours
           </label>
-          <p>
+          <p className=''>
             Monday - Friday: 10:00 AM - 8:00 PM
           </p>
           <p>Saturday: 10:00 AM - 7:00 PM</p>
@@ -121,7 +121,7 @@ export default function ContactPage() {
 
         <div>
           <FcGlobe className='mx-auto h-10 w-auto' />
-          <label className='font-bold'>
+          <label className='font-bold text-pink-700'>
             Location
           </label>
           <p>
@@ -131,8 +131,11 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className='bg-pink-100 border border-pink-100 rounded sm:py-16 md:px-8 py-16 px-6 shadow-xl shadow-gray-300 lg:mx-auto'>
-        <h3 className='text-center mb-10 font-bold text-2xl text-gray-600'>Leave us a message!</h3>
+      <div 
+        className='bg-pink-100 border border-pink-100 rounded sm:py-16 md:px-8 py-16 px-6 shadow-xl shadow-gray-300 lg:mx-auto'
+        // style={ { backgroundImage: `url(${require('./pink-design.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }
+      >
+        <h3 className='text-center mb-10 font-bold text-3xl text-[#d64f92]'>Leave us a message!</h3>
         <div className=''>
 
           <form onSubmit={ submitContactForm }>
@@ -198,7 +201,7 @@ export default function ContactPage() {
               <div className='pt-4'>
                 <button
                   type='submit'
-                  className='flex w-full bg-pink-300 justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'
+                  className='flex w-full text-lg justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 py-2.5 px-3.5 text-pink-700 hover:bg-pink-400 font-semibold'
                 >
                   Send Message
                 </button>

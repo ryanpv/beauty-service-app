@@ -24,11 +24,11 @@ const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading 
           .map((service) => {
             return (
               <div className='flex flex-col p-5 mx-auto sm:min-w-full space-y-3' key={ service.id }>
-                <div className='flex justify-between font-semibold sm:text-xl'>
-                  <h3>{ service.service_name }</h3>
-                  <h3>{ service.price }</h3>
+                <div className='flex justify-between font-semibold text-xl'>
+                  <h3 className='text-pink-700 text-xl'>{ service.service_name }</h3>
+                  <h3 className='text-pink-700'>{ service.price }</h3>
                 </div>
-                <p>{ service.description }</p>
+                <p className='text-lg font-semibold'>{ service.description }</p>
                 { (typeof currentUser !== "string" && currentUser.role === 2 && currentUser.id !== 0) ?
 
                 <Link 

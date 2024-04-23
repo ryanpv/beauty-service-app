@@ -86,9 +86,9 @@ const AppointmentsTable: React.FC<AppointmentsList> = ({ appointmentList, setApp
               <Link className='font-semibold underline pt-2' to={ `/update-appointment/${ appointment.id }` }>Edit </Link> 
               <p className='pt-2'>|</p>
               <button 
-                className='bg-pink-300 hover:bg-red-600 hover:text-white hover:font-semibold m-2 rounded-full px-2 pb-1'
+                className='bg-pink-700 hover:bg-red-600 text-white hover:text-white hover:font-semibold m-2 rounded-full px-4 pb-1'
                 onClick={ () => deleteAppointment(appointment.id, appointment.service_name, appointment.date, appointment.time) }
-              >Del</button>
+              >del</button>
             </div>
           </td>
         </tr>
