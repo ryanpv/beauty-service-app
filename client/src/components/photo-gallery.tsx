@@ -53,9 +53,9 @@ export default function PhotoGallery() {
 
   const Photos = (props: IgPhotosProp) => {
     return (
-      <div className='relative hover:z-30 sm:hover:scale-125 transition-all duration-200' >
+      <div className='relative hover:z-30 sm:hover:scale-125 transition-all duration-200'>
         <Link to={`${props.permalink}`} target='_blank'>  
-          <img className='rounded-xl lg:h-full' src={ props.media_url } alt=''/>
+          <img className='round ed h-full' src={ props.media_url } alt=''/>
         </Link>
         <div className='absolute top-0 left-0 w-full px-4 text-center py-2 text-white pointer-events-none'>
           <p className='font-bold text-xs sm:text-lg'>{ props.caption?.split('-')[0] }</p>
@@ -88,7 +88,7 @@ export default function PhotoGallery() {
   };
 
   return (
-    <div className='container space-y-10 mb-10'>
+    <div className='space-y-10 mb-10'>
       <div className='mx-auto text-center text-[#725C77] font-semibold text-5xl mt-10 space-y-3'>
         <h1>Photo Gallery</h1>
         {/* <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-[#342D59]"></hr> */}
@@ -96,7 +96,7 @@ export default function PhotoGallery() {
       {/* TEMP CLEAR LOCALSTORAGE BUTTON  */}
 {/* <button onClick={ clearStorage }>CLEAR STORAGE</button> */}
       <div className='container grid grid-cols-1 max-w-4xl'>
-        <div className='grid grid-cols-2 md:grid-cols-3 gap-1'>
+        <div className='grid grid-cols-3 gap-0.5'>
           {
             // Array.isArray(igPhotos?.data) && igPhotos.data.length > 0 
             igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
