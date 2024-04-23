@@ -6,7 +6,7 @@ export default function AboutPage() {
     <div className='grid md:grid-cols-2 min-h-screen max-w-screen'>
       <div className='container'>
         <div className='space-y-3 p-5'>
-          <h1 className='text-center pt-5 text-5xl text-[#725C77] text-[#d64f92] font-semibold'>About Me</h1>
+          <h1 className='text-center pt-5 text-5xl text-[#725C77] font-semibold'>About Me</h1>
           {/* <hr className='h-px mx-3 border-pink-200 w-full sm:max-w-screen-md mx-auto' /> */}
         </div>
 
