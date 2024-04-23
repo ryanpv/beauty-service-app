@@ -65,7 +65,7 @@ export default function HomePage() {
         // style={ { backgroundImage: `url(${require('./pink-design.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center', height: `${ window.innerHeight * 0.7 }px` } }
       >
         <div className='flex flex-col space-y-8 lg:p-5 m-auto lg:my-auto lg:ml-auto max-w-[75%] lg:text-right' >
-          <p className='text-2xl text-pink-700 font-semibold'>Welcome to PolishByCin</p>
+          <p className='text-2xl text-[#d64f92] font-semibold'>Welcome to PolishByCin</p>
           
           <div className='text-5xl font-semibold text-[#342D59]'>
             <p className=''>
@@ -81,13 +81,13 @@ export default function HomePage() {
           <div className='flex md:flex-row flex-col md:space-x-3 lg:justify-end space-y-3 md:space-y-0'>
             <Link
               to='/services' 
-              className='px-8 py-2.5 text-center rounded-full border-2 border-pink-700 font-semibold text-lg text-pink-700 hover:ring-pink-700 hover:bg-pink-300'
+              className='px-8 py-2.5 text-center rounded-full border-2 border-[#d64f92] font-semibold text-lg text-[#d64f92] hover:ring-[#d64f92] hover:bg-pink-300'
             >
               View Services
             </Link>
             <Link
               to='/login' 
-              className='px-8 py-2.5 text-center rounded-full border-2 bg-pink-700 border-pink-700 font-semibold text-lg text-white hover:border-pink-400 hover:bg-pink-400'
+              className='px-8 py-2.5 text-center rounded-full border-2 bg-[#d64f92] border-[#d64f92] font-semibold text-lg text-white hover:border-pink-400 hover:bg-pink-400'
             >
               Login
             </Link>
@@ -97,7 +97,7 @@ export default function HomePage() {
         <div
           className='flex my-auto w-3/4 hidden lg:block'
         >
-          <div className='my-auto rounded border-4 border-pink-700'>
+          <div className='my-auto rounded border-4 border-[#d64f92]'>
             <img src={ require('./cover-photo.jpg')} alt='nails' className='rounded lg:translate-y-10 lg:-translate-x-10'/>
           </div>
         </div>
@@ -106,13 +106,13 @@ export default function HomePage() {
       <div className='pb-10 space-y-3'>
     {/* <div className='flex py-3 px-10 rounded-full justify-center'> */}
         <div className='flex mb-10'>
-          {/* <div className='mx-auto border-2 border-pink-700 rounded-full px-3.5 py-2.5 bg-pink-100'> */}
-            <Link to='/photo-gallery' className='text-center text-pink-700 mx-auto'>
-              <div className='flex flex-cols-2 space-x-1 border-2 border-pink-700 rounded-full px-8 py-2.5 bg-pink-100'>
+          {/* <div className='mx-auto border-2 border-[#d64f92] rounded-full px-3.5 py-2.5 bg-pink-100'> */}
+            <Link to='/photo-gallery' className='text-center text-[#d64f92] mx-auto'>
+              <div className='flex flex-cols-2 space-x-1 border-2 border-[#d64f92] rounded-full px-8 py-1 bg-pink-100 hover:bg-pink-300'>
                 <div>
-                  <HiMiniArrowRightCircle className='' color='#fbb6ce' size='35'/>
+                  <HiMiniArrowRightCircle className='' color='#fbb6ce' size='40'/>
                 </div>
-                <p className='text-lg font-semibold mt-1'>Photo Gallery</p>
+                <p className='text-lg font-semibold mt-1.5'>Photo Gallery</p>
               </div>
             </Link>
           {/* </div> */}

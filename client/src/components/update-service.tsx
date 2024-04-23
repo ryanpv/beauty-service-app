@@ -144,7 +144,7 @@ export default function UpdateService() {
 
       {/* { isAdmin ? */}
         <div className='shadow-xl shadow-gray-300 space-y-10 bg-pink-100 rounded px-6 sm:p-16 sm:mx-auto sm:w-full sm:max-w-2xl py-16 mx-6'>
-          <h1 className='font-bold text-2xl text-gray-600'>Update Service</h1>
+          <h1 className='font-bold text-2xl text-[#d64f92]'>Update Service</h1>
 
           <form onSubmit={ formSubmit }>
             <div className='flex flex-col space-y-6'>
@@ -215,7 +215,7 @@ export default function UpdateService() {
 
               <button
                 type='submit'
-                className='flex w-full bg-pink-300 max-w-sm mx-auto justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'
+                className='flex w-full bg-[#d64f92] max-w-sm mx-auto justify-center rounded-full ring-2 ring-[#d64f92] hover:ring-pink-300 py-2.5 px-3.5 text-white hover:bg-pink-300 font-semibold'
               >
                 Update Service
               </button>

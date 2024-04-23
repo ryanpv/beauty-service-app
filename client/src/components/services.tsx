@@ -42,14 +42,14 @@ const Services:React.FC = () => {
   return (
     <div className='container flex flex-col max-w-screen-md pb-10 space-y-10'>
       <div className='space-y-3'>
-        <h1 className='text-center font-semibold text-[#342D59] text-5xl mt-10'>Available Services</h1>
+        <h1 className='text-center font-semibold text-[#725C77] text-5xl mt-10'>Available Services</h1>
         {/* <hr className="mx-5 lg:mx-0 border-[#342D59]" /> */}
       </div>
 
       { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2 ?
         <Link
           to='/add-new-service'
-          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-100 border-2 border-pink-700 font-semibold text-lg text-pink-700 hover:ring-pink-300 py-2.5 px-3.5 hover:bg-pink-300'
+          className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-100 border-2 border-[#d64f92] font-semibold text-lg text-[#d64f92] hover:ring-pink-300 py-2.5 px-3.5 hover:bg-pink-300'
           >
           + ADD NEW SERVICES
         </Link>
@@ -59,7 +59,7 @@ const Services:React.FC = () => {
       
       <Link
         to='/book-appointment'
-        className='px-8 py-2.5 mx-auto rounded-full text-center bg-pink-100 border-2 border-pink-700 font-semibold text-lg text-pink-700 hover:ring-pink-300 py-2.5 px-3.5 hover:bg-pink-300'
+        className='px-8 py-2.5 mx-auto rounded-full text-center bg-pink-100 border-2 border-[#d64f92] font-semibold text-lg text-[#d64f92] hover:ring-pink-300 py-2.5 px-3.5 hover:bg-pink-300'
         >
         Book Appointment
       </Link>

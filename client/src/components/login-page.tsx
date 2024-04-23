@@ -75,7 +75,7 @@ export default function LoginPage() {
               src={ require('./logo192.png') }
               alt='logo'
             /> */}
-            <h1 className='text-4xl text-[#d64f92] font-semibold'>PolishByCin</h1>
+            <h1 className='text-5xl text-[#725C77] font-semibold font-[satisfy]'>PolishBy<span className=' text-pink-300'>Cin</span></h1>
           </div>
 
         { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? <span>already logged in </span> : null }
@@ -95,7 +95,7 @@ export default function LoginPage() {
                 </label>
                 <div className='mt-2'>
                   <input 
-                    className='block w-full py-2.5 px-3.5 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                    className='block w-full py-2.5 px-3.5 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     required
                     type='email'
                     name='email'
@@ -118,7 +118,7 @@ export default function LoginPage() {
 
                 <div className='mt-2'>
                   <input 
-                    className='block w-full py-2.5 px-3.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+                    className='block w-full py-2.5 px-3.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
                     required
                     type='password'
                     name='password'
@@ -131,7 +131,7 @@ export default function LoginPage() {
               <div className='pt-4'>
                 <button
                   type='submit'
-                  className='flex w-full bg-pink-700 justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'>
+                  className='flex w-full bg-[#d64f92] justify-center rounded-full ring-2 ring-[#d64f92] hover:ring-pink-300 py-2.5 px-3.5 text-white hover:bg-pink-300 font-semibold'>
                     Sign In
                   </button>
               </div> }

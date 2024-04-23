@@ -89,7 +89,7 @@ export default function PhotoGallery() {
 
   return (
     <div className='container space-y-10 mb-10'>
-      <div className='mx-auto text-center text-[#342D59] font-semibold text-5xl mt-10 space-y-3'>
+      <div className='mx-auto text-center text-[#725C77] font-semibold text-5xl mt-10 space-y-3'>
         <h1>Photo Gallery</h1>
         {/* <hr className="h-px sm:mx-auto mx-3 sm:max-w-screen-md rounded-sm border-[#342D59]"></hr> */}
       </div>

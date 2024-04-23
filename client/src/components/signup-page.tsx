@@ -88,7 +88,7 @@ export default function SignupPage() {
           src={ require('./logo192.png') }
           alt='logo'
         /> */}
-        <h1 className='text-4xl text-[#d64f92] font-semibold'>PolishByCin</h1>
+        <h1 className='text-5xl text-[#725C77] font-semibold font-[satisfy]'>PolishBy<span className=' text-pink-300'>Cin</span></h1>
       </div>
 
       <div className='border border-pink-100 rounded bg-pink-100 space-y-6 mt-10 py-16 px-8 sm:mx-auto sm:w-full sm:w-full sm:max-w-lg shadow-xl shadow-gray-300'>
@@ -102,7 +102,7 @@ export default function SignupPage() {
           <div>
             <label className='font-semibold text-gray-600'>Full Name</label>
             <input 
-              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
+              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
               name='name'
               type='text'
@@ -113,7 +113,7 @@ export default function SignupPage() {
           <div>
             <label className='font-semibold text-gray-600'>Email</label>
             <input 
-              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
+              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
               name='email'
               type='email'
@@ -124,7 +124,7 @@ export default function SignupPage() {
           <div>
             <label className='font-semibold text-gray-600'>Phone Number</label>
             <input 
-              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
+              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
               name='phone_number'
               type='text'
@@ -135,7 +135,7 @@ export default function SignupPage() {
           <div>
             <label className='font-semibold text-gray-600'>Password</label>
             <input 
-              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
+              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
               name='password'
               type='password'
@@ -146,7 +146,7 @@ export default function SignupPage() {
           <div>
             <label className='font-semibold text-gray-600'>Confirm Password</label>
             <input 
-              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
+              className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
               name='confirm_password'
               type='password'
@@ -158,7 +158,7 @@ export default function SignupPage() {
           <div className='pt-4'>
             <button
               type='submit'
-              className='flex w-full bg-pink-700 justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 px-3.5 py-2.5 text-white hover:bg-pink-400 font-semibold'            
+              className='flex w-full bg-[#d64f92] justify-center rounded-full ring-2 ring-[#d64f92] hover:ring-pink-300 px-3.5 py-2.5 text-white hover:bg-pink-300 font-semibold'            
             >Create account</button>
           </div>
           }
@@ -176,7 +176,7 @@ export default function SignupPage() {
 
     <div className='mt-10 text-center text-sm text-gray-500'>
       Have an account? {' '}
-      <Link to='/login' className='font-semibold text-sm text-pink-400 hover:text-pink-900'>Go to the login page</Link>
+      <Link to='/login' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>Go to the login page</Link>
     </div>
 
     </div>

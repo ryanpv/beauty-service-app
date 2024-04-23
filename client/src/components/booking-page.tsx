@@ -139,7 +139,7 @@ const BookingPage: React.FC = () => {
   return (
     <div className='container flex flex-col space-y-10 my-10'>
       <div className='space-y-3'>
-        <h1 className='font-semibold text-4xl text-center text-[#342D59]'>Book Appointment</h1>
+        <h1 className='font-semibold text-5xl text-center text-[#725C77]'>Book Appointment</h1>
         {/* <hr className='h-px mx-3 border-pink-200 w-full sm:max-w-screen-md mx-auto' /> */}
       </div>
       <i className='text-center text-gray-600 text-xl'>Please confirm your appointment request details before submitting. You will receive an email for when it has been accepted</i>
@@ -173,7 +173,7 @@ const BookingPage: React.FC = () => {
             <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes } newAppointment={ newAppointment } />
             
             <div className='mx-auto space-y-2 px-6 text-[#342D59]'>
-              <h1 className='text-pink-700 text-xl'>Confirm your details below before submitted the booking request:</h1>
+              <h1 className='text-[#d64f92] text-xl'>Confirm your details below before submitted the booking request:</h1>
 
               { error !== "" && 
                 <>
@@ -196,7 +196,7 @@ const BookingPage: React.FC = () => {
             </div>
 
             <button
-              className='bg-pink-700 hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3.5 py-2.5 mx-auto rounded-full text-center font-semibold text-white'
+              className='bg-[#d64f92] hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3.5 py-2.5 mx-auto rounded-full text-center font-semibold text-white'
             >
               Submit Request
             </button>

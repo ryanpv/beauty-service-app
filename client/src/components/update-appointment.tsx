@@ -137,7 +137,7 @@ const UpdateAppointment: React.FC = () => {
               <input
                 name='name'
                 value={ appointment.name }
-                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
               />
             </div>
           </div>
@@ -147,7 +147,7 @@ const UpdateAppointment: React.FC = () => {
               <input
                 name='email'
                 value={ appointment.email }
-                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
               />
             </div>
           </div>
@@ -158,7 +158,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='service_name'
                 value={ appointment.service_name }
-                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
               />
             </div>
           </div>
@@ -166,7 +166,7 @@ const UpdateAppointment: React.FC = () => {
             <label className='font-bold text-gray-600 text-lg'>Status</label>
             <select 
               onChange={ putFormHandler }
-              className='py-1.5 px-2.5 w-full mt-2 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
+              className='py-1.5 px-2.5 w-full mt-2 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
               name='status'
             >
               <option selected value={ appointment.status }>{ appointment.status_name }</option>
@@ -181,7 +181,7 @@ const UpdateAppointment: React.FC = () => {
             <label className='font-bold text-gray-600 text-lg'>Date</label>
             <div>
               <DatePicker 
-                className='block sm:w-96 mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block sm:w-96 mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
                 dateFormat="MMMM d yyyy"
                 selected={ appointment.date ? new Date(appointment.date) : null }
                 onChange={ (date) => date && putFormHandler(date) }
@@ -195,7 +195,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='time'
                 value={ appointment.time ? appointment.time : "" }
-                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
               />
             </div>
           </div>
@@ -206,7 +206,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='price_paid'
                 value={ appointment.price_paid }
-                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
               />
             </div>
           </div>
@@ -221,7 +221,7 @@ const UpdateAppointment: React.FC = () => {
             :
             <div className='pt-4'>
               <button
-                className='px-3.5 py-2.5 rounded-full ring-2 ring-pink-700 bg-pink-700 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
+                className='px-3.5 py-2.5 rounded-full ring-2 ring-[#d64f92] bg-[#d64f92] hover:ring-pink-300 hover:bg-pink-300 text-center text-white font-semibold'
                 >Submit</button>
             </div>
           }
@@ -235,7 +235,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='service_name'
                 value={ appointment.service_name }
-                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
               />
             </div>
           </div>
@@ -244,7 +244,7 @@ const UpdateAppointment: React.FC = () => {
             <label className='font-bold'>Date</label>
             <div>
               <DatePicker 
-                className='block sm:w-96 mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block sm:w-96 mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
                 dateFormat="MMMM d yyyy"
                 selected={ appointment.date ? new Date(appointment.date) : null }
                 onChange={ (date) => date && putFormHandler(date) }
@@ -259,7 +259,7 @@ const UpdateAppointment: React.FC = () => {
                 onChange={ putFormHandler }
                 name='time'
                 value={ appointment.time ? appointment.time : "" }
-                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                className='block w-full mt-2 py-1.5 px-2.5 border-0 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
               />
             </div>
           </div>
@@ -274,7 +274,7 @@ const UpdateAppointment: React.FC = () => {
             :
             <div className='pt-4'>
               <button
-                className='px-3.5 py-2.5 rounded-full focus:ring-2 focus:ring-pink-300 bg-pink-700 hover:ring-pink-400 hover:bg-pink-400 text-center text-white font-semibold'
+                className='px-3.5 py-2.5 rounded-full focus:ring-2 focus:ring-pink-300 bg-[#d64f92] hover:ring-pink-300 hover:bg-pink-300 text-center text-white font-semibold'
                 >Submit</button>
             </div>
           }

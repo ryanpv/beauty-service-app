@@ -155,7 +155,7 @@ const AppointmentsList:React.FC = () => {
                   onChange={ filterHandler }
                   name='search'
                   placeholder='Enter name or contact information'
-                  className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'
+                  className='block w-full py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'
                 />
               </div>
             </div>
@@ -169,7 +169,7 @@ const AppointmentsList:React.FC = () => {
                 </label>
                 <div>
                 <DatePicker 
-                  className='block py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'  
+                  className='block py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'  
                   selected={ new Date(formState.startDate) }
                   selectsStart
                   startDate={ new Date(formState.startDate) }
@@ -184,7 +184,7 @@ const AppointmentsList:React.FC = () => {
                 </label>
                 <div>
                 <DatePicker 
-                  className='block py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline'  
+                  className='block py-1.5 px-2.5 border-0 rounded ring-1 ring-pink-200 focus:ring-gray-400 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline'  
                   selectsEnd
                   startDate={ new Date(formState.startDate) }
                   endDate={ formState.endDate !== "" ? new Date(formState.endDate) : null }
@@ -211,11 +211,11 @@ const AppointmentsList:React.FC = () => {
             <div className='flex justify-between'>
               <button
                 type='submit'
-                className='bg-pink-700 justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 py-1 px-5 text-white hover:bg-pink-400 font-semibold'
+                className='bg-[#d64f92] justify-center rounded-full ring-2 ring-[#d64f92] hover:ring-pink-300 py-1 px-5 text-white hover:bg-pink-300 font-semibold'
                 >Filter</button>
               <button
                 onClick={ resetForm }
-                className='bg-pink-700 justify-center rounded-full ring-2 ring-pink-700 hover:ring-pink-400 py-1 px-5 text-white hover:bg-pink-400 font-semibold'
+                className='bg-[#d64f92] justify-center rounded-full ring-2 ring-[#d64f92] hover:ring-pink-300 py-1 px-5 text-white hover:bg-pink-300 font-semibold'
                 >Reset</button>
             </div>
           </form>

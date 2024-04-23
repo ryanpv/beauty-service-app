@@ -102,7 +102,7 @@ const AddService:React.FC = () => {
 
       {/* { isAdmin ? */}
         <div className='shadow-xl shadow-gray-300 px-6 py-12 sm:p-16 mb-5 sm:mx-auto sm:w-full sm:max-w-2xl bg-pink-100 rounded mx-6 space-y-10'>
-          <h1 className='font-bold text-2xl mt-5 text-gray-600'>Add New Service</h1>
+          <h1 className='font-bold text-2xl mt-5 text-[#d64f92]'>Add New Service</h1>
 
           <form onSubmit={ formSubmit }>
             <div className='flex flex-col space-y-6'>
@@ -161,7 +161,7 @@ const AddService:React.FC = () => {
 
               <button
                 type='submit'
-                className='flex w-full bg-pink-300 max-w-sm mx-auto justify-center rounded-full ring-2 ring-pink-300 hover:ring-pink-400 py-2.5 px-3.5 text-white hover:bg-pink-400 font-semibold'
+                className='flex w-full bg-[#d64f92] max-w-sm mx-auto justify-center rounded-full ring-2 ring-[#d64f92] hover:ring-pink-300 py-2.5 px-3.5 text-white hover:bg-pink-300 font-semibold'
                 >
                 Update Service
               </button>
