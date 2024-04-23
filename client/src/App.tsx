@@ -93,8 +93,8 @@ function App() {
       </div>
 
       <footer
-        className="z-50 text-center p-6 text-pink-300 text-xs font-semibold"
-        style={{ backgroundColor: "#342D59" }}
+        className="z-50 text-center p-6 text-pink-300 text-xs"
+        style={{ backgroundColor: "#725C77" }}
       > 
         COPYRIGHT © 2024 POLISHBYCIN - ALL RIGHTS RESERVED.
       </footer>

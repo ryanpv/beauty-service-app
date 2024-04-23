@@ -59,7 +59,7 @@ const Services:React.FC = () => {
       
       <Link
         to='/book-appointment'
-        className='px-8 py-1.5 mx-auto rounded-full text-center bg-pink-100 border-2 border-pink-700 font-semibold text-lg text-pink-700 hover:ring-pink-300 py-2.5 px-3.5 hover:bg-pink-300'
+        className='px-8 py-2.5 mx-auto rounded-full text-center bg-pink-100 border-2 border-pink-700 font-semibold text-lg text-pink-700 hover:ring-pink-300 py-2.5 px-3.5 hover:bg-pink-300'
         >
         Book Appointment
       </Link>

@@ -60,7 +60,7 @@ export default function SignupPage() {
             const decodedUser = setUser();
             setCurrentUser(decodedUser);
 
-            navigate("/home")
+            navigate("/")
           } else if (responseStatus === 409) {
             console.log("User already exists.");
             setError("User already exists.");

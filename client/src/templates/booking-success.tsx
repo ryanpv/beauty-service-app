@@ -13,7 +13,7 @@ export default function BookingSuccessPage() {
 
 
   if (bookingSuccess) {
-    navigate("/home");
+    navigate("/");
   }
 
   return (
@@ -28,7 +28,7 @@ export default function BookingSuccessPage() {
         </div>
         
         <div className='mx-auto'>
-          <p>If you are not automatically redirected, click <Link to='/services' className='font-bold text-pink-300'>here</Link> to return home.</p>
+          <p>If you are not automatically redirected, click <Link to='/' className='font-bold text-pink-300'>here</Link> to return home.</p>
         </div>
 
         <div className='mx-auto'>

@@ -54,7 +54,7 @@ export default function LoginPage() {
        
         setCurrentUser(decodedUser);
         setError("");
-        navigate('/home');
+        navigate('/');
       }
       
       setLoading(false);

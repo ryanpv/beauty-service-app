@@ -60,7 +60,7 @@ export default function HomePage() {
       ></div> */}
 
       <div
-        className='grid lg:grid-cols-2 sm:m-8 m-3 bg-pink-100 shadow-xl rounded lg:space-x-10'
+        className='grid lg:grid-cols-2 sm:m-8 m-3 bg-pink-100 shadow-xl rounded lg:space-x-10 py-16'
         style={{  minHeight: `${ window.innerHeight * 0.7 }px`}}
         // style={ { backgroundImage: `url(${require('./pink-design.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center', height: `${ window.innerHeight * 0.7 }px` } }
       >
@@ -106,14 +106,16 @@ export default function HomePage() {
       <div className='pb-10 space-y-3'>
     {/* <div className='flex py-3 px-10 rounded-full justify-center'> */}
         <div className='flex mb-10'>
-          <Link to='/photo-gallery' className='mx-auto text-center font-semibold text-5xl text-pink-700'>
-            <div className='flex flex-cols-2 space-x-3 justify-center'>
-              <div>
-                <HiMiniArrowRightCircle className='mt-1' color='#fbb6ce' size='50'/>
+          {/* <div className='mx-auto border-2 border-pink-700 rounded-full px-3.5 py-2.5 bg-pink-100'> */}
+            <Link to='/photo-gallery' className='text-center text-pink-700 mx-auto'>
+              <div className='flex flex-cols-2 space-x-1 border-2 border-pink-700 rounded-full px-8 py-2.5 bg-pink-100'>
+                <div>
+                  <HiMiniArrowRightCircle className='' color='#fbb6ce' size='35'/>
+                </div>
+                <p className='text-lg font-semibold mt-1'>Photo Gallery</p>
               </div>
-              <p className='underline decoration-[#342D59] decoration-2'>Gallery</p>
-            </div>
-          </Link>
+            </Link>
+          {/* </div> */}
         </div>
 
         <div ref={ photoRef } className='container py-5'>
@@ -148,7 +150,7 @@ export default function HomePage() {
 
           <a href='https://www.instagram.com/polishbycin/' target='_blank' rel='noreferrer'>
             <p 
-              className='pt-2 px-3 text-2xl font-bold text-pink-700 underline decoration-pink-700 decoration-2'
+              className='pt-2 px-3 text-2xl font-bold text-pink-400 underline decoration-pink-400 decoration-2'
             >PolishBy<span className='text-[#342D59]'>Cin</span></p>
           </a>
         </div>
