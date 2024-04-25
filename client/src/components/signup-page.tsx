@@ -88,10 +88,10 @@ export default function SignupPage() {
           src={ require('./logo192.png') }
           alt='logo'
         /> */}
-        <h1 className='text-5xl text-[#725C77] font-semibold font-[satisfy]'>PolishBy<span className=' text-pink-300'>Cin</span></h1>
+        <h1 className='text-5xl text-[#725C77] font-semibold font-[satisfy]'>PolishBy<span className=' text-pink-100'>Cin</span></h1>
       </div>
 
-      <div className='border border-pink-100 rounded bg-pink-100 space-y-6 mt-10 py-16 px-8 sm:mx-auto sm:w-full sm:w-full sm:max-w-lg shadow-xl shadow-gray-300'>
+      <div className='border border-pink-100 rounded bg-pink-100 space-y-6 mt-10 py-16 px-8 sm:mx-auto sm:w-full sm:w-full sm:max-w-lg shadow-xl'>
         
         <div className='text-gray-600'>
           <h1 className='text-2xl font-bold text-[#d64f92]'>Create an account</h1>
