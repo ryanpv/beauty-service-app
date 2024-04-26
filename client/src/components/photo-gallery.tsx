@@ -55,7 +55,7 @@ export default function PhotoGallery() {
     return (
       <div className='relative hover:z-30 sm:hover:scale-125 transition-all duration-200'>
         <Link to={`${props.permalink}`} target='_blank'>  
-          <img className='h-full w-full' src={ props.media_url } alt=''/>
+          <img className='h-full w-full object-center object-cover' src={ props.media_url } alt=''/>
         </Link>
         <div className='absolute top-0 left-0 w-full px-4 text-center py-2 text-white pointer-events-none'>
           <p className='font-bold text-xs sm:text-lg'>{ props.caption?.split('-')[0] }</p>
