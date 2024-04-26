@@ -176,7 +176,7 @@ export default function SignupPage() {
 
     <div className='mt-10 text-center text-sm text-gray-500'>
       Have an account? {' '}
-      <Link to='/login' className='font-semibold text-sm text-pink-300 hover:text-pink-900'>Go to the login page</Link>
+      <Link to='/login' className='font-semibold text-sm text-[#d64f92] hover:text-pink-700'>Go to the login page</Link>
     </div>
 
     </div>

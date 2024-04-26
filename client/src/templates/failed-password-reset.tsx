@@ -27,7 +27,7 @@ const FailedPasswordReset = () => {
         </div>
 
         <div className='mx-auto'>
-          <p>If you are not redirected, click <Link to='/login' className='font-bold text-pink-300'>here to go to the login page.</Link></p>
+          <p>If you are not redirected, click <Link to='/login' className='font-bold text-[#d64f92] hover:text-pink-700'>here to go to the login page.</Link></p>
         </div>
       </div>
     </div>

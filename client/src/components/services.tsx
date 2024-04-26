@@ -56,13 +56,36 @@ const Services:React.FC = () => {
         :
         null
       }
+
+      { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? 
+        <Link
+          to='/book-appointment'
+          className='px-8 py-2.5 mx-auto rounded-full text-center bg-pink-100 border-2 border-[#d64f92] font-semibold text-lg text-[#d64f92] hover:ring-pink-300 py-2.5 px-3.5 hover:bg-pink-300'
+          >
+          Book Appointment
+        </Link>
+        : null
+      }
+      <div>
+        <p className='text-2xl text-center'>Please sign in to book an appointment.&nbsp;
+          <Link
+            to='/login'
+            className='mx-auto text-[#d64f92] hover:text-pink-700'
+            >
+            Sign in
+          </Link>
+          &nbsp;| 
+          &nbsp; 
+          <Link
+            to='/register'
+            className='mx-auto text-[#d64f92] hover:text-pink-700'
+            >
+            Create an account
+          </Link>
+        </p>
+
+      </div>
       
-      <Link
-        to='/book-appointment'
-        className='px-8 py-2.5 mx-auto rounded-full text-center bg-pink-100 border-2 border-[#d64f92] font-semibold text-lg text-[#d64f92] hover:ring-pink-300 py-2.5 px-3.5 hover:bg-pink-300'
-        >
-        Book Appointment
-      </Link>
 
       <div className='space-y-6 text-gray-700 bg-pink-100 rounded shadow-xl px-5 py-10 mx-5 sm:mx-0'>
   {/* REGULAR POLISH SERVICES SECTION */}
