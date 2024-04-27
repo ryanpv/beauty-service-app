@@ -36,9 +36,7 @@ const routeCache = (duration?: number) => async(req: Request, res: Response, nex
       return next();
     }
   
-    if (cacheResponse) {  
-      console.log("Returning cached data");
-      
+    if (cacheResponse) {        
       res.status(200).json(cacheResponse);
     } else {
       (res as CachedResponse).originalJsonRes = res.json;

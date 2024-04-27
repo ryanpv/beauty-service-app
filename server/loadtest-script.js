@@ -2,12 +2,12 @@
 import {loadTest} from 'loadtest'
 
 const options = {
-	// url: 'https://beauty-service-app.onrender.com/',
-  url: 'https://localhost:3001/services',
-  maxSeconds: 5,
-	maxRequests: 1000,
-  concurrency: 200,
-  clients: 200,
+	url: 'https://beauty-service-app.onrender.com/services',
+  // url: 'https://localhost:3001/services',
+  // maxSeconds: 5,
+	maxRequests: 1500,
+  concurrency: 100,
+  clients: 100,
   insecure: true
   // secureProtocol: 'TLSv1_method'
 }
