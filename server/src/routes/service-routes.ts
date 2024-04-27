@@ -12,6 +12,7 @@ export const servicesRouter = express.Router();
 
 servicesRouter.route('/')
   .get(routeCache(86400), getAllServices) // GET list of ALL service categories
+  // .get(getAllServices)
   .post(validateServiceForms, verifyUser, addService); // POST new service - admin route
 
 servicesRouter.route('/:serviceId')
