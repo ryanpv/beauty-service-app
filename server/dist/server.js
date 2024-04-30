@@ -72,7 +72,7 @@ app.use(session({
         secure: true
     }
 }));
-// app.use(rate_limiter);
+app.use(rate_limiter);
 // ROUTERS
 app.use('/test', testRoute);
 app.use('/services', servicesRouter);
