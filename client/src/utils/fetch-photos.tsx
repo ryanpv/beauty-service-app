@@ -30,35 +30,27 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
     const checkLocalStorage = localStoragePhotos ? JSON.parse(localStoragePhotos) : null;
 
         // *** FOR CACHING IG API RESPONSE ***
-    // If igPhotos localStorage exists AND a next URL exists from IG API update state with localStorage data. 'return' to end execution if none
-//     if (checkLocalStorage && checkLocalStorage.nextPage !== -1) {
-//       fetchParams.setIgPhotos({
-//         data: new Set(checkLocalStorage.data),
-//         paging: {
-//           next: checkLocalStorage.nextPage === -1 ? "" : checkLocalStorage.nextPage
-//         }
-//       });
 
-//     } else if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
-//       fetchParams.setIgPhotos({
-//         data: new Set(checkLocalStorage.data),
-//         paging: {
-//           next: ""
-//         }
-//       });
-
-//       return;
-//     }
-
-    if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
-      fetchParams.setIgPhotos((prev) => ({
+    // Check local storage for data to update state
+    if (checkLocalStorage && checkLocalStorage.nextPage !== -1) {
+      fetchParams.setIgPhotos({
         data: new Set(checkLocalStorage.data),
         paging: {
-          next: checkLocalStorage.nextPage !== -1 ? checkLocalStorage.nextPage : ""
+          next: checkLocalStorage.nextPage
         }
-      }));
-      return;
+      });
+
+    } else if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
+      fetchParams.setIgPhotos({
+        data: new Set(checkLocalStorage.data),
+        paging: {
+          next: ""
+        }
+      });
+
+      return; // End fetch operation as there should not be anymore pages to fetch (nextPage === -1)
     }
+
     /////////////////////////////////////
 
     // Check if there are more photos to be fetched from API - continue to fetch if next page of photos exists

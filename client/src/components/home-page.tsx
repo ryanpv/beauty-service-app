@@ -15,9 +15,6 @@ export default function HomePage() {
   const { igPhotos, setIgPhotos } = useStateContext();
   
   const photoRef = React.useRef<HTMLDivElement>(null);
-  const photoContainerHeight = photoRef.current && photoRef.current.clientHeight;
-  const photoContainerScrollTop = photoRef.current && photoRef.current.scrollTop;
-  const photoColumnLength = igPhotos.data && igPhotos.data.size;
   
   React.useEffect(() => {
     const media_url = igPhotos.paging.next ? igPhotos.paging.next : "";
