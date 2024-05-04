@@ -47,7 +47,6 @@ function App() {
     const storageTime = parseGalleryTimer && parseGalleryTimer.getTime()
     const storageExpiryInterval = 3600000 // 4 hours;
     const currentTime = new Date().getTime();
-console.log('timer: ', galleryTimer && JSON.parse(galleryTimer));
 
     // If localstorage for IG photos are more than 4 hours old, localstorage will be cleared
     if (storageTime && storageTime + storageExpiryInterval < currentTime) {
