@@ -9,8 +9,9 @@ const options = {
   concurrency: 200,
   clients: 200,
   insecure: true
-  // secureProtocol: 'TLSv1_method'
-}
+  // secureProtocol: 'TLSv1_method' // for compatibility for https://localhost
+};
+
 loadTest(options, function(error, result) {
 	if (error) {
 		console.error('Got an error: %s', error)
@@ -18,4 +19,4 @@ loadTest(options, function(error, result) {
   // console.log("results: ", result)
 	result.show()
 	console.log('Tests run successfully')
-})
+});
