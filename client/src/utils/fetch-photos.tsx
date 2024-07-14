@@ -14,7 +14,6 @@ type PhotoState = {
   }
 };
 
-
 type FetchParams = {
   setIgPhotos: Dispatch<SetStateAction<PhotoState>>;
   igPhotos: PhotoState;
@@ -59,7 +58,7 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
       const results = await queryInstagramUser.json();
       const nextPage = results.paging.next !== undefined ? results.paging.next : -1
       const lastItem = {
-        time: new Date(),
+        time: new Date().toUTCString(),
         lastURL: nextPage
       };
       
@@ -69,10 +68,10 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
       };
                     
       // if fetch operation is required, check if local storage 'igPhotos' exists and store accordingly
-      if (checkLocalStorage === null) {        
+      if (checkLocalStorage === null) {                
         localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
         localStorage.setItem('lastItem', JSON.stringify(lastItem))
-      } else {        
+      } else {                
         const updateLocalPhotos = {
           data: [...checkLocalStorage.data, ...results.data],
           nextPage: nextPage
@@ -89,7 +88,7 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
           next: results.paging.next !== undefined ? results.paging.next : ""
         }
       }));
-    } else {      
+    } else {            
       return;
     }
 
