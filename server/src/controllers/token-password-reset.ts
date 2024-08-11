@@ -6,6 +6,7 @@ interface ModifiedRequest extends Request {
 }
 
 export const passwordResetTokenCheck = async(req: Request, res:Response) => {
+  const domain = process.env.NODE_ENV === 'production' ? 'https://www.polishbycin.com' : 'http://localhost:3000'
   try {
     const { token } = req.params;
   
@@ -15,11 +16,11 @@ export const passwordResetTokenCheck = async(req: Request, res:Response) => {
     if (!resetToken) {
       res.status(400).json({ message: "Invalid/expired token" });
     } else {
-      res.redirect(`http://localhost:3000/reset-password?recovery-token=${ token }`);
+      res.redirect(`${ domain }/reset-password?recovery-token=${ token }`);
     }
   } catch (error) {
     console.log('Error with password reset request', error);
-    res.redirect('http://localhost:3000/token-expired');
+    res.redirect(`${ domain }/token-expired`);
   }
 };
 
