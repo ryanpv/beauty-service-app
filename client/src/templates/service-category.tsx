@@ -18,8 +18,8 @@ interface Services {
 const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading }) => {
   const { currentUser } = useStateContext();
 
-  const services = () => {
-      if (list.length !== 0) {
+  const services = () => {   
+      if (Array.isArray(list) && list.length !== 0) {
         return list.filter((service) => service.service_categories_id === serviceCategoryId)
           .map((service) => {
             return (
@@ -44,7 +44,7 @@ const ServiceCategory: React.FC<Services> = ({ list, serviceCategoryId, loading 
           });
     } else {
       return (
-        <h1>No services for this category</h1>
+        <h1 className='text-red-600 font-semibold'>List of services currently unavailable.</h1>
       )
     }
   };

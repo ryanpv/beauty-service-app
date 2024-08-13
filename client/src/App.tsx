@@ -41,14 +41,13 @@ function App() {
     setCurrentUser(userLogged)
   },[location]);
 
-  React.useEffect(() => {
+  React.useEffect(() => {   
     const galleryTimer = localStorage.getItem('lastItem');
     const parseGalleryTimer = galleryTimer && new Date(JSON.parse(galleryTimer).time);
     const storageTime = parseGalleryTimer && parseGalleryTimer.getTime()
     // const storageExpiryInterval = 3600 * 1000 * 4// 4 hours;
     const storageExpiryInterval = 1000 * 60 * 60 * 4;
     const currentTime = new Date().getTime();  
-    console.log(storageTime && storageTime + storageExpiryInterval - currentTime)
     // If localstorage for IG photos are more than 4 hours old, localstorage will be cleared
     if (storageTime && storageTime + storageExpiryInterval < currentTime) {
       localStorage.removeItem('igPhotos');

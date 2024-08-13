@@ -11,7 +11,7 @@ export default function PhotoGallery() {
   const { igPhotos, setIgPhotos } = useStateContext();
 
   // Initial fetch of instagram photos
-  React.useEffect(() => {
+  React.useEffect(() => {   
     const media_url = igPhotos.paging.next ? igPhotos.paging.next : "";
     const fetchPhotosParams = {
       setIgPhotos,
@@ -37,11 +37,11 @@ export default function PhotoGallery() {
     return () => window.removeEventListener("resize", handleScreenResizing);
   }, [loading]);
 
-  const clearStorage = () => {
-    console.log('clearing cache');
+  // const clearStorage = () => {
+  //   console.log('clearing cache');
     
-    localStorage.clear();
-  };
+  //   localStorage.clear();
+  // };
 
   // Type for IG photos prop
   type IgPhotosProp = {

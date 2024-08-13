@@ -7,6 +7,7 @@ import BarLoader from 'react-spinners/BarLoader';
 const Services:React.FC = () => {
   const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { currentUser, allServices, setAllServices } = useStateContext();
   const regularShellac = 1;
   const gelShellac = 2;
@@ -31,7 +32,11 @@ const Services:React.FC = () => {
       });
 
       const services = await fetchServices.json();
-      setAllServices(services);
+
+      if (fetchServices.status === 200 && Array.isArray(services)) {       
+        setAllServices(services);
+      } 
+            
       setLoading(false);
     } catch (error) {
       console.log("Fetch services error: ", error);
