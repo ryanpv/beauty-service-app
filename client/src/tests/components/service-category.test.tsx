@@ -4,6 +4,16 @@ import { BrowserRouter } from 'react-router-dom';
 import ServiceCategory from '../../templates/service-category';
 import { StateProvider } from '../../contexts/state-contexts';
 
+const renderServiceCategory = (listState: any[]) => {
+  render(
+    <BrowserRouter>
+      <StateProvider>
+        <ServiceCategory list={listState} serviceCategoryId={1} loading={false} />
+      </StateProvider>
+    </BrowserRouter>
+  )
+}; 
+
 
 describe('ServiceCategory Component', () => {
   const mockList = [
@@ -26,13 +36,7 @@ describe('ServiceCategory Component', () => {
   ];
 
   it('should render the services when list is not empty', () => {
-    render(
-      <BrowserRouter>
-        <StateProvider>
-          <ServiceCategory list={mockList} serviceCategoryId={1} loading={false} />
-        </StateProvider>
-      </BrowserRouter>
-    );
+    renderServiceCategory(mockList);
 
     expect(screen.getByText('Spa Manicure')).toBeInTheDocument();
     expect(screen.getByText('$20')).toBeInTheDocument();
@@ -42,13 +46,7 @@ describe('ServiceCategory Component', () => {
 
   it('should render the "List of services currently unavailable" message when list is empty', () => {
     const mockEmptyList: any[] = []
-    render(
-      <BrowserRouter>
-        <StateProvider>
-          <ServiceCategory list={mockEmptyList} serviceCategoryId={1} loading={false} />
-        </StateProvider>
-      </BrowserRouter>
-    );
+    renderServiceCategory(mockEmptyList);
 
     expect(screen.getByText('List of services currently unavailable.')).toBeInTheDocument();
   });
