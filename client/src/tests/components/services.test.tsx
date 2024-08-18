@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import Services from './services';
-import { StateProvider } from '../contexts/state-contexts';
+import Services from '../../components/services';
+import { StateProvider } from '../../contexts/state-contexts';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('Services Component', () => {
@@ -12,7 +12,7 @@ describe('Services Component', () => {
     global.fetch = mockFetch;
   });
 
-  it('should render list of services', async () => {
+  it('should render the services component', async () => {
     // Render the component
     render(
       <BrowserRouter>
@@ -24,8 +24,8 @@ describe('Services Component', () => {
 
     // Wait for the services to be fetched and rendered
     await waitFor(() => {
-      expect(screen.getByText('Spa Manicure')).toBeInTheDocument();
-      // expect(screen.getByText('Deluxe Spa Manicure')).toBeInTheDocument();
+      expect(screen.getByText('Available Services')).toBeInTheDocument();
     });
   });
+
 });

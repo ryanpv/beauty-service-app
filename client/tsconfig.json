@@ -23,5 +23,5 @@
   },
   "include": [
     "src"
-, "src/components/services.test.tsx", "src/tests/components/App.test.tsx"  ]
+, "src/tests/components/services.test.tsx", "src/tests/components/App.test.tsx"  ]
 }
