@@ -16,7 +16,7 @@ const Services:React.FC = () => {
   const additionalNail = 5;
 
   useEffect(() => {
-    servicesList();
+    servicesList();   
   }, []);
   
   const servicesList = async() => {
@@ -69,27 +69,26 @@ const Services:React.FC = () => {
           >
           Book Appointment
         </Link>
-        : null
+        : 
+        <div>
+          <p className='text-2xl text-center'>Please sign in to book an appointment.&nbsp;
+            <Link
+              to='/login'
+              className='mx-auto text-[#d64f92] hover:text-pink-700'
+              >
+              Sign in
+            </Link>
+            &nbsp;| 
+            &nbsp; 
+            <Link
+              to='/register'
+              className='mx-auto text-[#d64f92] hover:text-pink-700'
+              >
+              Create an account
+            </Link>
+          </p>
+        </div>
       }
-      <div>
-        <p className='text-2xl text-center'>Please sign in to book an appointment.&nbsp;
-          <Link
-            to='/login'
-            className='mx-auto text-[#d64f92] hover:text-pink-700'
-            >
-            Sign in
-          </Link>
-          &nbsp;| 
-          &nbsp; 
-          <Link
-            to='/register'
-            className='mx-auto text-[#d64f92] hover:text-pink-700'
-            >
-            Create an account
-          </Link>
-        </p>
-
-      </div>
       
 
       <div className='space-y-6 text-gray-700 bg-pink-100 rounded shadow-xl px-5 py-10 mx-5 sm:mx-0'>

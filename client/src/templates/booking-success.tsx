@@ -8,7 +8,7 @@ export default function BookingSuccessPage() {
   React.useEffect(() => {
     setTimeout(() => {
       setBookingSuccess(true);
-    }, 10000)
+    }, 5000)
   }, []);
 
 
