@@ -27,13 +27,13 @@ import UserLoggedIn from './components/logged-in-check';
 import PasswordResetSuccess from './templates/password-reset-success';
 import FailedPasswordReset from './templates/failed-password-reset';
 import RequiredLogin from './templates/required-login';
-// import Tester from './components/test-component';
 
 function App() {
   const { currentUser, setCurrentUser } = useStateContext();
   const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0;
   const adminUser = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
   const location = useLocation();
+  const appVersion = '1.0.1' // Update app version after changes to clear localstorage
 
   React.useEffect(() => {
     const userLogged = setUser();
@@ -42,6 +42,13 @@ function App() {
   },[location]);
 
   React.useEffect(() => {   
+    // Handle app versioning
+    const storedVersion = localStorage.getItem('pbc-appVersion');
+    if (storedVersion !== appVersion) {
+      localStorage.removeItem('igPhotos');
+      localStorage.setItem('pbc-appVersion', appVersion);
+    };
+
     const galleryTimer = localStorage.getItem('lastItem');
     const parseGalleryTimer = galleryTimer && new Date(JSON.parse(galleryTimer).time);
     const storageTime = parseGalleryTimer && parseGalleryTimer.getTime()
@@ -58,7 +65,6 @@ function App() {
   return (
     <div 
       className="App flex flex-col min-h-screen" 
-      // style={{ backgroundImage: `url(${require('./marble-background.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       <Navbar />
 

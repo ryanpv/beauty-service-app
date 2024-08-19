@@ -12,7 +12,7 @@ export default function HomePage() {
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [offset, setOffset] = React.useState(0);
-  const { igPhotos, setIgPhotos } = useStateContext();
+  const { igPhotos, setIgPhotos, currentUser } = useStateContext();
   
   const photoRef = React.useRef<HTMLDivElement>(null);
   
@@ -82,12 +82,22 @@ export default function HomePage() {
             >
               View Services
             </Link>
-            <Link
-              to='/login' 
-              className='px-8 py-2.5 text-center rounded-full border-2 bg-[#d64f92] border-[#d64f92] font-semibold text-lg text-white hover:border-pink-400 hover:bg-pink-400'
-            >
-              Login
-            </Link>
+
+            { typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role !== 0 ? 
+              <Link
+                to='/appointments' 
+                className='px-8 py-2.5 text-center rounded-full border-2 bg-[#d64f92] border-[#d64f92] font-semibold text-lg text-white hover:border-pink-400 hover:bg-pink-400'
+              >
+                Appointments
+              </Link>
+              :
+              <Link
+                to='/login' 
+                className='px-8 py-2.5 text-center rounded-full border-2 bg-[#d64f92] border-[#d64f92] font-semibold text-lg text-white hover:border-pink-400 hover:bg-pink-400'
+              >
+                Login
+              </Link>            
+            }
           </div>
         </div>
 
