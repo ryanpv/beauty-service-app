@@ -46,6 +46,7 @@ function App() {
     const storedVersion = localStorage.getItem('pbc-appVersion');
     if (storedVersion !== appVersion) {
       localStorage.removeItem('igPhotos');
+      localStorage.removeItem('lastItem');
       localStorage.setItem('pbc-appVersion', appVersion);
     };
 
