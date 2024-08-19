@@ -13,7 +13,7 @@ export const requestNewPassword = async(req: Request, res: Response, next: NextF
       const emailLowerCased = email.toLowerCase();
       // const email = 'socir16122@wikfee.com'
       const checkEmailExistence = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
-      const resetPasswordURL = 'https://localhost:3001/password-resets';
+      const resetPasswordURL = process.env.NODE_ENV === 'production' ? 'https://beauty-service-app.onrender.com' : 'http://localhost:3001'
       const resetToken = crypto.randomBytes(32).toString('hex'); 
       const emailMsg = {
         from: "test person",
@@ -31,7 +31,7 @@ export const requestNewPassword = async(req: Request, res: Response, next: NextF
         if (sendEmail.rejected.length > 0) {
           res.status(400).json({ message: "Email request has been rejected" });
         } else {
-          tokenCache({ key: resetToken, body: emailLowerCased, duration: 120, req: req, res: res, next: next }); // Set TTL for 15 minutes for prod ***
+          tokenCache({ key: resetToken, body: emailLowerCased, duration: 600, req: req, res: res, next: next }); // Set TTL for 10 minutes for prod ***
           res.status(201).json({ message: "Password reset request email has been sent!" });
         }
       } 

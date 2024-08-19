@@ -56,8 +56,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'https://localhost:3001',
-    'https://beauty-service-app.onrender.com',
-    'https://beauty-service-app-1.onrender.com',
+    'https://beauty-service-app.onrender.com', // API
+    'https://beauty-service-app-1.onrender.com', // Static page
     'https://www.polishbycin.com',
     'https://api.polishbycin.com'
   ],
