@@ -13,7 +13,7 @@ export const requestNewPassword = async(req: Request, res: Response, next: NextF
       const emailLowerCased = email.toLowerCase();
       // const email = 'socir16122@wikfee.com'
       const checkEmailExistence = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
-      const resetPasswordURL = process.env.NODE_ENV === 'production' ? 'https://beauty-service-app.onrender.com' : 'http://localhost:3001'
+      const resetPasswordURL = process.env.NODE_ENV === 'production' ? 'https://beauty-service-app.onrender.com/password-resets' : 'https://localhost:3001/password-resets'
       const resetToken = crypto.randomBytes(32).toString('hex'); 
       const emailMsg = {
         from: "test person",

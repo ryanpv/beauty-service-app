@@ -91,7 +91,7 @@ function App() {
           <Route path='/update-service/:serviceId' element={ !adminUser ? <Unauthorized /> : <UpdateService /> } />
           <Route path='/about' element={ <AboutPage /> } />
           <Route path='/request-new-password' element={ <NewPasswordRequest /> } />
-          <Route path='/reset-password' element={ noUserLogged ? <Unauthorized /> : <ResetPassword /> } />
+          <Route path='/reset-password' element={ <ResetPassword /> } />
           <Route path='/password-reset-success' element={ <PasswordResetSuccess /> } />
           <Route path='/token-expired' element={ <FailedPasswordReset /> } />
           <Route path='/add-new-service' element={ !adminUser ? <Unauthorized /> : <AddService /> } />
