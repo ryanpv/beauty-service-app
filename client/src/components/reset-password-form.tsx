@@ -13,11 +13,12 @@ const ResetPassword:React.FC = () => {
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
   
-  const seeValue = (event: React.FormEvent) => {
-    event.preventDefault();
-    const newPassVal = newPassRef.current?.value;
-    console.log(newPassVal);
-  };
+  // For development purposes only
+  // const seeValue = (event: React.FormEvent) => {
+  //   event.preventDefault();
+  //   const newPassVal = newPassRef.current?.value;
+  //   console.log(newPassVal);
+  // };
 
   const submitForm = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -71,7 +72,7 @@ const ResetPassword:React.FC = () => {
               </label>
               <input 
                 type='password' 
-                onChange={(e) => seeValue(e)} 
+                // onChange={(e) => seeValue(e)} // For development purposes only
                 ref={ newPassRef }
                 className='mt-2 block w-full py-2.5 px-3.5 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-pink-700 focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'
               />
