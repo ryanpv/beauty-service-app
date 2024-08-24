@@ -100,10 +100,11 @@ export default function SignupPage() {
         
         <form data-testid='signup-form' className='space-y-6' onSubmit={ submitSignup }>
           <div>
-            <label className='font-semibold text-gray-600'>Full Name</label>
+            <label htmlFor='name' className='font-semibold text-gray-600'>Full Name</label>
             <input 
               className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
+              id='name'
               name='name'
               type='text'
               onChange={ handleFormInputs }
@@ -111,10 +112,11 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className='font-semibold text-gray-600'>Email</label>
+            <label htmlFor='email' className='font-semibold text-gray-600'>Email</label>
             <input 
               className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
+              id='email'
               name='email'
               type='email'
               onChange={ handleFormInputs }
@@ -122,10 +124,11 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className='font-semibold text-gray-600'>Phone Number</label>
+            <label htmlFor='phone_number' className='font-semibold text-gray-600'>Phone Number</label>
             <input 
               className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
+              id='phone_number'
               name='phone_number'
               type='text'
               onChange={ handleFormInputs }
@@ -133,10 +136,11 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className='font-semibold text-gray-600'>Password</label>
+            <label htmlFor='password' className='font-semibold text-gray-600'>Password</label>
             <input 
               className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
+              id='password'
               name='password'
               type='password'
               onChange={ handleFormInputs }
@@ -144,10 +148,11 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className='font-semibold text-gray-600'>Confirm Password</label>
+            <label htmlFor='confirm_password' className='font-semibold text-gray-600'>Confirm Password</label>
             <input 
               className='block mt-2 w-full py-1.5 px-2.5 border-0 transition-all duration-300 rounded ring-pink-200 focus:ring-gray-300 focus:ring-offset-2 ring-1 focus:ring-4 focus:border-[#d64f92] focus:outline-pink-300 focus:outline text-gray-900 sm:text-sm sm:leading-6'            
               required
+              id='confirm_password'
               name='confirm_password'
               type='password'
               onChange={ handleFormInputs }
@@ -158,6 +163,7 @@ export default function SignupPage() {
           <div className='pt-4'>
             <button
               type='submit'
+              data-testid='submit-btn'
               className='flex w-full bg-[#d64f92] justify-center rounded-full ring-2 ring-[#d64f92] hover:ring-pink-300 px-3.5 py-2.5 text-white hover:bg-pink-300 font-semibold'            
             >Create account</button>
           </div>
