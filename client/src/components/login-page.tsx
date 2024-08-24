@@ -88,7 +88,7 @@ export default function LoginPage() {
             </h2>
           {/* </div> */}
           
-            <form className='space-y-8' onSubmit={ submitLogin }>
+            <form data-testid='login-form' className='space-y-8' onSubmit={ submitLogin }>
               <div>
                 <label className='font-semibold text-gray-600'>
                   Email

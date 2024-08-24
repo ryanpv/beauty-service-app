@@ -98,7 +98,7 @@ export default function SignupPage() {
           <p><i>Track your appointments or request a new one!</i></p>
         </div>
         
-        <form className='space-y-6' onSubmit={ submitSignup }>
+        <form data-testid='signup-form' className='space-y-6' onSubmit={ submitSignup }>
           <div>
             <label className='font-semibold text-gray-600'>Full Name</label>
             <input 
