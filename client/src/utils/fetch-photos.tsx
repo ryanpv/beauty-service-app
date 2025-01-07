@@ -61,7 +61,7 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
         time: new Date().toUTCString(),
         lastURL: nextPage
       };
-      
+
       const photosForLocal = {
         data: results.data,
         nextPage: results.paging.next

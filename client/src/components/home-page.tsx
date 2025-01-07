@@ -55,7 +55,6 @@ export default function HomePage() {
         // style={ { backgroundImage: `url(${require('./cover-photo.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' } }
         style={{ backgroundColor: "#F1C6D0"}}
       ></div> */}
-
       <div
         className='grid lg:grid-cols-2 sm:m-8 m-3 bg-pink-100 shadow-xl rounded lg:space-x-10 py-16'
         style={{  minHeight: `${ window.innerHeight * 0.7 }px`}}
@@ -126,7 +125,7 @@ export default function HomePage() {
         </div>
 
         <div ref={ photoRef } className='container py-5'>
-          <div className="flex justify-between overflow-x-hidden rounded-full h-80">
+          <div className="flex justify-between overflow-x-hidden rounded-2xl m-3 sm:rounded-full h-80">
           {/* [&>div]:flex-shrink-0 // prevent child divs from shrinking. can place shrink directly to photos component*/}
             <div className="flex w-full overflow-scroll overflow-y-hidden">
               {
