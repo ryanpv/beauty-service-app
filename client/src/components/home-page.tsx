@@ -40,7 +40,7 @@ export default function HomePage() {
 
   const Photos = (props: IgPhotosProp) => {
     return (
-      <div className='hover:z-30 hover:scale-125 transition-all duration-200' >
+      <div className='hover:z-30 hover:scale-125 transition-all duration-200 flex-shrink-0'>
         <Link to={`${props.permalink}`} target='_blank'>  
           <img className='min-h-64 max-h-80' src={ props.media_url } alt=''/>
         </Link>
@@ -127,7 +127,8 @@ export default function HomePage() {
 
         <div ref={ photoRef } className='container py-5'>
           <div className="flex justify-between overflow-x-hidden rounded-full h-80">
-            <div className="flex w-full overflow-scroll overflow-y-hidden [&>div]:flex-shrink-0">
+          {/* [&>div]:flex-shrink-0 // prevent child divs from shrinking. can place shrink directly to photos component*/}
+            <div className="flex w-full overflow-scroll overflow-y-hidden">
               {
                 igPhotos.data.size > 0 ? Array.from(igPhotos.data).map((photoData, idx) => {
                   return (

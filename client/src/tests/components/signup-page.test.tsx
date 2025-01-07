@@ -1,7 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { StateProvider } from '../../contexts/state-contexts';
 import SignupPage from '../../components/signup-page';
+import { setUser } from '../../utils/set-user';
 
 
 const renderServiceCategory = () => {
@@ -14,13 +15,14 @@ const renderServiceCategory = () => {
   );
 }; 
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn()
+}));
+
 describe('SignupPage Component', () => {
-  // const mockFetch = jest.fn(() => 
-  //   Promise.resolve({
-  //     status: 201,
-  //   })
-  // );
   let originalFetch: typeof global.fetch;
+  const mockNavigate = jest.mock;
 
   beforeAll(() => {
     originalFetch = global.fetch;
@@ -45,12 +47,24 @@ describe('SignupPage Component', () => {
 
   it("should handle signup form submission correctly", async () => {
     const mockFetch = jest.fn().mockResolvedValue({ 
-      status: 201
+      status: 201,
     });
     
     global.fetch = mockFetch;
-    renderServiceCategory();
 
+    const currentUserState = {
+      id: 0,
+      role: 0,
+      displayName: "",
+      iat: 0,
+      exp: 0
+    };
+
+    jest.mock('../../utils/set-user', () => ({
+      setUser: jest.fn().mockReturnValue(currentUserState)
+    }));
+
+    renderServiceCategory();
     
     fireEvent.change(screen.getByLabelText("Full Name"), { target: { value: "Ryan Tester" } });
     fireEvent.change(screen.getByLabelText("Email"), { target: { value: "RyanTester@email.com" } });
@@ -58,13 +72,15 @@ describe('SignupPage Component', () => {
     fireEvent.change(screen.getByLabelText("Password"), { target: { value: "password1" } });
     fireEvent.change(screen.getByLabelText("Confirm Password"), { target: { value: "password1" } });
 
-    fireEvent.click(screen.getByTestId("submit-btn"));
+      fireEvent.click(screen.getByTestId("submit-btn"));
 
+    
     expect(mockFetch).toHaveBeenCalled();
-    await waitFor(async () => {
-      const response = await mockFetch.mock.results[0].value;
-      expect(response.status).toEqual(201);
-    });
+    expect(mockNavigate).toHaveBeenCalled();
+    // await waitFor(async () => {
+    //   const response = await mockFetch.mock.results[0].value;
+    //   expect(response.status).toEqual(201);
+    // });
 
     global.fetch = originalFetch
   });

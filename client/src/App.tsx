@@ -33,7 +33,7 @@ function App() {
   const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0;
   const adminUser = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
   const location = useLocation();
-  const appVersion = '1.0.1' // Update app version after changes to clear localstorage
+  const appVersion = '1.0.2' // Update app version after changes to clear localstorage
 
   React.useEffect(() => {
     const userLogged = setUser();
