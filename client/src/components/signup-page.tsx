@@ -55,7 +55,7 @@ export default function SignupPage() {
           });
     
           const responseStatus = await signUp.status;
-    
+
           if (responseStatus === 201) {
             const decodedUser = setUser();
             setCurrentUser(decodedUser);

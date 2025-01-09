@@ -18,7 +18,7 @@ import BookingPage from './components/booking-page';
 import BookingSuccessPage from './templates/booking-success';
 import AppointmentsList from './components/appointments-list';
 import UpdateAppointment from './components/update-appointment';
-import SignupSuccess from './templates/signup-success';
+import VerifyAccount from './templates/verify-account';
 import Unauthorized from './components/unauthorized';
 import { useStateContext } from './contexts/state-contexts';
 import { setUser } from './utils/set-user';
@@ -83,7 +83,7 @@ function App() {
           <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
           <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
           <Route path='/register' element={ <SignupPage /> } />
-          <Route path='/successful-signup' element={ <SignupSuccess /> } />
+          <Route path='/verify-account' element={ <VerifyAccount /> } />
           <Route path='/ig-auth' element={ <GetAuth /> } />
           <Route path='/photo-gallery' element={ <PhotoGallery /> } />
           <Route path='/contact' element={ <ContactPage /> } />
