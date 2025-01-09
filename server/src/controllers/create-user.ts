@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt';
 import { Session } from "express-session";
 import { validationResult } from "express-validator";
 import { sendEmail } from "../utils/emailer-util.js";
+import crypto from 'crypto';
+import { tokenCache } from "../middleware/token-cache.js";
 
 interface ModifiedSession extends Session {
   isAuthenticated: boolean;
@@ -48,19 +50,23 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         const userId = newUser.rows[0].id;
         const userRole = clientRole;
         const userDisplayName = newUser.rows[0].name;
-  
+
+        const verificationToken = crypto.randomBytes(32).toString('hex'); 
+        const verificationURL = process.env.NODE_ENV === 'production' ? 'https://beauty-service-app.onrender.com/verify-user' : 'https://localhost:3001/verify-user';
+
         const payload = {
           id: userId,
           role: userRole,
           displayName: userDisplayName,
           iat: Math.floor(Date.now() / 1000)
-        }
+        };
         const jwtToken = jwt.sign(
           payload,
           process.env.JWT_SECRET,
           {
             expiresIn: "24h"
-          });
+          }
+        );
   
         (req.session as ModifiedSession).isAuthenticated = true;
         (req.session as ModifiedSession).userRole = "client";
@@ -71,6 +77,8 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
         res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
 
+        tokenCache({ key: verificationToken, body: userEmail, duration: 60, req: req, res: res }); // Set TTL for 10 minutes for prod ***
+
         const emailMsg = {
           from: process.env.GMAIL_ACCOUNT,
           to: userEmail,
@@ -79,11 +87,14 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
           <div>
             <p>Hello ${ name },</p>
             <p>
-              You have successfully created an account with us at PolishByCin. You will now be able to track your appointments, see appointment status updates, and request 
-              changes to your appointments.
+              Thank you for signing up with PolishByCin! We are excited to have you as a client. Before you can book and manage your appointments, please verify your email address by clicking the link below.
             </p>
+
+            <p>This link will expire after 10 minutes: <a href="${ verificationURL }/${ verificationToken }">Email verification for PolishByCin</a></p>
+            <br></br>
+            
             <p>
-            You will only receive emails for appointment bookings, appointment updates/cancellations, responses to inquiries sent from the contact page or by direct emails.
+            After verification, you will only receive emails for appointment bookings, appointment updates/cancellations, responses to inquiries sent from the contact page or by direct emails.
             Feel free to reach out if you have any questions/concerns.
             </p>
             <br></br>
