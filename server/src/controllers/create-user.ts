@@ -52,7 +52,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         const userDisplayName = newUser.rows[0].name;
 
         const verificationToken = crypto.randomBytes(32).toString('hex'); 
-        const verificationURL = process.env.NODE_ENV === 'production' ? 'https://beauty-service-app.onrender.com/verify-user' : 'https://localhost:3001/verify-user';
+        const verificationURL = process.env.NODE_ENV === 'production' ? 'https://www.polishbycin.com/verify-account' : 'http://localhost:3000/verify-account';
 
         const payload = {
           id: userId,
@@ -90,9 +90,9 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
               Thank you for signing up with PolishByCin! We are excited to have you as a client. Before you can book and manage your appointments, please verify your email address by clicking the link below.
             </p>
 
-            <p>This link will expire after 10 minutes: <a href="${ verificationURL }/${ verificationToken }">Email verification for PolishByCin</a></p>
+            <p>This link will expire after 10 minutes: <a href="${ verificationURL }?verification-token=${ verificationToken }">Email verification for PolishByCin</a></p>
             <br></br>
-            
+
             <p>
             After verification, you will only receive emails for appointment bookings, appointment updates/cancellations, responses to inquiries sent from the contact page or by direct emails.
             Feel free to reach out if you have any questions/concerns.
