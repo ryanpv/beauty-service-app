@@ -83,7 +83,7 @@ app.use(session({
     secure: true
    }
 }));
-// app.use(rate_limiter);
+app.use(rate_limiter);
 
 // ROUTERS
 app.use('/test', testRoute);
@@ -117,11 +117,10 @@ app.get('/upload-services', uploadServices)
 
 app.post('/contact-messages', validateContactForm, contactRequest);
 
-TODO:
 // Account verification for signup
 app.get('/verify-account/:token', verifyAccount);
 app.get('/request-verification-token/:id', requestVerificationToken);
-TODO:
+
 
 app.post('/password-resets', validateNewpassRequest, requestNewPassword)
 app.get('/password-resets/:token', validatePasswordResetToken, passwordResetTokenCheck)
