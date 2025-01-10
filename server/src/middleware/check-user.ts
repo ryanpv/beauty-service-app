@@ -4,11 +4,7 @@ import { pool } from '../queries.js';
 import { Session } from 'express-session';
 import { ModifiedSession } from '../controllers/login.js';
 
-// interface ModifiedSession extends Session {
-//   isAuthenticated?: boolean;
-//   userRole?: string;
-//   accessToken?: string;
-// };
+
 const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
 
 export const checkUserRole = async (req: Request, res: Response, next: NextFunction) => {
@@ -24,6 +20,8 @@ export const checkUserRole = async (req: Request, res: Response, next: NextFunct
     res.status(200).json(userRole.rows[0])
 };
 
+
+// Verify user session
 export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = (req.session as ModifiedSession).accessToken;
@@ -32,11 +30,8 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     jwt.verify(token, process.env.JWT_SECRET); // throws error on invalid token
 
     if (isAuthenticated) {
-      console.log("check-user.ts: user token authenticated");
-      
       next();
     } 
-
   } catch (error) {
     console.error("check-user.verifyUser error: ", error)
 

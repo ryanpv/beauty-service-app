@@ -15,6 +15,7 @@ import { getSingleAppointment } from '../controllers/get-single-appointment.js'
 import { validateSignup } from '../middleware/validators/validate-signup.js';
 import { validateAppointmentRequest } from '../middleware/validators/validate-appointment-request.js';
 import { validateAppointmentUpdate } from '../middleware/validators/validate-appointment-update.js';
+import { accountVerification } from '../middleware/verify-account.js';
 
 export const usersRouter = express.Router();
 
@@ -29,10 +30,10 @@ usersRouter.route('/:userId')
 
 usersRouter.route('/:userId/appointments')
   // .get(getUserAppointments)
-  .get(verifyUser, getUserAppointments)
-  .post(validateAppointmentRequest, verifyUser, addAppointment);
+  .get(verifyUser, accountVerification, getUserAppointments)
+  .post(validateAppointmentRequest, verifyUser, accountVerification, addAppointment);
 
 usersRouter.route('/:userId/appointments/:appointmentId')
-  .get(getSingleAppointment)
-  .put(validateAppointmentUpdate, verifyUser, updateAppointment)
-  .delete(verifyUser, deleteAppointment); 
+  .get(verifyUser, accountVerification, getSingleAppointment)
+  .put(validateAppointmentUpdate, verifyUser, accountVerification, updateAppointment)
+  .delete(verifyUser, accountVerification, deleteAppointment); 
