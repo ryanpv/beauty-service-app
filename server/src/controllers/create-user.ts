@@ -7,12 +7,13 @@ import { validationResult } from "express-validator";
 import { sendEmail } from "../utils/emailer-util.js";
 import crypto from 'crypto';
 import { tokenCache } from "../middleware/token-cache.js";
+import { ModifiedSession } from "./login.js";
 
-interface ModifiedSession extends Session {
-  isAuthenticated: boolean;
-  userRole: string;
-  accessToken: string; 
-}
+// interface ModifiedSession extends Session {
+//   isAuthenticated: boolean;
+//   userRole: string;
+//   accessToken: string; 
+// }
 
 export const createUser = async (req: Request, res: Response): Promise<Response> => {
   try {
@@ -31,25 +32,61 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
       const emailLowerCased = email.toLowerCase();
       const existingUser: boolean = await checkExistingUser(email);
       const clientRole = 1;
-      const adminRole = 2;
+      // const adminRole = 2;
   
       if (existingUser) {
         console.log("exists")
         res.status(409).json({ message: "Email already exists" });
       } else {
         const hashPassword = await bcrypt.hash(password, 10)
-  
-        const newUser = await pool.query(`
-          INSERT INTO users (name, email, phone_number, password, role_id)
-          VALUES ($1, $2, $3, $4, $5)
-          RETURNING id
-        `, [name, emailLowerCased, phone_number, hashPassword, clientRole]
-        );  
-  
+ 
+        await pool.query(`
+          CREATE OR REPLACE FUNCTION create_user(
+            name TEXT,
+            email TEXT,
+            phone_number TEXT,
+            password TEXT,
+            role_id INT
+          )
+          RETURNS INT
+          LANGUAGE plpgsql
+          AS
+          $BODY$
+          DECLARE
+            new_user_id INT;
+          BEGIN
+            INSERT INTO users (name, email, phone_number, password, role_id)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING id INTO new_user_id;
+
+            RAISE NOTICE 'User inserted successfully with ID: %', new_user_id;
+
+            INSERT INTO user_verifications (user_id, is_verified)
+            VALUES (new_user_id, FALSE);
+
+            RAISE NOTICE 'User verification inserted successfully with ID: %', new_user_id;
+
+            RETURN new_user_id;
+
+            EXCEPTION WHEN OTHERS THEN
+              RAISE NOTICE 'Error: %', SQLERRM;
+              RETURN -1;
+          END;
+          $BODY$
+        `, []);  
+
+        const createUser = await pool.query(`
+            SELECT * from create_user($1, $2, $3, $4, $5)
+          `,[name, emailLowerCased, phone_number, hashPassword, clientRole]);
+
+        if (createUser.rows[0].create_user === null || createUser.rows[0].create_user === -1) {
+          throw new Error("Error creating user");
+        }
+
         const userEmail = emailLowerCased;
-        const userId = newUser.rows[0].id;
+        const userId = createUser.rows[0].create_user;
         const userRole = clientRole;
-        const userDisplayName = newUser.rows[0].name;
+        const userDisplayName = name;
 
         const verificationToken = crypto.randomBytes(32).toString('hex'); 
         const verificationURL = process.env.NODE_ENV === 'production' ? 'https://www.polishbycin.com/verify-account' : 'http://localhost:3000/verify-account';
@@ -71,6 +108,8 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         (req.session as ModifiedSession).isAuthenticated = true;
         (req.session as ModifiedSession).userRole = "client";
         (req.session as ModifiedSession).accessToken = jwtToken;
+        (req.session as ModifiedSession).userEmail = userEmail;
+        (req.session as ModifiedSession).userId = userId;
   
         const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
 
@@ -109,7 +148,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
 
         sendEmail(emailMsg);
   
-        return res.status(201).json({ message: `Successfully created user with id ${ newUser.rows[0].id }`});
+        return res.status(201).json({ message: `Successfully created user with id ${ createUser.rows[0].create_user }`});  
       }
     } else {
       throw new Error("INVALID sign up credentials")
