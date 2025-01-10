@@ -77,7 +77,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         res.cookie('user', jwtToken, { httpOnly: false, secure: true, sameSite: 'none', domain: domain });
         res.cookie('id', req.sessionID, { httpOnly: true, secure: true, sameSite: 'none', domain: domain });
 
-        tokenCache({ key: verificationToken, body: userEmail, duration: 60, req: req, res: res }); // Set TTL for 10 minutes for prod ***
+        tokenCache({ key: verificationToken, body: userEmail, duration: 600, req: req }); // Set TTL for 10 minutes for prod ***
 
         const emailMsg = {
           from: process.env.GMAIL_ACCOUNT,

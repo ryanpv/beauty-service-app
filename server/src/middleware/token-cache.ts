@@ -8,7 +8,7 @@ type tokenCacheParams = {
   body?: string;
   duration?: number;
   req?: Request;
-  res: Response;
+  res?: Response;
   next?: NextFunction;
 }
 
@@ -31,5 +31,4 @@ export const tokenCache = ({ key, body, duration, req, res, next }: tokenCachePa
       throw new Error ("Invalid key.")
     }
   }
-  
 };
