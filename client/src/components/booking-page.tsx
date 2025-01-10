@@ -6,10 +6,17 @@ import ServiceOptions from '../templates/service-options';
 import TimeSlots  from '../templates/timeslots';
 import { BarLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
+import UnverifiedUser from '../templates/unverified-user';
 
 const BookingPage: React.FC = () => {
   const serverUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_SERVER : process.env.REACT_APP_PROD_SERVER;
-  const { currentUser, setCurrentUser, currentUserState, allServices, setAllServices } = useStateContext();
+  const { 
+    currentUser, 
+    setCurrentUser, 
+    currentUserState, 
+    allServices, 
+    setAllServices,
+  } = useStateContext();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const newAppointmentState = {
@@ -137,74 +144,77 @@ const BookingPage: React.FC = () => {
   };
 
   return (
-    <div className='container flex flex-col space-y-10 my-10'>
-      <div className='space-y-3'>
-        <h1 className='font-semibold text-5xl text-center text-[#725C77]'>Book Appointment</h1>
-        {/* <hr className='h-px mx-3 border-pink-200 w-full sm:max-w-screen-md mx-auto' /> */}
-      </div>
-      <i className='text-center text-gray-600 text-xl'>Please confirm your appointment request details before submitting. You will receive an email for when it has been accepted</i>
+    <>
+      { !loading && 
+      <div className='container flex flex-col space-y-10 my-10'>
+        <div className='space-y-3'>
+          <h1 className='font-semibold text-5xl text-center text-[#725C77]'>Book Appointment</h1>
+          {/* <hr className='h-px mx-3 border-pink-200 w-full sm:max-w-screen-md mx-auto' /> */}
+        </div>
+        <i className='text-center text-gray-600 text-xl'>Please confirm your appointment request details before submitting. You will receive an email for when it has been accepted</i>
 
-      <div className='mx-auto sm:w-full sm:max-w-screen-xl'>
-        <form 
-          onSubmit={ appointmentFormSubmit }
-          className='justify-between'
-          >
-          <div className='flex flex-col space-y-10'>
+        <div className='mx-auto sm:w-full sm:max-w-screen-xl'>
+          <form 
+            onSubmit={ appointmentFormSubmit }
+            className='justify-between'
+            >
+            <div className='flex flex-col space-y-10'>
 
-            {/* List of services for dropdown  */}
-            { loading ? 
-              <div className='mx-auto'>
-                <BarLoader color='#fbb6ce' /> 
-              </div>
-              :
-              <div className='flex flex-col mx-auto sm:flex-row justify-around space-y-5 sm:space-y-0'>
-                <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
-              </div>
-            }
-
-            {/* calender component import */}
-            <div className='mx-auto'>
-              <Calendar 
-                onChange={ (date) => date && formChangeHandler(date) }
-                value={ newAppointment.date instanceof Date ? newAppointment.date : new Date(newAppointment.date) }
-              />
-            </div>
-
-            <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes } newAppointment={ newAppointment } />
-            
-            <div className='mx-auto space-y-2 px-6 text-[#342D59]'>
-              <h1 className='text-[#d64f92] text-xl'>Confirm your details below before submitted the booking request:</h1>
-
-              { error !== "" && 
-                <>
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                  <strong className="font-bold">ERROR: </strong>
-                  <span className="block sm:inline">{ error }</span>
-                  <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  </span>
+              {/* List of services for dropdown  */}
+              { loading ? 
+                <div className='mx-auto'>
+                  <BarLoader color='#fbb6ce' /> 
                 </div>
-                </>
+                :
+                <div className='flex flex-col mx-auto sm:flex-row justify-around space-y-5 sm:space-y-0'>
+                  <ServiceOptions serviceList={ allServices } formHandler={ formChangeHandler } newAppointment={ newAppointment } setNewAppointment={ setNewAppointment } />
+                </div>
               }
 
-              <div>
-                <ul>
-                  <li><strong>Service:</strong> { newAppointment.id !== "" && JSON.parse(newAppointment.id).service_name }</li>
-                  <li><strong>Date:</strong> { formatDate() }</li>
-                  <li><strong>Time:</strong> { newAppointment.time }</li>
-                </ul>
+              {/* calender component import */}
+              <div className='mx-auto'>
+                <Calendar 
+                  onChange={ (date) => date && formChangeHandler(date) }
+                  value={ newAppointment.date instanceof Date ? newAppointment.date : new Date(newAppointment.date) }
+                />
               </div>
+
+              <TimeSlots formChangeHandler={ formChangeHandler } bookedTimes={ bookedTimes } newAppointment={ newAppointment } />
+              
+              <div className='mx-auto space-y-2 px-6 text-[#342D59]'>
+                <h1 className='text-[#d64f92] text-xl'>Confirm your details below before submitted the booking request:</h1>
+
+                { error !== "" && 
+                  <>
+                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong className="font-bold">ERROR: </strong>
+                    <span className="block sm:inline">{ error }</span>
+                    <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    </span>
+                  </div>
+                  </>
+                }
+
+                <div>
+                  <ul>
+                    <li><strong>Service:</strong> { newAppointment.id !== "" && JSON.parse(newAppointment.id).service_name }</li>
+                    <li><strong>Date:</strong> { formatDate() }</li>
+                    <li><strong>Time:</strong> { newAppointment.time }</li>
+                  </ul>
+                </div>
+              </div>
+
+              <button
+                className='bg-[#d64f92] hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3.5 py-2.5 mx-auto rounded-full text-center font-semibold text-white'
+              >
+                Submit Request
+              </button>
             </div>
-
-            <button
-              className='bg-[#d64f92] hover:bg-pink-400 ring-pink-300 hover:ring-pink-400 px-3.5 py-2.5 mx-auto rounded-full text-center font-semibold text-white'
-            >
-              Submit Request
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-
-    </div>
+      }
+    </>
   )
 }
 

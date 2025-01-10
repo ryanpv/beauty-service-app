@@ -27,11 +27,13 @@ import UserLoggedIn from './components/logged-in-check';
 import PasswordResetSuccess from './templates/password-reset-success';
 import FailedPasswordReset from './templates/failed-password-reset';
 import RequiredLogin from './templates/required-login';
+import UnverifiedUser from './templates/unverified-user';
 
 function App() {
   const { currentUser, setCurrentUser } = useStateContext();
   const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0;
   const adminUser = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
+  const unverifiedUser = typeof currentUser !== "string" && currentUser.isVerified === false;
   const location = useLocation();
   const appVersion = '1.0.3' // Update app version after changes to clear localstorage
 
@@ -74,13 +76,13 @@ function App() {
           {/* <Route path='/tester' element={ <Tester /> } /> */}
           <Route path='/' element={ <HomePage /> } />
           {/* <Route path='/home' element={ <HomePage /> } /> */}
-          <Route path='/book-appointment' element={ noUserLogged ? <RequiredLogin /> : <BookingPage /> } />
+          <Route path='/book-appointment' element={ noUserLogged ? <RequiredLogin /> : unverifiedUser ? <UnverifiedUser /> : <BookingPage /> } />
           {/* <Route path='/book-appointment' element={ <BookingPage /> } /> */}
           <Route path='/booking-success' element={ noUserLogged ? <Unauthorized /> : <BookingSuccessPage /> } />
           {/* <Route path='/booking-success' element={ <BookingSuccessPage /> } /> */}
           <Route path='/appointments' element={ noUserLogged ? <Unauthorized /> : <AppointmentsList /> } />
           {/* <Route path='/appointments' element={ <AppointmentsList /> } /> */}
-          <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : <UpdateAppointment /> } />
+          <Route path='/update-appointment/:appointmentId' element={ noUserLogged ? <Unauthorized /> : unverifiedUser ? <UnverifiedUser /> : <UpdateAppointment /> } />
           <Route path='/login' element={ !noUserLogged ? <UserLoggedIn /> : <LoginPage /> } />
           <Route path='/register' element={ <SignupPage /> } />
           <Route path='/verify-account' element={ <VerifyAccount /> } />

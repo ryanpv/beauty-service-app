@@ -9,8 +9,10 @@ export const setUser = () => {
     role: 0,
     displayName: "",
     iat: 0,
-    exp: 0
+    exp: 0,
+    isVerified: false
   }
+  
   if (userLogged) {
     const decoded = jwtDecode<string>(userLogged);
     return decoded;

@@ -28,6 +28,7 @@ type User = {
   displayName: string;
   iat: number;
   exp: number;
+  isVerified?: boolean;
 };
 
 type PhotoState = {
@@ -61,7 +62,8 @@ const currentUserState = {
   role: 0,
   displayName: "",
   iat: 0,
-  exp: 0
+  exp: 0,
+  isVerfied: false
 };
 
 const igPhotoState = {
@@ -78,6 +80,7 @@ const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [currentUser, setCurrentUser] = useState<string | User>(currentUserState);
   const [allServices, setAllServices] = useState<ServiceState>([]);
   const [igPhotos, setIgPhotos] = React.useState<PhotoState>(igPhotoState);
+  const [accountVerified, setAccountVerified] = useState<boolean>(false);
 
 
   const values: StateValues = {
