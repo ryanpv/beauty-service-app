@@ -9,11 +9,6 @@ import crypto from 'crypto';
 import { tokenCache } from "../middleware/token-cache.js";
 import { ModifiedSession } from "./login.js";
 
-// interface ModifiedSession extends Session {
-//   isAuthenticated: boolean;
-//   userRole: string;
-//   accessToken: string; 
-// }
 
 export const createUser = async (req: Request, res: Response): Promise<Response> => {
   try {
@@ -95,7 +90,8 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
           id: userId,
           role: userRole,
           displayName: userDisplayName,
-          iat: Math.floor(Date.now() / 1000)
+          iat: Math.floor(Date.now() / 1000),
+          isVerified: false
         };
         const jwtToken = jwt.sign(
           payload,
@@ -110,6 +106,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         (req.session as ModifiedSession).accessToken = jwtToken;
         (req.session as ModifiedSession).userEmail = userEmail;
         (req.session as ModifiedSession).userId = userId;
+        (req.session as ModifiedSession).is_verified = false;
   
         const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
 

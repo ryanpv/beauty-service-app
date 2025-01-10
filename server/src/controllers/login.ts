@@ -12,6 +12,7 @@ export interface ModifiedSession extends Session {
   userEmail?: string;
   userId?: number;
   name?: string;
+  is_verified?: boolean;
 };
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
@@ -23,7 +24,9 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       const emailLowerCased = email.toLowerCase();
   
       const getUser = await pool.query(`
-        SELECT * FROM users
+        SELECT users.*, is_verified FROM users
+        JOIN user_verifications
+          ON users.id = user_verifications.user_id
         WHERE email = $1
       `, [emailLowerCased]);
   
@@ -36,6 +39,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         const userRole = getUser.rows[0].role_id;
         const userDisplayName = getUser.rows[0].name;
         const hashedPassword = getUser.rows[0].password;
+        const isVerified = getUser.rows[0].is_verified;
         const checkPassword = await bcrypt.compare(password, hashedPassword);
   
         if (!checkPassword) {
@@ -45,7 +49,8 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
             id: userId,
             role: userRole,
             displayName: userDisplayName,
-            iat: Math.floor(Date.now() / 1000)
+            iat: Math.floor(Date.now() / 1000),
+            isVerified: isVerified
           }
           const jwtToken = jwt.sign(
             payload,
@@ -59,6 +64,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
           (req.session as ModifiedSession).accessToken = jwtToken;
           (req.session as ModifiedSession).userEmail = userEmail;
           (req.session as ModifiedSession).userId = userId;
+          (req.session as ModifiedSession).is_verified = isVerified;
 
           const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
   

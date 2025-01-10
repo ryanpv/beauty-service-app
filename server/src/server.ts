@@ -37,6 +37,7 @@ import { validateNewPassword } from './middleware/validators/validate-new-passwo
 import { validateContactForm } from './middleware/validators/validate-contact-form.js';
 import { verifyAccount } from './controllers/verify-account.js';
 import { requestVerificationToken } from './controllers/request-verification-token.js';
+import { accountVerification } from './middleware/verify-account.js';
 
 
 const app = express();
@@ -127,7 +128,7 @@ app.get('/password-resets/:token', validatePasswordResetToken, passwordResetToke
 app.put('/password-resets/:token', validateNewPassword, passwordReset)
 
 /////////////////////////
-app.get('/appointment-times', appointmentTimes)
+app.get('/appointment-times', accountVerification, appointmentTimes)
 
 if (process.env.NODE_ENV === 'development') {
   const options = {
