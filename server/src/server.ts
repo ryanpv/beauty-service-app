@@ -128,7 +128,7 @@ app.get('/password-resets/:token', validatePasswordResetToken, passwordResetToke
 app.put('/password-resets/:token', validateNewPassword, passwordReset)
 
 /////////////////////////
-app.get('/appointment-times', accountVerification, appointmentTimes)
+app.get('/appointment-times', appointmentTimes)
 
 if (process.env.NODE_ENV === 'development') {
   const options = {
