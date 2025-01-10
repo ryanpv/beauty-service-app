@@ -35,6 +35,8 @@ import { validateNewpassRequest } from './middleware/validators/validate-newpass
 import { validatePasswordResetToken } from './middleware/validators/validate-reset-token.js';
 import { validateNewPassword } from './middleware/validators/validate-new-password.js';
 import { validateContactForm } from './middleware/validators/validate-contact-form.js';
+import { verifyAccount } from './controllers/verify-account.js';
+import { requestVerificationToken } from './controllers/request-verification-token.js';
 
 
 const app = express();
@@ -81,7 +83,7 @@ app.use(session({
     secure: true
    }
 }));
-app.use(rate_limiter);
+// app.use(rate_limiter);
 
 // ROUTERS
 app.use('/test', testRoute);
@@ -114,6 +116,12 @@ app.get('/check-user', checkUserRole)
 app.get('/upload-services', uploadServices)
 
 app.post('/contact-messages', validateContactForm, contactRequest);
+
+TODO:
+// Account verification for signup
+app.get('/verify-account/:token', verifyAccount);
+app.get('/request-verification-token/:id', requestVerificationToken);
+TODO:
 
 app.post('/password-resets', validateNewpassRequest, requestNewPassword)
 app.get('/password-resets/:token', validatePasswordResetToken, passwordResetTokenCheck)

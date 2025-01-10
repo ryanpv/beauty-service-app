@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
+import { useStateContext } from '../contexts/state-contexts';
 
 
 const VerifyAccount = () => {
@@ -10,6 +11,7 @@ const VerifyAccount = () => {
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [linkRequested, setLinkRequested] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const { currentUser } = useStateContext();
   const queryParams = new URLSearchParams(window.location.search);
   const verificationToken = queryParams.get('verification-token');
   const navigate = useNavigate();
@@ -49,12 +51,13 @@ const VerifyAccount = () => {
     try {
       setLoading(true);
       setLinkRequested(true);
-      const request = await fetch(`${ serverUrl }/request-verification-token`);
 
-      console.log("request: ", request.ok);
-
-      if (!request.ok) {
-       throw new Error("Failed to request new verification link.") 
+      if (typeof currentUser !== 'string' && currentUser.id) {
+        const request = await fetch(`${ serverUrl }/request-verification-token/${ currentUser.id }`);
+  
+        if (!request.ok) {
+         throw new Error("Failed to request new verification link.") 
+        }
       }
 
       setTimeout(() => {

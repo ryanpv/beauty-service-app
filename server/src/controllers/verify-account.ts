@@ -4,9 +4,9 @@ import { tokenCache } from "../middleware/token-cache.js";
 export const verifyAccount = async (req: Request, res: Response): Promise<Response> => {
   try {
     const verificationToken = req.params.token;
-    const exists = tokenCache({ key: verificationToken });
+    const userVerified = tokenCache({ key: verificationToken });
 
-    if (!exists) {
+    if (!userVerified) {
       throw new Error ("Invalid/expired token.");
     }
 

@@ -7,14 +7,13 @@ type tokenCacheParams = {
   key: string;
   body?: string;
   duration?: number;
-  req?: Request;
+  req?: Request | { method: string };
   res?: Response;
   next?: NextFunction;
 }
 
 export const tokenCache = ({ key, body, duration, req, res, next }: tokenCacheParams) => {
   const cacheKey = key;
-
   if (req) {
     if (req.method === "POST") {
       resetTokenCache.set(cacheKey, body, duration);
@@ -24,7 +23,7 @@ export const tokenCache = ({ key, body, duration, req, res, next }: tokenCachePa
     }
   } else {
     const userEmail = resetTokenCache.get(cacheKey);
-
+    console.log('userEmail: ', userEmail)
     if (userEmail) {
       return userEmail;
     } else {
