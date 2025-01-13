@@ -106,7 +106,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         (req.session as ModifiedSession).accessToken = jwtToken;
         (req.session as ModifiedSession).userEmail = userEmail;
         (req.session as ModifiedSession).userId = userId;
-        (req.session as ModifiedSession).is_verified = false;
+        (req.session as ModifiedSession).isVerified = false;
   
         const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
 

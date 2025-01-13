@@ -12,7 +12,7 @@ export interface ModifiedSession extends Session {
   userEmail?: string;
   userId?: number;
   name?: string;
-  is_verified?: boolean;
+  isVerified?: boolean;
 };
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
@@ -64,7 +64,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
           (req.session as ModifiedSession).accessToken = jwtToken;
           (req.session as ModifiedSession).userEmail = userEmail;
           (req.session as ModifiedSession).userId = userId;
-          (req.session as ModifiedSession).is_verified = isVerified;
+          (req.session as ModifiedSession).isVerified = isVerified;
 
           const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
   

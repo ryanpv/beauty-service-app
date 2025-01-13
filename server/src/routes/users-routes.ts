@@ -15,7 +15,7 @@ import { getSingleAppointment } from '../controllers/get-single-appointment.js'
 import { validateSignup } from '../middleware/validators/validate-signup.js';
 import { validateAppointmentRequest } from '../middleware/validators/validate-appointment-request.js';
 import { validateAppointmentUpdate } from '../middleware/validators/validate-appointment-update.js';
-import { accountVerification } from '../middleware/verify-account.js';
+import { accountVerification } from '../middleware/check-verification.js';
 
 export const usersRouter = express.Router();
 

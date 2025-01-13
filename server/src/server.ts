@@ -37,7 +37,7 @@ import { validateNewPassword } from './middleware/validators/validate-new-passwo
 import { validateContactForm } from './middleware/validators/validate-contact-form.js';
 import { verifyAccount } from './controllers/verify-account.js';
 import { requestVerificationToken } from './controllers/request-verification-token.js';
-import { accountVerification } from './middleware/verify-account.js';
+import { accountVerification } from './middleware/check-verification.js';
 
 
 const app = express();
