@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BarLoader } from 'react-spinners';
 import { useStateContext } from '../contexts/state-contexts';
+import { setUser } from '../utils/set-user';
 
 
 const VerifyAccount = () => {
@@ -11,7 +12,7 @@ const VerifyAccount = () => {
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [linkRequested, setLinkRequested] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const { currentUser } = useStateContext();
+  const { currentUser, setCurrentUser } = useStateContext();
   const queryParams = new URLSearchParams(window.location.search);
   const verificationToken = queryParams.get('verification-token');
   const navigate = useNavigate();
@@ -21,18 +22,29 @@ const VerifyAccount = () => {
     const verificationTokenCheck = async() => {
       try {
         setLoading(true);
-        const checkToken = await fetch(`${ serverUrl }/verify-account/${ verificationToken }`);
-  
+        const checkToken = await fetch(`${ serverUrl }/verify-account/${ verificationToken }`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-type": "application/json"
+          }
+        });
+
         if (checkToken.status === 200) {
           setAccountVerified(true);
           setTokenExpired(false);
-  
+
+          // Update currentUser
+          const decodedUser = setUser();
+          setCurrentUser(decodedUser); 
+
           setTimeout(() => {
             navigate('/');
           }, 5000);
         } else {
           setTokenExpired(true);
         }
+
         setLoading(false)
       } catch (error) {
         console.log('Error verifying token: ', error);

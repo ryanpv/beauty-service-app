@@ -15,7 +15,7 @@ export default function HomePage() {
   const { igPhotos, setIgPhotos, currentUser } = useStateContext();
   
   const photoRef = React.useRef<HTMLDivElement>(null);
-  
+
   React.useEffect(() => {
     const media_url = igPhotos.paging.next ? igPhotos.paging.next : "";
     const fetchPhotosParams = {
