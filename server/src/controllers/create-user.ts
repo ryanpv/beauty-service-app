@@ -80,7 +80,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
 
         const userEmail = emailLowerCased;
         const userId = createUser.rows[0].create_user;
-        const userRole = clientRole;
+        const userRole = "client";
         const userDisplayName = name;
 
         const verificationToken = crypto.randomBytes(32).toString('hex'); 
@@ -93,6 +93,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
           iat: Math.floor(Date.now() / 1000),
           isVerified: false
         };
+
         const jwtToken = jwt.sign(
           payload,
           process.env.JWT_SECRET,
@@ -106,6 +107,7 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
         (req.session as ModifiedSession).accessToken = jwtToken;
         (req.session as ModifiedSession).userEmail = userEmail;
         (req.session as ModifiedSession).userId = userId;
+        (req.session as ModifiedSession).name = userDisplayName;
         (req.session as ModifiedSession).isVerified = false;
   
         const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'

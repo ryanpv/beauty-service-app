@@ -64,6 +64,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
           (req.session as ModifiedSession).accessToken = jwtToken;
           (req.session as ModifiedSession).userEmail = userEmail;
           (req.session as ModifiedSession).userId = userId;
+          (req.session as ModifiedSession).name = userDisplayName;
           (req.session as ModifiedSession).isVerified = isVerified;
 
           const domain = process.env.NODE_ENV === 'production' ? '.polishbycin.com' : 'localhost'
