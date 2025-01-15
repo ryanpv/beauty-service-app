@@ -36,14 +36,13 @@ function App() {
   const location = useLocation();
 
   // Update app version after changes to clear localstorage
-  const appVersion = '1.2.2' 
+  const appVersion = '1.2.3' 
 
   // Handle app versioning
   React.useEffect(() => {
     const storedVersion = localStorage.getItem('pbc-appVersion');
     if (storedVersion !== appVersion) {
-      localStorage.removeItem('igPhotos');
-      localStorage.removeItem('lastItem');
+      localStorage.clear();
       localStorage.setItem('pbc-appVersion', appVersion);
 
       // Reset state for IG photos
@@ -51,7 +50,7 @@ function App() {
       setAppVersion(appVersion);
     };
   },[]);
-  
+
 
   // Check for stale localstorage data for IG photos
   React.useEffect(() => {   
@@ -65,8 +64,7 @@ function App() {
 
     // If localstorage for IG photos are more than 4 hours old, localstorage will be cleared
     if (storageTime && storageTime + storageExpiryInterval < currentTime) {
-      localStorage.removeItem('igPhotos');
-      localStorage.removeItem('lastItem');
+      localStorage.clear();
 
       setIgPhotos(igPhotoState);
       setAppVersion(appVersion);
