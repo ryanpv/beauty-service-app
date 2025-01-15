@@ -36,7 +36,7 @@ function App() {
   const location = useLocation();
 
   // Update app version after changes to clear localstorage
-  const appVersion = '1.2.3' 
+  const appVersion = '1.2.2' 
 
   // Handle app versioning
   React.useEffect(() => {
@@ -44,7 +44,7 @@ function App() {
     if (storedVersion !== appVersion) {
       localStorage.clear();
       localStorage.setItem('pbc-appVersion', appVersion);
-
+      console.log("local storage cleared: ", localStorage)
       // Reset state for IG photos
       setIgPhotos(igPhotoState);
       setAppVersion(appVersion);
