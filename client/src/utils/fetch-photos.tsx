@@ -68,7 +68,8 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
       };
                     
       // if fetch operation is required, check if local storage 'igPhotos' exists and store accordingly
-      if (checkLocalStorage === null) {                
+      if (checkLocalStorage === null) {           
+        console.log("no local storage")     
         localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
         localStorage.setItem('lastItem', JSON.stringify(lastItem))
       } else {                

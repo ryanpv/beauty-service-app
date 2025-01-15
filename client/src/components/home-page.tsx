@@ -12,7 +12,7 @@ export default function HomePage() {
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [offset, setOffset] = React.useState(0);
-  const { igPhotos, setIgPhotos, currentUser } = useStateContext();
+  const { igPhotos, setIgPhotos, currentUser, appVersion } = useStateContext();
   
   const photoRef = React.useRef<HTMLDivElement>(null);
 
@@ -29,7 +29,7 @@ export default function HomePage() {
     if (!loading) {
       fetchInstagramPhotos(fetchPhotosParams);
     } 
-  }, [offset]);
+  }, [offset, appVersion]);
 
   type IgPhotosProp = {
     id?: string,

@@ -10,6 +10,9 @@ interface StateValues {
   setAllServices: Dispatch<SetStateAction<ServiceState | []>>;
   igPhotos: PhotoState;
   setIgPhotos: Dispatch<SetStateAction<PhotoState>>;
+  igPhotoState: PhotoState;
+  appVersion: string;
+  setAppVersion: Dispatch<SetStateAction<string>>;
 };
 
 type ServiceState = {
@@ -81,7 +84,7 @@ const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [allServices, setAllServices] = useState<ServiceState>([]);
   const [igPhotos, setIgPhotos] = React.useState<PhotoState>(igPhotoState);
   const [accountVerified, setAccountVerified] = useState<boolean>(false);
-
+  const [appVersion, setAppVersion] = useState<string>('');
 
   const values: StateValues = {
     userId,
@@ -93,6 +96,9 @@ const StateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     setAllServices,
     igPhotos,
     setIgPhotos,
+    igPhotoState,
+    appVersion,
+    setAppVersion
   };  
 
   return (

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from '../src/components/landing-page';
 import HomePage from '../src/components/home-page';
 import Navbar from '../src/components/navbar';
 import LoginPage from '../src/components/login-page';
@@ -21,7 +20,6 @@ import UpdateAppointment from './components/update-appointment';
 import VerifyAccount from './templates/verify-account';
 import Unauthorized from './components/unauthorized';
 import { useStateContext } from './contexts/state-contexts';
-import { setUser } from './utils/set-user';
 import { useLocation } from 'react-router-dom';
 import UserLoggedIn from './components/logged-in-check';
 import PasswordResetSuccess from './templates/password-reset-success';
@@ -29,41 +27,51 @@ import FailedPasswordReset from './templates/failed-password-reset';
 import RequiredLogin from './templates/required-login';
 import UnverifiedUser from './templates/unverified-user';
 
+
 function App() {
-  const { currentUser, setCurrentUser } = useStateContext();
+  const { currentUser, setIgPhotos, igPhotoState, setAppVersion } = useStateContext();
   const noUserLogged = typeof currentUser !== 'string' && currentUser.id === 0 && currentUser.role === 0;
   const adminUser = typeof currentUser !== 'string' && currentUser.id !== 0 && currentUser.role === 2;
   const unverifiedUser = typeof currentUser !== "string" && currentUser.isVerified === false;
   const location = useLocation();
-  const appVersion = '1.2.1' // Update app version after changes to clear localstorage
 
+  // Update app version after changes to clear localstorage
+  const appVersion = '1.2.2' 
+
+  // Handle app versioning
   React.useEffect(() => {
-    const userLogged = setUser();
-
-    setCurrentUser(userLogged)
-  },[location]);
-
-  React.useEffect(() => {   
-    // Handle app versioning
     const storedVersion = localStorage.getItem('pbc-appVersion');
     if (storedVersion !== appVersion) {
       localStorage.removeItem('igPhotos');
       localStorage.removeItem('lastItem');
       localStorage.setItem('pbc-appVersion', appVersion);
-    };
 
+      // Reset state for IG photos
+      setIgPhotos(igPhotoState);
+      setAppVersion(appVersion);
+    };
+  },[]);
+  
+
+  // Check for stale localstorage data for IG photos
+  React.useEffect(() => {   
     const galleryTimer = localStorage.getItem('lastItem');
     const parseGalleryTimer = galleryTimer && new Date(JSON.parse(galleryTimer).time);
     const storageTime = parseGalleryTimer && parseGalleryTimer.getTime()
+
     // const storageExpiryInterval = 3600 * 1000 * 4// 4 hours;
     const storageExpiryInterval = 1000 * 60 * 60 * 4;
     const currentTime = new Date().getTime();  
+
     // If localstorage for IG photos are more than 4 hours old, localstorage will be cleared
     if (storageTime && storageTime + storageExpiryInterval < currentTime) {
       localStorage.removeItem('igPhotos');
       localStorage.removeItem('lastItem');
+
+      setIgPhotos(igPhotoState);
+      setAppVersion(appVersion);
     }
-  }, [location])
+  }, [location]);
 
   return (
     <div 
