@@ -24,6 +24,7 @@ type FetchParams = {
 
 export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
   fetchParams.setLoading(true);
+  console.log("Retrieving images from Instagram API");
   try {
     const localStoragePhotos = localStorage.getItem('igPhotos');
     const checkLocalStorage = localStoragePhotos ? JSON.parse(localStoragePhotos) : null;
@@ -54,6 +55,7 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
 
     // Check if there are more photos to be fetched from API - continue to fetch if next page of photos exists
     if (fetchParams.igPhotos.paging.next !== "") {
+      console.log("Next page exists.")
       const queryInstagramUser = await fetch(fetchParams.media_url)
       const results = await queryInstagramUser.json();
       const nextPage = results.paging.next !== undefined ? results.paging.next : -1
@@ -72,7 +74,8 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
         console.log("no local storage")     
         localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
         localStorage.setItem('lastItem', JSON.stringify(lastItem))
-      } else {                
+      } else { 
+        console.log("local storage exists")               
         const updateLocalPhotos = {
           data: [...checkLocalStorage.data, ...results.data],
           nextPage: nextPage
@@ -92,7 +95,6 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
     } else {            
       return;
     }
-
 
   } catch (error) {
     console.log("error fetching instagram photos: ", error);
