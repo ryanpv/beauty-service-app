@@ -24,6 +24,8 @@ type FetchParams = {
 
 export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
   fetchParams.setLoading(true);
+  const photos = localStorage.getItem("igPhotos");
+  console.log("stored photos: ", photos)
   console.log("Retrieving images from Instagram API");
   try {
     const localStoragePhotos = localStorage.getItem('igPhotos');
