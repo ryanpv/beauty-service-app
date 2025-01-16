@@ -36,7 +36,7 @@ function App() {
   const location = useLocation();
 
   // Update app version after changes to clear localstorage
-  const updatedAppVersion = '1.2.21';
+  const updatedAppVersion = '1.2.2';
 
   // Handle app versioning
   React.useEffect(() => {
@@ -47,9 +47,9 @@ function App() {
       localStorage.setItem('pbc-appVersion', updatedAppVersion);
 
       // Reset state for IG photos
+      setIgPhotos(igPhotoState);
     };
 
-    setIgPhotos(igPhotoState);
     setAppVersion(updatedAppVersion);
   },[]);
 
@@ -68,9 +68,10 @@ function App() {
     if (storageTime && storageTime + storageExpiryInterval < currentTime) {
       localStorage.removeItem("igPhotos");
       localStorage.removeItem("lastItem");
+      
+      setIgPhotos(igPhotoState);
     }
 
-    setIgPhotos(igPhotoState);
     setAppVersion(updatedAppVersion);
   }, [location]);
 

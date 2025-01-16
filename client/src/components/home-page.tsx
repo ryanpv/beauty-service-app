@@ -27,7 +27,6 @@ export default function HomePage() {
     };
 
     if (!loading) {
-      console.log("Fetching photos. ", appVersion)
       fetchInstagramPhotos(fetchPhotosParams);
     } 
   }, [offset, appVersion]);

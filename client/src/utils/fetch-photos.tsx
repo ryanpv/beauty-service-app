@@ -26,16 +26,10 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
   fetchParams.setLoading(true);
 
   try {
-    const checkLocalStorage = 
-      localStorage.getItem('igPhotos') ? 
-      JSON.parse(localStorage.getItem('igPhotos')!)
-      : null;
-
         // *** FOR CACHING IG API RESPONSE ***
 
     // Check local storage for data to update state
     if (JSON.parse(localStorage.getItem('igPhotos')!) && JSON.parse(localStorage.getItem('igPhotos')!).nextPage !== -1) {
-      console.log("next page exists in local storage")
       fetchParams.setIgPhotos({
         data: new Set(JSON.parse(localStorage.getItem('igPhotos')!).data),
         paging: {
@@ -44,7 +38,6 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
       });
 
     } else if (JSON.parse(localStorage.getItem('igPhotos')!) && JSON.parse(localStorage.getItem('igPhotos')!).nextPage === -1) {
-      console.log("no next page in local storage")
       fetchParams.setIgPhotos({
         data: new Set(JSON.parse(localStorage.getItem('igPhotos')!).data),
         paging: {
@@ -59,7 +52,6 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
 
     // Check if there are more photos to be fetched from API - continue to fetch if next page of photos exists
     if (fetchParams.igPhotos.paging.next !== "") {
-      console.log("Next page exists.")
       const queryInstagramUser = await fetch(fetchParams.media_url)
       const results = await queryInstagramUser.json();
       const nextPage = results.paging.next !== undefined ? results.paging.next : -1
@@ -75,12 +67,9 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
                     
       // if fetch operation is required, check if local storage 'igPhotos' exists and store accordingly
       if (JSON.parse(localStorage.getItem('igPhotos')!) === null) {           
-        console.log("no local storage")     
         localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
         localStorage.setItem('lastItem', JSON.stringify(lastItem))
-      } else { 
-        console.log("local storage exists", checkLocalStorage)
-        console.log("secondary log: ", localStorage.getItem('igPhotos'))               
+      } else {             
         const updateLocalPhotos = {
           data: [...JSON.parse(localStorage.getItem('igPhotos')!).data, ...results.data],
           nextPage: nextPage
@@ -98,10 +87,9 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
         }
       }));
     } else { 
-      console.log("No next page from results.")           
+      console.log("No more results.")           
       return;
     }
-
   } catch (error) {
     console.log("error fetching instagram photos: ", error);
     fetchParams.setError("Error fetching instagram photos.");

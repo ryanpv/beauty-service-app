@@ -8,7 +8,7 @@ export default function PhotoGallery() {
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [offset, setOffset] = React.useState(0);
-  const { igPhotos, setIgPhotos } = useStateContext();
+  const { igPhotos, setIgPhotos, appVersion } = useStateContext();
 
   // Initial fetch of instagram photos
   React.useEffect(() => {   
@@ -24,7 +24,7 @@ export default function PhotoGallery() {
     if (!loading) {
       fetchInstagramPhotos(fetchPhotosParams);
     } 
-  }, [offset]);
+  }, [offset, appVersion]);
 
   // Fetch instagram photos on scroll for infinite scroll
   React.useEffect(() => {
@@ -37,11 +37,6 @@ export default function PhotoGallery() {
     return () => window.removeEventListener("resize", handleScreenResizing);
   }, [loading]);
 
-  // const clearStorage = () => {
-  //   console.log('clearing cache');
-    
-  //   localStorage.clear();
-  // };
 
   // Type for IG photos prop
   type IgPhotosProp = {
