@@ -24,12 +24,13 @@ type FetchParams = {
 
 export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
   fetchParams.setLoading(true);
-  const photos = localStorage.getItem("igPhotos");
-  console.log("stored photos: ", photos)
-  console.log("Retrieving images from Instagram API");
+
   try {
-    const localStoragePhotos = localStorage.getItem('igPhotos');
-    const checkLocalStorage = localStoragePhotos ? JSON.parse(localStoragePhotos) : null;
+    // const localStoragePhotos = localStorage.getItem('igPhotos');
+    const checkLocalStorage = 
+      localStorage.getItem('igPhotos') ? 
+      JSON.parse(localStorage.getItem('igPhotos')!)
+      : null;
 
         // *** FOR CACHING IG API RESPONSE ***
 

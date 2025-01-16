@@ -36,23 +36,19 @@ function App() {
   const location = useLocation();
 
   // Update app version after changes to clear localstorage
-  const appVersion = '1.2.2' 
+  const updatedAppVersion = '1.2.3';
 
   // Handle app versioning
   React.useEffect(() => {
     const storedVersion = localStorage.getItem('pbc-appVersion');
-    const storedItems = localStorage.getItem('igPhotos');
-    if (storedVersion !== appVersion) {
-      console.log("App version updated. ", storedItems)
+    if (storedVersion !== updatedAppVersion) {
       localStorage.removeItem("igPhotos");
       localStorage.removeItem("lastItem");
-      localStorage.setItem('pbc-appVersion', appVersion);
-
-      console.log("Removed items: ", localStorage.getItem('igPhotos'))
+      localStorage.setItem('pbc-appVersion', updatedAppVersion);
 
       // Reset state for IG photos
       setIgPhotos(igPhotoState);
-      setAppVersion(appVersion);
+      setAppVersion(updatedAppVersion);
     };
   },[]);
 
@@ -73,7 +69,7 @@ function App() {
       localStorage.removeItem("lastItem");
 
       setIgPhotos(igPhotoState);
-      setAppVersion(appVersion);
+      setAppVersion(updatedAppVersion);
     }
   }, [location]);
 
