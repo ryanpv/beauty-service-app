@@ -33,6 +33,7 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
 
     // Check local storage for data to update state
     if (checkLocalStorage && checkLocalStorage.nextPage !== -1) {
+      console.log("next page exists in local storage")
       fetchParams.setIgPhotos({
         data: new Set(checkLocalStorage.data),
         paging: {
@@ -41,6 +42,7 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
       });
 
     } else if (checkLocalStorage && checkLocalStorage.nextPage === -1) {
+      console.log("no next page in local storage")
       fetchParams.setIgPhotos({
         data: new Set(checkLocalStorage.data),
         paging: {
@@ -92,7 +94,8 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
           next: results.paging.next !== undefined ? results.paging.next : ""
         }
       }));
-    } else {            
+    } else { 
+      console.log("No next page from results.")           
       return;
     }
 
