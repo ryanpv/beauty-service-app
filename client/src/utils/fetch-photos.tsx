@@ -79,7 +79,8 @@ export const fetchInstagramPhotos = async({...fetchParams}: FetchParams) => {
         localStorage.setItem('igPhotos', JSON.stringify(photosForLocal))
         localStorage.setItem('lastItem', JSON.stringify(lastItem))
       } else { 
-        console.log("local storage exists")               
+        console.log("local storage exists", checkLocalStorage)
+        console.log("secondary log: ", localStorage.getItem('igPhotos'))               
         const updateLocalPhotos = {
           data: [...checkLocalStorage.data, ...results.data],
           nextPage: nextPage
